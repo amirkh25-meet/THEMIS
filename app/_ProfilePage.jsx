@@ -1,0 +1,210 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Account, Client, Databases } from 'appwrite';
+import { useEffect, useState } from 'react';
+import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import UUID from 'react-native-uuid';
+
+
+
+const client = new Client();
+client.setEndpoint('https://cloud.appwrite.io/v1')  // Appwrite API endpoint
+      .setProject('6851607e003b10432fe3');  // Your Appwrite Project ID
+
+// Initialize the Account service
+const account = new Account(client);
+
+// Initialize the Databases service
+const databases = new Databases(client);
+
+const _ProfilePage = () => {
+  
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [currentUser, setCurrentUser] = useState(null);
+  const [time, setTime] = useState('');
+  const [if1, setIf] = useState(0);
+  
+  
+   const checkActiveSession = async () => {
+    try {
+      const session = await AsyncStorage.getItem('userSession');
+      if (session) {
+        setCurrentUser(session);
+        return 2;
+      } else {
+        return 0;
+      }
+    } catch (error) {
+      console.error('Error checking active session:', error);
+      return 0;
+    }
+  };
+
+  useEffect(() => {
+    
+    checkActiveSession().then(status => {
+      if (status === 2) {
+        setIf(2);
+      }
+    }); 
+
+    const interval = setInterval(() => {
+      const currentTime = new Date().toLocaleTimeString();
+      setTime(currentTime);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [currentUser]);
+
+
+  const createUser = async () => {
+    try {
+      await deleteExistingSession();
+
+      const userId = UUID.v4();
+
+      const response = await account.create(userId, email, password);
+      console.log('User created:', response);
+
+      await AsyncStorage.setItem('userSession', email);
+      setCurrentUser(email);
+      setIf(2)
+
+      await saveUserBio(response.email, bio);
+    } catch (error) {
+      console.error('Error creating account:', error);
+      Alert.alert('Error', 'Error creating account, please try again.');
+    }
+  };
+
+  const signIn = async () => {
+    try {
+      await deleteExistingSession();
+
+      const session = await account.createEmailPasswordSession(email, password);
+      console.log('Session Data:', session);
+
+      if (session && session.$id) {
+        await AsyncStorage.setItem('userSession', email);
+        setCurrentUser(email);
+        setIf(2)
+      }
+    } catch (error) {
+      console.error('Error signing in:', error);
+      Alert.alert('Error', 'Failed to sign in, please check your credentials.');
+    }
+  };
+
+  const signOut = async () => {
+    try {
+      await account.deleteSession('current');
+      await AsyncStorage.removeItem('userSession');
+      setCurrentUser(null);
+      setIf(0)
+    } catch (error) {
+      console.error('Error signing out:', error);
+      Alert.alert('Error', 'Failed to sign out, please try again.');
+    }
+  };
+
+  const deleteExistingSession = async () => {
+    try {
+      const sessions = await account.listSessions();
+
+      if (sessions.total > 0) {
+        await account.deleteSession('current');
+        console.log('Existing session deleted.');
+      }
+    } catch (error) {
+      console.error('Error deleting session:', error);
+    }
+  };
+    if (if1 === 0) {
+    return (
+      <View style={styles.container}>
+        <Navbar />
+        <Text style={styles.title}>Create your account</Text>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Email</Text>
+          <TextInput
+            placeholder="Enter your email"
+            style={styles.input}
+            value={email}
+            onChangeText={setEmail}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Name</Text>
+          <TextInput
+            placeholder="Enter your name"
+            style={styles.input}
+            value={name}
+            onChangeText={setName}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Password</Text>
+          <TextInput
+            placeholder="Enter your password"
+            style={styles.input}
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
+        </View>
+        <Button title="Sign Up" onPress={createUser} color="#64adc3" />
+        <View style={styles.buttonSpacer} />
+        <Text style={styles.link} onPress={() => setIf(1)}>Already have an account? Sign In</Text>
+      </View>
+    );
+  }
+
+  if (if1 === 1) {
+    return (
+      <View style={styles.container}>
+        <Navbar />
+        <Text style={styles.title}>Sign In</Text>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Email</Text>
+          <TextInput
+            placeholder="Enter your email"
+            style={styles.input}
+            value={email}
+            onChangeText={setEmail}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Password</Text>
+          <TextInput
+            placeholder="Enter your password"
+            style={styles.input}
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
+        </View>
+        <Button title="Sign In" onPress={signIn} color="#64adc3" />
+        <View style={styles.buttonSpacer} />
+        <Text style={styles.link} onPress={() => setIf(0)}>Sign Up</Text>
+      </View>
+    );
+  }
+
+  if (if1 === 2) {
+    return (
+      <View style={styles.container}>
+        <Navbar />
+        <Text style={styles.title}>Welcome, {currentUser}!</Text>
+        <Text>Current Time: {time}</Text>
+
+        <View style={styles.buttonSpacer} />
+        <Text style={styles.link} onPress={signOut}>Sign Out</Text>
+      </View>
+    );
+  }
+}
+
+export default _ProfilePage
+
+const styles = StyleSheet.create({})
