@@ -27,19 +27,21 @@ const _ProfilePage = () => {
   
   
    const checkActiveSession = async () => {
-    try {
-      const session = await AsyncStorage.getItem('userSession');
-      if (session) {
-        setCurrentUser(session);
-        return 2;
-      } else {
-        return 0;
-      }
-    } catch (error) {
-      console.error('Error checking active session:', error);
+  try {
+    const sessionData = await AsyncStorage.getItem('userSession');
+    if (sessionData) {
+      const user = JSON.parse(sessionData);
+      setCurrentUser(user);
+      return 2;
+    } else {
       return 0;
     }
-  };
+  } catch (error) {
+    console.error('Error checking active session:', error);
+    return 0;
+  }
+};
+
 
   useEffect(() => {
     
@@ -59,42 +61,49 @@ const _ProfilePage = () => {
 
 
   const createUser = async () => {
-    try {
-      await deleteExistingSession();
+  try {
+    await deleteExistingSession();
 
-      const userId = UUID.v4();
+    const userId = UUID.v4();
 
-      const response = await account.create(userId, email, password);
-      console.log('User created:', response);
+    await account.create(userId, email, password);
+    console.log('User created');
 
-      await AsyncStorage.setItem('userSession', email);
-      setCurrentUser(email);
-      setIf(2)
+    const session = await account.createEmailPasswordSession(email, password);
 
-      await saveUserBio(response.email, bio);
-    } catch (error) {
-      console.error('Error creating account:', error);
-      Alert.alert('Error', 'Error creating account, please try again.');
-    }
-  };
+    const user = await account.get();
+    console.log('Authenticated user:', user);
 
-  const signIn = async () => {
-    try {
-      await deleteExistingSession();
+    await AsyncStorage.setItem('userSession', JSON.stringify(user));
+    setCurrentUser(user);
+    setIf(2);
 
-      const session = await account.createEmailPasswordSession(email, password);
-      console.log('Session Data:', session);
+  } catch (error) {
+    console.error('Error creating account:', error);
+    Alert.alert('Error', 'Error creating account, please try again.');
+  }
+};
 
-      if (session && session.$id) {
-        await AsyncStorage.setItem('userSession', email);
-        setCurrentUser(email);
-        setIf(2)
-      }
-    } catch (error) {
-      console.error('Error signing in:', error);
-      Alert.alert('Error', 'Failed to sign in, please check your credentials.');
-    }
-  };
+
+ const signIn = async () => {
+  try {
+    await deleteExistingSession();
+
+    const session = await account.createEmailPasswordSession(email, password);
+    console.log('Session created:', session);
+
+    const user = await account.get();
+    console.log('Authenticated user:', user);
+
+    await AsyncStorage.setItem('userSession', JSON.stringify(user));
+    setCurrentUser(user);
+    setIf(2);
+  } catch (error) {
+    console.error('Error signing in:', error);
+    Alert.alert('Error', 'Failed to sign in, please check your credentials.');
+  }
+};
+
 
   const signOut = async () => {
     try {
@@ -207,4 +216,44 @@ const _ProfilePage = () => {
 
 export default _ProfilePage
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flex: 1,
+    backgroundColor: '#f4f4f4',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: '#021F54',
+  },
+  inputContainer: {
+    width: '100%',
+    marginBottom: 15,
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 5,
+    color: '#232323',
+  },
+  input: {
+    height: 40,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    paddingLeft: 10,
+    fontSize: 16,
+    width: '100%',
+  },
+  buttonSpacer: {
+    marginVertical: 20,
+  },
+  link: {
+    color: '#5cb85c',
+    marginTop: 10,
+    fontWeight: 'bold',
+    textDecorationLine: 'underline',
+  }
+});

@@ -10,6 +10,7 @@ export default function Index() {
       }}
     >
       <Text>Welcome to THEMIS</Text>
+      
     </View>
   );
 }
