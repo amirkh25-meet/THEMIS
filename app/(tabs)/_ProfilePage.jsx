@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react';
 import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import UUID from 'react-native-uuid';
 
-
-
 const client = new Client();
 client.setEndpoint('https://cloud.appwrite.io/v1')  // Appwrite API endpoint
       .setProject('6851607e003b10432fe3');  // Your Appwrite Project ID
@@ -16,7 +14,7 @@ const account = new Account(client);
 // Initialize the Databases service
 const databases = new Databases(client);
 
-const _ProfilePage = () => {
+export default function _ProfilePage() {
   
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -132,7 +130,6 @@ const _ProfilePage = () => {
     if (if1 === 0) {
     return (
       <View style={styles.container}>
-        <Navbar />
         <Text style={styles.title}>Create your account</Text>
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Email</Text>
@@ -172,7 +169,7 @@ const _ProfilePage = () => {
   if (if1 === 1) {
     return (
       <View style={styles.container}>
-        <Navbar />
+
         <Text style={styles.title}>Sign In</Text>
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Email</Text>
@@ -203,8 +200,8 @@ const _ProfilePage = () => {
   if (if1 === 2) {
     return (
       <View style={styles.container}>
-        <Navbar />
-        <Text style={styles.title}>Welcome, {currentUser}!</Text>
+  
+        <Text style={styles.title}>Welcome, {currentUser?.name || currentUser?.email || 'User'}!</Text>
         <Text>Current Time: {time}</Text>
 
         <View style={styles.buttonSpacer} />
@@ -214,7 +211,6 @@ const _ProfilePage = () => {
   }
 }
 
-export default _ProfilePage
 
 const styles = StyleSheet.create({
   container: {
