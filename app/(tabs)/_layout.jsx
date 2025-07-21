@@ -4,7 +4,7 @@ const _layout = () => {
   return (
     <Tabs>
     <Tabs.Screen 
-        name="index"
+        name="homePage"
         options={{
             title: 'Home',
             headerShown: false,
@@ -23,16 +23,27 @@ const _layout = () => {
         ),
     }}
 />
-        {/* <Tabs.Screen
-            name="index"
-            options ={{title : 'Home',
-            headerShown : false}}
-        /> */}
-        {/* <Tabs.Screen
-            name="index"
-            options ={{title : 'Home',
-            headerShown : false}}
-        /> */}
+      <Tabs.Screen 
+    name="CompanySearchPage"
+    options={{
+        title: 'Reviews', 
+        headerShown: false,
+        tabBarIcon: ({ color, size }) => (
+            <Ionicons name="search" size={size} color={color} />
+        ),
+    }}
+/>         
+
+<Tabs.Screen 
+    name="videoPage"
+    options={{
+        title: 'negotiation', 
+        headerShown: false,
+        tabBarIcon: ({ color, size }) => (
+            <Ionicons name="play-circle" size={size} color={color} />
+        ),
+    }}
+/>              
     </Tabs>
   )
 }
