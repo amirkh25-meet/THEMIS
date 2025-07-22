@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  StyleSheet,
-  TextInput,
-  ActivityIndicator,
-  RefreshControl,
-  Image,
-  Alert,
-  Modal
-} from 'react-native';
-import { databases, Query, ID } from '../appwrite1'; // Make sure this exports Query correctly
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { router } from 'expo-router';
+import { useEffect, useState } from 'react';
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  Image,
+  Modal,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
+} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { databases, ID, Query } from '../../assets/appwrite1'; // Make sure this exports Query correctly
 
 
 const CompanySearchPage = ({  }) => {
@@ -63,7 +63,8 @@ const CompanySearchPage = ({  }) => {
       }
     };
   }, [companies, searchQuery]);
-
+  console.log("Loaded: companySearchPage");
+  
   const fetchCompanies = async () => {
     try {
       // Check if Query is properly imported
@@ -366,6 +367,7 @@ CRITICAL: genderPayGap must be an integer between 0-100 (no % symbol, no quotes 
 
     const query = searchQuery.toLowerCase();
     
+      console.log("Loaded: companySearchPage");
     // First check if exact company name exists in database
     const exactMatch = await checkCompanyExists(searchQuery);
     if (exactMatch) {

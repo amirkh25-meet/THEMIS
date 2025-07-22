@@ -14,7 +14,7 @@ import {
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { databases, ID, Query } from '../appwrite1';
+import { databases, ID, Query } from './appwrite1';
 
 const CompanyDetails = ({ }) => {
   const { companyId, companyName } = useLocalSearchParams();
@@ -163,7 +163,7 @@ const CompanyDetails = ({ }) => {
         ID.unique(),
         reviewData
       );
-
+      console.log("Loaded: comapnyDetails");
       Alert.alert(
         'Success',
         'Your review has been submitted successfully!',

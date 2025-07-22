@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  View, 
-  Text, 
-  TouchableOpacity, 
-  ScrollView, 
-  ActivityIndicator, 
+import { useEffect, useState } from 'react';
+import {
+  ActivityIndicator,
   Alert,
   Dimensions,
+  Linking,
+  ScrollView,
   StyleSheet,
-  Linking 
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import { databases, Query } from '../appwrite1';
+import { databases, Query } from './appwrite1';
 
 const { width } = Dimensions.get('window');
 

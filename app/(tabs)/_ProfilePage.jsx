@@ -127,7 +127,9 @@ export default function _ProfilePage() {
       console.error('Error deleting session:', error);
     }
   };
-    if (if1 === 0) {
+
+  // Sign Up Screen
+  if (if1 === 0) {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Create your account</Text>
@@ -166,10 +168,10 @@ export default function _ProfilePage() {
     );
   }
 
+  // Sign In Screen
   if (if1 === 1) {
     return (
       <View style={styles.container}>
-
         <Text style={styles.title}>Sign In</Text>
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Email</Text>
@@ -197,18 +199,25 @@ export default function _ProfilePage() {
     );
   }
 
+  // Welcome Screen (Logged in)
   if (if1 === 2) {
     return (
       <View style={styles.container}>
-  
         <Text style={styles.title}>Welcome, {currentUser?.name || currentUser?.email || 'User'}!</Text>
         <Text>Current Time: {time}</Text>
-
         <View style={styles.buttonSpacer} />
         <Text style={styles.link} onPress={signOut}>Sign Out</Text>
       </View>
     );
   }
+
+  // DEFAULT RETURN - This was missing!
+  // Loading state while checking session
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Loading...</Text>
+    </View>
+  );
 }
 
 
