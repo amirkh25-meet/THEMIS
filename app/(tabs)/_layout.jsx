@@ -47,6 +47,16 @@ export default function Layout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="IsrealSalaryCalculator"
+        options={{
+          title: 'figure out your salary',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="play-circle" size={size} color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
