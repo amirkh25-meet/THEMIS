@@ -14,7 +14,7 @@ import {
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { databases, ID, Query } from './appwrite1';
+import { databases, ID, Query } from '../assets/appwrite1';
 
 const CompanyDetails = ({ }) => {
   const { companyId, companyName } = useLocalSearchParams();
