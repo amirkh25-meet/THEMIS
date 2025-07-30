@@ -23,7 +23,6 @@ const videoPage = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [playing, setPlaying] = useState(false);
-
 const videos = [
   {
     id: 'Tt08KmFfIYQ',
@@ -80,6 +79,14 @@ const videos = [
     duration: '4:50',
     views: '900K views',
     channel: 'Motivation Daily'
+  },
+  {
+    id: 'bgz2vNMTpxQ',
+    title: '5 Ways to Boost Confidence at Work',
+    thumbnail: 'https://img.youtube.com/vi/bgz2vNMTpxQ/maxresdefault.jpg',
+    duration: '8:12',
+    views: '1.1M views',
+    channel: 'CareerBoost'
   }
 ];
 
