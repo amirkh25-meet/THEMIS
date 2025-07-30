@@ -103,6 +103,14 @@ const IsraelSalaryCalculator = () => {
     }).format(amount);
   };
 
+
+  const getSliderColor = (value) => {
+  if (value < 5) return '#84cc16'; // green
+  if (value < 10) return '#f59e0b'; // yellow-orange
+  if (value < 15) return '#ec4899'; // pink
+  return '#6366f1'; // blue
+};
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -164,7 +172,7 @@ const IsraelSalaryCalculator = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#EAEBFF', // overall page background
     padding: 16,
   },
   header: {
@@ -181,7 +189,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'white',
+    color: '#041E42FF', // updated text color
     marginLeft: 8,
   },
   headerSubRow: {
@@ -189,26 +197,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerSubtitle: {
-    color: 'white',
+    color: '#041E42FF', // updated text color
     marginLeft: 4,
   },
   section: {
     marginBottom: 24,
+    backgroundColor: '#B9BDFF', // section background
+    padding: 12,
+    borderRadius: 8,
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: '600',
     marginBottom: 12,
+    color: '#041E42FF',
   },
   label: {
     marginTop: 12,
     marginBottom: 4,
     fontSize: 14,
+    color: '#041E42FF',
   },
   salaryLabel: {
     fontSize: 16,
     marginVertical: 4,
+    color: '#041E42FF',
   },
 });
+
 
 export default IsraelSalaryCalculator;
