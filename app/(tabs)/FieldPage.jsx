@@ -1,11 +1,19 @@
 import { FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 
 export default function FieldPage() {
   return (
     <View style={styles.container}>
+
       <Text style={styles.title}>Choose Your Field</Text>
+    <Text style={styles.intro}>
+      Discover companies that{" "}
+      <Text style={styles.highlight}>value women</Text> .{" "}
+      Choose your field and explore your best-fit workplaces.
+    </Text>
+
+
 
       <TouchableOpacity style={styles.card} onPress={goToHealthCare} activeOpacity={0.8}>
         <Ionicons name="medkit" size={28} color="#0d6efd" style={styles.icon} />
@@ -73,4 +81,17 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#343a40',
   },
+intro: {
+  fontSize: 15,
+  lineHeight: 20,
+  textAlign: 'center',
+  color: '#495057',
+  marginBottom: 20,
+  paddingHorizontal: 10,
+},
+
+highlight: {
+  fontWeight: '600',
+  color: '#d63384',
+},
 });

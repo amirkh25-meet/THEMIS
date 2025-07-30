@@ -203,6 +203,11 @@ const videos = [
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
+            <Text style={styles.intro}>
+              Real stories. Real advice.{" "}
+              <Text style={styles.highlight}>Hear from women</Text> .{" "}
+               who’ve been there - and learn from their journeys.
+            </Text>
         <View style={styles.gridContainer}>
           {videos.map((video) => (
             <VideoCard key={video.id} video={video} />
@@ -391,6 +396,19 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginLeft: 8,
   },
+  intro: {
+  fontSize: 15,
+  lineHeight: 20,
+  textAlign: 'center',
+  color: '#495057',
+  marginBottom: 20,
+  paddingHorizontal: 10,
+},
+
+highlight: {
+  fontWeight: '600',
+  color: '#d63384',
+},
 });
 
 export default videoPage;

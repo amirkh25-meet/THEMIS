@@ -120,7 +120,13 @@ const IsraelSalaryCalculator = () => {
           <Text style={styles.headerSubtitle}>Including Israeli Tax Calculations</Text>
         </View>
       </View>
+          <Text style={styles.intro}>
+            Know your worth.
+Enter your info to see what   {""}
 
+            <Text style={styles.highlight}>salary</Text> .{" "}
+            you should aim for - and walk in with confidence.{" "}
+          </Text>
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Your Details</Text>
 
@@ -312,7 +318,19 @@ tableTotal: {
   flex: 1,
   textAlign: 'left',
 },
+intro: {
+  fontSize: 15,
+  lineHeight: 20,
+  textAlign: 'center',
+  color: '#495057',
+  marginBottom: 20,
+  paddingHorizontal: 10,
+},
 
+highlight: {
+  fontWeight: '600',
+  color: '#d63384',
+},
 });
 
 
