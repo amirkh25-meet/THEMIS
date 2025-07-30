@@ -114,8 +114,8 @@ export default function HomeScreen() {
     const interval = setInterval(() => {
       setRandomFact(getRandomFact());
       setShowFactPopup(true);
-      setTimeout(() => setShowFactPopup(false), 4000);
-    }, 10000);
+      setTimeout(() => setShowFactPopup(false), 300000);
+    }, 300000);
 
     return () => clearInterval(interval);
   }, []);
