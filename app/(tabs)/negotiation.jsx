@@ -1,6 +1,5 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, Linking } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Image, Linking, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 export default function NegotiationSimulatorPage() {
   const openSimulator = () => {
@@ -9,11 +8,11 @@ export default function NegotiationSimulatorPage() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Image
-        source={{ uri: 'https://app.cesura.ai/sim/dd070bcd-9b2c-48e3-90ca-21fa7f4501db' }}
-        style={styles.image}
-        resizeMode="contain"
-      />
+        <Image
+          source={require('../../assets/images/THEMISLOGO.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
 
       <Text style={styles.heading}>Ready to Get What You Deserve?</Text>
       <Text style={styles.subheading}>
@@ -36,38 +35,40 @@ const styles = StyleSheet.create({
   container: {
     padding: 24,
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#EAEBFF',
     flexGrow: 1,
   },
-  image: {
-    width: '100%',
+    logo: {
+    width: 500,
     height: 200,
-    marginBottom: 24,
   },
+
   heading: {
     fontSize: 24,
     fontWeight: '700',
-    color: '#212529',
+    color: '#041E42FF',
     textAlign: 'center',
     marginBottom: 12,
+    marginTop: 10,
   },
   subheading: {
-    fontSize: 16,
-    color: '#495057',
+    fontSize: 20,
+    color: '#041E42FF',
     textAlign: 'center',
     marginBottom: 16,
   },
   description: {
-    fontSize: 14,
-    color: '#6c757d',
+    fontSize: 16,
+    color: '#041E42FF',
     textAlign: 'center',
     marginBottom: 32,
     lineHeight: 22,
+    marginTop: 15,
   },
   button: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#007bff',
+    backgroundColor: '#B9BDFF',
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 8,
@@ -76,6 +77,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginLeft: 10,
     fontWeight: '600',
-    fontSize: 16,
+    fontSize: 20,
   },
 });
