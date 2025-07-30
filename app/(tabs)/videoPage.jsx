@@ -1,21 +1,21 @@
 // Install all required libraries with this single command:
 // npm install react-native-youtube-iframe react-native-vector-icons react-native-webview react-native-orientation-locker
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  Modal,
-  StyleSheet,
-  Image,
   Dimensions,
-  StatusBar,
+  Image,
+  Modal,
   SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import YoutubePlayer from 'react-native-youtube-iframe';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import YoutubePlayer from 'react-native-youtube-iframe';
 
 const { width, height } = Dimensions.get('window');
 
@@ -24,57 +24,65 @@ const videoPage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [playing, setPlaying] = useState(false);
 
-  // Sample YouTube videos data
-  const videos = [
-    {
-      id: 'dQw4w9WgXcQ',
-      title: 'Rick Astley - Never Gonna Give You Up (Official Video)',
-      thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
-      duration: '3:33',
-      views: '1.4B views',
-      channel: 'Rick Astley'
-    },
-    {
-      id: 'jNQXAC9IVRw',
-      title: 'Me at the zoo',
-      thumbnail: 'https://img.youtube.com/vi/jNQXAC9IVRw/maxresdefault.jpg',
-      duration: '0:19',
-      views: '300M views',
-      channel: 'jawed'
-    },
-    {
-      id: 'kJQP7kiw5Fk',
-      title: 'Luis Fonsi - Despacito ft. Daddy Yankee',
-      thumbnail: 'https://img.youtube.com/vi/kJQP7kiw5Fk/maxresdefault.jpg',
-      duration: '4:42',
-      views: '8.2B views',
-      channel: 'LuisFonsiVEVO'
-    },
-    {
-      id: '9bZkp7q19f0',
-      title: 'PSY - GANGNAM STYLE(강남스타일) M/V',
-      thumbnail: 'https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg',
-      duration: '4:13',
-      views: '4.8B views',
-      channel: 'officialpsy'
-    },
-    {
-      id: 'L_jWHffIx5E',
-      title: 'Smash Mouth - All Star (Official Music Video)',
-      thumbnail: 'https://img.youtube.com/vi/L_jWHffIx5E/maxresdefault.jpg',
-      duration: '3:21',
-      views: '200M views',
-      channel: 'SmashMouthVEVO'
-    },
-    {
-      id: 'ZZ5LpwO-An4',
-      title: 'HELLO ADELE',
-      thumbnail: 'https://img.youtube.com/vi/ZZ5LpwO-An4/maxresdefault.jpg',
-      duration: '6:07',
-      views: '3.2B views',
-      channel: 'AdeleVEVO'
-    }
-  ];
+const videos = [
+  {
+    id: 'Tt08KmFfIYQ',
+    title: 'TEDx: The future of work for women',
+    thumbnail: 'https://img.youtube.com/vi/Tt08KmFfIYQ/maxresdefault.jpg',
+    duration: '11:23',
+    views: '500K views',
+    channel: 'TEDx Talks'
+  },
+  {
+    id: 'HBKmdGzAt68',
+    title: 'Empowering Women - Shorts',
+    thumbnail: 'https://img.youtube.com/vi/HBKmdGzAt68/maxresdefault.jpg',
+    duration: '0:58',
+    views: '1.2M views',
+    channel: 'Inspiration Hub'
+  },
+  {
+    id: 'LWz57CpcSnE',
+    title: 'Negotiating Your Worth',
+    thumbnail: 'https://img.youtube.com/vi/LWz57CpcSnE/maxresdefault.jpg',
+    duration: '6:45',
+    views: '750K views',
+    channel: 'Career Talks'
+  },
+  {
+    id: 'Fr9a3F29JJA',
+    title: 'How to Ask for a Raise',
+    thumbnail: 'https://img.youtube.com/vi/Fr9a3F29JJA/maxresdefault.jpg',
+    duration: '5:22',
+    views: '1M views',
+    channel: 'Money Talks'
+  },
+  {
+    id: 'a43Je1KQY3s',
+    title: 'Women in Tech: Pay Gap Reality',
+    thumbnail: 'https://img.youtube.com/vi/a43Je1KQY3s/maxresdefault.jpg',
+    duration: '9:10',
+    views: '820K views',
+    channel: 'Equality Now'
+  },
+  {
+    id: 'XYuXmAwUuyk',
+    title: 'Why Women Don’t Apply for Jobs',
+    thumbnail: 'https://img.youtube.com/vi/XYuXmAwUuyk/maxresdefault.jpg',
+    duration: '7:01',
+    views: '610K views',
+    channel: 'Workplace Studies'
+  },
+  {
+    id: 'u0s9Z-RinoA',
+    title: 'How to Beat Impostor Syndrome',
+    thumbnail: 'https://img.youtube.com/vi/u0s9Z-RinoA/maxresdefault.jpg',
+    duration: '4:50',
+    views: '900K views',
+    channel: 'Motivation Daily'
+  }
+];
+
 
   const openVideoModal = (video) => {
     setSelectedVideo(video);
