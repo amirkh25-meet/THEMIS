@@ -12,7 +12,7 @@ export default function Layout() {
         options={{
           title: 'Home',
           headerShown: false,
-          //tabBarStyle: { display: 'none' },  
+          tabBarStyle: { display: 'none' },  
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
           ),
