@@ -67,11 +67,20 @@ const steps = [
 ];
 
 const facts = [
-  'Women negotiate 30% less often than men.',
-  'Companies with wage transparency have happier employees.',
-  'Negotiation skills improve with practice.',
-  'Equal pay boosts team productivity.',
-  'Mentorship increases chances of promotion.',
+  'Over a birth cohort’s lifetime, the gender-wage gap tends to grow, as small early differences compound over time.',
+  'Over their lifetime, women earn on average 30% less than men.',
+  'The monthly gender wage gap is about 32%–42% in Israel.',
+  'The main cause for the gender wage gap is the number of work hours, which accounts for about 57% of the gap.',
+  'Within feminine occupations, wage gaps are larger.',
+  "If the work is hurting the worker's health during her pregnancy, she must provide a doctor's letter about it. Absence from work as a result of this shall count as use of paid sick days.",
+  'A worker who is pregnant must inform the employer about her pregnancy no later than the 5th month of the pregnancy.',
+  "A worker who had an abortion may get paid leave of at least a week, only with a doctor's written approval.",
+  'Firing a pregnant worker is forbidden in the case that she has worked in the same place for over 6 months, unless there is a special approval from the Minister of Labor.',
+  'The employer must acquire health insurance for the employee, and must not deduct more than 125 NIS monthly from her salary.',
+  'On the basis of good faith vis-à-vis the employer and in order to benefit from various employee rights, women are advised to inform their employer by the 5th month of pregnancy.',
+  'The Law for Prevention of Sexual Harassment,– 1998 sets both tort and criminal responsibility. The penalty may be a monetary fine and/or imprisonment.',
+  'During the pregnancy, a woman who works full time (generally considered 182 hours per month), may be absent from work for up to 40 hours, with pay',
+  'The law limits fertility treatment absences to 12 days for the father. For the mother, it allows up to 4 treatment cycles per year, with a maximum of 64 days for a 5-day workweek, or 80 days for a 6-day workweek.',
 ];
 
 const getRandomFact = () => {
