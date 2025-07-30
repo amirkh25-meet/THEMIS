@@ -4,6 +4,7 @@ import { Picker } from '@react-native-picker/picker';
 import Slider from '@react-native-community/slider';
 import { Calculator, GraduationCap, Clock, MapPin, DollarSign } from 'lucide-react-native';
 
+
 const IsraelSalaryCalculator = () => {
   const [experience, setExperience] = useState(0);
   const [education, setEducation] = useState('bachelor');
@@ -104,12 +105,8 @@ const IsraelSalaryCalculator = () => {
   };
 
 
-  const getSliderColor = (value) => {
-  if (value < 5) return '#84cc16'; // green
-  if (value < 10) return '#f59e0b'; // yellow-orange
-  if (value < 15) return '#ec4899'; // pink
-  return '#6366f1'; // blue
-};
+  
+
 
   return (
     <ScrollView style={styles.container}>
@@ -128,21 +125,28 @@ const IsraelSalaryCalculator = () => {
         <Text style={styles.sectionTitle}>Your Details</Text>
 
         <Text style={styles.label}>Professional Field</Text>
-        <Picker selectedValue={field} onValueChange={(value) => setField(value)}>
-          <Picker.Item label="Software Development" value="software" />
-          <Picker.Item label="Engineering" value="engineering" />
-          <Picker.Item label="Marketing" value="marketing" />
-          <Picker.Item label="Finance" value="finance" />
-          <Picker.Item label="Healthcare" value="healthcare" />
-        </Picker>
+      <Picker 
+  selectedValue={field} 
+  onValueChange={(value) => setField(value)}
+  style={styles.picker}
+>
+  <Picker.Item label="Software Development" value="software" />
+  <Picker.Item label="Engineering" value="engineering" />
+  <Picker.Item label="Marketing" value="marketing" />
+  <Picker.Item label="Finance" value="finance" />
+  <Picker.Item label="Healthcare" value="healthcare" />
+</Picker>
 
-        <Text style={styles.label}>Education Level</Text>
-        <Picker selectedValue={education} onValueChange={(value) => setEducation(value)}>
-          <Picker.Item label="High School" value="highschool" />
-          <Picker.Item label="Bachelor's Degree" value="bachelor" />
-          <Picker.Item label="Master's Degree" value="master" />
-          <Picker.Item label="PhD" value="phd" />
-        </Picker>
+<Picker 
+  selectedValue={education} 
+  onValueChange={(value) => setEducation(value)}
+  style={styles.picker}
+>
+  <Picker.Item label="High School" value="highschool" />
+  <Picker.Item label="Bachelor's Degree" value="bachelor" />
+  <Picker.Item label="Master's Degree" value="master" />
+  <Picker.Item label="PhD" value="phd" />
+</Picker>
 
         <Text style={styles.label}>Years of Experience: {experience}</Text>
         <Slider
@@ -154,17 +158,57 @@ const IsraelSalaryCalculator = () => {
         />
       </View>
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Salary Breakdown</Text>
-        <Text style={styles.salaryLabel}>Gross Monthly Salary: {formatCurrency(baseSalary)}</Text>
-        <Text style={styles.salaryLabel}>Income Tax: {formatCurrency(taxes.incomeTax)}</Text>
-        <Text style={styles.salaryLabel}>National Insurance: {formatCurrency(taxes.nationalInsurance)}</Text>
-        <Text style={styles.salaryLabel}>Health Tax: {formatCurrency(taxes.healthTax)}</Text>
-        <Text style={styles.salaryLabel}>Total Deductions: {formatCurrency(taxes.total)}</Text>
-        <Text style={styles.salaryLabel}>Net Monthly Salary: {formatCurrency(netSalary)}</Text>
-        <Text style={styles.salaryLabel}>Annual Net Salary: {formatCurrency(netSalary * 12)}</Text>
-        <Text style={styles.salaryLabel}>Effective Tax Rate: {((taxes.total / baseSalary) * 100).toFixed(1)}%</Text>
-      </View>
+      <View style={styles.tableContainer}>
+  <Text style={styles.tableTitle}>Salary Breakdown</Text>
+
+  <View style={styles.tableRow}>
+    <Text style={styles.tableHeader}>Item</Text>
+    <Text style={styles.tableHeader}>Amount</Text>
+  </View>
+
+  <View style={styles.tableRow}>
+    <Text style={styles.tableCell}>Gross Monthly Salary</Text>
+    <Text style={styles.tableCell}>{formatCurrency(baseSalary)}</Text>
+  </View>
+
+  <View style={styles.tableRow}>
+    <Text style={styles.tableCell}>Income Tax</Text>
+    <Text style={styles.tableCell}>{formatCurrency(taxes.incomeTax)}</Text>
+  </View>
+
+  <View style={styles.tableRow}>
+    <Text style={styles.tableCell}>National Insurance</Text>
+    <Text style={styles.tableCell}>{formatCurrency(taxes.nationalInsurance)}</Text>
+  </View>
+
+  <View style={styles.tableRow}>
+    <Text style={styles.tableCell}>Health Tax</Text>
+    <Text style={styles.tableCell}>{formatCurrency(taxes.healthTax)}</Text>
+  </View>
+
+  <View style={styles.tableRow}>
+    <Text style={styles.tableCell}>Total Deductions</Text>
+    <Text style={styles.tableCell}>{formatCurrency(taxes.total)}</Text>
+  </View>
+
+  <View style={styles.tableRow}>
+    <Text style={styles.tableCell}>Net Monthly Salary</Text>
+    <Text style={styles.tableCell}>{formatCurrency(netSalary)}</Text>
+  </View>
+
+  <View style={styles.tableRow}>
+    <Text style={styles.tableCell}>Annual Net Salary</Text>
+    <Text style={styles.tableCell}>{formatCurrency(netSalary * 12)}</Text>
+  </View>
+
+  <View style={styles.tableRow}>
+    <Text style={styles.tableCell}>Effective Tax Rate</Text>
+    <Text style={styles.tableCell}>
+      {((taxes.total / baseSalary) * 100).toFixed(1)}%
+    </Text>
+  </View>
+</View>
+      
     </ScrollView>
   );
 };
@@ -172,11 +216,11 @@ const IsraelSalaryCalculator = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EAEBFF', // overall page background
+    backgroundColor: '#EAEBFF', // main background
     padding: 16,
   },
   header: {
-    backgroundColor: '#3b82f6',
+    backgroundColor: '#EAEBFF', // section background
     padding: 16,
     borderRadius: 8,
     marginBottom: 16,
@@ -189,7 +233,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#041E42FF', // updated text color
+    color: '#041E42FF', // all text color
     marginLeft: 8,
   },
   headerSubRow: {
@@ -197,12 +241,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerSubtitle: {
-    color: '#041E42FF', // updated text color
+    color: '#041E42FF', // all text color
     marginLeft: 4,
   },
   section: {
     marginBottom: 24,
-    backgroundColor: '#B9BDFF', // section background
+    backgroundColor: '#EAEBFF', // section background
     padding: 12,
     borderRadius: 8,
   },
@@ -210,19 +254,65 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     marginBottom: 12,
-    color: '#041E42FF',
+    color: '#041E42FF', // all text color
   },
   label: {
     marginTop: 12,
     marginBottom: 4,
     fontSize: 14,
-    color: '#041E42FF',
+    color: '#041E42FF', // all text color
   },
   salaryLabel: {
     fontSize: 16,
     marginVertical: 4,
-    color: '#041E42FF',
+    color: '#041E42FF', // all text color
   },
+  picker: {
+    backgroundColor: '#EAEBFF', // picker background
+    color: '#041E42FF', // picker text color
+  },tableContainer: {
+  marginTop: 30,
+  backgroundColor: '#F8FAFC',
+  borderRadius: 8,
+  padding: 10,
+  borderWidth: 1,
+  borderColor: '#CBD5E1',
+},
+tableTitle: {
+  fontSize: 18,
+  fontWeight: 'bold',
+  marginBottom: 10,
+  color: '#041E42FF',
+  textAlign: 'center',
+},
+tableRow: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  paddingVertical: 6,
+  borderBottomWidth: 1,
+  borderBottomColor: '#E2E8F0',
+},
+tableHeader: {
+  fontWeight: 'bold',
+  fontSize: 16,
+  color: '#041E42FF',
+  flex: 1,
+  textAlign: 'left',
+},
+tableCell: {
+  fontSize: 15,
+  color: '#041E42FF',
+  flex: 1,
+  textAlign: 'left',
+},
+tableTotal: {
+  fontWeight: 'bold',
+  fontSize: 16,
+  color: '#041E42FF',
+  flex: 1,
+  textAlign: 'left',
+},
+
 });
 
 
