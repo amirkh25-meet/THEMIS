@@ -1,14 +1,88 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
-export default function IntelIsrael() {
+export default function IsraelAerospaceIndustries() {
   return (
-    <View>
-      <Text>Intel Israel is one of the country’s largest and most influential tech employers, and it places a strong emphasis on diversity, equity, and inclusion. Women at Intel benefit from mentorship programs, professional development tracks, and a company culture that actively supports work-life balance. Intel Israel runs dedicated initiatives to recruit and promote women in engineering, R&D, and leadership roles. As a woman working at Intel Haifa, you’ll join a collaborative and forward-thinking environment that respects your voice, invests in your growth, and encourages you to lead innovation at the forefront of global technology.
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.card}>
+        <View style={styles.decorativeLine} />
+        <MaterialCommunityIcons name="airplane-takeoff" size={56} color="#2e7d32" style={styles.icon} />
+        <Text style={styles.header}>Israel Aerospace Industries (IAI)</Text>
+        <View style={styles.decorativeLine} />
 
-</Text>
-    </View>
-  )
+        <Text style={styles.subHeader}>Lod, Israel</Text>
+
+        <Text style={styles.paragraph}>
+          IAI, Israel’s flagship aerospace and defense company, is actively working to break gender stereotypes in one of the most male-dominated industries. The company supports women engineers, scientists, and managers through internal networks, educational partnerships, and outreach programs aimed at increasing female representation in STEM.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          IAI promotes <Text style={styles.highlight}>equal pay</Text>, flexible scheduling, and advancement opportunities that make it a strong option for women seeking long-term career development in high-impact roles.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          For women who aspire to shape the future of aerospace and innovation, IAI offers a stable yet dynamic platform for professional success.
+        </Text>
+      </View>
+    </ScrollView>
+  );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#e8f5e9',  // light green background
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 50,
+    paddingHorizontal: 20,
+  },
+  card: {
+    backgroundColor: '#ffffff',
+    borderRadius: 20,
+    padding: 30,
+    maxWidth: 700,
+    shadowColor: '#388e3c', // darker green shadow
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.2,
+    shadowRadius: 15,
+    elevation: 8,
+  },
+  decorativeLine: {
+    height: 4,
+    width: 60,
+    backgroundColor: '#2e7d32',
+    borderRadius: 2,
+    alignSelf: 'center',
+    marginVertical: 10,
+  },
+  icon: {
+    alignSelf: 'center',
+    marginBottom: 15,
+  },
+  header: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#2e7d32',  // green header text
+    textAlign: 'center',
+    marginBottom: 6,
+  },
+  subHeader: {
+    fontSize: 18,
+    color: '#43a047',  // lighter green subheader
+    fontStyle: 'italic',
+    textAlign: 'center',
+    marginBottom: 24,
+  },
+  paragraph: {
+    fontSize: 16,
+    color: '#1b5e20',  // dark green text
+    lineHeight: 26,
+    marginBottom: 18,
+    textAlign: 'justify',
+  },
+  highlight: {
+    color: '#33691e',  // deeper green highlight
+    fontWeight: '600',
+  },
+});
