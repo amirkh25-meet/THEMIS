@@ -12,6 +12,7 @@ export default function Layout() {
         options={{
           title: 'Home',
           headerShown: false,
+          //tabBarStyle: { display: 'none' },  
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
           ),
@@ -51,6 +52,16 @@ export default function Layout() {
         name="IsrealSalaryCalculator"
         options={{
           title: 'figure out your salary',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="play-circle" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="FeildPage"
+        options={{
+          title: 'rField',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="play-circle" size={size} color={color} />
