@@ -28,7 +28,7 @@ const steps = [
     id: 1,
     title: '1.Companies',
     icon: <Ionicons name="business" size={50} color="#fff" />,
-    route: '/CompanySearchPage',
+    route: '/FieldPage',
     description:
       'Here you can find our “Themis approved” companies that have good conditions for women and promote equality.',
   },
@@ -36,7 +36,7 @@ const steps = [
     id: 2,
     title: '2.Resume Guide',
     icon: <MaterialIcons name="description" size={50} color="#fff" />,
-    route: '/resume-guide',
+    route: '/resumeGuide',
     description:
       'Here you can find our specially designed guide to write your CV and make a dazzling first impression.',
   },
