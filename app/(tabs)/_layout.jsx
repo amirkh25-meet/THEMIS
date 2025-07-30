@@ -68,6 +68,17 @@ export default function Layout() {
           ),
         }}
       />
+        <Tabs.Screen
+        name="resumeGuide"
+        options={{
+          title: 'resumeGuide',
+          headerShown: false,
+          //tabBarStyle: { display: 'none' },  
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" size={size} color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }

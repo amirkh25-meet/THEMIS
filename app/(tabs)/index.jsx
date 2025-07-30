@@ -26,7 +26,7 @@ const sections = [
 const steps = [
   {
     id: 1,
-    title: 'Companies',
+    title: '1.Companies',
     icon: <Ionicons name="business" size={50} color="#fff" />,
     route: '/CompanySearchPage',
     description:
@@ -34,7 +34,7 @@ const steps = [
   },
   {
     id: 2,
-    title: 'Resume Guide',
+    title: '2.Resume Guide',
     icon: <MaterialIcons name="description" size={50} color="#fff" />,
     route: '/resume-guide',
     description:
@@ -42,7 +42,7 @@ const steps = [
   },
   {
     id: 3,
-    title: 'Salary Calculator',
+    title: '3.Salary Calculator',
     icon: <Entypo name="calculator" size={50} color="#fff" />,
     route: '/IsraelSalaryCalculator',
     description:
@@ -50,7 +50,7 @@ const steps = [
   },
   {
     id: 4,
-    title: 'Negotiation Simulation',
+    title: '4.Negotiation Simulation',
     icon: <MaterialCommunityIcons name="handshake" size={50} color="#fff" />,
     route: '/negotiation',
     description:
@@ -58,7 +58,7 @@ const steps = [
   },
   {
     id: 5,
-    title: 'Mentors videos',
+    title: '5.Mentors videos',
     icon: <Entypo name="video" size={50} color="#fff" />,
     route: '/videoPage',
     description:
