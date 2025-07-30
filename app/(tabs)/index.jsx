@@ -125,7 +125,7 @@ export default function HomeScreen() {
       <ScrollView contentContainerStyle={styles.container}>
 
         <Image
-          source={require('../../assets/images/logo.jpeg')}
+          source={require('../../assets/images/THEMISLOGO.png')}
           style={styles.logo}
           resizeMode="contain"
         />
