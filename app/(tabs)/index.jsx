@@ -1,73 +1,97 @@
 import { Entypo, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Image, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Animated,
+  Dimensions,
+  Image,
+  Modal,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 
+const { width, height } = Dimensions.get('window');
 const sections = [
   {
     key: 'intro',
     title: 'What we are?',
     content:
-      'We’re building a community of women to share reviews and discuss the gender pay gap at work, while offering tools, videos and resources to help them master negotiation and advance their careers.',
+      "We're building a community of women to share reviews and discuss the gender pay gap at work, while offering tools, videos and resources to help them master negotiation and advance their careers.",
+    icon: 'users',
+    color: '#041E42FF' // updated
   },
   {
     key: 'vision',
     title: 'Who we are?',
     content:
       'Our solution is to build a community of women who write reviews and communicate about the gender pay gap in their workplaces. We also offer simulations and lessons in negotiation.',
+    icon: 'eye',
+    color: '#041E42FF' // updated
   },
   {
     key: 'mission',
     title: 'Our Mission',
-    content: 'At Themis, we give women all the tools they need to advance their career, right from the first step - the first interview, and beyond!',
+    content:
+      'At Themis, we give women all the tools they need to advance their career, right from the first step - the first interview, and beyond!',
+    icon: 'target',
+    color: '#041E42FF' // updated
   },
 ];
 
 const steps = [
   {
     id: 1,
-    title: '1.Companies',
-    icon: <Ionicons name="business" size={50} color="#fff" />,
+    title: 'Companies',
+    icon: <Ionicons name="business" size={40} color="#fff" />,
     route: '/FieldPage',
-    description:
-      'Here you can find our “Themis approved” companies that have good conditions for women and promote equality.',
+    description: 'Here you can find our "Themis approved" companies that have good conditions for women and promote equality.',
+    backgroundColor: '#041E42FF',
+    shadowColor: '#041E42FF'
   },
   {
     id: 2,
-    title: '2.Resume Guide',
-    icon: <MaterialIcons name="description" size={50} color="#fff" />,
+    title: 'Resume Guide',
+    icon: <MaterialIcons name="description" size={40} color="#fff" />,
     route: '/resumeGuide',
-    description:
-      'Here you can find our specially designed guide to write your CV and make a dazzling first impression.',
+    description: 'Here you can find our specially designed guide to write your CV and make a dazzling first impression.',
+    backgroundColor: '#041E42FF',
+    shadowColor: '#041E42FF'
   },
   {
     id: 3,
-    title: '3.Salary Calculator',
-    icon: <Entypo name="calculator" size={50} color="#fff" />,
+    title: 'Salary Calculator',
+    icon: <Entypo name="calculator" size={40} color="#fff" />,
     route: '/IsraelSalaryCalculator',
-    description:
-      'Come prepared to your first interview with our salary calculator - knowledge is power!',
+    description: 'Come prepared to your first interview with our salary calculator - knowledge is power!',
+    backgroundColor: '#041E42FF',
+    shadowColor: '#041E42FF'
   },
   {
     id: 4,
-    title: '4.Negotiation Simulation',
-    icon: <MaterialCommunityIcons name="handshake" size={50} color="#fff" />,
+    title: 'Negotiation Simulation',
+    icon: <MaterialCommunityIcons name="handshake" size={40} color="#fff" />,
     route: '/negotiation',
-    description:
-      'Here you can learn how to negotiate your desired salary and conditions with our high-quality simulator.',
+    description: 'Here you can learn how to negotiate your desired salary and conditions with our high-quality simulator.',
+    backgroundColor: '#041E42FF',
+    shadowColor: '#041E42FF'
   },
   {
     id: 5,
-    title: '5.Mentors videos',
-    icon: <Entypo name="video" size={50} color="#fff" />,
+    title: 'Mentors Videos',
+    icon: <Entypo name="video" size={40} color="#fff" />,
     route: '/videoPage',
-    description:
-      'See what advice women mentors can give about their experiences in the job market through engaging videos.',
+    description: 'See what advice women mentors can give about their experiences in the job market through engaging videos.',
+    backgroundColor: '#041E42FF',
+    shadowColor: '#041E42FF'
   },
 ];
 
+
 const facts = [
-  'Over a birth cohort’s lifetime, the gender-wage gap tends to grow, as small early differences compound over time.',
+  "Over a birth cohort's lifetime, the gender-wage gap tends to grow, as small early differences compound over time.",
   'Over their lifetime, women earn on average 30% less than men.',
   'The monthly gender wage gap is about 32%–42% in Israel.',
   'The main cause for the gender wage gap is the number of work hours, which accounts for about 57% of the gap.',
@@ -93,6 +117,10 @@ export default function HomeScreen() {
   const [visibleStepId, setVisibleStepId] = useState(null);
   const [showFactPopup, setShowFactPopup] = useState(false);
   const [randomFact, setRandomFact] = useState('');
+  const [logoAnimation] = useState(new Animated.Value(0));
+  const [cardAnimations] = useState(sections.map(() => new Animated.Value(0)));
+  const [stepAnimations] = useState(steps.map(() => new Animated.Value(0)));
+  const [pulseAnimation] = useState(new Animated.Value(1));
   const router = useRouter();
 
   const toggleSection = (section) => {
@@ -109,7 +137,56 @@ export default function HomeScreen() {
 
   const closeFactPopup = () => setShowFactPopup(false);
 
-  // Auto-popup with random fact every 10 seconds
+  // Animations
+  useEffect(() => {
+    // Logo entrance animation
+    Animated.spring(logoAnimation, {
+      toValue: 1,
+      tension: 50,
+      friction: 7,
+      useNativeDriver: true,
+    }).start();
+
+    // Stagger card animations
+    const cardDelay = 200;
+    cardAnimations.forEach((anim, index) => {
+      Animated.timing(anim, {
+        toValue: 1,
+        duration: 800,
+        delay: index * cardDelay,
+        useNativeDriver: true,
+      }).start();
+    });
+
+    // Stagger step animations
+    const stepDelay = 150;
+    stepAnimations.forEach((anim, index) => {
+      Animated.timing(anim, {
+        toValue: 1,
+        duration: 600,
+        delay: 1000 + index * stepDelay,
+        useNativeDriver: true,
+      }).start();
+    });
+
+    // Pulse animation for subheading
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulseAnimation, {
+          toValue: 1.05,
+          duration: 2000,
+          useNativeDriver: true,
+        }),
+        Animated.timing(pulseAnimation, {
+          toValue: 1,
+          duration: 2000,
+          useNativeDriver: true,
+        }),
+      ])
+    ).start();
+  }, []);
+
+  // Auto-popup with random fact every 5 minutes
   useEffect(() => {
     const interval = setInterval(() => {
       setRandomFact(getRandomFact());
@@ -120,97 +197,274 @@ export default function HomeScreen() {
     return () => clearInterval(interval);
   }, []);
 
+  const logoTransform = {
+    transform: [
+      {
+        scale: logoAnimation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0.3, 1],
+        })
+      },
+      {
+        rotate: logoAnimation.interpolate({
+          inputRange: [0, 1],
+          outputRange: ['180deg', '0deg'],
+        })
+      }
+    ]
+  };
+
   return (
-    <View>
-      <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.mainContainer}>
+      <View style={styles.backgroundGradient} />
+      
+      <ScrollView 
+        contentContainerStyle={styles.container}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Animated Logo */}
+        <Animated.View style={[styles.logoContainer, logoTransform]}>
+          <Image
+            source={require('../../assets/images/THEMISLOGO.png')}
+            style={styles.logo}
+            resizeMode="contain"
+          />
+        </Animated.View>
 
-        <Image
-          source={require('../../assets/images/THEMISLOGO.png')}
-          style={styles.logo}
-          resizeMode="contain"
-        />
-        <Text style={styles.subheading}>Empower Women, Empower humanity</Text>
-        {sections.map((section) => (
-          <View key={section.key} style={styles.card}>
-            <TouchableOpacity onPress={() => toggleSection(section.key)} style={styles.cardHeader}>
-              <Text style={styles.cardTitle}>{section.title}</Text>
-              </TouchableOpacity>
-              {expanded === section.key && (
-                <View style={styles.cardContent}>
-                  <Text style={styles.cardText}>{section.content}</Text>
+        {/* Animated Subheading */}
+        <Animated.View style={[styles.subheadingContainer, { transform: [{ scale: pulseAnimation }] }]}>
+          <Text style={styles.subheading}>Empower Women,</Text>
+          <Text style={styles.subheading}>Empower Humanity</Text>
+        </Animated.View>
+
+        {/* Animated Info Cards */}
+        <View style={styles.cardsContainer}>
+          {sections.map((section, index) => (
+            <Animated.View
+              key={section.key}
+              style={[
+                styles.cardWrapper,
+                {
+                  opacity: cardAnimations[index],
+                  transform: [
+                    {
+                      translateY: cardAnimations[index].interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [50, 0],
+                      })
+                    }
+                  ]
+                }
+              ]}
+            >
+              <TouchableOpacity 
+                onPress={() => toggleSection(section.key)} 
+                style={[styles.modernCard, { borderLeftColor: section.color }]}
+                activeOpacity={0.8}
+              >
+                <View style={styles.cardGradient}>
+                  <View style={styles.cardHeader}>
+                    <View style={[styles.iconContainer, { backgroundColor: section.color }]}>
+                      <Entypo name={section.icon} size={24} color="#fff" />
+                    </View>
+                    <Text style={styles.modernCardTitle}>{section.title}</Text>
+                    <Animated.View
+                      style={{
+                        transform: [{
+                          rotate: expanded === section.key ? '180deg' : '0deg'
+                        }]
+                      }}
+                    >
+                      <MaterialIcons name="keyboard-arrow-down" size={28} color="#666" />
+                    </Animated.View>
                   </View>
-                )}
+                  {expanded === section.key && (
+                    <Animated.View style={styles.cardContent}>
+                      <Text style={styles.cardText}>{section.content}</Text>
+                    </Animated.View>
+                  )}
                 </View>
-              ))}
-
-
-
-<View style={styles.mapGrid}>
-  <View style={styles.row}>
-    {steps.slice(0, 3).map((step) => (
-      <TouchableOpacity
-        key={step.id}
-        onPress={() => router.push(step.route)}
-        activeOpacity={0.8}
-        style={styles.stepCard}
-      >
-        <View style={styles.bubble}>{step.icon}</View>
-        <View style={styles.titleRow}>
-          <Text style={styles.stepTitle}>{step.title}</Text>
-          <TouchableOpacity onPress={() => handleHelpPress(step.id)}>
-            <MaterialIcons name="help-outline" size={24} color="#041e42ff" />
-          </TouchableOpacity>
+              </TouchableOpacity>
+            </Animated.View>
+          ))}
         </View>
-      </TouchableOpacity>
-    ))}
-  </View>
 
-  <View style={[styles.row, styles.centerRow]}>
-    {steps.slice(3).map((step) => (
-      <TouchableOpacity
-        key={step.id}
-        onPress={() => router.push(step.route)}
-        activeOpacity={0.8}
-        style={styles.stepCard}
-      >
-        <View style={styles.bubble}>{step.icon}</View>
-        <View style={styles.titleRow}>
-          <Text style={styles.stepTitle}>{step.title}</Text>
-          <TouchableOpacity onPress={() => handleHelpPress(step.id)}>
-            <MaterialIcons name="help-outline" size={24} color="#041e42ff" />
-          </TouchableOpacity>
+        {/* Journey Steps Title */}
+        <View style={styles.journeyTitleContainer}>
+          <Text style={styles.journeyTitle}>Your Career Journey:</Text>
+          <View style={styles.titleUnderline} />
         </View>
-      </TouchableOpacity>
-    ))}
-  </View>
-</View>
 
+        {/* Animated Step Grid */}
+        <View style={styles.stepsContainer}>
+          <View style={styles.stepRow}>
+            {steps.slice(0, 3).map((step, index) => (
+              <Animated.View
+                key={step.id}
+                style={[
+                  styles.stepWrapper,
+                  {
+                    opacity: stepAnimations[index],
+                    transform: [
+                      {
+                        translateY: stepAnimations[index].interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [30, 0],
+                        })
+                      },
+                      {
+                        scale: stepAnimations[index].interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [0.8, 1],
+                        })
+                      }
+                    ]
+                  }
+                ]}
+              >
+                <TouchableOpacity
+                  onPress={() => router.push(step.route)}
+                  activeOpacity={0.8}
+                  style={styles.stepCard}
+                >
+                  <View
+                    style={[
+                      styles.stepBubble, 
+                      { 
+                        backgroundColor: step.backgroundColor,
+                        shadowColor: step.shadowColor 
+                      }
+                    ]}
+                  >
+                    {step.icon}
+                  </View>
+                  <View style={styles.stepTitleContainer}>
+                    <Text style={styles.stepTitle}>{step.title}</Text>
+                    <TouchableOpacity 
+                      onPress={() => handleHelpPress(step.id)}
+                      style={styles.helpButton}
+                    >
+                      <MaterialIcons name="help-outline" size={20} color="#666" />
+                    </TouchableOpacity>
+                  </View>
+                </TouchableOpacity>
+              </Animated.View>
+            ))}
+          </View>
 
+          <View style={styles.stepRow}>
+            {steps.slice(3).map((step, index) => (
+              <Animated.View
+                key={step.id}
+                style={[
+                  styles.stepWrapper,
+                  {
+                    opacity: stepAnimations[index + 3],
+                    transform: [
+                      {
+                        translateY: stepAnimations[index + 3].interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [30, 0],
+                        })
+                      },
+                      {
+                        scale: stepAnimations[index + 3].interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [0.8, 1],
+                        })
+                      }
+                    ]
+                  }
+                ]}
+              >
+                <TouchableOpacity
+                  onPress={() => router.push(step.route)}
+                  activeOpacity={0.8}
+                  style={styles.stepCard}
+                >
+                  <View
+                    style={[
+                      styles.stepBubble, 
+                      { 
+                        backgroundColor: step.backgroundColor,
+                        shadowColor: step.shadowColor 
+                      }
+                    ]}
+                  >
+                    {step.icon}
+                  </View>
+                  <View style={styles.stepTitleContainer}>
+                    <Text style={styles.stepTitle}>{step.title}</Text>
+                    <TouchableOpacity 
+                      onPress={() => handleHelpPress(step.id)}
+                      style={styles.helpButton}
+                    >
+                      <MaterialIcons name="help-outline" size={20} color="#666" />
+                    </TouchableOpacity>
+                  </View>
+                </TouchableOpacity>
+              </Animated.View>
+            ))}
+          </View>
+        </View>
+
+        {/* Footer */}
+        <View style={styles.footer}>
+          
+        </View>
       </ScrollView>
 
-      <Modal visible={visibleStepId !== null} transparent animationType="fade" onRequestClose={handleCloseModal}>
+      {/* Help Modal */}
+      <Modal 
+        visible={visibleStepId !== null} 
+        transparent 
+        animationType="slide" 
+        onRequestClose={handleCloseModal}
+      >
         <View style={styles.modalOverlay}>
-          <View style={styles.modalBox}>
-            <Text style={styles.modalText}>
-              {steps.find((s) => s.id === visibleStepId)?.description}
-            </Text>
-            <TouchableOpacity onPress={handleCloseModal} style={styles.closeButton}>
-              <Text style={styles.closeButtonText}>Close</Text>
-            </TouchableOpacity>
-          </View>
+          <Animated.View style={styles.modernModalBox}>
+            <View style={styles.modalGradient}>
+              <View style={styles.modalHeader}>
+                <MaterialIcons name="info" size={40} color="#fff" />
+                <Text style={styles.modalTitle}>
+                  {steps.find((s) => s.id === visibleStepId)?.title}
+                </Text>
+              </View>
+            </View>
+            <View style={styles.modalContent}>
+              <Text style={styles.modalText}>
+                {steps.find((s) => s.id === visibleStepId)?.description}
+              </Text>
+              <TouchableOpacity onPress={handleCloseModal} style={styles.modernCloseButton}>
+                <View style={styles.closeButtonGradient}>
+                  <Text style={styles.closeButtonText}>Got it!</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </Animated.View>
         </View>
       </Modal>
 
-      <Modal visible={showFactPopup} transparent animationType="fade" onRequestClose={closeFactPopup}>
+      {/* Fact Popup Modal */}
+      <Modal 
+        visible={showFactPopup} 
+        transparent 
+        animationType="fade" 
+        onRequestClose={closeFactPopup}
+      >
         <View style={styles.modalOverlay}>
-          <View style={styles.modalBox}>
-            <Text style={[styles.modalText, { fontStyle: 'italic' }]}>
-              💡 Did you know? {'\n\n'} {randomFact}
-            </Text>
-            <TouchableOpacity onPress={closeFactPopup} style={styles.closeButton}>
-              <Text style={styles.closeButtonText}>Got it!</Text>
-            </TouchableOpacity>
-          </View>
+          <Animated.View style={styles.factModalBox}>
+            <View style={styles.factModalGradient}>
+              <View style={styles.factHeader}>
+                <Text style={styles.factEmoji}>💡</Text>
+                <Text style={styles.factTitle}>Did You Know?</Text>
+              </View>
+              <Text style={styles.factText}>{randomFact}</Text>
+              <TouchableOpacity onPress={closeFactPopup} style={styles.factCloseButton}>
+                <Text style={styles.factCloseText}>Amazing!</Text>
+              </TouchableOpacity>
+            </View>
+          </Animated.View>
         </View>
       </Modal>
     </View>
@@ -218,156 +472,268 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+  },
+  backgroundGradient: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundColor: '#EAEBFF', // Solid color instead of gradient
+  },
   container: {
-    paddingVertical: 50,
-    paddingHorizontal: 24,
-    backgroundColor: '#eaebff',
+    paddingVertical: 60,
+    paddingHorizontal: 20,
     alignItems: 'center',
+  },
+  logoContainer: {
+    marginBottom: 5,
   },
   logo: {
     width: 450,
-    height: 180,
+    height: 200,
+  },
+  subheadingContainer: {
+    marginBottom: 40,
   },
   subheading: {
-    fontSize: 20,
-    color: '#041e42ff',
+    fontSize: 24,
+    color: '#041E42FF',
     textAlign: 'center',
-    marginBottom: 30,
-    marginTop: 20,
-    paddingHorizontal: 12,
-    lineHeight: 26,
+    fontWeight: 'bold',
+    textShadowColor: 'rgba(0,0,0,0.3)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
+  },
+  cardsContainer: {
+    width: '100%',
+    marginBottom: 40,
+  },
+  cardWrapper: {
+    marginBottom: 15,
+  },
+  modernCard: {
+    borderRadius: 20,
+    overflow: 'hidden',
+    elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    borderLeftWidth: 5,
+  },
+  cardGradient: {
+    backgroundColor: '#ffffff', // Solid color instead of gradient
+    padding: 0,
+  },
+  cardHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 20,
+  },
+  iconContainer: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 15,
+    elevation: 3,
+  },
+  modernCardTitle: {
+    flex: 1,
+    fontSize: 20,
+    color: '#2c3e50',
     fontWeight: 'bold',
   },
-  sub2: {
-    fontSize: 21,
-    color: '#041e42ff',
-    textAlign: 'center',
-    marginBottom: 20,
-    paddingHorizontal: 12,
-    lineHeight: 26,
-    fontFamily: 'sans-serif-light',
-    fontWeight: '300',
+  cardContent: {
+    paddingHorizontal: 20,
+    paddingBottom: 20,
   },
-  mapContainer: {
+  cardText: {
+    fontSize: 16,
+    color: '#555',
+    lineHeight: 24,
+  },
+  journeyTitleContainer: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  journeyTitle: {
+    fontSize: 28,
+    color: '#041E42FF',
+    fontWeight: 'bold',
+    textShadowColor: 'rgba(0,0,0,0.3)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
+  },
+  titleUnderline: {
+    width: 60,
+    height: 4,
+    backgroundColor: '#fff',
+    borderRadius: 2,
+    marginTop: 10,
+  },
+  stepsContainer: {
     width: '100%',
     alignItems: 'center',
-    marginBottom: 50,
+    marginBottom: 40,
+  },
+  stepRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    marginBottom: 30,
   },
   stepWrapper: {
     alignItems: 'center',
-    marginBottom: 36,
   },
-  connectorContainer: {
+  stepCard: {
     alignItems: 'center',
-  },
-  connectorLine: {
-    width: 6,
-    height: 40,
-    backgroundColor: '#ff7c8a',
-  },
-  bubble: {
     width: 100,
-    height: 100,
+  },
+  stepBubble: {
+    width: 80,
+    height: 80,
     borderRadius: 40,
-    backgroundColor: '#041e42ff',
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 10,
-    elevation: 5,
+    elevation: 12,
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.4,
+    shadowRadius: 12,
+  },
+  stepTitleContainer: {
+    alignItems: 'center',
+    marginTop: 12,
   },
   stepTitle: {
-    fontSize: 17,
-    color: '#2c3e50',
+    fontSize: 16,
+    color: '#041E42FF',
     textAlign: 'center',
     fontWeight: 'bold',
+    marginBottom: 8,
+    textShadowColor: 'rgba(0,0,0,0.3)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
   },
-  titleRow: {
-    flexDirection: 'row',
+  helpButton: {
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    borderRadius: 15,
+    padding: 6,
+    elevation: 2,
+  },
+  footer: {
+    marginTop: 20,
     alignItems: 'center',
-    gap: 6,
-    marginTop: 10,
+  },
+  footerText: {
+    fontSize: 18,
+    color: '#fff',
+    fontWeight: 'bold',
+    textShadowColor: 'rgba(0,0,0,0.3)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.7)',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
   },
-  modalBox: {
+  modernModalBox: {
     backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 20,
+    borderRadius: 25,
+    overflow: 'hidden',
     maxWidth: 400,
+    width: '100%',
+    elevation: 20,
   },
-  modalText: {
-    fontSize: 20,
-    color: '#333',
-    marginBottom: 20,
+  modalGradient: {
+    backgroundColor: '#667eea', // Solid color instead of gradient
+    padding: 25,
+  },
+  modalHeader: {
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontSize: 22,
+    color: '#fff',
+    fontWeight: 'bold',
+    marginTop: 10,
     textAlign: 'center',
   },
-  closeButton: {
-    backgroundColor: '#041e42ff',
-    borderRadius: 20,
+  modalContent: {
+    padding: 25,
+  },
+  modalText: {
+    fontSize: 16,
+    color: '#333',
+    lineHeight: 24,
+    textAlign: 'center',
+    marginBottom: 25,
+  },
+  modernCloseButton: {
+    borderRadius: 15,
+    overflow: 'hidden',
+  },
+  closeButtonGradient: {
+    backgroundColor: '#667eea', // Solid color instead of gradient
     paddingVertical: 15,
-    paddingHorizontal: 15,
-    alignSelf: 'center',
+    paddingHorizontal: 30,
+    alignItems: 'center',
   },
   closeButtonText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 16,
   },
-  
-  card: {
-    width: '100%',
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    marginBottom: 10,
+  factModalBox: {
+    borderRadius: 25,
     overflow: 'hidden',
-    elevation: 2
+    maxWidth: 380,
+    width: '100%',
+    elevation: 20,
   },
-  cardHeader: {
-    padding: 15,
-    backgroundColor: '#ff7c8a'
+  factModalGradient: {
+    backgroundColor: '#041E42FF', // Solid color instead of gradient
+    padding: 30,
   },
-  cardTitle: {
-    fontSize: 20,
+  factHeader: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  factEmoji: {
+    fontSize: 40,
+    marginBottom: 10,
+  },
+  factTitle: {
+    fontSize: 24,
     color: '#fff',
-    fontWeight: '600'
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
-  cardContent: {
-    padding: 15,
-    backgroundColor: '#ecf0f1'
+  factText: {
+    fontSize: 16,
+    color: '#fff',
+    lineHeight: 24,
+    textAlign: 'center',
+    marginBottom: 25,
+    fontStyle: 'italic',
   },
-  cardText: {
-    fontSize: 18,
-    color: '#2d3436'
+  factCloseButton: {
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    borderRadius: 15,
+    paddingVertical: 12,
+    paddingHorizontal: 25,
+    alignSelf: 'center',
   },
-mapGrid: {
-  width: '97%',
-  gap: 20,
-  marginTop: 20,
-  marginBottom: 40,
-},
-
-row: {
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  justifyContent: 'space-between',
-  marginBottom: 20,
-  width: '100%',
-},
-
-centerRow: {
-  justifyContent: 'center',
-  gap: 80,
-},
-
-stepCard: {
-  width: 100,
-  alignItems: 'center',
-},
-
-
+  factCloseText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
 });
