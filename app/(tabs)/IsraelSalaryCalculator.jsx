@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
 import Slider from '@react-native-community/slider';
-import { Calculator, GraduationCap, Clock, MapPin, DollarSign } from 'lucide-react-native';
-
+import { Picker } from '@react-native-picker/picker';
+import { Calculator, MapPin } from 'lucide-react-native';
+import { useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 const IsraelSalaryCalculator = () => {
   const [experience, setExperience] = useState(0);
@@ -20,34 +19,34 @@ const IsraelSalaryCalculator = () => {
 
   const salaryRanges = {
     software: {
-      highschool: { base: 8000, experienceBonus: 800 },
-      bachelor: { base: 12000, experienceBonus: 1200 },
-      master: { base: 15000, experienceBonus: 1500 },
-      phd: { base: 18000, experienceBonus: 1800 }
+      highschool: { base: 8000, experienceBonus: 500 },
+      bachelor: { base: 15800, experienceBonus: 1300 },
+      master: { base: 18000, experienceBonus: 1500 },
+      phd: { base: 20000, experienceBonus: 1600 }
     },
     engineering: {
-      highschool: { base: 7000, experienceBonus: 600 },
-      bachelor: { base: 11000, experienceBonus: 1000 },
-      master: { base: 14000, experienceBonus: 1300 },
-      phd: { base: 17000, experienceBonus: 1600 }
+      highschool: { base: 7000, experienceBonus: 500 },
+      bachelor: { base: 14500, experienceBonus: 1100 },
+      master: { base: 16500, experienceBonus: 1300 },
+      phd: { base: 18500, experienceBonus: 1450 }
     },
     marketing: {
-      highschool: { base: 6000, experienceBonus: 500 },
-      bachelor: { base: 9000, experienceBonus: 800 },
-      master: { base: 12000, experienceBonus: 1100 },
-      phd: { base: 15000, experienceBonus: 1400 }
+      highschool: { base: 6000, experienceBonus: 400 },
+      bachelor: { base: 11500, experienceBonus: 950 },
+      master: { base: 13500, experienceBonus: 1100 },
+      phd: { base: 15500, experienceBonus: 1250 }
     },
     finance: {
-      highschool: { base: 7000, experienceBonus: 600 },
-      bachelor: { base: 10000, experienceBonus: 900 },
-      master: { base: 13000, experienceBonus: 1200 },
-      phd: { base: 16000, experienceBonus: 1500 }
+      highschool: { base: 7000, experienceBonus: 500 },
+      bachelor: { base: 12000, experienceBonus: 1000 },
+      master: { base: 14500, experienceBonus: 1200 },
+      phd: { base: 17000, experienceBonus: 1400 }
     },
     healthcare: {
-      highschool: { base: 6500, experienceBonus: 550 },
-      bachelor: { base: 10500, experienceBonus: 950 },
-      master: { base: 13500, experienceBonus: 1250 },
-      phd: { base: 16500, experienceBonus: 1550 }
+      highschool: { base: 6500, experienceBonus: 450 },
+      bachelor: { base: 11000, experienceBonus: 950 },
+      master: { base: 13000, experienceBonus: 1150 },
+      phd: { base: 15000, experienceBonus: 1300 }
     }
   };
 
@@ -103,11 +102,6 @@ const IsraelSalaryCalculator = () => {
       maximumFractionDigits: 0
     }).format(amount);
   };
-
-
-  
-
-
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -216,9 +210,10 @@ Enter your info to see what   {""}
 </View>
       
     </ScrollView>
+ 
   );
 };
-
+  
 const styles = StyleSheet.create({
   container: {
     flex: 1,
