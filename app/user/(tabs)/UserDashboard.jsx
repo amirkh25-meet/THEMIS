@@ -1,5 +1,6 @@
 import { Entypo, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 import {
   Animated,
@@ -14,6 +15,8 @@ import {
 } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
+
+// Define sections data inside the component file
 const sections = [
   {
     key: 'intro',
@@ -21,7 +24,7 @@ const sections = [
     content:
       "We're building a community of women to share reviews and discuss the gender pay gap at work, while offering tools, videos and resources to help them master negotiation and advance their careers.",
     icon: 'users',
-    color: '#041E42FF' // updated
+    color: '#041E42FF'
   },
   {
     key: 'vision',
@@ -29,7 +32,7 @@ const sections = [
     content:
       'Our solution is to build a community of women who write reviews and communicate about the gender pay gap in their workplaces. We also offer simulations and lessons in negotiation.',
     icon: 'eye',
-    color: '#041E42FF' // updated
+    color: '#041E42FF'
   },
   {
     key: 'mission',
@@ -37,10 +40,11 @@ const sections = [
     content:
       'At Themis, we give women all the tools they need to advance their career, right from the first step - the first interview, and beyond!',
     icon: 'target',
-    color: '#041E42FF' // updated
+    color: '#041E42FF'
   },
 ];
 
+// Define steps data inside the component file
 const steps = [
   {
     id: 1,
@@ -89,7 +93,7 @@ const steps = [
   },
 ];
 
-
+// Define facts data inside the component file
 const facts = [
   "Over a birth cohort's lifetime, the gender-wage gap tends to grow, as small early differences compound over time.",
   'Over their lifetime, women earn on average 30% less than men.',
@@ -112,6 +116,7 @@ const getRandomFact = () => {
   return facts[index];
 };
 
+// Main component without props - all data is defined internally
 export default function HomeScreen() {
   const [expanded, setExpanded] = useState(null);
   const [visibleStepId, setVisibleStepId] = useState(null);
@@ -125,10 +130,6 @@ export default function HomeScreen() {
 
   const toggleSection = (section) => {
     setExpanded(expanded === section ? null : section);
-  };
-
-  const handleHelpPress = (id) => {
-    setVisibleStepId(id);
   };
 
   const handleCloseModal = () => {
@@ -214,6 +215,67 @@ export default function HomeScreen() {
     ]
   };
 
+  const checkUserSignInStatus = async () => {
+  try {
+    // Check AsyncStorage instead of making API call
+    const sessionData = await AsyncStorage.getItem('userSession');
+    if (sessionData) {
+      const user = JSON.parse(sessionData);
+      return {
+        isSignedIn: true,
+        user: user,
+        error: null
+      };
+    } else {
+      return {
+        isSignedIn: false,
+        user: null,
+        error: 'No session found'
+      };
+    }
+  } catch (error) {
+    console.log('Error checking session:', error.message);
+    return {
+      isSignedIn: false,
+      user: null,
+      error: error.message
+    };
+  }
+};
+
+const handleCardPress = async (step) => {
+  try {
+    // Check if user is signed in using AsyncStorage
+    const authStatus = await checkUserSignInStatus();
+    
+    // Construct the full route with /user/ prefix
+    const fullRoute = `/user${step.route}`;
+    
+    if (authStatus.isSignedIn) {
+      // User is signed in, navigate to the step route
+      router.push(fullRoute);
+    } else {
+      // User is not signed in, store the intended destination and redirect to profile page
+      console.log('User not authenticated, redirecting to sign-up');
+      
+      // Store the intended route in AsyncStorage
+      await AsyncStorage.setItem('intendedRoute', fullRoute);
+      
+      // Navigate to profile page with correct path
+      router.push('/user/_ProfilePage');
+    }
+  } catch (error) {
+    console.error('Error checking authentication:', error);
+    // On error, also redirect to sign-up as a fallback
+    await AsyncStorage.setItem('intendedRoute', fullRoute);
+    router.push('/user/_ProfilePage');
+  }
+};
+
+  const handleHelpPress = (stepId) => {
+    setVisibleStepId(stepId);
+  };
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.backgroundGradient} />
@@ -225,7 +287,8 @@ export default function HomeScreen() {
         {/* Animated Logo */}
         <Animated.View style={[styles.logoContainer, logoTransform]}>
           <Image
-            source={require('../../assets/images/THEMISLOGO.png')}
+            
+            source={require('../../../assets/images/THEMISLOGO.png')}
             style={styles.logo}
             resizeMode="contain"
           />
@@ -323,7 +386,7 @@ export default function HomeScreen() {
                 ]}
               >
                 <TouchableOpacity
-                  onPress={() => router.push(step.route)}
+                  onPress={() => handleCardPress(step)}
                   activeOpacity={0.8}
                   style={styles.stepCard}
                 >
@@ -378,7 +441,7 @@ export default function HomeScreen() {
                 ]}
               >
                 <TouchableOpacity
-                  onPress={() => router.push(step.route)}
+                  onPress={() => handleCardPress(step)}
                   activeOpacity={0.8}
                   style={styles.stepCard}
                 >
@@ -471,6 +534,7 @@ export default function HomeScreen() {
   );
 }
 
+// Define styles inside the component file - no props needed
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
@@ -481,7 +545,8 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
-    backgroundColor: '#EAEBFF', // Solid color instead of gradient
+    backgroundColor: '#EAEBFF', 
+    backgroundColor: '#EAEBFF',
   },
   container: {
     paddingVertical: 60,
@@ -525,7 +590,8 @@ const styles = StyleSheet.create({
     borderLeftWidth: 5,
   },
   cardGradient: {
-    backgroundColor: '#ffffff', // Solid color instead of gradient
+    backgroundColor: '#ffffff', 
+    backgroundColor: '#ffffff',
     padding: 0,
   },
   cardHeader: {
@@ -653,7 +719,7 @@ const styles = StyleSheet.create({
     elevation: 20,
   },
   modalGradient: {
-    backgroundColor: '#667eea', // Solid color instead of gradient
+    backgroundColor: '#667eea',
     padding: 25,
   },
   modalHeader: {
@@ -681,7 +747,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   closeButtonGradient: {
-    backgroundColor: '#667eea', // Solid color instead of gradient
+    backgroundColor: '#667eea',
     paddingVertical: 15,
     paddingHorizontal: 30,
     alignItems: 'center',
@@ -699,7 +765,7 @@ const styles = StyleSheet.create({
     elevation: 20,
   },
   factModalGradient: {
-    backgroundColor: '#041E42FF', // Solid color instead of gradient
+    backgroundColor: '#041E42FF',
     padding: 30,
   },
   factHeader: {
