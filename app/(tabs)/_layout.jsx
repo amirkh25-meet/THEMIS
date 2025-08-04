@@ -20,16 +20,8 @@ export default function Layout() {
     ),
   }}
 />
-<Tabs.Screen
-  name="FieldPage"
-  options={{
-    title: 'Company',
-    headerShown: false,
-    tabBarIcon: ({ color, size }) => (
-      <Ionicons name="business-outline" size={size} color={color} />
-    ),
-  }}
-/>
+
+
 <Tabs.Screen
   name="IsraelSalaryCalculator"
   options={{
@@ -60,6 +52,18 @@ export default function Layout() {
     ),
   }}
 />
+<Tabs.Screen
+  name="FieldPage"
+  options={{
+    title: 'Field',
+    headerShown: false,
+    tabBarIcon: ({ color, size }) => (
+      <Ionicons name="business" size={size} color={color} />
+    ),
+  }}
+/>
+
+
 
     </Tabs>
   );
