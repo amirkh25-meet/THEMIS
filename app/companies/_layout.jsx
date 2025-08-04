@@ -15,6 +15,15 @@ export default function CompaniesLayout() {
           headerShown: true
         }} 
       />
+            <Stack.Screen 
+        name="GenderEquityAssessmentApp" 
+        options={{
+          
+          title: 'Company Dashboard',
+          headerShown: true
+        }} 
+      />
+
     </Stack>
   );
 }

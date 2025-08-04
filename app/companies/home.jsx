@@ -28,7 +28,7 @@ export default function CompaniesIndex() {
 
       {/* Reports & Settings Buttons */}
       <View style={styles.menuGrid}>
-        <TouchableOpacity style={styles.menuItem} onPress={() => navigateTo('reports')}>
+        <TouchableOpacity style={styles.menuItem} onPress={() => navigateTo('GenderEquityAssessmentApp')}>
           <Ionicons name="bar-chart-outline" style={styles.menuIcon} />
           <Text style={styles.menuText}>Analysis</Text>
         </TouchableOpacity>
