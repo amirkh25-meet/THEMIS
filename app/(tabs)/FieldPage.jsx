@@ -1,97 +1,239 @@
-import { FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import {
+  ArrowRight,
+  Heart,
+  Laptop,
+  TrendingUp,
+} from 'lucide-react-native';
+import { useEffect, useState } from 'react';
+import {
+  Platform,
+  Animated,
+  Dimensions,
+  ScrollView,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+
+const { width } = Dimensions.get('window');
+
+const fields = [
+  {
+    id: 'healthcare',
+    title: 'Healthcare',
+    subtitle: 'Medical & Wellness',
+    description:
+      "Join leading healthcare institutions making a difference in people's lives through innovative medical solutions.",
+    icon: <Heart color="#ffffff" size={24} />,
+    gradient: ['#041E42', '#041E42'],
+    route: '/Fields/HeathCare/HealthCare',
+  },
+  {
+    id: 'tech',
+    title: 'Technology',
+    subtitle: 'Innovation & Digital',
+    description:
+      'Build the future with cutting-edge technology companies driving digital transformation and innovation.',
+    icon: <Laptop color="#ffffff" size={24} />,
+    gradient: ['#041E42', '#041E42'],
+    route: '/Fields/Tech/Tech',
+  },
+  {
+    id: 'finance',
+    title: 'Finance',
+    subtitle: 'Banking & Investment',
+    description:
+      'Shape the financial landscape with established banks and investment firms managing global economies.',
+    icon: <TrendingUp color="#ffffff" size={24} />,
+    gradient: ['#041E42', '#041E42'],
+    route: '/Fields/Fainance/Fainance',
+  },
+];
 
 export default function FieldPage() {
+  const [selectedField, setSelectedField] = useState(null);
+  const [fadeAnim] = useState(new Animated.Value(0));
+  const [slideAnim] = useState(new Animated.Value(50));
+
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, []);
+
+  const handleCardPress = (field) => {
+    setSelectedField(field.id);
+    setTimeout(() => {
+      router.push(field.route);
+    }, 200);
+  };
+
+  const styles = {
+    container: {
+      flex: 1,
+      backgroundColor: '#ffffff',
+    },
+    header: {
+  backgroundColor: '#041E42FF',
+  padding: 20,
+  paddingTop: Platform.OS === 'android' ? 40 : 60,
+  paddingHorizontal: 16,
+  borderBottomLeftRadius: 24,
+  borderBottomRightRadius: 24,
+  marginBottom: 20,
+  elevation: 4,
+  alignItems: 'center',
+    },
+    headerTitle: {
+      fontSize: 28,
+      fontWeight: '800',
+      color: '#ffffff',
+      marginBottom: 6,
+      textAlign: 'center',
+    },
+    headerSubtitle: {
+      fontSize: 14,
+      color: '#ffffff',
+      textAlign: 'center',
+      marginBottom: 12,
+      lineHeight: 20,
+      fontWeight: '500',
+    },
+    cardList: {
+      padding: 24,
+      paddingBottom: 40,
+    },
+    card: {
+      backgroundColor: '#ffffff',
+      borderRadius: 20,
+      padding: 16,
+      marginBottom: 16,
+      shadowColor: '#041E42',
+      shadowOffset: { width: 0, height: 6 },
+      shadowOpacity: 0.12,
+      shadowRadius: 12,
+      elevation: 6,
+      borderWidth: 2,
+      borderColor: '#ffffff',
+    },
+    selectedCard: {
+      borderColor: '#ff7c8a',
+    },
+    cardContent: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    iconContainer: {
+      width: 48,
+      height: 48,
+      borderRadius: 16,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginRight: 16,
+      backgroundColor: '#041E42',
+    },
+    info: {
+      flex: 1,
+    },
+    title: {
+      fontSize: 18,
+      fontWeight: '800',
+      color: '#041E42',
+      marginBottom: 4,
+    },
+    subtitle: {
+      fontSize: 15,
+      fontWeight: '600',
+      color: '#64748B',
+    },
+    description: {
+      fontSize: 16,
+      color: '#04142F',
+      lineHeight: 22,
+      marginTop: 8,
+    },
+
+    arrow: {
+      marginLeft: 12,
+    },
+    footer: {
+      alignItems: 'center',
+      marginTop: 20,
+    },
+    footerText: {
+      fontSize: 16,
+      fontWeight: '700',
+      color: '#041E42',
+      marginBottom: 4,
+    },
+    footerSubtext: {
+      fontSize: 13,
+      color: '#64748B',
+      textAlign: 'center',
+      fontWeight: '500',
+    },
+  };
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#041E42" />
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Explore Career Fields</Text>
+        <Text style={styles.headerSubtitle}>
+          Find inclusive workplaces and career opportunities
+        </Text>
+      </View>
 
-      <Text style={styles.title}>Choose Your Field</Text>
-    <Text style={styles.intro}>
-      Discover companies that{" "}
-      <Text style={styles.highlight}>value women</Text> .{" "}
-      Choose your field and explore your best-fit workplaces.
-    </Text>
+      <ScrollView contentContainerStyle={styles.cardList}>
+        {fields.map((field) => (
+          <Animated.View
+            key={field.id}
+            style={{
+              opacity: fadeAnim,
+              transform: [{ translateY: slideAnim }],
+            }}
+          >
+            <TouchableOpacity
+              style={[
+                styles.card,
+                selectedField === field.id && styles.selectedCard,
+              ]}
+              onPress={() => handleCardPress(field)}
+              activeOpacity={0.9}
+            >
+              <View style={styles.cardContent}>
+                <View style={[styles.iconContainer, { backgroundColor: field.gradient[0] }]}>
+                  {field.icon}
+                </View>
+                <View style={styles.info}>
+                  <Text style={styles.title}>{field.title}</Text>
+                  <Text style={styles.subtitle}>{field.subtitle}</Text>
+                  <Text style={styles.description}>{field.description}</Text>
+                </View>
+                <ArrowRight color="#041E42" size={24} style={styles.arrow} />
+              </View>
+            </TouchableOpacity>
+          </Animated.View>
+        ))}
 
-
-
-      <TouchableOpacity style={styles.card} onPress={goToHealthCare} activeOpacity={0.8}>
-        <Ionicons name="medkit" size={28} color="#0d6efd" style={styles.icon} />
-        <Text style={styles.cardText}>Healthcare Companies</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.card} onPress={goToTech} activeOpacity={0.8}>
-        <MaterialCommunityIcons name="laptop" size={28} color="#6610f2" style={styles.icon} />
-        <Text style={styles.cardText}>Tech Companies</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.card} onPress={goToFinance} activeOpacity={0.8}>
-        <FontAwesome5 name="chart-line" size={24} color="#198754" style={styles.icon} />
-        <Text style={styles.cardText}>Finance Companies</Text>
-      </TouchableOpacity>
-    </View>
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>Need help picking a field?</Text>
+          <Text style={styles.footerSubtext}>
+            Tap any card to explore career paths that support you
+          </Text>
+        </View>
+      </ScrollView>
+    </ScrollView>
   );
 }
-
-const goToHealthCare = () => {
-  router.push('/Fields/HeathCare/HealthCare');
-};
-
-const goToTech = () => {
-  router.push('/Fields/Tech/Tech');
-};
-
-const goToFinance = () => {
-  router.push('/Fields/Fainance/Fainance');
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f8f9fa',
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-  },
-  title: {
-    fontSize: 26,
-    fontWeight: '700',
-    textAlign: 'center',
-    marginBottom: 40,
-    color: '#212529',
-  },
-  card: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    paddingVertical: 18,
-    paddingHorizontal: 20,
-    marginBottom: 20,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-  icon: {
-    marginRight: 16,
-  },
-  cardText: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#343a40',
-  },
-intro: {
-  fontSize: 15,
-  lineHeight: 20,
-  textAlign: 'center',
-  color: '#495057',
-  marginBottom: 20,
-  paddingHorizontal: 10,
-},
-
-highlight: {
-  fontWeight: '600',
-  color: '#d63384',
-},
-});

@@ -3,13 +3,13 @@ import { Image, Linking, ScrollView, StyleSheet, Text, TouchableOpacity } from '
 
 export default function NegotiationSimulatorPage() {
   const openSimulator = () => {
-    Linking.openURL('https://app.cesura.ai/sim/dd070bcd-9b2c-48e3-90ca-21fa7f4501db');
+    Linking.openURL('https://app.cesura.ai/sim/4d091003-9abc-4700-8686-cb29c97fb88e');
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
         <Image
-          source={require('../../assets/images/THEMISLOGO.png')}
+          source={require('../../assets/images/pinklogo.png')}
           style={styles.logo}
           resizeMode="contain"
         />
@@ -24,7 +24,7 @@ export default function NegotiationSimulatorPage() {
       </Text>
 
       <TouchableOpacity style={styles.button} onPress={openSimulator}>
-        <Ionicons name="rocket-outline" size={20} color="#fff" />
+        <Ionicons name="rocket-outline" size={20} color="#ff7c8a" />
         <Text style={styles.buttonText}>Start Simulating</Text>
       </TouchableOpacity>
     </ScrollView>
@@ -35,12 +35,12 @@ const styles = StyleSheet.create({
   container: {
     padding: 24,
     alignItems: 'center',
-    backgroundColor: '#EAEBFF',
+    backgroundColor: '#ffffff',
     flexGrow: 1,
   },
     logo: {
     width: 500,
-    height: 200,
+    height: 250,
   },
 
   heading: {
@@ -48,33 +48,33 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#041E42FF',
     textAlign: 'center',
-    marginBottom: 12,
-    marginTop: 10,
+    marginBottom: 18,
+    marginTop: 1,
   },
   subheading: {
-    fontSize: 20,
+    fontSize: 22,
     color: '#041E42FF',
     textAlign: 'center',
     marginBottom: 16,
   },
   description: {
-    fontSize: 16,
+    fontSize: 18,
     color: '#041E42FF',
     textAlign: 'center',
     marginBottom: 32,
-    lineHeight: 22,
+    lineHeight: 25,
     marginTop: 15,
   },
   button: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#B9BDFF',
+    backgroundColor: '#041E42FF',
     paddingVertical: 14,
     paddingHorizontal: 24,
     borderRadius: 8,
   },
   buttonText: {
-    color: '#fff',
+    color: '#ff7c8a',
     marginLeft: 10,
     fontWeight: '600',
     fontSize: 20,

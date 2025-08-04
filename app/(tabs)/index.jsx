@@ -225,7 +225,7 @@ export default function HomeScreen() {
         {/* Animated Logo */}
         <Animated.View style={[styles.logoContainer, logoTransform]}>
           <Image
-            source={require('../../assets/images/THEMISLOGO.png')}
+            source={require('../assets/images/THEMISLOGO.png')}
             style={styles.logo}
             resizeMode="contain"
           />
@@ -481,7 +481,7 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
-    backgroundColor: '#EAEBFF', // Solid color instead of gradient
+    backgroundColor: '#EAEBFF', 
   },
   container: {
     paddingVertical: 60,
@@ -525,7 +525,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 5,
   },
   cardGradient: {
-    backgroundColor: '#ffffff', // Solid color instead of gradient
+    backgroundColor: '#ffffff', 
     padding: 0,
   },
   cardHeader: {
