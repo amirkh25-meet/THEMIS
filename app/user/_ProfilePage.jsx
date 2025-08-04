@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Account, Client, Databases } from 'appwrite';
+import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import UUID from 'react-native-uuid';
@@ -25,27 +26,44 @@ export default function _ProfilePage() {
   
   
    const checkActiveSession = async () => {
-  try {
-    const sessionData = await AsyncStorage.getItem('userSession');
-    if (sessionData) {
-      const user = JSON.parse(sessionData);
-      setCurrentUser(user);
-      return 2;
-    } else {
+    try {
+      const sessionData = await AsyncStorage.getItem('userSession');
+      if (sessionData) {
+        const user = JSON.parse(sessionData);
+        setCurrentUser(user);
+        return 2;
+      } else {
+        return 0;
+      }
+    } catch (error) {
+      console.error('Error checking active session:', error);
       return 0;
     }
-  } catch (error) {
-    console.error('Error checking active session:', error);
-    return 0;
-  }
-};
+  };
 
+  const redirectToIntendedRoute = async () => {
+    try {
+      const intendedRoute = await AsyncStorage.getItem('intendedRoute');
+      if (intendedRoute) {
+        // Clear the stored route
+        await AsyncStorage.removeItem('intendedRoute');
+        // Navigate to the intended route
+        router.push(intendedRoute);
+      } else {
+        // Default route if no intended route stored
+        router.push('/user/(tabs)'); // or wherever you want them to go by default
+      }
+    } catch (error) {
+      console.error('Error redirecting to intended route:', error);
+      router.push('/user/(tabs)'); // fallback route
+    }
+  };
 
   useEffect(() => {
-    
     checkActiveSession().then(status => {
       if (status === 2) {
-        setIf(2);
+        // User is already logged in, redirect to intended route
+        redirectToIntendedRoute();
       }
     }); 
 
@@ -57,50 +75,55 @@ export default function _ProfilePage() {
     return () => clearInterval(interval);
   }, [currentUser]);
 
-
   const createUser = async () => {
-  try {
-    await deleteExistingSession();
+    try {
+      await deleteExistingSession();
 
-    const userId = UUID.v4();
+      const userId = UUID.v4();
 
-    await account.create(userId, email, password);
-    console.log('User created');
+      await account.create(userId, email, password);
+      console.log('User created');
 
-    const session = await account.createEmailPasswordSession(email, password);
+      const session = await account.createEmailPasswordSession(email, password);
 
-    const user = await account.get();
-    console.log('Authenticated user:', user);
+      const user = await account.get();
+      console.log('Authenticated user:', user);
 
-    await AsyncStorage.setItem('userSession', JSON.stringify(user));
-    setCurrentUser(user);
-    setIf(2);
+      await AsyncStorage.setItem('userSession', JSON.stringify(user));
+      setCurrentUser(user);
+      setIf(2);
 
-  } catch (error) {
-    console.error('Error creating account:', error);
-    Alert.alert('Error', 'Error creating account, please try again.');
-  }
-};
+      // After successful signup, redirect to intended route
+      await redirectToIntendedRoute();
 
+    } catch (error) {
+      console.error('Error creating account:', error);
+      Alert.alert('Error', 'Error creating account, please try again.');
+    }
+  };
 
- const signIn = async () => {
-  try {
-    await deleteExistingSession();
+  const signIn = async () => {
+    try {
+      await deleteExistingSession();
 
-    const session = await account.createEmailPasswordSession(email, password);
-    console.log('Session created:', session);
+      const session = await account.createEmailPasswordSession(email, password);
+      console.log('Session created:', session);
 
-    const user = await account.get();
-    console.log('Authenticated user:', user);
+      const user = await account.get();
+      console.log('Authenticated user:', user);
 
-    await AsyncStorage.setItem('userSession', JSON.stringify(user));
-    setCurrentUser(user);
-    setIf(2);
-  } catch (error) {
-    console.error('Error signing in:', error);
-    Alert.alert('Error', 'Failed to sign in, please check your credentials.');
-  }
-};
+      await AsyncStorage.setItem('userSession', JSON.stringify(user));
+      setCurrentUser(user);
+      setIf(2);
+
+      // After successful signin, redirect to intended route
+      await redirectToIntendedRoute();
+      
+    } catch (error) {
+      console.error('Error signing in:', error);
+      Alert.alert('Error', 'Failed to sign in, please check your credentials.');
+    }
+  };
 
 
   const signOut = async () => {
@@ -200,16 +223,16 @@ export default function _ProfilePage() {
   }
 
   // Welcome Screen (Logged in)
-  if (if1 === 2) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Welcome, {currentUser?.name || currentUser?.email || 'User'}!</Text>
-        <Text>Current Time: {time}</Text>
-        <View style={styles.buttonSpacer} />
-        <Text style={styles.link} onPress={signOut}>Sign Out</Text>
-      </View>
-    );
-  }
+  // if (if1 === 2) {
+  //   return (
+  //     <View style={styles.container}>
+  //       <Text style={styles.title}>Welcome, {currentUser?.name || currentUser?.email || 'User'}!</Text>
+  //       <Text>Current Time: {time}</Text>
+  //       <View style={styles.buttonSpacer} />
+  //       <Text style={styles.link} onPress={signOut}>Sign Out</Text>
+  //     </View>
+  //   );
+  // }
 
   // DEFAULT RETURN - This was missing!
   // Loading state while checking session
