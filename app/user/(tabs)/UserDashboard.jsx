@@ -287,6 +287,7 @@ const handleCardPress = async (step) => {
         {/* Animated Logo */}
         <Animated.View style={[styles.logoContainer, logoTransform]}>
           <Image
+            source={require('../assets/images/THEMISLOGO.png')}
             source={require('../../../assets/images/THEMISLOGO.png')}
             style={styles.logo}
             resizeMode="contain"
@@ -544,6 +545,7 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
+    backgroundColor: '#EAEBFF', 
     backgroundColor: '#EAEBFF',
   },
   container: {
@@ -588,6 +590,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 5,
   },
   cardGradient: {
+    backgroundColor: '#ffffff', 
     backgroundColor: '#ffffff',
     padding: 0,
   },
