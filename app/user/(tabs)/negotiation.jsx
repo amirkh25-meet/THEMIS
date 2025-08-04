@@ -9,7 +9,7 @@ export default function NegotiationSimulatorPage() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
         <Image
-          source={require('../../assets/images/pinklogo.png')}
+          source={require('../../../assets/images/pinklogo.png')}
           style={styles.logo}
           resizeMode="contain"
         />

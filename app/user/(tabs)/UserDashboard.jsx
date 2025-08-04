@@ -287,7 +287,7 @@ const handleCardPress = async (step) => {
         {/* Animated Logo */}
         <Animated.View style={[styles.logoContainer, logoTransform]}>
           <Image
-            source={require('../assets/images/THEMISLOGO.png')}
+            
             source={require('../../../assets/images/THEMISLOGO.png')}
             style={styles.logo}
             resizeMode="contain"

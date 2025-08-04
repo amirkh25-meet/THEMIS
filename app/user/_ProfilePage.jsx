@@ -28,26 +28,43 @@ export default function _ProfilePage() {
   const [time, setTime] = useState('');
   const [if1, setIf] = useState(0);
   
-  
-   const checkActiveSession = async () => {
-  try {
-    const sessionData = await AsyncStorage.getItem('userSession');
-    if (sessionData) {
-      const user = JSON.parse(sessionData);
-      setCurrentUser(user);
-      return 2;
-    } else {
+  const checkActiveSession = async () => {
+    try {
+      const sessionData = await AsyncStorage.getItem('userSession');
+      if (sessionData) {
+        const user = JSON.parse(sessionData);
+        setCurrentUser(user);
+        return 2;
+      } else {
+        return 0;
+      }
+    } catch (error) {
+      console.error('Error checking active session:', error);
       return 0;
     }
-  } catch (error) {
-    console.error('Error checking active session:', error);
-    return 0;
-  }
-};
+  };
 
+  // Function to redirect to intended route
+  const redirectToIntendedRoute = async () => {
+    try {
+      const intendedRoute = await AsyncStorage.getItem('intendedRoute');
+      if (intendedRoute) {
+        // Clear the stored route
+        await AsyncStorage.removeItem('intendedRoute');
+        // Navigate to the intended route
+        router.replace(intendedRoute);
+      } else {
+        // If no intended route, go to home or default page
+        router.replace('/user'); // or wherever your main user area is
+      }
+    } catch (error) {
+      console.error('Error redirecting to intended route:', error);
+      // Fallback to home
+      router.replace('/user');
+    }
+  };
 
   useEffect(() => {
-    
     checkActiveSession().then(status => {
       if (status === 2) {
         // User is already logged in, redirect to intended route
@@ -61,59 +78,67 @@ export default function _ProfilePage() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [currentUser]);
+  }, []);
 
+  // Modified createUser function
   const createUser = async () => {
-  try {
-    await deleteExistingSession();
+    try {
+      await deleteExistingSession();
 
-    const userId = UUID.v4();
+      const userId = UUID.v4();
 
-    await account.create(userId, email, password);
-    console.log('User created');
+      await account.create(userId, email, password);
+      console.log('User created');
 
-    const session = await account.createEmailPasswordSession(email, password);
+      const session = await account.createEmailPasswordSession(email, password);
 
-    const user = await account.get();
-    console.log('Authenticated user:', user);
+      const user = await account.get();
+      console.log('Authenticated user:', user);
 
-    await AsyncStorage.setItem('userSession', JSON.stringify(user));
-    setCurrentUser(user);
-    setIf(2);
+      await AsyncStorage.setItem('userSession', JSON.stringify(user));
+      setCurrentUser(user);
+      
+      // Instead of setting if1 to 2, redirect immediately
+      await redirectToIntendedRoute();
 
-  } catch (error) {
-    console.error('Error creating account:', error);
-    Alert.alert('Error', 'Error creating account, please try again.');
-  }
-};
+    } catch (error) {
+      console.error('Error creating account:', error);
+      Alert.alert('Error', 'Error creating account, please try again.');
+    }
+  };
 
+  // Modified signIn function
+  const signIn = async () => {
+    try {
+      await deleteExistingSession();
 
- const signIn = async () => {
-  try {
-    await deleteExistingSession();
+      const session = await account.createEmailPasswordSession(email, password);
+      console.log('Session created:', session);
 
-    const session = await account.createEmailPasswordSession(email, password);
-    console.log('Session created:', session);
+      const user = await account.get();
+      console.log('Authenticated user:', user);
 
-    const user = await account.get();
-    console.log('Authenticated user:', user);
+      await AsyncStorage.setItem('userSession', JSON.stringify(user));
+      setCurrentUser(user);
+      
+      // Instead of setting if1 to 2, redirect immediately
+      await redirectToIntendedRoute();
 
-    await AsyncStorage.setItem('userSession', JSON.stringify(user));
-    setCurrentUser(user);
-    setIf(2);
-  } catch (error) {
-    console.error('Error signing in:', error);
-    Alert.alert('Error', 'Failed to sign in, please check your credentials.');
-  }
-};
-
+    } catch (error) {
+      console.error('Error signing in:', error);
+      Alert.alert('Error', 'Failed to sign in, please check your credentials.');
+    }
+  };
 
   const signOut = async () => {
     try {
       await account.deleteSession('current');
       await AsyncStorage.removeItem('userSession');
+      await AsyncStorage.removeItem('intendedRoute'); // Clear any stored intended route
       setCurrentUser(null);
       setIf(0);
+      // Optionally redirect to home after sign out
+      router.replace('/');
     } catch (error) {
       console.error('Error signing out:', error);
       Alert.alert('Error', 'Failed to sign out, please try again.');
@@ -133,13 +158,12 @@ export default function _ProfilePage() {
 
   const renderForm = (title, fields, action, switchText, switchAction, buttonText) => (
     <View style={styles.container}>
-            <Image
-  source={require('../../assets/images/pinklogo.png')}
-  style={styles.logo}
-  resizeMode="contain"
-/>
+      <Image
+        source={require('../../assets/images/pinklogo.png')}
+        style={styles.logo}
+        resizeMode="contain"
+      />
       <Text style={styles.header}>{title}</Text>
-
 
       <View style={styles.card}>
         {fields}
@@ -153,6 +177,7 @@ export default function _ProfilePage() {
     </View>
   );
 
+  // Sign Up Form
   if (if1 === 0) {
     return renderForm(
       'Create Account',
@@ -174,6 +199,7 @@ export default function _ProfilePage() {
     );
   }
 
+  // Sign In Form
   if (if1 === 1) {
     return renderForm(
       'Sign In',
@@ -188,28 +214,21 @@ export default function _ProfilePage() {
         />
       </>,
       signIn,
-      'Don’t have an account? Sign Up',
+      "Don't have an account? Sign Up",
       () => setIf(0),
       'Sign In'
     );
   }
 
-  // Welcome Screen (Logged in)
-  if (if1 === 2) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Welcome, {currentUser?.name || currentUser?.email || 'User'}!</Text>
-        <Text>Current Time: {time}</Text>
-        <View style={styles.buttonSpacer} />
-        <Text style={styles.link} onPress={signOut}>Sign Out</Text>
-      </View>
-    );
-  }
-
+  // Loading state - this will show briefly before redirect
   return (
     <View style={styles.container}>
-      
-      <Text style={styles.header}>Loading...</Text>
+      <Image
+        source={require('../../assets/images/pinklogo.png')}
+        style={styles.logo}
+        resizeMode="contain"
+      />
+      <Text style={styles.header}>Signing you in...</Text>
     </View>
   );
 }
@@ -218,7 +237,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -266,9 +284,8 @@ const styles = StyleSheet.create({
   logo: {
     width: 600,
     height: 170,
-  marginBottom: 10,
-},
-
+    marginBottom: 10,
+  },
   buttonText: {
     color: '#fff',
     fontSize: 16,
