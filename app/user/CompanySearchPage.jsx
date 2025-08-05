@@ -15,7 +15,6 @@ import {
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { databases, ID, Query } from '../../assets/appwrite1'; // Make sure this exports Query correctly
 
 
 const CompanySearchPage = ({  }) => {
