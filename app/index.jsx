@@ -1,15 +1,15 @@
-import React from 'react';
-import { 
-  View, 
-  Text, 
-  TouchableOpacity, 
-  StyleSheet, 
-  SafeAreaView,
-  Dimensions,
-  StatusBar
-} from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
+import {
+  Dimensions,
+  Image,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
@@ -27,21 +27,17 @@ export default function LandingPage() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <StatusBar barStyle="light-content" />
-      <LinearGradient
-        colors={['#4c63d2', '#7c4dff', '#9c27b0']}
-        style={styles.gradient}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-      >
         <View style={styles.content}>
-          {/* Header Section */}
+          <Text style={styles.title}>Welcome to</Text>
           <View style={styles.header}>
-            <View style={styles.logoContainer}>
-              <Text style={styles.logoText}>📱</Text>
-            </View>
-            <Text style={styles.title}>Welcome to Our Platform</Text>
+            
+        <Image
+          source={require('../images/pinklogo.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
             <Text style={styles.subtitle}>
               Choose your account type to get started
             </Text>
@@ -57,7 +53,7 @@ export default function LandingPage() {
             >
               <View style={styles.cardContent}>
                 <View style={[styles.iconContainer, styles.userIcon]}>
-                  <Text style={styles.iconEmoji}>👤</Text>
+                  <MaterialCommunityIcons name="account" size={32} color="#fff" />
                 </View>
                 <View style={styles.cardText}>
                   <Text style={styles.cardTitle}>I'm a User</Text>
@@ -79,7 +75,7 @@ export default function LandingPage() {
             >
               <View style={styles.cardContent}>
                 <View style={[styles.iconContainer, styles.companyIcon]}>
-                  <Text style={styles.iconEmoji}>🏢</Text>
+                 <MaterialCommunityIcons name="office-building" size={32} color="#fff" />
                 </View>
                 <View style={styles.cardText}>
                   <Text style={styles.cardTitle}>I'm a Company</Text>
@@ -93,28 +89,15 @@ export default function LandingPage() {
               </View>
             </TouchableOpacity>
           </View>
-
-          {/* Footer */}
-          <View style={styles.footer}>
-            <View style={styles.featuresList}>
-              <Text style={styles.featureItem}>✨ Easy to use interface</Text>
-              <Text style={styles.featureItem}>🔒 Secure and private</Text>
-              <Text style={styles.featureItem}>🚀 Fast and reliable</Text>
-            </View>
-            
-            <Text style={styles.footerNote}>
-              Tap on your account type to continue
-            </Text>
-          </View>
         </View>
-      </LinearGradient>
-    </SafeAreaView>
+      
+    </ScrollView>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#ffffff', 
   },
   gradient: {
     flex: 1,
@@ -122,60 +105,69 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 24,
-    paddingVertical: 20,
+    paddingTop: 40,
     justifyContent: 'space-between',
+  },
+      logo: {
+    width: 500,
+    height: 250,
   },
   header: {
     alignItems: 'center',
-    marginTop: height * 0.08,
   },
   logoContainer: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 24,
-    borderWidth: 2,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
+    borderWidth: 1.5,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
+    shadowColor: '#fff',
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 5 },
+    shadowRadius: 10,
   },
   logoText: {
-    fontSize: 40,
+    fontSize: 44,
+    textShadowColor: 'rgba(0,0,0,0.4)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 6,
   },
   title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: 'white',
-    textAlign: 'center',
-    marginBottom: 12,
+    fontSize: 25,
+    fontWeight: '700',
+    color: '#ff7c8a',
+    textAlign: 'left',
+    marginTop: 33,
     letterSpacing: -0.5,
   },
   subtitle: {
-    fontSize: 18,
-    color: 'rgba(255, 255, 255, 0.85)',
+    fontSize: 16,
+    color: '#041e42',
     textAlign: 'center',
+    paddingHorizontal: 16,
     lineHeight: 24,
-    paddingHorizontal: 20,
   },
   selectionContainer: {
     flex: 1,
     justifyContent: 'center',
-    gap: 20,
-    marginVertical: 40,
+    gap: 24,
+    marginTop: 40,
   },
   selectionCard: {
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 24,
+    backgroundColor: '#041e42',
+    borderRadius: 24,
+    padding: 20,
+    backdropFilter: 'blur(20px)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 16,
-    elevation: 12,
+    shadowOpacity: 0.3,
+    shadowRadius: 30,
+    shadowOffset: { width: 0, height: 15 },
   },
   cardContent: {
     flexDirection: 'row',
@@ -190,59 +182,68 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   userIcon: {
-    backgroundColor: '#e3f2fd',
+
+    borderColor: '#ff7c8a',
+    borderWidth: 1,
   },
   companyIcon: {
-    backgroundColor: '#f3e5f5',
+    borderColor: '#ff7c8a',
+    borderWidth: 1,
   },
   iconEmoji: {
     fontSize: 32,
+    textShadowColor: 'rgba(0,0,0,0.3)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
   },
   cardText: {
     flex: 1,
-    paddingRight: 12,
   },
   cardTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#1a1a1a',
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#fff',
     marginBottom: 6,
   },
   cardDescription: {
-    fontSize: 15,
-    color: '#666',
-    lineHeight: 21,
+    fontSize: 14,
+    color: 'rgba(255, 255, 255, 0.8)',
+    lineHeight: 20,
   },
   arrowContainer: {
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#041e42',
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#ff7c8a',
   },
   arrow: {
     fontSize: 18,
-    color: '#666',
+    color: '#ff7c8a',
     fontWeight: 'bold',
   },
   footer: {
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 30,
+    marginTop: 20,
+    fontSize: 14,
   },
   featuresList: {
     alignItems: 'center',
     gap: 8,
-    marginBottom: 20,
+    marginBottom: 12,
   },
   featureItem: {
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: '#041e42',
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: '400',
   },
   footerNote: {
-    color: 'rgba(255, 255, 255, 0.7)',
-    fontSize: 13,
+    color: '#041e42',
+    fontSize: 12,
     fontStyle: 'italic',
   },
 });
