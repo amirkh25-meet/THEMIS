@@ -12,6 +12,9 @@ export default function UserTabsLayout() {
         name="UserDashboard"
         options={{
           title: 'Home',
+          tabBarStyle: {
+            display: 'none',
+          },
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
           ),
