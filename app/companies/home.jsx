@@ -33,7 +33,7 @@ export default function CompaniesIndex() {
           <Text style={styles.menuText}>Analysis</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.menuItem} onPress={() => navigateTo('settings')}>
+        <TouchableOpacity style={styles.menuItem} onPress={() => navigateTo('Strategy')}>
           <Ionicons name="people-outline" style={styles.menuIcon} />
           <Text style={styles.menuText}>Consultation</Text>
         </TouchableOpacity>

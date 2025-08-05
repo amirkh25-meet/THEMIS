@@ -23,6 +23,14 @@ export default function CompaniesLayout() {
           headerShown: true
         }} 
       />
+                  <Stack.Screen 
+        name="Strategy" 
+        options={{
+          
+          title: 'Company Dashboard',
+          headerShown: true
+        }} 
+      />
 
     </Stack>
   );
