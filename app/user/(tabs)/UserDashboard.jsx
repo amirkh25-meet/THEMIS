@@ -1,6 +1,6 @@
 import { Entypo, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import {
   Animated,
@@ -288,7 +288,7 @@ const handleCardPress = async (step) => {
         <Animated.View style={[styles.logoContainer, logoTransform]}>
           <Image
             
-            source={require('../../../assets/images/THEMISLOGO.png')}
+            source={require('../../../assets/images/logo.jpeg')}
             style={styles.logo}
             resizeMode="contain"
           />
