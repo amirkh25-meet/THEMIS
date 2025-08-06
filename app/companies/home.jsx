@@ -1,15 +1,38 @@
-import React from 'react';
+import React, { use,useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
+
 export default function CompaniesIndex() {
   const router = useRouter();
+  const [if2, setIf2] = useState(0);
+  const [showLangMenu, setShowLangMenu] = useState(false);
+
 
   const navigateTo = (path) => router.push(`/companies/${path}`);
-
+if (if2 === 0) {
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.topRightContainer}>
+        <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+          <Text style={styles.menuIcon}>⋮</Text>
+        </TouchableOpacity>
+      
+        {showLangMenu && (
+          <View style={styles.languageMenu}>
+            <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+              <Text style={styles.menuItem}>English</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+              <Text style={styles.menuItem}>العربية</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+              <Text style={styles.menuItem}>עברית</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
       {/* Badge */}
       <View style={styles.badge}>
         <Text style={styles.badgeText}>Professional Gender Equity Assessment</Text>
@@ -42,6 +65,116 @@ export default function CompaniesIndex() {
   );
 }
 
+if (if2 === 1) {
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+  <View style={styles.topRightContainer}>
+    <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+      <Text style={styles.menuIcon}>⋮</Text>
+    </TouchableOpacity>
+
+    {showLangMenu && (
+      <View style={styles.languageMenu}>
+        <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+          <Text style={styles.menuItem}>English</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+          <Text style={styles.menuItem}>العربية</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+          <Text style={styles.menuItem}>עברית</Text>
+        </TouchableOpacity>
+      </View>
+    )}
+  </View>
+
+  {/* Badge */}
+  <View style={styles.badge}>
+    <Text style={styles.badgeText}>تقييم مهني للمساواة بين الجنسين</Text>
+  </View>
+
+  {/* Hero Title */}
+  <Text style={styles.title}>
+    أنشئ بيئة عمل <Text style={styles.highlight}>أكثر إنصافاً</Text>
+  </Text>
+
+  {/* Subtext */}
+  <Text style={styles.description}>
+    أداة تقييم شاملة لقياس ممارسات المساواة بين الجنسين في مؤسستك عبر مجالات التوظيف، الترقية، المساواة في الأجور، وثقافة مكان العمل.
+    احصل على رؤى قابلة للتنفيذ وتواصل مع نظرائك في القطاع.
+  </Text>
+
+  {/* Reports & Settings Buttons */}
+  <View style={styles.menuGrid}>
+    <TouchableOpacity style={styles.menuItem} onPress={() => navigateTo('GenderEquityAssessmentApp')}>
+      <Ionicons name="bar-chart-outline" style={styles.menuIcon} />
+      <Text style={styles.menuText}>التحليل</Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity style={styles.menuItem} onPress={() => navigateTo('Strategy')}>
+      <Ionicons name="people-outline" style={styles.menuIcon} />
+      <Text style={styles.menuText}>الاستشارة</Text>
+    </TouchableOpacity>
+  </View>
+</ScrollView>
+
+  );
+}
+
+if (if2 === 2) {
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.topRightContainer}>
+        <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+          <Text style={styles.menuIcon}>⋮</Text>
+        </TouchableOpacity>
+      
+        {showLangMenu && (
+          <View style={styles.languageMenu}>
+            <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+              <Text style={styles.menuItem}>English</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+              <Text style={styles.menuItem}>العربية</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+              <Text style={styles.menuItem}>עברית</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
+      {/* Badge */}
+      <View style={styles.badge}>
+  <Text style={styles.badgeText}>הערכת שוויון מגדרי מקצועית</Text>
+</View>
+
+{/* Hero Title */}
+<Text style={styles.title}>
+  בנו סביבת עבודה <Text style={styles.highlight}>שוויונית יותר</Text>
+</Text>
+
+{/* Subtext */}
+<Text style={styles.description}>
+  כלי הערכה מקיף להערכת מדיניות השוויון המגדרי בארגון שלכם בתחומי גיוס, קידום, שכר ותרבות ארגונית.
+  קבלו תובנות מעשיות והתחברו לעמיתים בענף.
+</Text>
+
+{/* Reports & Settings Buttons */}
+<View style={styles.menuGrid}>
+  <TouchableOpacity style={styles.menuItem} onPress={() => navigateTo('GenderEquityAssessmentApp')}>
+    <Ionicons name="bar-chart-outline" style={styles.menuIcon} />
+    <Text style={styles.menuText}>ניתוח</Text>
+  </TouchableOpacity>
+
+  <TouchableOpacity style={styles.menuItem} onPress={() => navigateTo('Strategy')}>
+    <Ionicons name="people-outline" style={styles.menuIcon} />
+    <Text style={styles.menuText}>ייעוץ</Text>
+  </TouchableOpacity>
+</View>
+
+    </ScrollView>
+  );
+}}
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -111,4 +244,45 @@ const styles = StyleSheet.create({
     color: '#333',
     textAlign: 'center',
   },
+  topRightContainer: {
+    position: 'absolute',
+    top: 60, // Increased to account for status bar
+    right: 24, // Aligned with container padding
+    zIndex: 999,
+    alignItems: 'flex-end',
+  },
+  languageMenu: {
+    backgroundColor: '#fff',
+    borderRadius: 8, // Slightly larger for better appearance
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15, // Reduced for subtler shadow
+    shadowRadius: 4,
+    minWidth: 120,
+    marginTop: 4, // Small gap from trigger
+  },
+  langMenuItem: {
+    paddingVertical: 8,
+    paddingHorizontal: 4,
+  },
+  langMenuItemText: {
+    fontSize: 14,
+    color: '#333',
+    textAlign: 'left',
+  },
+  // Additional utility styles you might need
+  languageButton: {
+    padding: 8,
+    borderRadius: 6,
+    backgroundColor: 'rgba(126, 87, 194, 0.1)',
+  },
+  languageButtonText: {
+    fontSize: 12,
+    color: '#7E57C2',
+    fontWeight: '600',
+  },
 });
+
