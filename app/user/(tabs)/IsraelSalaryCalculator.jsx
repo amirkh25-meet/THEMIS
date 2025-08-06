@@ -21,6 +21,8 @@ const IsraelSalaryCalculator = () => {
     healthTax: 0,
     total: 0
   });
+  const [jobPercentage, setJobPercentage] = useState(100); 
+
 
   const salaryRanges = {
     software: {
@@ -90,14 +92,17 @@ const IsraelSalaryCalculator = () => {
   };
 
   useEffect(() => {
-    const range = salaryRanges[field][education];
-    const calculatedGross = range.base + (experience * range.experienceBonus);
-    setBaseSalary(calculatedGross);
+  const range = salaryRanges[field][education];
+  const grossFullTime = range.base + (experience * range.experienceBonus);
+  const adjustedGross = grossFullTime * (jobPercentage / 100);
+  
+  setBaseSalary(adjustedGross);
 
-    const calculatedTaxes = calculateTaxes(calculatedGross);
-    setTaxes(calculatedTaxes);
-    setNetSalary(calculatedGross - calculatedTaxes.total);
-  }, [experience, education, field]);
+  const calculatedTaxes = calculateTaxes(adjustedGross);
+  setTaxes(calculatedTaxes);
+  setNetSalary(adjustedGross - calculatedTaxes.total);
+}, [experience, education, field, jobPercentage]);
+
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('he-IL', {
@@ -156,6 +161,25 @@ const IsraelSalaryCalculator = () => {
           thumbTintColor="#ff7c8a"
         />
       </View>
+
+
+      <Text style={styles.label}>Job Load: {jobPercentage}%</Text>
+<Slider
+  minimumValue={10}
+  maximumValue={100}
+  step={10}
+  value={jobPercentage}
+  onValueChange={setJobPercentage}
+  minimumTrackTintColor="#ff7c8a"
+  maximumTrackTintColor="#adb5bd"
+  thumbTintColor="#ff7c8a"
+/>
+
+<Text style={{ fontSize: 12, color: '#666', marginBottom: 8 }}>
+  Adjust to calculate part-time salaries based on job load.
+</Text>
+
+
 
       <View style={styles.tableContainer}>
         <Text style={styles.tableTitle}>Salary Breakdown</Text>
