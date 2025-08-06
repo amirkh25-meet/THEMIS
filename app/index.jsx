@@ -123,8 +123,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   logo: {
-    width: 500,
-    height: 250,
+    width: '100%',
+    height: '45%',
     marginTop: 60,
   },
   header: {
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     gap: 20,
-    paddingBottom: 250,
+    // paddingBottom: 150,
   },
   selectionCard: {
     backgroundColor: '#041e42',

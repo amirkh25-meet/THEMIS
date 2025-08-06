@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import {
   ArrowRight,
@@ -7,9 +8,9 @@ import {
 } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import {
-  Platform,
   Animated,
   Dimensions,
+  Platform,
   ScrollView,
   StatusBar,
   Text,
@@ -50,6 +51,17 @@ const fields = [
     gradient: ['#041E42', '#041E42'],
     route: '/Fields/Fainance/Fainance',
   },
+{
+  id: 'Private Science',
+  title: 'Private Science',
+  subtitle: 'Innovation in Pharmaceuticals & Diagnostics',
+  description:
+    'Drive scientific breakthroughs in private-sector labs, where innovation meets cutting-edge technology to shape the future of healthcare, biotech, and life sciences.',
+  icon: <Ionicons name="flask" color="#ffffff" size={24} />,
+  gradient: ['#041E42', '#041E42'],
+  route: '/Fields/PrivateScience/Science',
+}
+
 ];
 
 export default function FieldPage() {

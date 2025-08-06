@@ -14,173 +14,107 @@ import {
 } from 'react-native';
 
 const companies = [
-  {
-    name: 'Raphael Hospitals',
-    city: 'Tel Aviv',
-    description: [
-      'Modern private hospital with advanced technologies.',
-      'Offers robotic surgery and high-tech facilities.',
-      'Collaborative team culture with focus on compassion.',
-      'Supportive of women in tech-focused roles.',
-      'Promotes work-life balance and emotional intelligence.',
-    ],
-  },
-  {
-    name: 'Reuth Rehabilitation Hospital',
-    city: 'Tel Aviv',
-    description: [
-      'Mission-driven nonprofit with inclusive culture.',
-      'Women hold key roles in nursing, therapy, and rehab.',
-      'Warm, family-like environment and interdisciplinary teamwork.',
-      'Flexible hours for better work-life balance.',
-      'Major new campus brings growth and leadership paths.',
-    ],
-  },
-  {
-    name: 'Shaare Zedek Medical Center',
+    {
+    name: 'Oramed Pharmaceuticals',
     city: 'Jerusalem',
     description: [
-      'Offers clinical excellence and academic growth.',
-      'Inclusive culture with strong female leadership.',
-      'Dr. Paluch-Shimon leads Oncology while raising 3 kids.',
-      'Promotes Jewish-Arab staff coexistence and respect.',
-      'Expanding pediatric, neonatal, and women’s health units.',
-      'Flexible roles support work-life balance for women.',
-      'Collaborative, mission-driven atmosphere with real purpose.',
+      'Develops oral drug delivery solutions.',
+      'Focus on diabetes treatment via oral insulin.',
+      'Innovative culture and biotech research roles.',
+      'Women involved in clinical and regulatory teams.',
     ],
   },
   {
-    name: 'Herzliya Medical Center',
+    name: 'AION Labs',
+    city: 'Rehovot',
+    description: [
+      'AI and bio lab backed by pharma leaders.',
+      'Combines cloud, biology, and machine learning.',
+      'Fosters startup innovation with biotech experts.',
+      'Encourages female founders and scientists.',
+    ],
+  },
+  {
+    name: 'BioLineRx',
+    city: 'Modi’in',
+    description: [
+      'Clinical-stage biopharma developing cancer therapies.',
+      'Focus on immunotherapy and rare diseases.',
+      'Women contribute in research, trials, and ops.',
+      'Dynamic, impact-driven team culture.',
+    ],
+  },
+  {
+    name: 'Innocan Pharma',
     city: 'Herzliya',
     description: [
-      'Leading private hospital known for patient care.',
-      'Attracts international patients and elite doctors.',
-      'Modern facilities and minimally invasive surgery.',
-      'Supportive atmosphere for women professionals.',
-      'Competitive benefits and career development.',
+      'Specializes in cannabinoid-based treatments.',
+      'Integrates nanotech and medical cannabis.',
+      'R&D and formulation roles open to women.',
+      'Supports hybrid and flexible research schedules.',
     ],
   },
   {
-    name: 'Assuta Medical Center',
+    name: 'EZbra Advanced Wound Care',
     city: 'Tel Aviv',
     description: [
-      'Israel’s largest private hospital network.',
-      'Focus on innovation and personalized care.',
-      'Women lead in radiology, fertility, and research.',
-      'Diverse, high-performing medical teams.',
-      'Values collaboration, equity, and advancement.',
+      'Develops sterile, disposable breast dressings.',
+      'Female-led startup addressing women’s health.',
+      'Designs with dignity, comfort, and innovation.',
+      'Promotes women in product, design, and sales.',
     ],
   },
   {
-    name: 'Ramat Aviv Medical Center',
-    city: 'Ramat Aviv',
+    name: 'MobileODT',
+    city: 'Tel Aviv',
     description: [
-      'Upscale medical center with private specialists.',
-      'Emphasis on discretion and comfort for patients.',
-      'Work culture supports professional mothers.',
-      'Opportunities in dermatology, wellness, diagnostics.',
+      'Uses mobile phones for cervical cancer screening.',
+      'AI-powered digital colposcopy for low-resource areas.',
+      'Impact-driven, female-forward company culture.',
+      'Opportunities in AI, UX, and clinical validation.',
     ],
   },
   {
-    name: 'Be Well Clinics',
-    city: 'Herzliya',
-    description: [
-      'Boutique health clinics with holistic approach.',
-      'Flexible hours and part-time work options.',
-      'Female leadership in administrative and care roles.',
-      'Comfortable, wellness-focused work environment.',
-    ],
-  },
-  {
-    name: 'Harel Insurance - Health Division',
+    name: 'Biop Medical',
     city: 'Ramat Gan',
     description: [
-      'Insurance provider with a strong healthcare unit.',
-      'Offers telemedicine and advanced patient services.',
-      'Women lead product design and client services.',
-      'Promotes flexibility and hybrid work culture.',
+      'Develops imaging tech for early cancer detection.',
+      'Women contribute in R&D and clinical outreach.',
+      'Focus on gynecological cancer diagnostics.',
+      'Mission-driven and innovation-focused team.',
     ],
   },
   {
-    name: 'Phoenix Insurance - Health Division',
-    city: 'Givatayim',
-    description: [
-      'Top insurer with growing digital health services.',
-      'Focus on innovation, data science, and patient apps.',
-      'Women are central in R&D and health tech design.',
-      'Encourages mentorship and hybrid schedules.',
-    ],
-  },
-  {
-    name: 'Menora Mivtachim Health Insurance',
+    name: 'Embie',
     city: 'Tel Aviv',
     description: [
-      'Health insurance division within major firm.',
-      'Offers employee wellness and fitness programs.',
-      'Women involved in health plans and outreach.',
-      'Balanced corporate structure with growth paths.',
+      'Fertility tracking app for patients and clinics.',
+      'Empowers women through fertility data insights.',
+      'Female-led startup with focus on reproductive health.',
+      'Tech and product roles suited for women in digital health.',
     ],
   },
   {
-    name: 'Bikur Rofeh Clinics',
-    city: 'Nationwide',
+    name: 'Gals Bio',
+    city: 'Herzliya',
     description: [
-      'Walk-in clinic chain across Israel.',
-      'Fast-paced, practical environment for all staff.',
-      'Female physicians in urgent care and pediatrics.',
-      'Part-time options for working mothers.',
+      'Develops smart tampon for menstrual biomarker tracking.',
+      'Promotes women’s health innovation and body literacy.',
+      'Startup run by women, for women.',
+      'Tech and bioengineering opportunities.',
     ],
   },
   {
-    name: 'Terem - Emergency Care Centers',
-    city: 'Nationwide',
+    name: 'impact.51',
+    city: 'Tel Aviv',
     description: [
-      'Emergency care centers offering quick service.',
-      'Run by a diverse group of clinicians.',
-      'Supportive for nurses and administrative staff.',
-      '24/7 shifts allow flexible scheduling.',
+      'Health tech impact accelerator supporting diverse founders.',
+      'Invests in women-led startups in healthcare.',
+      'Offers mentorship, funding, and tech tools.',
+      'Women leaders in venture, health, and strategy.',
     ],
   },
-  {
-    name: 'Mayanei Hayeshua Medical Center',
-    city: 'Bnei Brak',
-    description: [
-      'Hospital with focus on halachic medicine.',
-      'Respected OB-GYN and mental health departments.',
-      'Supportive of ultra-Orthodox women professionals.',
-      'Community-centered, mission-driven care.',
-    ],
-  },
-  {
-    name: 'Italian Hospital',
-    city: 'Nazareth',
-    description: [
-      'Christian hospital with long-standing legacy.',
-      'Small, compassionate care teams.',
-      'Inclusive environment for Arab and Jewish staff.',
-      'Strong nursing and pediatric programs.',
-    ],
-  },
-  {
-    name: 'French Hospital',
-    city: 'Nazareth',
-    description: [
-      'Faith-based hospital serving diverse communities.',
-      'Known for women-led midwifery and pediatrics.',
-      'Warm, inclusive culture across departments.',
-      'Mentorship programs for Arab women professionals.',
-    ],
-  },
-  {
-    name: 'English Hospital',
-    city: 'Nazareth',
-    description: [
-      'Historic hospital with missionary roots.',
-      'Offers internships and training for women.',
-      'Focus on compassionate, holistic patient care.',
-      'Respected surgical and internal medicine teams.',
-    ],
-  },
+
 ];
 
 
@@ -253,7 +187,7 @@ export default function HealthCare() {
               >
                 <View style={styles.cardHeader}>
                   <View style={styles.logoContainer}>
-                    <MaterialIcons name="local-hospital" size={32} color="#003366" />
+                    <Ionicons name="flask-outline" size={24} color="#003366" />
                   </View>
                   <View style={styles.companyInfo}>
                     <Text style={styles.companyName}>{company.name}</Text>
