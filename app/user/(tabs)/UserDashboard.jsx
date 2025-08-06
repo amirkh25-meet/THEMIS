@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import { databases, account } from '../../../assets/appwrite1';
 
 const { width, height } = Dimensions.get('window');
 
@@ -216,51 +217,75 @@ export default function HomeScreen() {
   };
 
 
-  const checkUserSignInStatus = async () => {
-    try {
-      const user = await account.get();
-      return {
-        isSignedIn: true,
-        user: user,
-        error: null
-      };
-    } catch (error) {
-      return {
-        isSignedIn: false,
-        user: null,
-        error: error.message
-      };
+const handleStepNavigation = async (step) => {
+if (!step?.route) {
+    console.error('Invalid step parameter');
+    return { isSignedIn: false, user: null };
+  }
+
+  try {
+    console.log('Checking authentication for route:', step.route);
+    const authResult = await verifyAuthStatus();
+    
+    if (!authResult.isSignedIn) {
+      console.log('User not authenticated, redirecting to profile page');
+      // Store intended route in a global variable or context (not AsyncStorage)
+      global.intendedRoute = `/user${step.route}`;
+      router.replace('/user/_ProfilePage');
+      return authResult;
     }
-}
-
-
+    
+    console.log('User authenticated, proceeding to:', step.route);
+    router.push(`/user${step.route}`);
+    return authResult;
+    
+  } catch (error) {
+    console.error('Navigation failed:', error);
+    router.replace('/user/_ProfilePage');
+    return { isSignedIn: false, user: null, error: error.message };
+  }
+};
+// Separate auth verification
+const verifyAuthStatus = async () => {
+  try {
+    console.log('Verifying authentication with server...');
+    const user = await account.get();
+    console.log('User authenticated:', user);
+    return { isSignedIn: true, user };
+  } catch (error) {
+    console.log('User not authenticated:', error.message);
+    return { isSignedIn: false, user: null, error: error.message };
+  }
+};
 
 const handleCardPress = async (step) => {
+  if (!step?.route) {
+    console.error('Invalid step parameter');
+    router.replace('/user/_ProfilePage');
+    return;
+  }
+
   try {
-    // Check if user is signed in using AsyncStorage
-    const authStatus = await checkUserSignInStatus();
-    
-    // Construct the full route with /user/ prefix
+    const authStatus = await verifyAuthStatus();
     const fullRoute = `/user${step.route}`;
     
     if (authStatus.isSignedIn) {
-      // User is signed in, navigate to the step route
+      console.log('User authenticated, navigating to:', fullRoute);
       router.push(fullRoute);
     } else {
-      // User is not signed in, store the intended destination and redirect to profile page
-      console.log('User not authenticated, redirecting to sign-up');
+      console.log('User not authenticated, redirecting to signup...');
       
-      // Store the intended route in AsyncStorage
-      await AsyncStorage.setItem('intendedRoute', fullRoute);
+      // Store intended route globally (instead of AsyncStorage)
+      global.intendedRoute = fullRoute;
       
-      // Navigate to profile page with correct path
-      router.push('/user/_ProfilePage');
+      router.replace({
+        pathname: '/user/_ProfilePage',
+        params: { isSignupFlow: true }
+      });
     }
   } catch (error) {
-    console.error('Error checking authentication:', error);
-    // On error, also redirect to sign-up as a fallback
-    await AsyncStorage.setItem('intendedRoute', fullRoute);
-    router.push('/user/_ProfilePage');
+    console.error('Navigation error:', error);
+    router.replace('/user/_ProfilePage');
   }
 };
 
@@ -359,7 +384,6 @@ const handleCardPress = async (step) => {
           <Text style={styles.journeyTitle}>Your Career Journey:</Text>
           <View style={styles.titleUnderline} />
         </View>
-
         {/* Animated Step Grid */}
         <View style={styles.stepsContainer}>
           <View style={styles.stepRow}>
