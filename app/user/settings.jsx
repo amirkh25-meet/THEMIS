@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
+import { useEffect, useState } from 'react';
 import {
-  View,
+  ActivityIndicator,
+  Alert,
+  Image,
+  ScrollView,
+  StyleSheet,
   Text,
   TouchableOpacity,
-  ScrollView,
-  Image,
-  Alert,
-  StyleSheet,
-  ActivityIndicator
+  View
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { database , account, avatars } from '../../assets/appwrite1';
+import { account, avatars } from '../../assets/appwrite1';
+
 const SettingsPage = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
   const [user, setUser] = useState(null);
+  const [isLoadingUser, setIsLoadingUser] = useState(true);
 
   // Available languages - En, Ar, He only
   const languages = [
@@ -24,25 +27,67 @@ const SettingsPage = () => {
     { code: 'he', name: 'עברית'}
   ];
 
-  // Simulate user data (in real app, this would come from Appwrite)
+  // Fetch user data from Appwrite
   useEffect(() => {
-    setUser({
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      avatar: 'https://via.placeholder.com/150'
-    });
+    fetchUserData();
     
     // Load saved language preference
-    const savedLanguage = 'en'; // In RN, you'd use AsyncStorage
+    const savedLanguage = 'en'; // In RN, you'd use AsyncStorage if needed
     setSelectedLanguage(savedLanguage);
   }, []);
 
+  const fetchUserData = async () => {
+try {
+    setIsLoadingUser(true);
+    
+    const currentUser = await account.get();
+    console.log('Fetched user:', currentUser);
+    
+    // Fix: Convert URL object to string and add fallback
+    let avatarUrl;
+    try {
+      const initialsUrl = avatars.getInitials(currentUser.name || 'User', 150, 150);
+      avatarUrl = initialsUrl.toString(); // Convert to string
+    } catch (avatarError) {
+      // Fallback to external avatar service
+      const name = encodeURIComponent(currentUser.name || 'User');
+      avatarUrl = `https://ui-avatars.com/api/?name=${name}&size=150&background=FF7C8A&color=fff&rounded=true`;
+    }
+    
+    setUser({
+      name: currentUser.name || 'No name provided',
+      email: currentUser.email,
+      avatar: avatarUrl,
+      userId: currentUser.$id
+    });
+    
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    
+    if (error.code === 401 || error.message.includes('missing scope')) {
+      Alert.alert(
+        'Authentication Required',
+        'Please sign in to view your settings.',
+        [
+          {
+            text: 'Sign In',
+            onPress: () => router.replace('/user/_ProfilePage')
+          }
+        ]
+      );
+    } else {
+      Alert.alert('Error', 'Failed to load user data. Please try again.');
+    }
+  } finally {
+    setIsLoadingUser(false);
+  }
+  };
+
+    
+
   const handleLanguageChange = (languageCode) => {
     setSelectedLanguage(languageCode);
-    // In React Native, you'd use AsyncStorage.setItem('selectedLanguage', languageCode);
     setIsLanguageDropdownOpen(false);
-    
-    // In a real app, you might trigger a language change event here
     console.log(`Language changed to: ${languageCode}`);
   };
 
@@ -50,20 +95,16 @@ const SettingsPage = () => {
     setIsSigningOut(true);
     
     try {
-      // Simulate Appwrite session deletion
-      // In a real app, this would be:
-      // await account.deleteSession('current');
-      // or await account.deleteSessions(); to delete all sessions
+      // Delete current Appwrite session
+      await account.deleteSession('current');
       
-      // await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API call
-      account.deleteSession('current')
-      // Clear AsyncStorage
-      // await AsyncStorage.removeItem('selectedLanguage');
-      // await AsyncStorage.removeItem('userSession');
-      
-      // In a real app, navigate to login screen
       console.log('User signed out successfully');
-      Alert.alert('Success', 'You have been signed out successfully!');
+      Alert.alert('Success', 'You have been signed out successfully!', [
+        {
+          text: 'OK',
+          onPress: () => router.replace('/') // Navigate to home page
+        }
+      ]);
       
     } catch (error) {
       console.error('Sign out error:', error);
@@ -73,7 +114,21 @@ const SettingsPage = () => {
     }
   };
 
+  const handleRefreshUserData = () => {
+    fetchUserData();
+  };
+
   const selectedLang = languages.find(lang => lang.code === selectedLanguage);
+
+  // Loading state for user data
+  if (isLoadingUser) {
+    return (
+      <View style={[styles.container, styles.centered]}>
+        <ActivityIndicator size="large" color="#2563eb" />
+        <Text style={styles.loadingText}>Loading your settings...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -96,12 +151,26 @@ const SettingsPage = () => {
               <Image 
                 source={{ uri: user.avatar }}
                 style={styles.userAvatar}
+                onError={() => {
+                  // Fallback to a default avatar if image fails to load
+                  console.log('Avatar failed to load, using fallback');
+                }}
               />
-              <View>
+              <View style={styles.userInfo}>
                 <Text style={styles.userName}>{user.name}</Text>
                 <Text style={styles.userEmail}>{user.email}</Text>
+                {/* <Text style={styles.userId}>ID: {user.userId}</Text> */}
               </View>
             </View>
+            
+            {/* Refresh button */}
+            <TouchableOpacity 
+              onPress={handleRefreshUserData}
+              style={styles.refreshButton}
+            >
+              <Ionicons name="refresh-outline" size={20} color="#2563eb" />
+              <Text style={styles.refreshButtonText}>Refresh</Text>
+            </TouchableOpacity>
           </View>
         )}
 
@@ -127,7 +196,6 @@ const SettingsPage = () => {
               ]}
             >
               <View style={styles.dropdownContent}>
-                <Text style={styles.dropdownFlag}>{selectedLang?.flag}</Text>
                 <Text style={styles.dropdownText}>{selectedLang?.name}</Text>
               </View>
               <Ionicons 
@@ -153,7 +221,6 @@ const SettingsPage = () => {
                     ]}
                   >
                     <View style={styles.dropdownContent}>
-                      <Text style={styles.dropdownFlag}>{language.flag}</Text>
                       <Text style={styles.dropdownText}>{language.name}</Text>
                     </View>
                     {selectedLanguage === language.code && (
@@ -214,6 +281,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f8fafc'
   },
+  centered: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  loadingText: {
+    marginTop: 16,
+    fontSize: 16,
+    color: '#6b7280'
+  },
   scrollContainer: {
     flex: 1,
     paddingHorizontal: 16,
@@ -257,7 +333,8 @@ const styles = StyleSheet.create({
   },
   userRow: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 16
   },
   userAvatar: {
     width: 64,
@@ -267,6 +344,9 @@ const styles = StyleSheet.create({
     borderColor: '#e5e7eb',
     marginRight: 16
   },
+  userInfo: {
+    flex: 1
+  },
   userName: {
     fontSize: 20,
     fontWeight: '600',
@@ -274,7 +354,28 @@ const styles = StyleSheet.create({
   },
   userEmail: {
     color: '#6b7280',
-    fontSize: 14
+    fontSize: 14,
+    marginTop: 2
+  },
+  userId: {
+    color: '#9ca3af',
+    fontSize: 12,
+    marginTop: 4
+  },
+  refreshButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    backgroundColor: '#dbeafe',
+    borderRadius: 6
+  },
+  refreshButtonText: {
+    color: '#2563eb',
+    fontSize: 14,
+    marginLeft: 6,
+    fontWeight: '500'
   },
   settingCard: {
     backgroundColor: 'white',
@@ -334,10 +435,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
-  dropdownFlag: {
-    fontSize: 20,
-    marginRight: 12
-  },
   dropdownText: {
     fontWeight: '500',
     color: '#111827',
@@ -349,24 +446,24 @@ const styles = StyleSheet.create({
   chevronRotated: {
     transform: [{ rotate: '180deg' }]
   },
-  dropdownMenu: {
-    position: 'absolute',
-    top: '100%',
-    left: 0,
-    right: 0,
-    marginTop: 8,
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: '#d1d5db',
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 4,
-    maxHeight: 240,
-    zIndex: 10
-  },
+dropdownMenu: {
+  position: 'absolute',
+  bottom: '100%', // <== DROPDOWN ABOVE INSTEAD OF BELOW
+  left: 0,
+  right: 0,
+  marginBottom: 8,
+  backgroundColor: 'white',
+  borderWidth: 1,
+  borderColor: '#d1d5db',
+  borderRadius: 8,
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 4 },
+  shadowOpacity: 0.1,
+  shadowRadius: 6,
+  elevation: 4,
+  maxHeight: 240,
+  zIndex: 50 // make sure this is higher than surrounding elements
+},
   dropdownMenuItem: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -61,13 +61,14 @@ export default function _ProfilePage() {
     // No need to delete existing session - Appwrite handles this
     const userId = UUID.v4();
 
-    await account.create(userId, email, password);
+    await account.create(userId, email, password, name);
     console.log('User created successfully');
 
     const session = await account.createEmailPasswordSession(email, password);
     console.log('Session created:', session);
 
     const user = await account.get();
+    
     console.log('Authenticated user:', user);
 
     // No AsyncStorage - user data comes from server
