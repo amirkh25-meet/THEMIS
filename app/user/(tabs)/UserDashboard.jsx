@@ -1,6 +1,6 @@
 import { Entypo, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import {
   Animated,
@@ -215,33 +215,25 @@ export default function HomeScreen() {
     ]
   };
 
+
   const checkUserSignInStatus = async () => {
-  try {
-    // Check AsyncStorage instead of making API call
-    const sessionData = await AsyncStorage.getItem('userSession');
-    if (sessionData) {
-      const user = JSON.parse(sessionData);
+    try {
+      const user = await account.get();
       return {
         isSignedIn: true,
         user: user,
         error: null
       };
-    } else {
+    } catch (error) {
       return {
         isSignedIn: false,
         user: null,
-        error: 'No session found'
+        error: error.message
       };
     }
-  } catch (error) {
-    console.log('Error checking session:', error.message);
-    return {
-      isSignedIn: false,
-      user: null,
-      error: error.message
-    };
-  }
-};
+}
+
+
 
 const handleCardPress = async (step) => {
   try {
@@ -272,9 +264,14 @@ const handleCardPress = async (step) => {
   }
 };
 
+
   const handleHelpPress = (stepId) => {
     setVisibleStepId(stepId);
   };
+  const handleMenuPress = () => {
+    router.push('/user/settings')
+  }
+
 
   return (
     <View style={styles.mainContainer}>
@@ -283,12 +280,17 @@ const handleCardPress = async (step) => {
       <ScrollView 
         contentContainerStyle={styles.container}
         showsVerticalScrollIndicator={false}
-      >
+      >      
+        <TouchableOpacity >
+          <View style={{ position: 'relative', top: 0, left: "50%" }} >
+            < Ionicons onPress={handleMenuPress} name="reorder-three-outline" size={30} color="black" />
+          </View>
+        </TouchableOpacity>
         {/* Animated Logo */}
         <Animated.View style={[styles.logoContainer, logoTransform]}>
           <Image
             
-            source={require('../../../assets/images/THEMISLOGO.png')}
+            source={require('../../../assets/images/logo.jpeg')}
             style={styles.logo}
             resizeMode="contain"
           />

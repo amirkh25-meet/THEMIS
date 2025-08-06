@@ -9,6 +9,7 @@ export default function UserLayout() {
       <Stack.Screen name="CompanySearchPage" />
       <Stack.Screen name="videoPage" />
       <Stack.Screen name="videosNoa" />
+      <Stack.Screen name="settings" />
     </Stack>
   );
 }

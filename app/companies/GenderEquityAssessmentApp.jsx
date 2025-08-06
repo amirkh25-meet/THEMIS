@@ -1623,9 +1623,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#00b894',
   },
   sectionText: {
-    fontSize: 16,
+    fontSize: 12,
     color: '#666666',
     flex: 1,
+    marginBottom:0,
   },
   sectionActiveText: {
     color: '#ffffff',

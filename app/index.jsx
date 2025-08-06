@@ -1,55 +1,64 @@
-import React from 'react';
-import { 
-  View, 
-  Text, 
-  TouchableOpacity, 
-  StyleSheet, 
-  SafeAreaView,
-  Dimensions,
-  StatusBar
-} from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
+import { useEffect, useRef } from 'react';
+import {
+  Animated,
+  Dimensions,
+  Image,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 
 const { width, height } = Dimensions.get('window');
+const AnimatedImageBackground = Animated.createAnimatedComponent(ImageBackground);
 
 export default function LandingPage() {
   const router = useRouter();
 
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1500,
+      useNativeDriver: true,
+    }).start();
+  }, []);
+
   const handleCompanySelection = () => {
-    // Navigate to companies login in the same folder (companies/login.jsx)
     router.push('companyLogin');
   };
 
   const handleUserSelection = () => {
-    // Navigate directly to user tabs index
     router.push('/user/(tabs)');
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" />
-      <LinearGradient
-        colors={['#4c63d2', '#7c4dff', '#9c27b0']}
-        style={styles.gradient}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-      >
+    <AnimatedImageBackground
+      source={require('../assets/images/backpink.jpeg')}
+      style={[styles.background, { opacity: fadeAnim }]}
+      resizeMode="cover"
+    >
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.title}>Welcome to</Text>
+
         <View style={styles.content}>
-          {/* Header Section */}
           <View style={styles.header}>
-            <View style={styles.logoContainer}>
-              <Text style={styles.logoText}>📱</Text>
-            </View>
-            <Text style={styles.title}>Welcome to Our Platform</Text>
+            <Image
+              source={require('../assets/images/nobackgroundlogo.png')}
+              style={styles.logo}
+              resizeMode="contain"
+            />
             <Text style={styles.subtitle}>
               Choose your account type to get started
             </Text>
           </View>
 
-          {/* Selection Cards */}
           <View style={styles.selectionContainer}>
-            {/* User Card */}
             <TouchableOpacity
               style={styles.selectionCard}
               onPress={handleUserSelection}
@@ -57,7 +66,7 @@ export default function LandingPage() {
             >
               <View style={styles.cardContent}>
                 <View style={[styles.iconContainer, styles.userIcon]}>
-                  <Text style={styles.iconEmoji}>👤</Text>
+                  <MaterialCommunityIcons name="account" size={32} color="#fff" />
                 </View>
                 <View style={styles.cardText}>
                   <Text style={styles.cardTitle}>I'm a User</Text>
@@ -71,7 +80,6 @@ export default function LandingPage() {
               </View>
             </TouchableOpacity>
 
-            {/* Company Card */}
             <TouchableOpacity
               style={styles.selectionCard}
               onPress={handleCompanySelection}
@@ -79,7 +87,7 @@ export default function LandingPage() {
             >
               <View style={styles.cardContent}>
                 <View style={[styles.iconContainer, styles.companyIcon]}>
-                  <Text style={styles.iconEmoji}>🏢</Text>
+                  <MaterialCommunityIcons name="office-building" size={32} color="#fff" />
                 </View>
                 <View style={styles.cardText}>
                   <Text style={styles.cardTitle}>I'm a Company</Text>
@@ -93,89 +101,67 @@ export default function LandingPage() {
               </View>
             </TouchableOpacity>
           </View>
-
-          {/* Footer */}
-          <View style={styles.footer}>
-            <View style={styles.featuresList}>
-              <Text style={styles.featureItem}>✨ Easy to use interface</Text>
-              <Text style={styles.featureItem}>🔒 Secure and private</Text>
-              <Text style={styles.featureItem}>🚀 Fast and reliable</Text>
-            </View>
-            
-            <Text style={styles.footerNote}>
-              Tap on your account type to continue
-            </Text>
-          </View>
         </View>
-      </LinearGradient>
-    </SafeAreaView>
+      </ScrollView>
+    </AnimatedImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
+    width: '100%',
+    height: '100%',
   },
-  gradient: {
-    flex: 1,
+  container: {
+    flexGrow: 1,
+    paddingHorizontal: 24,
+    paddingTop: 40,
   },
   content: {
     flex: 1,
-    paddingHorizontal: 24,
-    paddingVertical: 20,
     justifyContent: 'space-between',
+  },
+  logo: {
+    width: 500,
+    height: 250,
+    marginTop: 60,
   },
   header: {
     alignItems: 'center',
-    marginTop: height * 0.08,
-  },
-  logoContainer: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 24,
-    borderWidth: 2,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
-  },
-  logoText: {
-    fontSize: 40,
+    marginTop: -20,
   },
   title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: 'white',
-    textAlign: 'center',
-    marginBottom: 12,
+    fontSize: 24,
+    color: '#ff7c8a',
+    textAlign: 'left',
+    marginTop: 33,
+    marginBottom: -20,
     letterSpacing: -0.5,
   },
   subtitle: {
-    fontSize: 18,
-    color: 'rgba(255, 255, 255, 0.85)',
+    fontSize: 16,
+    color: '#041e42',
     textAlign: 'center',
+    paddingHorizontal: 16,
     lineHeight: 24,
-    paddingHorizontal: 20,
   },
   selectionContainer: {
     flex: 1,
     justifyContent: 'center',
     gap: 20,
-    marginVertical: 40,
+    paddingBottom: 250,
   },
   selectionCard: {
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 24,
+    backgroundColor: '#041e42',
+    borderRadius: 24,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 16,
-    elevation: 12,
+    shadowOpacity: 0.3,
+    shadowRadius: 30,
+    shadowOffset: { width: 0, height: 15 },
   },
   cardContent: {
     flexDirection: 'row',
@@ -190,59 +176,40 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   userIcon: {
-    backgroundColor: '#e3f2fd',
+    borderColor: '#ff7c8a',
+    borderWidth: 1,
   },
   companyIcon: {
-    backgroundColor: '#f3e5f5',
-  },
-  iconEmoji: {
-    fontSize: 32,
+    borderColor: '#ff7c8a',
+    borderWidth: 1,
   },
   cardText: {
     flex: 1,
-    paddingRight: 12,
   },
   cardTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#1a1a1a',
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#fff',
     marginBottom: 6,
   },
   cardDescription: {
-    fontSize: 15,
-    color: '#666',
-    lineHeight: 21,
+    fontSize: 14,
+    color: 'rgba(255, 255, 255, 0.8)',
+    lineHeight: 20,
   },
   arrowContainer: {
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#041e42',
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#ff7c8a',
   },
   arrow: {
     fontSize: 18,
-    color: '#666',
+    color: '#ff7c8a',
     fontWeight: 'bold',
-  },
-  footer: {
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  featuresList: {
-    alignItems: 'center',
-    gap: 8,
-    marginBottom: 20,
-  },
-  featureItem: {
-    color: 'rgba(255, 255, 255, 0.8)',
-    fontSize: 14,
-    fontWeight: '500',
-  },
-  footerNote: {
-    color: 'rgba(255, 255, 255, 0.7)',
-    fontSize: 13,
-    fontStyle: 'italic',
   },
 });
