@@ -13,12 +13,8 @@ import {
   Image,
 } from 'react-native';
 import UUID from 'react-native-uuid';
-
-const client = new Client();
-client.setEndpoint('https://cloud.appwrite.io/v1').setProject('6851607e003b10432fe3');
-
-const account = new Account(client);
-const databases = new Databases(client);
+import { ActivityIndicator } from 'react-native';
+import { databases, account, avatars } from '../../assets/appwrite1';
 
 export default function _ProfilePage() {
   const [password, setPassword] = useState('');
@@ -27,134 +23,167 @@ export default function _ProfilePage() {
   const [currentUser, setCurrentUser] = useState(null);
   const [time, setTime] = useState('');
   const [if1, setIf] = useState(0);
-  
-  const checkActiveSession = async () => {
-    try {
-      const sessionData = await AsyncStorage.getItem('userSession');
-      if (sessionData) {
-        const user = JSON.parse(sessionData);
-        setCurrentUser(user);
-        return 2;
-      } else {
-        return 0;
-      }
-    } catch (error) {
-      console.error('Error checking active session:', error);
-      return 0;
-    }
-  };
 
-  // Function to redirect to intended route
-  const redirectToIntendedRoute = async () => {
-    try {
-      const intendedRoute = await AsyncStorage.getItem('intendedRoute');
-      if (intendedRoute) {
-        // Clear the stored route
-        await AsyncStorage.removeItem('intendedRoute');
-        // Navigate to the intended route
-        router.replace(intendedRoute);
-      } else {
-        // If no intended route, go to home or default page
-        router.replace('/user'); // or wherever your main user area is
-      }
-    } catch (error) {
-      console.error('Error redirecting to intended route:', error);
-      // Fallback to home
-      router.replace('/user');
-    }
-  };
-
+  // Simple time updater - no auth checking
   useEffect(() => {
-    checkActiveSession().then(status => {
-      if (status === 2) {
-        // User is already logged in, redirect to intended route
-        redirectToIntendedRoute();
-      }
-    });
-
     const interval = setInterval(() => {
-      const currentTime = new Date().toLocaleTimeString();
-      setTime(currentTime);
+      setTime(new Date().toLocaleTimeString());
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
+  // Function to redirect after successful login/signup
+  const redirectAfterAuth = async () => {
+      try {
+    // Check global variable instead of AsyncStorage
+    const intendedRoute = global.intendedRoute;
+    
+    if (intendedRoute) {
+      // Clear the stored route
+      global.intendedRoute = null;
+      console.log('Redirecting to intended route:', intendedRoute);
+      router.replace(intendedRoute);
+    } else {
+      // No intended route, go to main user area
+      console.log('No intended route, going to main user area');
+      router.replace('/user');
+    }
+  } catch (error) {
+    console.error('Error redirecting after auth:', error);
+    router.replace('/user');
+  }
+  };
+
   // Modified createUser function
   const createUser = async () => {
     try {
-      await deleteExistingSession();
+    // No need to delete existing session - Appwrite handles this
+    const userId = UUID.v4();
 
-      const userId = UUID.v4();
+    await account.create(userId, email, password);
+    console.log('User created successfully');
 
-      await account.create(userId, email, password);
-      console.log('User created');
+    const session = await account.createEmailPasswordSession(email, password);
+    console.log('Session created:', session);
 
-      const session = await account.createEmailPasswordSession(email, password);
+    const user = await account.get();
+    console.log('Authenticated user:', user);
 
-      const user = await account.get();
-      console.log('Authenticated user:', user);
+    // No AsyncStorage - user data comes from server
+    setCurrentUser(user);
+    
+    // Redirect after successful signup
+    await redirectAfterAuth();
 
-      await AsyncStorage.setItem('userSession', JSON.stringify(user));
-      setCurrentUser(user);
-      
-      // Instead of setting if1 to 2, redirect immediately
-      await redirectToIntendedRoute();
-
-    } catch (error) {
-      console.error('Error creating account:', error);
-      Alert.alert('Error', 'Error creating account, please try again.');
-    }
+  } catch (error) {
+    console.error('Error creating account:', error);
+    Alert.alert('Error', 'Error creating account, please try again.');
+  }
   };
 
   // Modified signIn function
   const signIn = async () => {
     try {
-      await deleteExistingSession();
+    const session = await account.createEmailPasswordSession(email, password);
+    console.log('Session created:', session);
 
-      const session = await account.createEmailPasswordSession(email, password);
-      console.log('Session created:', session);
+    const user = await account.get();
+    console.log('Authenticated user:', user);
 
-      const user = await account.get();
-      console.log('Authenticated user:', user);
+    // No AsyncStorage - rely on server session
+    setCurrentUser(user);
+    
+    // Redirect after successful signin
+    await redirectAfterAuth();
 
-      await AsyncStorage.setItem('userSession', JSON.stringify(user));
-      setCurrentUser(user);
+  } catch (error) {
+    console.error('Error signing in:', error);
+    Alert.alert('Error', 'Failed to sign in, please check your credentials.');
+  }
+  };
+
+  // const signOut = async () => {
+  //   try {
+  //     await account.deleteSession('current');
+  //     // await AsyncStorage.removeItem('userSession');
+  //     // await AsyncStorage.removeItem('intendedRoute'); // Clear any stored intended route
+  //     setCurrentUser(null);
+  //     setIf(0);
+  //     // Redirect to home after sign out
+  //     router.replace('/');
+  //   } catch (error) {
+  //     console.error('Error signing out:', error);
+  //     Alert.alert('Error', 'Failed to sign out, please try again.');
+  //   }
+  // };
+
+  // const deleteExistingSession = async () => {
+  //   try {
+  //     // Try to delete current session directly
+  //     await account.deleteSession('current');
+  //     console.log('Session deleted successfully');
+  //   } catch (error) {
+  //     // Check if error is because there's no session to delete
+  //     if (error.code === 401 || 
+  //         error.message.includes('missing scope') || 
+  //         error.message.includes('guests')) {
+  //       console.log('No active session to delete');
+  //       // This is expected when user isn't logged in - not an error
+  //       return;
+  //     }
       
-      // Instead of setting if1 to 2, redirect immediately
-      await redirectToIntendedRoute();
+  //     // If it's a different error, log it
+  //     console.error('Unexpected error deleting session:', error);
+  //   }
+  // };
 
-    } catch (error) {
-      console.error('Error signing in:', error);
-      Alert.alert('Error', 'Failed to sign in, please check your credentials.');
-    }
+  const useAuthStatus = () => {
+  const [authState, setAuthState] = useState({
+    isSignedIn: false,
+    user: null,
+    loading: true
+  });
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const result = await verifyAuthStatus();
+      setAuthState({
+        isSignedIn: result.isSignedIn,
+        user: result.user,
+        loading: false
+      });
+    };
+
+    checkAuth();
+  }, []);
+
+  return authState;
+};
+  // Optional: Add a "Go to Dashboard" button for logged-in users
+  const goToDashboard = () => {
+    router.replace('/user');
   };
 
-  const signOut = async () => {
-    try {
-      await account.deleteSession('current');
-      await AsyncStorage.removeItem('userSession');
-      await AsyncStorage.removeItem('intendedRoute'); // Clear any stored intended route
-      setCurrentUser(null);
-      setIf(0);
-      // Optionally redirect to home after sign out
-      router.replace('/');
-    } catch (error) {
-      console.error('Error signing out:', error);
-      Alert.alert('Error', 'Failed to sign out, please try again.');
-    }
-  };
+  // Check if user is currently logged in (for UI purposes only - no auto-redirect)
+const checkCurrentUser = async () => {
+  try {
+    console.log('Checking current user from server...');
+    const user = await account.get();
+    console.log('User found:', user);
+    setCurrentUser(user);
+    return user;
+  } catch (error) {
+    console.log('No authenticated user found');
+    setCurrentUser(null);
+    return null;
+  }
+};
 
-  const deleteExistingSession = async () => {
-    try {
-      const sessions = await account.listSessions();
-      if (sessions.total > 0) {
-        await account.deleteSession('current');
-      }
-    } catch (error) {
-      console.error('Error deleting session:', error);
-    }
-  };
+  // Check current user on component mount (but don't redirect)
+  useEffect(() => {
+    checkCurrentUser();
+  }, []);
 
   const renderForm = (title, fields, action, switchText, switchAction, buttonText) => (
     <View style={styles.container}>
@@ -173,6 +202,13 @@ export default function _ProfilePage() {
         <TouchableOpacity onPress={switchAction}>
           <Text style={styles.switchText}>{switchText}</Text>
         </TouchableOpacity>
+        
+        {/* Optional: Show dashboard button if user is logged in */}
+        {currentUser && (
+          <TouchableOpacity style={styles.dashboardButton} onPress={goToDashboard}>
+            <Text style={styles.dashboardButtonText}>Go to Dashboard</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -220,7 +256,7 @@ export default function _ProfilePage() {
     );
   }
 
-  // Loading state - this will show briefly before redirect
+  // This should not be reached anymore since we removed the auto-redirect
   return (
     <View style={styles.container}>
       <Image
@@ -228,7 +264,10 @@ export default function _ProfilePage() {
         style={styles.logo}
         resizeMode="contain"
       />
-      <Text style={styles.header}>Signing you in...</Text>
+      <Text style={styles.header}>Welcome!</Text>
+      <TouchableOpacity style={styles.button} onPress={() => setIf(0)}>
+        <Text style={styles.buttonText}>Get Started</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -301,5 +340,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 20,
     color: '#041E42',
+  },
+  dashboardButton: {
+    backgroundColor: '#041E42',
+    paddingVertical: 12,
+    borderRadius: 12,
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  dashboardButtonText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: 'bold',
   },
 });
