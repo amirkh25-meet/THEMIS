@@ -44,7 +44,6 @@ export default function LandingPage() {
       resizeMode="cover"
     >
       <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.title}>Welcome to</Text>
 
         <View style={styles.content}>
           <View style={styles.header}>
@@ -57,7 +56,6 @@ export default function LandingPage() {
               Choose your account type to get started
             </Text>
           </View>
-
           <View style={styles.selectionContainer}>
             <TouchableOpacity
               style={styles.selectionCard}
@@ -109,22 +107,21 @@ export default function LandingPage() {
 
 const styles = StyleSheet.create({
   background: {
-    flex: 1,
     width: '100%',
     height: '100%',
   },
   container: {
     flexGrow: 1,
     paddingHorizontal: 24,
-    paddingTop: 40,
+    paddingTop: 20,
   },
-  content: {
-    flex: 1,
-    justifyContent: 'space-between',
-  },
+content: {
+  justifyContent: 'flex-start',
+  marginTop: 20,               
+},
   logo: {
     width: '100%',
-    height: '45%',
+    height: '55%',
     marginTop: 60,
   },
   header: {
@@ -146,26 +143,30 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     lineHeight: 24,
   },
-  selectionContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    gap: 20,
-    // paddingBottom: 150,
-  },
-  selectionCard: {
-    backgroundColor: '#041e42',
-    borderRadius: 24,
-    padding: 20,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
-    shadowColor: '#000',
-    shadowOpacity: 0.3,
-    shadowRadius: 30,
-    shadowOffset: { width: 0, height: 15 },
-  },
+selectionContainer: {
+  width: '100%', // ensure full-width cards
+  gap: 20,
+  alignItems: 'center',
+  marginTop: -95,
+},
+
+selectionCard: {
+  width: '100%',
+  backgroundColor: '#041e42',
+  borderRadius: 24,
+  padding: 20,
+  borderWidth: 1,
+  borderColor: 'rgba(255, 255, 255, 0.2)',
+  shadowColor: '#000',
+  shadowOpacity: 0.3,
+  shadowRadius: 30,
+  shadowOffset: { width: 0, height: 15 },
+},
+
   cardContent: {
     flexDirection: 'row',
     alignItems: 'center',
+    
   },
   iconContainer: {
     width: 64,
