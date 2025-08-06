@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput } from 'react-native'
 import React, { useState } from 'react'
+import { router } from 'expo-router';
 
 
 export default function GenderEquityAssessmentApp() {
@@ -32,6 +33,9 @@ export default function GenderEquityAssessmentApp() {
       component: AdditionalConsiderations, 
       name: 'Additional Considerations',
       requiredQuestions: ['parental_leave_policy', 'flexible_work_policies', 'employee_survey', 'bias_incidents_tracked', 'internal_champion']
+    },{component:GenderEquityAssesmentApp2,
+    name:'Results',
+    requiredQuestions: []
     }
   ];
 
@@ -859,6 +863,10 @@ export function AdditionalConsiderations({
 }) {
   const [responses, setResponses] = useState(allResponses);
 
+ 
+
+  
+
   const updateResponse = (questionKey, value) => {
     const newResponses = {
       ...responses,
@@ -1041,7 +1049,7 @@ export function AdditionalConsiderations({
             </TouchableOpacity>
             <TouchableOpacity 
               style={[styles.completeButton, !isPageComplete && styles.completeButtonDisabled]} 
-              onPress={handleComplete}
+              onPress={goToNextPage}
               disabled={!isPageComplete}
             >
               <Text style={[styles.completeButtonText, !isPageComplete && styles.completeButtonTextDisabled]}>
@@ -1054,6 +1062,347 @@ export function AdditionalConsiderations({
     </View>
   )
 }
+
+
+
+
+
+export function GenderEquityAssesmentApp2({ 
+  currentPage, 
+  totalPages, 
+  navigateToPage, 
+  goToNextPage, 
+  goToPreviousPage, 
+  allResponses, 
+  updateGlobalResponses,
+  isPageComplete,
+  completedSections,
+  getCompletedSectionsCount,
+  pages
+}){
+
+// 
+  // Calculate score for a specific section based on responses
+ const calculateSectionScore = (questionKeys) => {
+    if (!questionKeys || questionKeys.length === 0) return 0;
+    
+    let totalScore = 0;
+    let answeredQuestions = 0;
+    
+    questionKeys.forEach(key => {
+      const response = allResponses[key];
+      if (response && response.toString().trim() !== '') {
+        answeredQuestions++;
+        let questionScore = 0;
+        
+        // Scoring logic based on response type
+        if (response === 'Yes' || response === 'Always') {
+          questionScore = 100;
+        } else if (response === 'Sometimes' || response === 'Partially' || response === 'Somewhat' || response === 'Planning To' || response === 'Some Roles' || response === 'Some Managers' || response === 'Informally' || response === 'Informal Role') {
+          questionScore = 66;
+        } else if (response === 'Rarely' || response === 'No' || response === 'Never' || response === 'Below') {
+          questionScore = 33;
+        } else if (response === 'Unsure' || response === "Don't Know" || response === 'Not Sure') {
+          questionScore = 25;
+        } else if (response === 'In Progress' || response === 'Meets') {
+          questionScore = 75;
+        } else if (!isNaN(response)) {
+          // For percentage inputs
+          const percentage = parseInt(response);
+          questionScore = Math.min(100, Math.max(0, percentage));
+        }
+        
+        totalScore += questionScore;
+      }
+    });
+    
+    return answeredQuestions > 0 ? Math.round(totalScore / answeredQuestions) : 0;
+  };
+
+  // Define section mappings
+  const sectionMappings = {
+    'Hiring Practices': [
+      'track_gender_breakdown',
+      'job_descriptions_audited', 
+      'interview_panels',
+      'diversity_formal_goal',
+      'entry_roles_offered'
+    ],
+    'Promotion & Advancement': [
+      'promotion_data_analyzed',
+      'leadership_development',
+      'mentoring_program', 
+      'promotion_criteria',
+      'women_overlooked'
+    ],
+    'Pay Equity': [
+      'pay_audit_conducted',
+      'adjust_salaries',
+      'starting_salaries_compared',
+      'transparent_pay_bands',
+      'manager_training'
+    ],
+    'Performance Metrics': [
+      'women_applied_percentage',
+      'women_hired_percentage',
+      'women_promotions_percentage',
+      'women_salary_raises_percentage',
+      'women_leadership_percentage'
+    ],
+    'Additional Considerations': [
+      'parental_leave_policy',
+      'flexible_work_policies',
+      'employee_survey',
+      'bias_incidents_tracked',
+      'internal_champion'
+    ]
+  };
+
+  // Calculate scores for each section
+  const sectionScores = Object.keys(sectionMappings).reduce((scores, sectionName) => {
+    scores[sectionName] = calculateSectionScore(sectionMappings[sectionName]);
+    return scores;
+  }, {});
+
+  // Calculate overall score
+  const overallScore = Math.round(
+    Object.values(sectionScores).reduce((sum, score) => sum + score, 0) / 
+    Object.keys(sectionScores).length
+  );
+
+  // Get score label and color
+  const getScoreLabel = (score) => {
+    if (score >= 80) return 'Good';
+    if (score >= 60) return 'Fair';
+    return 'Poor';
+  };
+
+  const getScoreColor = (score) => {
+    if (score >= 80) return '#22c55e'; // Green
+    if (score >= 60) return '#f59e0b'; // Yellow/Orange
+    return '#ef4444'; // Red
+  };
+
+  const SectionCard = ({ title, score, description }) => (
+    <View style={[styles.sectionCard, { borderLeftColor: getScoreColor(score) }]}>
+      <View style={styles.sectionCardHeader}>
+        <Text style={styles.sectionCardTitle}>{title}</Text>
+        <View style={styles.sectionScoreContainer}>
+          <View style={[styles.scoreBadge, { backgroundColor: getScoreColor(score) + '20' }]}>
+            <Text style={[styles.scoreBadgeText, { color: getScoreColor(score) }]}>
+              {getScoreLabel(score)}
+            </Text>
+          </View>
+          <Text style={styles.sectionScoreText}>{score}%</Text>
+        </View>
+      </View>
+      
+      <View style={styles.progressBarContainer}>
+        <View style={styles.progressBarBackground}>
+          <View 
+            style={[
+              styles.progressBarFill, 
+              { 
+                width: `${score}%`, 
+                backgroundColor: getScoreColor(score) 
+              }
+            ]} 
+          />
+        </View>
+      </View>
+      
+      <Text style={styles.sectionDescription}>{description}</Text>
+      
+      <TouchableOpacity style={styles.actionPlanButton}>
+        <View style={styles.actionPlanIcon} />
+        <Text style={styles.actionPlanText}>View Action Plan</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
+  const ProgressBar = () => {
+    const completedCount = getCompletedSectionsCount();
+    return (
+      <View style={styles.progressContainer}>
+        <Text style={styles.progressText}>{completedCount} of {totalPages} sections completed</Text>
+        <View style={styles.progressBar}>
+          <View style={[styles.progressFill, { width: `${(completedCount / totalPages) * 100}%` }]} />
+        </View>
+      </View>
+    );
+  };
+
+  const getSectionStatus = (pageIndex) => {
+    if (completedSections.includes(pageIndex) || (pageIndex < pages.length && pages[pageIndex].requiredQuestions.every(q => allResponses[q] && allResponses[q].toString().trim() !== ''))) {
+      return 'completed';
+    } else if (pageIndex === currentPage) {
+      return 'active';
+    } else {
+      return 'inactive';
+    }
+  };
+
+  const SectionNav = () => (
+    <View style={styles.sectionNav}>
+      <Text style={styles.sectionTitle}>Sections</Text>
+      
+      {pages.slice(0, -1).map((page, index) => {
+        const status = getSectionStatus(index);
+        return (
+          <TouchableOpacity 
+            key={index}
+            style={[
+              styles.sectionItem, 
+              status === 'completed' && styles.sectionCompleted,
+              status === 'active' && styles.sectionActive
+            ]}
+            onPress={() => navigateToPage(index)}
+          >
+            <Text style={[
+              styles.sectionText,
+              status === 'completed' && styles.sectionCompletedText,
+              status === 'active' && styles.sectionActiveText
+            ]}>
+              {page.name}
+            </Text>
+            <Text style={[
+              styles.sectionInactiveBadge,
+              status === 'completed' && styles.sectionCompletedBadge,
+              status === 'active' && styles.sectionBadge
+            ]}>
+              {status === 'completed' ? '✓' : index + 1}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+
+  return (
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Gender Equity Assessment</Text>
+        <Text style={styles.headerSubtitle}>Comprehensive analysis of your organization's gender equity practices</Text>
+        <ProgressBar />
+      </View>
+
+      <View style={styles.content}>
+        {/* Sidebar Navigation */}
+        <View style={styles.sidebar}>
+          <SectionNav />
+        </View>
+
+        {/* Main Content */}
+        <ScrollView style={styles.mainContent}>
+          <View style={styles.resultsHeader}>
+            <Text style={styles.resultsTitle}>Your Gender Equity Assessment Results</Text>
+            <Text style={styles.resultsSubtitle}>
+              Comprehensive analysis of your organization's gender equity practices
+            </Text>
+          </View>
+
+          {/* Overall Score */}
+          <View style={styles.overallScoreContainer}>
+            <View style={styles.overallScoreCircle}>
+              <Text style={styles.overallScoreNumber}>{overallScore}%</Text>
+            </View>
+            <Text style={styles.overallScoreLabel}>
+              Overall Score: {getScoreLabel(overallScore)}
+            </Text>
+            <Text style={styles.overallScoreDescription}>
+              Your organization shows {overallScore >= 80 ? 'strong' : overallScore >= 60 ? 'fair' : 'limited'} practices in gender equity across all assessed areas.
+            </Text>
+          </View>
+
+          {/* Section Results */}
+          <View style={styles.sectionResults}>
+            <SectionCard
+              title="Hiring Practices"
+              score={sectionScores['Hiring Practices']}
+              description="Evaluate fairness and transparency in recruitment processes"
+            />
+            
+            <SectionCard
+              title="Promotion & Advancement"
+              score={sectionScores['Promotion & Advancement']}
+              description="Assess equity in career advancement opportunities"
+            />
+            
+            <SectionCard
+              title="Pay Equity"
+              score={sectionScores['Pay Equity']}
+              description="Review compensation practices and gender pay gaps"
+            />
+            
+            <SectionCard
+              title="Performance Metrics"
+              score={sectionScores['Performance Metrics']}
+              description="Quantitative data on women in your organization"
+            />
+            
+            <SectionCard
+              title="Additional Considerations"
+              score={sectionScores['Additional Considerations']}
+              description="Examine workplace culture and support systems"
+            />
+          </View>
+
+          {/* Key Recommendations */}
+          <View style={styles.recommendationsContainer}>
+            <Text style={styles.recommendationsTitle}>🔑 Key Recommendations</Text>
+            <View style={styles.recommendationItem}>
+              <View style={styles.recommendationNumber}>
+                <Text style={styles.recommendationNumberText}>1</Text>
+              </View>
+              <Text style={styles.recommendationText}>
+                Implement structured diversity tracking and bias-free hiring practices
+              </Text>
+            </View>
+            <View style={styles.recommendationItem}>
+              <View style={styles.recommendationNumber}>
+                <Text style={styles.recommendationNumberText}>2</Text>
+              </View>
+              <Text style={styles.recommendationText}>
+                Establish transparent promotion criteria and mentorship programs
+              </Text>
+            </View>
+            <View style={styles.recommendationItem}>
+              <View style={styles.recommendationNumber}>
+                <Text style={styles.recommendationNumberText}>3</Text>
+              </View>
+              <Text style={styles.recommendationText}>
+                Enhance workplace policies and create formal support systems
+              </Text>
+            </View>
+          </View>
+
+          {/* Action Buttons */}
+          <View style={styles.actionButtonsContainer}>
+            <TouchableOpacity style={styles.primaryActionButton}>
+              <Text style={styles.primaryActionButtonText}>👥 Connect with Similar Companies</Text>
+            </TouchableOpacity>
+            
+            <View style={styles.secondaryButtonsRow}>
+              <TouchableOpacity style={styles.secondaryActionButton}>
+                <Text style={styles.secondaryActionButtonText}>📄 Download Report</Text>
+              </TouchableOpacity>
+              
+              <TouchableOpacity 
+                style={styles.secondaryActionButton}
+                onPress={() => navigateToPage(0)}
+              >
+                <Text style={styles.secondaryActionButtonText}>🔄 Take Assessment Again</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
+      </View>
+    </View>
+  );}
+  
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -1302,5 +1651,218 @@ const styles = StyleSheet.create({
   sectionInactiveBadge: {
     backgroundColor: '#e0e0e0',
     color: '#666666',
+  },resultsHeader: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  resultsTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#1f2937',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  resultsSubtitle: {
+    fontSize: 16,
+    color: '#6b7280',
+    textAlign: 'center',
+    maxWidth: 400,
+  },
+  overallScoreContainer: {
+    backgroundColor: '#f8fafc',
+    borderWidth: 2,
+    borderColor: '#e5e7eb',
+    borderRadius: 12,
+    padding: 32,
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  overallScoreCircle: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: '#8b5cf6',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  overallScoreNumber: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  overallScoreLabel: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#1f2937',
+    marginBottom: 8,
+  },
+  overallScoreDescription: {
+    fontSize: 14,
+    color: '#6b7280',
+    textAlign: 'center',
+    maxWidth: 300,
+    lineHeight: 20,
+  },
+  sectionResults: {
+    marginBottom: 30,
+  },
+  sectionCard: {
+    backgroundColor: 'white',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+    borderLeftWidth: 4,
+    padding: 20,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
+  },
+  sectionCardHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 16,
+  },
+  sectionCardTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#1f2937',
+    flex: 1,
+  },
+  sectionScoreContainer: {
+    alignItems: 'flex-end',
+  },
+  scoreBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+    marginBottom: 4,
+  },
+  scoreBadgeText: {
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  sectionScoreText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#1f2937',
+  },
+  progressBarContainer: {
+    marginBottom: 16,
+  },
+  progressBarBackground: {
+    height: 8,
+    backgroundColor: '#e5e7eb',
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  progressBarFill: {
+    height: '100%',
+    borderRadius: 4,
+  },
+  sectionDescription: {
+    fontSize: 14,
+    color: '#6b7280',
+    marginBottom: 16,
+    lineHeight: 20,
+  },
+  actionPlanButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  actionPlanIcon: {
+    width: 16,
+    height: 16,
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: '#3b82f6',
+    marginRight: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  actionPlanText: {
+    fontSize: 14,
+    color: '#3b82f6',
+    fontWeight: '500',
+  },
+  recommendationsContainer: {
+    backgroundColor: 'white',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+    padding: 20,
+    marginBottom: 30,
+  },
+  recommendationsTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#1f2937',
+    marginBottom: 16,
+  },
+  recommendationItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 12,
+  },
+  recommendationNumber: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: '#dbeafe',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+    marginTop: 2,
+  },
+  recommendationNumberText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#3b82f6',
+  },
+  recommendationText: {
+    fontSize: 14,
+    color: '#4b5563',
+    lineHeight: 20,
+    flex: 1,
+  },
+  actionButtonsContainer: {
+    marginBottom: 30,
+  },
+  primaryActionButton: {
+    backgroundColor: '#8b5cf6',
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    marginBottom: 12,
+  },
+  primaryActionButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  secondaryButtonsRow: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  secondaryActionButton: {
+    flex: 1,
+    backgroundColor: '#f3f4f6',
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+  },
+  secondaryActionButtonText: {
+    color: '#4b5563',
+    fontSize: 14,
+    fontWeight: '500',
+    textAlign: 'center',
   },
 });

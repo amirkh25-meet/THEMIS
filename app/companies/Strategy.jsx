@@ -1,22 +1,78 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, ScrollView,TextInput, Button } from 'react-native'
+import React, { use } from 'react'
+import { useState } from 'react' 
+
 
 export default function Strategy() {
-  return (
+  const [a,setA] = useState(0)
+  const [b,setB] = useState(0)
+  const [c,setC] = useState(0)
+  const [d,setD] = useState(0)
+  const [e,setE] = useState(0)
+  const [if1,setIf1] = useState(0)
+  
+  if(if1===0)
+    {
+return (
+    <View style={styles.container}>
+      
+      <TextInput
+      value={a}
+      onChangeText={text => setA(text)}
+      placeholder="enter your HiringPractices rate"
+      style={styles.input}/>
+
+      <TextInput
+      value={b}
+      onChangeText={text => setB(text)}
+      placeholder="enter your PromotionAdvancement rate"
+      style={styles.input}/>
+
+      <TextInput
+      value={c}
+      onChangeText={text => setC(text)}
+      placeholder="enter your PayEquity rate"
+      style={styles.input}/>
+
+      <TextInput
+      value={d}
+      onChangeText={text => setD(text)}
+      placeholder="enter your PerformanceMetrics rate"
+      style={styles.input}/>
+
+      <TextInput
+      value={e}
+      onChangeText={text => setE(text)}
+      placeholder="enter your AdditionalConsiderations rate"
+      style={styles.input}/>
+
+      <Button title="Submit"
+      onPress={() => {setIf1(1)}}
+      style={styles.button}/>
+      </View>
+)
+  }
+  
+  if(if1===1)
+  {return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Gender Equity Strategy</Text>
-
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>1. Hiring Practices</Text>
-        <Text style={styles.goal}>Goal:</Text>
-        <Text style={styles.text}>Ensure fair, inclusive, and transparent recruitment processes.</Text>
-        <Text style={styles.subTitle}>Steps to Improve:</Text>
-        <Text style={styles.bullet}>• Audit job descriptions for biased language and unnecessary requirements (e.g., “aggressive,” “rockstar,” or excessive years of experience).</Text>
-        <Text style={styles.bullet}>• Commit to diverse interview panels (include at least one woman or underrepresented group member).</Text>
-        <Text style={styles.bullet}>• Standardize interview questions to ensure candidates are assessed equally.</Text>
-        <Text style={styles.bullet}>• Track applicant demographics to identify drop-off points or bias in the pipeline.</Text>
-        <Text style={styles.bullet}>• Post openings on inclusive platforms that reach diverse talent pools.</Text>
-      </View>
+    {a < 80 ? (
+  <View style={styles.section}>
+    <Text style={styles.sectionTitle}>1. Hiring Practices</Text>
+    <Text style={styles.goal}>Goal:</Text>
+    <Text style={styles.text}>
+      Ensure fair, inclusive, and transparent recruitment processes.
+    </Text>
+    <Text style={styles.subTitle}>Steps to Improve:</Text>
+    <Text style={styles.bullet}>• Audit job descriptions for biased language and unnecessary requirements.</Text>
+    <Text style={styles.bullet}>• Commit to diverse interview panels.</Text>
+    <Text style={styles.bullet}>• Standardize interview questions.</Text>
+    <Text style={styles.bullet}>• Track applicant demographics.</Text>
+    <Text style={styles.bullet}>• Post openings on inclusive platforms.</Text>
+  </View>
+) : null}
+      {b < 80 ? (
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>2. Promotion & Advancement</Text>
@@ -28,8 +84,9 @@ export default function Strategy() {
         <Text style={styles.bullet}>• Create mentorship or sponsorship programs that support women’s advancement.</Text>
         <Text style={styles.bullet}>• Encourage internal mobility by openly advertising roles to current employees.</Text>
         <Text style={styles.bullet}>• Offer leadership training programs targeted at high-potential women.</Text>
-      </View>
+      </View>) : null}
 
+      {c < 80 ? (
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>3. Pay Equity</Text>
         <Text style={styles.goal}>Goal:</Text>
@@ -40,8 +97,10 @@ export default function Strategy() {
         <Text style={styles.bullet}>• Establish clear pay bands and make them accessible to employees.</Text>
         <Text style={styles.bullet}>• Ban asking for salary history in the hiring process.</Text>
         <Text style={styles.bullet}>• Commit to regular reviews of pay practices and adjustments.</Text>
-      </View>
+      </View>) : null}
 
+
+      {d < 80 ? (
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>4. Performance Metrics</Text>
         <Text style={styles.goal}>Goal:</Text>
@@ -52,8 +111,10 @@ export default function Strategy() {
         <Text style={styles.bullet}>• Break down data by department to identify weak spots.</Text>
         <Text style={styles.bullet}>• Share selected results transparently with staff to build trust and accountability.</Text>
         <Text style={styles.bullet}>• Use metrics to guide decisions — don’t just collect them.</Text>
-      </View>
+      </View>) : null}
 
+
+      {e < 80 ? (
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>5. Culture & Support Systems</Text>
         <Text style={styles.goal}>Goal:</Text>
@@ -64,50 +125,84 @@ export default function Strategy() {
         <Text style={styles.bullet}>• Create employee resource groups (ERGs) or women’s networks.</Text>
         <Text style={styles.bullet}>• Offer unconscious bias training for managers and hiring teams.</Text>
         <Text style={styles.bullet}>• Regularly survey employees about inclusion and respond to feedback.</Text>
-      </View>
+      </View>) : null}
     </ScrollView>
   )
-}
+}}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#EAEBFF',
-    padding: 20,
+    paddingHorizontal: 16,
+    paddingTop: 40,
   },
   title: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: 'bold',
     color: '#021F54',
-    marginBottom: 20,
+    marginBottom: 30,
     textAlign: 'center',
   },
   section: {
-    marginBottom: 30,
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: 'bold',
     color: '#2E3A59',
-    marginBottom: 8,
+    marginBottom: 10,
   },
   goal: {
     fontWeight: '600',
     color: '#374259',
+    marginBottom: 4,
   },
   subTitle: {
     marginTop: 8,
     fontWeight: '600',
     color: '#374259',
-    marginBottom: 4,
+    marginBottom: 6,
   },
   text: {
     marginBottom: 8,
     color: '#333',
+    fontSize: 14,
+    lineHeight: 20,
   },
   bullet: {
     marginLeft: 10,
     marginBottom: 6,
     color: '#333',
+    fontSize: 14,
   },
-})
+  input: {
+    backgroundColor: '#fff',
+    padding: 12,
+    borderRadius: 8,
+    fontSize: 14,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#ccc',
+  },
+  button: {
+    backgroundColor: '#021F54',
+    padding: 14,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  }
+});
