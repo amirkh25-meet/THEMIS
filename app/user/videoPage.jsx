@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#e9ecef',
   },
   headerTitle: {
-    fontSize: 28,
+    fontSize: 33,
     fontWeight: 'bold',
     color: '#212529',
     textAlign: 'center',
@@ -257,6 +257,8 @@ const styles = StyleSheet.create({
   videoCard: {
     backgroundColor: '#fff',
     borderRadius: 12,
+    borderColor: '#041E42',
+    borderWidth: 1,
     marginBottom: 16,
     shadowColor: '#000',
     shadowOffset: {
