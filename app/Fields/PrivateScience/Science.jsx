@@ -157,6 +157,7 @@ export default function HealthCare() {
     });
   };
 
+if(if2===0){
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
@@ -216,6 +217,7 @@ export default function HealthCare() {
     </>
   );
 }
+}}
 
 const styles = StyleSheet.create({
   container: {
