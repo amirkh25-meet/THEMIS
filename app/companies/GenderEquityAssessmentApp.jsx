@@ -1379,9 +1379,6 @@ export function GenderEquityAssesmentApp2({
 
           {/* Action Buttons */}
           <View style={styles.actionButtonsContainer}>
-            <TouchableOpacity style={styles.primaryActionButton}>
-              <Text style={styles.primaryActionButtonText}>👥 Connect with Similar Companies</Text>
-            </TouchableOpacity>
             
             <View style={styles.secondaryButtonsRow}>
               <TouchableOpacity style={styles.secondaryActionButton}>
