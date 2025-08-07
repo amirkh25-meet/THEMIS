@@ -156,7 +156,6 @@ export default function HealthCare() {
       if (route) router.push(route);
     });
   };
-
 if(if2===0){
   return (
     <>
@@ -216,7 +215,6 @@ if(if2===0){
       </ScrollView>
     </>
   );
-}
 }}
 
 const styles = StyleSheet.create({
