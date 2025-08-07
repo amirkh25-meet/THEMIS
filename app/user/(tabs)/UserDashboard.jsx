@@ -378,9 +378,48 @@ const [stepAnimations2] = useState(steps2.map(() => new Animated.Value(0)));
       }).start();
     });
 
+    cardAnimations1.forEach((anim, index) => {
+      Animated.timing(anim, {
+        toValue: 1,
+        duration: 800,
+        delay: index * cardDelay,
+        useNativeDriver: true,
+      }).start();
+    });
+
+
+    cardAnimations2.forEach((anim, index) => {
+      Animated.timing(anim, {
+        toValue: 1,
+        duration: 800,
+        delay: index * cardDelay,
+        useNativeDriver: true,
+      }).start();
+    });
+
     // Stagger step animations
     const stepDelay = 150;
     stepAnimations.forEach((anim, index) => {
+      Animated.timing(anim, {
+        toValue: 1,
+        duration: 600,
+        delay: 1000 + index * stepDelay,
+        useNativeDriver: true,
+      }).start();
+    });
+
+
+    stepAnimations1.forEach((anim, index) => {
+      Animated.timing(anim, {
+        toValue: 1,
+        duration: 600,
+        delay: 1000 + index * stepDelay,
+        useNativeDriver: true,
+      }).start();
+    });
+
+
+    stepAnimations2.forEach((anim, index) => {
       Animated.timing(anim, {
         toValue: 1,
         duration: 600,
@@ -432,6 +471,7 @@ const [stepAnimations2] = useState(steps2.map(() => new Animated.Value(0)));
 
 
 
+  
   if(if2===2){useEffect(() => {
     const interval = setInterval(() => {
       setRandomFact2(getRandomFact2());
@@ -1353,7 +1393,7 @@ if(if2===2){
     </AnimatedImageBackground>
   );
 }
-} 
+}
 
 // Define styles inside the component file - no props needed
 const styles = StyleSheet.create({

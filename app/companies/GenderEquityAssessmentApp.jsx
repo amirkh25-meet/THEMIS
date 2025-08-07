@@ -1263,6 +1263,7 @@ export function PayEquity({
     </View>
   );
 
+  
 
   const ProgressBar1 = () => {
     const completedCount = getCompletedSectionsCount1();
@@ -1420,25 +1421,7 @@ if(if2 === 0)
   { 
   return (
     <View style={styles.container}>
-       <View style={styles.topRightContainer}>
-              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
-                <Text style={styles.menuIcon}>⋮</Text>
-              </TouchableOpacity>
-            
-              {showLangMenu && (
-                <View style={styles.languageMenu}>
-                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
-                    <Text style={styles.menuItem}>English</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
-                    <Text style={styles.menuItem}>العربية</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
-                    <Text style={styles.menuItem}>עברית</Text>
-                  </TouchableOpacity>
-                </View>
-              )}
-            </View>
+       
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Gender Equity Assessment</Text>
@@ -1617,25 +1600,6 @@ if(if2 === 2)
   { 
   return (
     <View style={styles.container}>
-       <View style={styles.topRightContainer}>
-              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
-                <Text style={styles.menuIcon}>⋮</Text>
-              </TouchableOpacity>
-            
-              {showLangMenu && (
-                <View style={styles.languageMenu}>
-                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
-                    <Text style={styles.menuItem}>English</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
-                    <Text style={styles.menuItem}>العربية</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
-                    <Text style={styles.menuItem}>עברית</Text>
-                  </TouchableOpacity>
-                </View>
-              )}
-            </View>
       {/* Header */}
       <View style={styles.header}>
   <Text style={styles.headerTitle}>הערכת שוויון מגדרי</Text>
@@ -1924,25 +1888,7 @@ if(if2 === 0)
   {
   return (
     <View style={styles.container}>
-       <View style={styles.topRightContainer}>
-              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
-                <Text style={styles.menuIcon}>⋮</Text>
-              </TouchableOpacity>
-            
-              {showLangMenu && (
-                <View style={styles.languageMenu}>
-                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
-                    <Text style={styles.menuItem}>English</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
-                    <Text style={styles.menuItem}>العربية</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
-                    <Text style={styles.menuItem}>עברית</Text>
-                  </TouchableOpacity>
-                </View>
-              )}
-            </View>
+       
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Gender Equity Assessment</Text>
@@ -2018,204 +1964,166 @@ if(if2 === 0)
     </View>
   )
 }
-if(if2 === 1)
-  {
+if (if2 === 1) {
   return (
     <View style={styles.container}>
-       <View style={styles.topRightContainer}>
-              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
-                <Text style={styles.menuIcon}>⋮</Text>
-              </TouchableOpacity>
-            
-              {showLangMenu && (
-                <View style={styles.languageMenu}>
-                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
-                    <Text style={styles.menuItem}>English</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
-                    <Text style={styles.menuItem}>العربية</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
-                    <Text style={styles.menuItem}>עברית</Text>
-                  </TouchableOpacity>
-                </View>
-              )}
-            </View>
-      {/* Header */}
+
+      {/* العنوان */}
       <View style={styles.header}>
-  <Text style={styles.headerTitle}>تقييم المساواة بين الجنسين</Text>
-  <Text style={styles.headerSubtitle}>قيّم ممارسات مؤسستك في المجالات الرئيسية للمساواة بين الجنسين</Text>
-  <ProgressBar1/>
-</View>
-
-<View style={styles.content}>
-  {/* Sidebar Navigation */}
-  <View style={styles.sidebar}>
-    <SectionNav1/>
-  </View>
-
-  {/* Main Content */}
-  <ScrollView style={styles.mainContent}>
-    <View style={styles.contentHeader}>
-      <Text style={styles.contentTitle}>الإنصاف في الأجور</Text>
-      <Text style={styles.contentSubtitle}>راجع ممارسات التعويضات والفجوات في الأجور بين الجنسين</Text>
-    </View>
-
-    <QuestionCard
-      question="هل تم إجراء تدقيق على الأجور حسب النوع الاجتماعي خلال العامين الماضيين؟"
-      options={['نعم', 'لا']}
-      questionKey="pay_audit_conducted"
-    />
-
-    <QuestionCard
-      question="هل تقومون بتعديل الرواتب في حال وجود فجوات قائمة على النوع الاجتماعي؟"
-      options={['دائمًا', 'أحيانًا', 'أبدًا']}
-      questionKey="adjust_salaries"
-    />
-
-    <QuestionCard
-      question="هل تتم مقارنة الرواتب الابتدائية للنساء والرجال في نفس الأدوار؟"
-      options={['نعم', 'لا', 'لا أعلم']}
-      questionKey="starting_salaries_compared"
-    />
-
-    <QuestionCard
-      question="هل لدى الموظفين إمكانية الوصول إلى نطاقات الأجور الشفافة؟"
-      options={['نعم', 'لبعض الوظائف', 'لا']}
-      questionKey="transparent_pay_bands"
-    />
-
-    <QuestionCard
-      question="هل يتلقى المديرون تدريبًا على ممارسات التعويض العادل؟"
-      options={['نعم', 'بعض المديرين', 'لا']}
-      questionKey="manager_training"
-    />
-
-    {!isPageComplete && (
-      <View style={styles.validationMessage}>
-        <Text style={styles.validationText}>يرجى الإجابة على جميع الأسئلة قبل الانتقال إلى القسم التالي.</Text>
+        <Text style={styles.headerTitle}>تقييم المساواة بين الجنسين</Text>
+        <Text style={styles.headerSubtitle}>قيّم ممارسات منظمتك في مجالات رئيسية من المساواة بين الجنسين</Text>
+        <ProgressBar />
       </View>
-    )}
 
-    <View style={styles.buttonContainer}>
-      <TouchableOpacity style={styles.prevButton} onPress={goToPreviousPage}>
-        <Text style={styles.prevButtonText}>القسم السابق</Text>
-      </TouchableOpacity>
-      <TouchableOpacity 
-        style={[styles.nextButton, !isPageComplete && styles.nextButtonDisabled]} 
-        onPress={goToNextPage}
-        disabled={!isPageComplete}
-      >
-        <Text style={[styles.nextButtonText, !isPageComplete && styles.nextButtonTextDisabled]}>
-          القسم التالي
-        </Text>
-      </TouchableOpacity>
-    </View>
-  </ScrollView>
-</View>
+      <View style={styles.content}>
+        {/* التنقل الجانبي */}
+        <View style={styles.sidebar}>
+          <SectionNav />
+        </View>
 
+        {/* المحتوى الرئيسي */}
+        <ScrollView style={styles.mainContent}>
+          <View style={styles.contentHeader}>
+            <Text style={styles.contentTitle}>مقاييس الأداء</Text>
+            <Text style={styles.contentSubtitle}>بيانات كمية عن النساء في منظمتك</Text>
+          </View>
+
+          <TextInputQuestion
+            question="ما نسبة النساء اللواتي قدمن طلبات توظيف خلال الـ12 شهرًا الماضية؟"
+            questionKey="women_applied_percentage"
+            placeholder="أدخل النسبة المئوية (0-100)"
+          />
+
+          <TextInputQuestion
+            question="ما نسبة النساء اللواتي تم توظيفهن خلال الـ12 شهرًا الماضية؟"
+            questionKey="women_hired_percentage"
+            placeholder="أدخل النسبة المئوية (0-100)"
+          />
+
+          <TextInputQuestion
+            question="ما نسبة الترقيات التي حصلت عليها النساء خلال الـ12 شهرًا الماضية؟"
+            questionKey="women_promotions_percentage"
+            placeholder="أدخل النسبة المئوية (0-100)"
+          />
+
+          <TextInputQuestion
+            question="ما نسبة زيادات الرواتب التي حصلت عليها النساء خلال الـ12 شهرًا الماضية؟"
+            questionKey="women_salary_raises_percentage"
+            placeholder="أدخل النسبة المئوية (0-100)"
+          />
+
+          <TextInputQuestion
+            question="ما نسبة النساء في فريق القيادة (المستوى الإداري وما فوق)؟"
+            questionKey="women_leadership_percentage"
+            placeholder="أدخل النسبة المئوية (0-100)"
+          />
+
+          {!isPageComplete && (
+            <View style={styles.validationMessage}>
+              <Text style={styles.validationText}>يرجى الإجابة على جميع الأسئلة قبل الانتقال إلى القسم التالي.</Text>
+            </View>
+          )}
+
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.prevButton} onPress={goToPreviousPage}>
+              <Text style={styles.prevButtonText}>القسم السابق</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.nextButton, !isPageComplete && styles.nextButtonDisabled]}
+              onPress={goToNextPage}
+              disabled={!isPageComplete}
+            >
+              <Text style={[styles.nextButtonText, !isPageComplete && styles.nextButtonTextDisabled]}>
+                القسم التالي
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </View>
     </View>
-  )
+  );
 }
-if(if2 === 2)
-  {
+
+if (if2 === 2) {
   return (
     <View style={styles.container}>
-       <View style={styles.topRightContainer}>
-              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
-                <Text style={styles.menuIcon}>⋮</Text>
-              </TouchableOpacity>
-            
-              {showLangMenu && (
-                <View style={styles.languageMenu}>
-                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
-                    <Text style={styles.menuItem}>English</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
-                    <Text style={styles.menuItem}>العربية</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
-                    <Text style={styles.menuItem}>עברית</Text>
-                  </TouchableOpacity>
-                </View>
-              )}
-            </View>
-      {/* Header */}
-<View style={styles.header}>
-  <Text style={styles.headerTitle}>הערכת שוויון מגדרי</Text>
-  <Text style={styles.headerSubtitle}>הערך את נהלי הארגון שלך בתחומים מרכזיים של שוויון מגדרי</Text>
-  <ProgressBar2 />
-</View>
 
-<View style={styles.content}>
-  {/* Sidebar Navigation */}
-  <View style={styles.sidebar}>
-    <SectionNav2 />
-  </View>
-
-  {/* Main Content */}
-  <ScrollView style={styles.mainContent}>
-    <View style={styles.contentHeader}>
-      <Text style={styles.contentTitle}>שוויון בשכר</Text>
-      <Text style={styles.contentSubtitle}>סקור נהלי תגמול ופערים מגדריים בשכר</Text>
-    </View>
-
-    <QuestionCard
-      question="האם נערך סקר שכר מגדרי במהלך השנתיים האחרונות?"
-      options={['כן', 'לא']}
-      questionKey="pay_audit_conducted"
-    />
-
-    <QuestionCard
-      question="האם מתבצע תיקון שכר כאשר מתגלים פערים מגדריים?"
-      options={['תמיד', 'לפעמים', 'לעולם לא']}
-      questionKey="adjust_salaries"
-    />
-
-    <QuestionCard
-      question="האם שכר התחלתי מושווה בין נשים לגברים בתפקידים דומים?"
-      options={['כן', 'לא', 'לא יודע/ת']}
-      questionKey="starting_salaries_compared"
-    />
-
-    <QuestionCard
-      question="האם לעובדים יש גישה לטווחי שכר שקופים?"
-      options={['כן', 'בחלק מהתפקידים', 'לא']}
-      questionKey="transparent_pay_bands"
-    />
-
-    <QuestionCard
-      question="האם מנהלים מקבלים הכשרה בנושא תגמול שוויוני?"
-      options={['כן', 'חלק מהמנהלים', 'לא']}
-      questionKey="manager_training"
-    />
-
-    {!isPageComplete && (
-      <View style={styles.validationMessage}>
-        <Text style={styles.validationText}>אנא ענה/עני על כל השאלות לפני המעבר לסעיף הבא.</Text>
+      {/* כותרת */}
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>הערכת שוויון מגדרי</Text>
+        <Text style={styles.headerSubtitle}>הערך את נהלי הארגון שלך בתחומי שוויון מגדרי מרכזיים</Text>
+        <ProgressBar />
       </View>
-    )}
 
-    <View style={styles.buttonContainer}>
-      <TouchableOpacity style={styles.prevButton} onPress={goToPreviousPage}>
-        <Text style={styles.prevButtonText}>הסעיף הקודם</Text>
-      </TouchableOpacity>
-      <TouchableOpacity 
-        style={[styles.nextButton, !isPageComplete && styles.nextButtonDisabled]} 
-        onPress={goToNextPage}
-        disabled={!isPageComplete}
-      >
-        <Text style={[styles.nextButtonText, !isPageComplete && styles.nextButtonTextDisabled]}>
-          הסעיף הבא
-        </Text>
-      </TouchableOpacity>
-    </View>
-  </ScrollView>
-</View>
+      <View style={styles.content}>
+        {/* ניווט צדדי */}
+        <View style={styles.sidebar}>
+          <SectionNav />
+        </View>
 
+        {/* תוכן ראשי */}
+        <ScrollView style={styles.mainContent}>
+          <View style={styles.contentHeader}>
+            <Text style={styles.contentTitle}>מדדי ביצועים</Text>
+            <Text style={styles.contentSubtitle}>נתונים כמותיים על נשים בארגון שלך</Text>
+          </View>
+
+          <TextInputQuestion
+            question="מה אחוז הנשים שהגישו מועמדות למשרות ב-12 החודשים האחרונים?"
+            questionKey="women_applied_percentage"
+            placeholder="הזן אחוז (0-100)"
+          />
+
+          <TextInputQuestion
+            question="מה אחוז הנשים שנשכרו ב-12 החודשים האחרונים?"
+            questionKey="women_hired_percentage"
+            placeholder="הזן אחוז (0-100)"
+          />
+
+          <TextInputQuestion
+            question="מה אחוז הקידומים שניתנו לנשים ב-12 החודשים האחרונים?"
+            questionKey="women_promotions_percentage"
+            placeholder="הזן אחוז (0-100)"
+          />
+
+          <TextInputQuestion
+            question="מה אחוז העלאות השכר שניתנו לנשים ב-12 החודשים האחרונים?"
+            questionKey="women_salary_raises_percentage"
+            placeholder="הזן אחוז (0-100)"
+          />
+
+          <TextInputQuestion
+            question="מה אחוז הנשים בצוות ההנהלה (מדרגת מנהל ומעלה)?"
+            questionKey="women_leadership_percentage"
+            placeholder="הזן אחוז (0-100)"
+          />
+
+          {!isPageComplete && (
+            <View style={styles.validationMessage}>
+              <Text style={styles.validationText}>אנא ענה על כל השאלות לפני המעבר לסעיף הבא.</Text>
+            </View>
+          )}
+
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.prevButton} onPress={goToPreviousPage}>
+              <Text style={styles.prevButtonText}>סעיף קודם</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.nextButton, !isPageComplete && styles.nextButtonDisabled]}
+              onPress={goToNextPage}
+              disabled={!isPageComplete}
+            >
+              <Text style={[styles.nextButtonText, !isPageComplete && styles.nextButtonTextDisabled]}>
+                סעיף הבא
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </View>
     </View>
-  )
+  );
 }
+
 
 
 }

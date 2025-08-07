@@ -90,7 +90,7 @@ if(if2===0){
   );
 }
 
-if (if2 === 0) {
+if (if2 === 1) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>تسجيل دخول الشركة</Text>
@@ -122,7 +122,7 @@ if (if2 === 0) {
   );
 }
 
-if (if2 === 0) {
+if (if2 === 2){
   return (
     <View style={styles.container}>
       <Text style={styles.title}>כניסת חברה</Text>

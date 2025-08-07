@@ -35,10 +35,10 @@ export default function LandingPage() {
   };
 
   const handleUserSelection = () => {
-    router.push('/user/(tabs)/ ');
+    router.push('/user/(tabs)/UserDashboard');
   };
 
-if(if2 ===0 || if2 === 1 || if2 === 2) {
+if(if2 ===0 ) {
   return (
     <AnimatedImageBackground
       source={require('../assets/images/backpink.jpeg')}
