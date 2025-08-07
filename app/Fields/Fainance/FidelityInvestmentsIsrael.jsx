@@ -164,5 +164,33 @@ const styles = StyleSheet.create({
     color: '#334155',
     marginBottom: 4,
     lineHeight: 22,
-  },
+  },topRightContainer: {
+  position: 'absolute',
+  top: 10,
+  right: 10,
+  zIndex: 999,
+  alignItems: 'flex-end',
+},
+
+menuIcon: {
+  fontSize: 24,
+  padding: 5,
+},
+
+languageMenu: {
+  backgroundColor: '#fff',
+  borderRadius: 6,
+  padding: 8,
+  elevation: 4,
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.3,
+  shadowRadius: 4,
+},
+
+menuItem: {
+  paddingVertical: 6,
+  paddingHorizontal: 10,
+  fontSize: 16,
+},
 });

@@ -7,6 +7,7 @@ export default function GenderEquityAssessmentApp() {
   const [currentPage, setCurrentPage] = useState(0);
   const [allResponses, setAllResponses] = useState({});
   const [completedSections, setCompletedSections] = useState([]);
+  
 
   const pages = [
     { 
@@ -38,6 +39,75 @@ export default function GenderEquityAssessmentApp() {
     requiredQuestions: []
     }
   ];
+
+const pages1 = [
+  { 
+    component: HiringPractices, 
+    name: 'ممارسات التوظيف',
+    requiredQuestions: ['track_gender_breakdown', 'job_descriptions_audited', 'interview_panels', 'diversity_formal_goal', 'entry_roles_offered']
+  },
+  { 
+    component: PromotionAdvancement, 
+    name: 'الترقية والتقدم الوظيفي',
+    requiredQuestions: ['promotion_data_analyzed', 'leadership_development', 'mentoring_program', 'promotion_criteria', 'women_overlooked']
+  },
+  { 
+    component: PayEquity, 
+    name: 'الإنصاف في الأجور',
+    requiredQuestions: ['pay_audit_conducted', 'adjust_salaries', 'starting_salaries_compared', 'transparent_pay_bands', 'manager_training']
+  },
+  { 
+    component: PerformanceMetrics, 
+    name: 'مقاييس الأداء',
+    requiredQuestions: ['women_applied_percentage', 'women_hired_percentage', 'women_promotions_percentage', 'women_salary_raises_percentage', 'women_leadership_percentage']
+  },
+  { 
+    component: AdditionalConsiderations, 
+    name: 'اعتبارات إضافية',
+    requiredQuestions: ['parental_leave_policy', 'flexible_work_policies', 'employee_survey', 'bias_incidents_tracked', 'internal_champion']
+  },
+  {
+    component: GenderEquityAssesmentApp2,
+    name: 'النتائج',
+    requiredQuestions: []
+  }
+];
+
+
+const pages2 = [
+  { 
+    component: HiringPractices, 
+    name: 'נהלי גיוס',
+    requiredQuestions: ['track_gender_breakdown', 'job_descriptions_audited', 'interview_panels', 'diversity_formal_goal', 'entry_roles_offered']
+  },
+  { 
+    component: PromotionAdvancement, 
+    name: 'קידום והתקדמות מקצועית',
+    requiredQuestions: ['promotion_data_analyzed', 'leadership_development', 'mentoring_program', 'promotion_criteria', 'women_overlooked']
+  },
+  { 
+    component: PayEquity, 
+    name: 'שוויון בשכר',
+    requiredQuestions: ['pay_audit_conducted', 'adjust_salaries', 'starting_salaries_compared', 'transparent_pay_bands', 'manager_training']
+  },
+  { 
+    component: PerformanceMetrics, 
+    name: 'מדדי ביצועים',
+    requiredQuestions: ['women_applied_percentage', 'women_hired_percentage', 'women_promotions_percentage', 'women_salary_raises_percentage', 'women_leadership_percentage']
+  },
+  { 
+    component: AdditionalConsiderations, 
+    name: 'שיקולים נוספים',
+    requiredQuestions: ['parental_leave_policy', 'flexible_work_policies', 'employee_survey', 'bias_incidents_tracked', 'internal_champion']
+  },
+  {
+    component: GenderEquityAssesmentApp2,
+    name: 'תוצאות',
+    requiredQuestions: []
+  }
+];
+
+
 
   const navigateToPage = (pageIndex) => {
     setCurrentPage(pageIndex);
@@ -83,6 +153,26 @@ export default function GenderEquityAssessmentApp() {
     return completed;
   };
 
+  const getCompletedSectionsCount1 = () => {
+    let completed = 0;
+    for (let i = 0; i < pages1.length; i++) {
+      if (isPageComplete(i)) {
+        completed++;
+      }
+    }
+    return completed;
+  };
+
+  const getCompletedSectionsCount2 = () => {
+    let completed = 0;
+    for (let i = 0; i < pages2.length; i++) {
+      if (isPageComplete(i)) {
+        completed++;
+      }
+    }
+    return completed;
+  };
+
   const renderCurrentPage = () => {
     const CurrentPageComponent = pages[currentPage].component;
     return (
@@ -97,7 +187,11 @@ export default function GenderEquityAssessmentApp() {
         isPageComplete={isPageComplete(currentPage)}
         completedSections={completedSections}
         getCompletedSectionsCount={getCompletedSectionsCount}
+        getCompletedSectionsCount1={getCompletedSectionsCount1}
+        getCompletedSectionsCount2={getCompletedSectionsCount2}
         pages={pages}
+        pages1={pages1}
+        pages2={pages2}
       />
     );
   };
@@ -118,10 +212,13 @@ export function HiringPractices({
   updateGlobalResponses,
   isPageComplete,
   completedSections,
-  getCompletedSectionsCount,
-  pages
+  getCompletedSectionsCount,getCompletedSectionsCount1,getCompletedSectionsCount2,
+  pages,pages1,pages2
 }) {
   const [responses, setResponses] = useState(allResponses);
+  const [showLangMenu, setShowLangMenu] = useState(false);
+  const [if2, setIf2] = useState(0);
+
 
   const updateResponse = (questionKey, value) => {
     const newResponses = {
@@ -131,6 +228,8 @@ export function HiringPractices({
     setResponses(newResponses);
     updateGlobalResponses(newResponses);
   };
+
+
 
   const RadioButton = ({ selected, onPress, label }) => (
     <TouchableOpacity style={styles.radioContainer} onPress={onPress}>
@@ -157,6 +256,30 @@ export function HiringPractices({
 
   const ProgressBar = () => {
     const completedCount = getCompletedSectionsCount();
+    return (
+      <View style={styles.progressContainer}>
+        <Text style={styles.progressText}>{completedCount} of {totalPages} sections completed</Text>
+        <View style={styles.progressBar}>
+          <View style={[styles.progressFill, { width: `${(completedCount / totalPages) * 100}%` }]} />
+        </View>
+      </View>
+    );
+  };
+
+  const ProgressBar1 = () => {
+    const completedCount = getCompletedSectionsCount1();
+    return (
+      <View style={styles.progressContainer}>
+        <Text style={styles.progressText}>{completedCount} of {totalPages} </Text>
+        <View style={styles.progressBar}>
+          <View style={[styles.progressFill, { width: `${(completedCount / totalPages) * 100}%` }]} />
+        </View>
+      </View>
+    );
+  };
+
+  const ProgressBar2 = () => {
+    const completedCount = getCompletedSectionsCount2();
     return (
       <View style={styles.progressContainer}>
         <Text style={styles.progressText}>{completedCount} of {totalPages} sections completed</Text>
@@ -213,9 +336,101 @@ export function HiringPractices({
     </View>
   );
 
-  return (
+
+  const SectionNav1 = () => (
+    <View style={styles.sectionNav}>
+      <Text style={styles.sectionTitle}>Sections</Text>
+      
+      {pages1.map((page, index) => {
+        const status = getSectionStatus(index);
+        return (
+          <TouchableOpacity 
+            key={index}
+            style={[
+              styles.sectionItem, 
+              status === 'completed' && styles.sectionCompleted,
+              status === 'active' && styles.sectionActive
+            ]}
+            
+          >
+            <Text style={[
+              styles.sectionText,
+              status === 'completed' && styles.sectionCompletedText,
+              status === 'active' && styles.sectionActiveText
+            ]}>
+              {page.name}
+            </Text>
+            <Text style={[
+              styles.sectionInactiveBadge,
+              status === 'completed' && styles.sectionCompletedBadge,
+              status === 'active' && styles.sectionBadge
+            ]}>
+              {status === 'completed' ? '✓' : index + 1}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+
+  const SectionNav2 = () => (
+    <View style={styles.sectionNav}>
+      <Text style={styles.sectionTitle}>Sections</Text>
+      
+      {pages2.map((page, index) => {
+        const status = getSectionStatus(index);
+        return (
+          <TouchableOpacity 
+            key={index}
+            style={[
+              styles.sectionItem, 
+              status === 'completed' && styles.sectionCompleted,
+              status === 'active' && styles.sectionActive
+            ]}
+            
+          >
+            <Text style={[
+              styles.sectionText,
+              status === 'completed' && styles.sectionCompletedText,
+              status === 'active' && styles.sectionActiveText
+            ]}>
+              {page.name}
+            </Text>
+            <Text style={[
+              styles.sectionInactiveBadge,
+              status === 'completed' && styles.sectionCompletedBadge,
+              status === 'active' && styles.sectionBadge
+            ]}>
+              {status === 'completed' ? '✓' : index + 1}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+if(if2 === 0)
+  {return (
     <View style={styles.container}>
       {/* Header */}
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Gender Equity Assessment</Text>
         <Text style={styles.headerSubtitle}>Evaluate your organization's practices across key areas of gender equity</Text>
@@ -293,6 +508,210 @@ export function HiringPractices({
     </View>
   )
 }
+if(if2 === 1)
+  {return (
+    <View style={styles.container}>
+      {/* Header */}
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+      <View style={styles.header}>
+  <Text style={styles.headerTitle}>تقييم المساواة بين الجنسين</Text>
+  <Text style={styles.headerSubtitle}>قم بتقييم ممارسات مؤسستك في مجالات رئيسية من المساواة بين الجنسين</Text>
+  <ProgressBar1 />
+</View>
+
+<View style={styles.content}>
+  {/* Sidebar Navigation */}
+  <View style={styles.sidebar}>
+    <SectionNav1 />
+  </View>
+
+  {/* Main Content */}
+  <ScrollView style={styles.mainContent}>
+    <View style={styles.contentHeader}>
+      <Text style={styles.contentTitle}>ممارسات التوظيف</Text>
+      <Text style={styles.contentSubtitle}>قيّم العدالة والشفافية في عمليات التوظيف</Text>
+    </View>
+
+    <QuestionCard
+      question="هل تتابعون التوزيع حسب الجنس للمتقدمين في كل مرحلة من مراحل التوظيف؟"
+      options={['نعم', 'جزئيًا', 'لا', 'لست متأكدًا']}
+      questionKey="track_gender_breakdown"
+    />
+
+    <QuestionCard
+      question="هل يتم تدقيق الوصف الوظيفي للغة متحيزة جنسياً؟"
+      options={['دائمًا', 'أحيانًا', 'نادرًا', 'أبدًا']}
+      questionKey="job_descriptions_audited"
+    />
+
+    <QuestionCard
+      question="هل تضم لجان المقابلات امرأة واحدة على الأقل؟"
+      options={['دائمًا', 'أحيانًا', 'نادرًا', 'أبدًا']}
+      questionKey="interview_panels"
+    />
+
+    <QuestionCard
+      question="هل التنوع هدف رسمي له مؤشرات أداء؟"
+      options={['نعم', 'قيد التنفيذ', 'لا']}
+      questionKey="diversity_formal_goal"
+    />
+
+    <QuestionCard
+      question="هل يتم تقديم الأدوار المبدئية بشكل صريح للنساء؟"
+      options={['نعم', 'نخطط لذلك', 'لا']}
+      questionKey="entry_roles_offered"
+    />
+
+    {!isPageComplete && (
+      <View style={styles.validationMessage}>
+        <Text style={styles.validationText}>يرجى الإجابة على جميع الأسئلة قبل الانتقال إلى القسم التالي.</Text>
+      </View>
+    )}
+
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity 
+        style={[styles.prevButton, styles.prevButtonDisabled]} 
+        disabled={true}
+      >
+        <Text style={styles.prevButtonTextDisabled}>القسم السابق</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+        style={[styles.nextButton, !isPageComplete && styles.nextButtonDisabled]} 
+        onPress={goToNextPage}
+        disabled={!isPageComplete}
+      >
+        <Text style={[styles.nextButtonText, !isPageComplete && styles.nextButtonTextDisabled]}>
+          القسم التالي
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </ScrollView>
+</View>
+
+    </View>
+  )
+}
+
+if(if2 === 2)
+  {return (
+    <View style={styles.container}>
+      {/* Header */}
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+      <View style={styles.header}>
+  <Text style={styles.headerTitle}>הערכת שוויון מגדרי</Text>
+  <Text style={styles.headerSubtitle}>העריכו את מדיניות הארגון בתחומים המרכזיים של שוויון בין המינים</Text>
+  <ProgressBar2 />
+</View>
+
+<View style={styles.content}>
+  {/* Sidebar Navigation */}
+  <View style={styles.sidebar}>
+    <SectionNav2 />
+  </View>
+
+  {/* Main Content */}
+  <ScrollView style={styles.mainContent}>
+    <View style={styles.contentHeader}>
+      <Text style={styles.contentTitle}>נהלי גיוס</Text>
+      <Text style={styles.contentSubtitle}>העריכו את ההוגנות והשקיפות בתהליכי הגיוס</Text>
+    </View>
+
+    <QuestionCard
+      question="האם אתם עוקבים אחר הפילוח המגדרי של המועמדים בכל שלב בגיוס?"
+      options={['כן', 'חלקית', 'לא', 'לא בטוח/ה']}
+      questionKey="track_gender_breakdown"
+    />
+
+    <QuestionCard
+      question="האם מנותחים תיאורי משרות לשפה מוטה מגדרית?"
+      options={['תמיד', 'לפעמים', 'לעיתים נדירות', 'אף פעם לא']}
+      questionKey="job_descriptions_audited"
+    />
+
+    <QuestionCard
+      question="האם צוותי הראיונות כוללים לפחות אישה אחת?"
+      options={['תמיד', 'לפעמים', 'לעיתים נדירות', 'אף פעם לא']}
+      questionKey="interview_panels"
+    />
+
+    <QuestionCard
+      question="האם הגיוון הוא מטרה רשמית עם מדדי ביצוע (KPI)?"
+      options={['כן', 'בתהליך', 'לא']}
+      questionKey="diversity_formal_goal"
+    />
+
+    <QuestionCard
+      question="האם תפקידים התחלתיים מוצעים באופן יזום לנשים?"
+      options={['כן', 'בתכנון', 'לא']}
+      questionKey="entry_roles_offered"
+    />
+
+    {!isPageComplete && (
+      <View style={styles.validationMessage}>
+        <Text style={styles.validationText}>נא להשיב על כל השאלות לפני המעבר לחלק הבא.</Text>
+      </View>
+    )}
+
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity 
+        style={[styles.prevButton, styles.prevButtonDisabled]} 
+        disabled={true}
+      >
+        <Text style={styles.prevButtonTextDisabled}>החלק הקודם</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+        style={[styles.nextButton, !isPageComplete && styles.nextButtonDisabled]} 
+        onPress={goToNextPage}
+        disabled={!isPageComplete}
+      >
+        <Text style={[styles.nextButtonText, !isPageComplete && styles.nextButtonTextDisabled]}>
+          החלק הבא
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </ScrollView>
+</View>
+
+    </View>
+  )
+}
+}
 
 // PromotionAdvancement.js
 export function PromotionAdvancement({ 
@@ -305,10 +724,107 @@ export function PromotionAdvancement({
   updateGlobalResponses,
   isPageComplete,
   completedSections,
-  getCompletedSectionsCount,
-  pages
+  getCompletedSectionsCount,getCompletedSectionsCount1,getCompletedSectionsCount2,
+  pages,pages1,pages2
 }) {
   const [responses, setResponses] = useState(allResponses);
+  const [showLangMenu, setShowLangMenu] = useState(false);
+  const [if2, setIf2] = useState(0);
+
+const ProgressBar1 = () => {
+    const completedCount = getCompletedSectionsCount1();
+    return (
+      <View style={styles.progressContainer}>
+        <Text style={styles.progressText}>{completedCount} of {totalPages} </Text>
+        <View style={styles.progressBar}>
+          <View style={[styles.progressFill, { width: `${(completedCount / totalPages) * 100}%` }]} />
+        </View>
+      </View>
+    );
+  };
+
+  const ProgressBar2 = () => {
+    const completedCount = getCompletedSectionsCount2();
+    return (
+      <View style={styles.progressContainer}>
+        <Text style={styles.progressText}>{completedCount} of {totalPages} sections completed</Text>
+        <View style={styles.progressBar}>
+          <View style={[styles.progressFill, { width: `${(completedCount / totalPages) * 100}%` }]} />
+        </View>
+      </View>
+    );
+  };
+  const SectionNav1 = () => (
+    <View style={styles.sectionNav}>
+      <Text style={styles.sectionTitle}>Sections</Text>
+      
+      {pages1.map((page, index) => {
+        const status = getSectionStatus(index);
+        return (
+          <TouchableOpacity 
+            key={index}
+            style={[
+              styles.sectionItem, 
+              status === 'completed' && styles.sectionCompleted,
+              status === 'active' && styles.sectionActive
+            ]}
+            
+          >
+            <Text style={[
+              styles.sectionText,
+              status === 'completed' && styles.sectionCompletedText,
+              status === 'active' && styles.sectionActiveText
+            ]}>
+              {page.name}
+            </Text>
+            <Text style={[
+              styles.sectionInactiveBadge,
+              status === 'completed' && styles.sectionCompletedBadge,
+              status === 'active' && styles.sectionBadge
+            ]}>
+              {status === 'completed' ? '✓' : index + 1}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+
+  const SectionNav2 = () => (
+    <View style={styles.sectionNav}>
+      <Text style={styles.sectionTitle}>Sections</Text>
+      
+      {pages2.map((page, index) => {
+        const status = getSectionStatus(index);
+        return (
+          <TouchableOpacity 
+            key={index}
+            style={[
+              styles.sectionItem, 
+              status === 'completed' && styles.sectionCompleted,
+              status === 'active' && styles.sectionActive
+            ]}
+            
+          >
+            <Text style={[
+              styles.sectionText,
+              status === 'completed' && styles.sectionCompletedText,
+              status === 'active' && styles.sectionActiveText
+            ]}>
+              {page.name}
+            </Text>
+            <Text style={[
+              styles.sectionInactiveBadge,
+              status === 'completed' && styles.sectionCompletedBadge,
+              status === 'active' && styles.sectionBadge
+            ]}>
+              {status === 'completed' ? '✓' : index + 1}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
 
   const updateResponse = (questionKey, value) => {
     const newResponses = {
@@ -399,9 +915,28 @@ export function PromotionAdvancement({
       })}
     </View>
   );
-
-  return (
+if(if2 === 0)
+  {return (
     <View style={styles.container}>
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Gender Equity Assessment</Text>
@@ -477,6 +1012,203 @@ export function PromotionAdvancement({
     </View>
   )
 }
+if(if2 === 1)
+  {return (
+    <View style={styles.container}>
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+      {/* Header */}
+      <View style={styles.header}>
+  <Text style={styles.headerTitle}>تقييم المساواة بين الجنسين</Text>
+  <Text style={styles.headerSubtitle}>قيّم ممارسات مؤسستك في المجالات الرئيسية للمساواة بين الجنسين</Text>
+  <ProgressBar1 />
+</View>
+
+<View style={styles.content}>
+  {/* Sidebar Navigation */}
+  <View style={styles.sidebar}>
+    <SectionNav1/>
+  </View>
+
+  {/* Main Content */}
+  <ScrollView style={styles.mainContent}>
+    <View style={styles.contentHeader}>
+      <Text style={styles.contentTitle}>الترقيات والتقدم المهني</Text>
+      <Text style={styles.contentSubtitle}>قيّم مدى العدالة في فرص التقدم الوظيفي</Text>
+    </View>
+
+    <QuestionCard
+      question="هل يتم تحليل بيانات الترقيات حسب النوع الاجتماعي بشكل منتظم؟"
+      options={['نعم', 'أحياناً', 'لا', 'غير متأكد/ة']}
+      questionKey="promotion_data_analyzed"
+    />
+
+    <QuestionCard
+      question="هل يتم تمثيل النساء بشكل متساوٍ في برامج تطوير القيادة؟"
+      options={['نعم', 'إلى حد ما', 'لا']}
+      questionKey="leadership_development"
+    />
+
+    <QuestionCard
+      question="هل يوجد برنامج رسمي للإرشاد أو الرعاية للموظفات؟"
+      options={['نعم', 'غير رسمي', 'لا']}
+      questionKey="mentoring_program"
+    />
+
+    <QuestionCard
+      question="هل معايير الترقية شفافة وموحدة عبر الأدوار المختلفة؟"
+      options={['نعم', 'جزئياً', 'لا']}
+      questionKey="promotion_criteria"
+    />
+
+    <QuestionCard
+      question="هل أبلغت النساء عن شعورهن بالتجاهل أو الاستبعاد في المراجعات الداخلية؟"
+      options={['نعم', 'أحياناً', 'نادراً', 'أبداً']}
+      questionKey="women_overlooked"
+    />
+
+    {!isPageComplete && (
+      <View style={styles.validationMessage}>
+        <Text style={styles.validationText}>يرجى الإجابة على جميع الأسئلة قبل الانتقال إلى القسم التالي.</Text>
+      </View>
+    )}
+
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity style={styles.prevButton} onPress={goToPreviousPage}>
+        <Text style={styles.prevButtonText}>القسم السابق</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+        style={[styles.nextButton, !isPageComplete && styles.nextButtonDisabled]} 
+        onPress={goToNextPage}
+        disabled={!isPageComplete}
+      >
+        <Text style={[styles.nextButtonText, !isPageComplete && styles.nextButtonTextDisabled]}>
+          القسم التالي
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </ScrollView>
+</View>
+
+    </View>
+  )
+}
+if(if2 === 2)
+  {return (
+    <View style={styles.container}>
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+      {/* Header */}
+      <View style={styles.header}>
+  <Text style={styles.headerTitle}>הערכת שוויון מגדרי</Text>
+  <Text style={styles.headerSubtitle}>הערך את נהלי הארגון בתחומים המרכזיים של שוויון מגדרי</Text>
+  <ProgressBar2 />
+</View>
+
+<View style={styles.content}>
+  {/* Sidebar Navigation */}
+  <View style={styles.sidebar}>
+    <SectionNav2 />
+  </View>
+
+  {/* Main Content */}
+  <ScrollView style={styles.mainContent}>
+    <View style={styles.contentHeader}>
+      <Text style={styles.contentTitle}>קידום והתפתחות מקצועית</Text>
+      <Text style={styles.contentSubtitle}>הערך את שוויון ההזדמנויות לקידום מקצועי</Text>
+    </View>
+
+    <QuestionCard
+      question="האם נתוני הקידום מפורקים לפי מגדר ומנותחים באופן קבוע?"
+      options={['כן', 'לפעמים', 'לא', 'לא בטוח/ה']}
+      questionKey="promotion_data_analyzed"
+    />
+
+    <QuestionCard
+      question="האם נשים מיוצגות באופן שווה בתוכניות לפיתוח מנהיגות?"
+      options={['כן', 'באופן חלקי', 'לא']}
+      questionKey="leadership_development"
+    />
+
+    <QuestionCard
+      question="האם קיים תוכנית רשמית לחונכות או חסות עבור נשים בעבודה?"
+      options={['כן', 'בלתי פורמלי', 'לא']}
+      questionKey="mentoring_program"
+    />
+
+    <QuestionCard
+      question="האם קריטריוני הקידום שקופים ומאוחדים בכל התפקידים?"
+      options={['כן', 'חלקית', 'לא']}
+      questionKey="promotion_criteria"
+    />
+
+    <QuestionCard
+      question="האם נשים דיווחו על תחושת הדרה או פספוס בהערכות פנימיות?"
+      options={['כן', 'לפעמים', 'לעיתים נדירות', 'אף פעם']}
+      questionKey="women_overlooked"
+    />
+
+    {!isPageComplete && (
+      <View style={styles.validationMessage}>
+        <Text style={styles.validationText}>נא לענות על כל השאלות לפני המעבר לסעיף הבא.</Text>
+      </View>
+    )}
+
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity style={styles.prevButton} onPress={goToPreviousPage}>
+        <Text style={styles.prevButtonText}>סעיף קודם</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+        style={[styles.nextButton, !isPageComplete && styles.nextButtonDisabled]} 
+        onPress={goToNextPage}
+        disabled={!isPageComplete}
+      >
+        <Text style={[styles.nextButtonText, !isPageComplete && styles.nextButtonTextDisabled]}>
+          סעיף הבא
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </ScrollView>
+</View>
+
+    </View>
+  )
+}
+}
 
 export function PayEquity({ 
   currentPage, 
@@ -488,10 +1220,13 @@ export function PayEquity({
   updateGlobalResponses,
   isPageComplete,
   completedSections,
-  getCompletedSectionsCount,
-  pages
+  getCompletedSectionsCount,getCompletedSectionsCount1,getCompletedSectionsCount2,
+  pages,pages1,pages2
 }) {
   const [responses, setResponses] = useState(allResponses);
+  const [showLangMenu, setShowLangMenu] = useState(false);
+  const [if2, setIf2] = useState(0);
+
 
   const updateResponse = (questionKey, value) => {
     const newResponses = {
@@ -524,6 +1259,103 @@ export function PayEquity({
       ))}
     </View>
   );
+
+
+  const ProgressBar1 = () => {
+    const completedCount = getCompletedSectionsCount1();
+    return (
+      <View style={styles.progressContainer}>
+        <Text style={styles.progressText}>{completedCount} of {totalPages} </Text>
+        <View style={styles.progressBar}>
+          <View style={[styles.progressFill, { width: `${(completedCount / totalPages) * 100}%` }]} />
+        </View>
+      </View>
+    );
+  };
+
+  const ProgressBar2 = () => {
+    const completedCount = getCompletedSectionsCount2();
+    return (
+      <View style={styles.progressContainer}>
+        <Text style={styles.progressText}>{completedCount} of {totalPages} sections completed</Text>
+        <View style={styles.progressBar}>
+          <View style={[styles.progressFill, { width: `${(completedCount / totalPages) * 100}%` }]} />
+        </View>
+      </View>
+    );
+  };
+  const SectionNav1 = () => (
+    <View style={styles.sectionNav}>
+      <Text style={styles.sectionTitle}>Sections</Text>
+      
+      {pages1.map((page, index) => {
+        const status = getSectionStatus(index);
+        return (
+          <TouchableOpacity 
+            key={index}
+            style={[
+              styles.sectionItem, 
+              status === 'completed' && styles.sectionCompleted,
+              status === 'active' && styles.sectionActive
+            ]}
+            
+          >
+            <Text style={[
+              styles.sectionText,
+              status === 'completed' && styles.sectionCompletedText,
+              status === 'active' && styles.sectionActiveText
+            ]}>
+              {page.name}
+            </Text>
+            <Text style={[
+              styles.sectionInactiveBadge,
+              status === 'completed' && styles.sectionCompletedBadge,
+              status === 'active' && styles.sectionBadge
+            ]}>
+              {status === 'completed' ? '✓' : index + 1}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+
+  const SectionNav2 = () => (
+    <View style={styles.sectionNav}>
+      <Text style={styles.sectionTitle}>Sections</Text>
+      
+      {pages2.map((page, index) => {
+        const status = getSectionStatus(index);
+        return (
+          <TouchableOpacity 
+            key={index}
+            style={[
+              styles.sectionItem, 
+              status === 'completed' && styles.sectionCompleted,
+              status === 'active' && styles.sectionActive
+            ]}
+            
+          >
+            <Text style={[
+              styles.sectionText,
+              status === 'completed' && styles.sectionCompletedText,
+              status === 'active' && styles.sectionActiveText
+            ]}>
+              {page.name}
+            </Text>
+            <Text style={[
+              styles.sectionInactiveBadge,
+              status === 'completed' && styles.sectionCompletedBadge,
+              status === 'active' && styles.sectionBadge
+            ]}>
+              {status === 'completed' ? '✓' : index + 1}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+
 
   const ProgressBar = () => {
     const completedCount = getCompletedSectionsCount();
@@ -581,9 +1413,29 @@ export function PayEquity({
       })}
     </View>
   );
-
+if(if2 === 0)
+  { 
   return (
     <View style={styles.container}>
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Gender Equity Assessment</Text>
@@ -659,6 +1511,206 @@ export function PayEquity({
     </View>
   )
 }
+if(if2 === 1)
+  { 
+  return (
+    <View style={styles.container}>
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+      {/* Header */}
+      <View style={styles.header}>
+  <Text style={styles.headerTitle}>تقييم المساواة بين الجنسين</Text>
+  <Text style={styles.headerSubtitle}>قيّم ممارسات مؤسستك في المجالات الأساسية للمساواة بين الجنسين</Text>
+  <ProgressBar1 />
+</View>
+
+<View style={styles.content}>
+  {/* Sidebar Navigation */}
+  <View style={styles.sidebar}>
+    <SectionNav1 />
+  </View>
+
+  {/* Main Content */}
+  <ScrollView style={styles.mainContent}>
+    <View style={styles.contentHeader}>
+      <Text style={styles.contentTitle}>المساواة في الأجور</Text>
+      <Text style={styles.contentSubtitle}>مراجعة ممارسات التعويض والفجوات في الأجور بين الجنسين</Text>
+    </View>
+
+    <QuestionCard
+      question="هل تم إجراء تدقيق في الأجور حسب الجنس خلال العامين الماضيين؟"
+      options={['نعم', 'لا']}
+      questionKey="pay_audit_conducted"
+    />
+
+    <QuestionCard
+      question="هل تقوم بتعديل الرواتب إذا تم العثور على فجوات قائمة على الجنس؟"
+      options={['دائمًا', 'أحيانًا', 'أبدًا']}
+      questionKey="adjust_salaries"
+    />
+
+    <QuestionCard
+      question="هل تتم مقارنة الرواتب الابتدائية بين الرجال والنساء في الأدوار المشابهة؟"
+      options={['نعم', 'لا', 'لا أعرف']}
+      questionKey="starting_salaries_compared"
+    />
+
+    <QuestionCard
+      question="هل يمكن للموظفين الوصول إلى نطاقات رواتب شفافة؟"
+      options={['نعم', 'لبعض الوظائف', 'لا']}
+      questionKey="transparent_pay_bands"
+    />
+
+    <QuestionCard
+      question="هل يتلقى المديرون تدريبًا على ممارسات التعويض العادلة؟"
+      options={['نعم', 'بعض المديرين', 'لا']}
+      questionKey="manager_training"
+    />
+
+    {!isPageComplete && (
+      <View style={styles.validationMessage}>
+        <Text style={styles.validationText}>يرجى الإجابة على جميع الأسئلة قبل الانتقال إلى القسم التالي.</Text>
+      </View>
+    )}
+
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity style={styles.prevButton} onPress={goToPreviousPage}>
+        <Text style={styles.prevButtonText}>القسم السابق</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+        style={[styles.nextButton, !isPageComplete && styles.nextButtonDisabled]} 
+        onPress={goToNextPage}
+        disabled={!isPageComplete}
+      >
+        <Text style={[styles.nextButtonText, !isPageComplete && styles.nextButtonTextDisabled]}>
+          القسم التالي
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </ScrollView>
+</View>
+
+    </View>
+  )
+}
+if(if2 === 2)
+  { 
+  return (
+    <View style={styles.container}>
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+      {/* Header */}
+      <View style={styles.header}>
+  <Text style={styles.headerTitle}>הערכת שוויון מגדרי</Text>
+  <Text style={styles.headerSubtitle}>הערך את נהלי הארגון שלך בתחומים מרכזיים של שוויון מגדרי</Text>
+  <ProgressBar2 />
+</View>
+
+<View style={styles.content}>
+  {/* Sidebar Navigation */}
+  <View style={styles.sidebar}>
+    <SectionNav2 />
+  </View>
+
+  {/* Main Content */}
+  <ScrollView style={styles.mainContent}>
+    <View style={styles.contentHeader}>
+      <Text style={styles.contentTitle}>שוויון בשכר</Text>
+      <Text style={styles.contentSubtitle}>סקור נהלי תגמול ופערים מגדריים בשכר</Text>
+    </View>
+
+    <QuestionCard
+      question="האם נערך סקר שכר מגדרי במהלך השנתיים האחרונות?"
+      options={['כן', 'לא']}
+      questionKey="pay_audit_conducted"
+    />
+
+    <QuestionCard
+      question="האם מתבצע תיקון שכר כאשר מתגלים פערים מגדריים?"
+      options={['תמיד', 'לפעמים', 'לעולם לא']}
+      questionKey="adjust_salaries"
+    />
+
+    <QuestionCard
+      question="האם שכר התחלתי מושווה בין נשים לגברים בתפקידים דומים?"
+      options={['כן', 'לא', 'לא יודע/ת']}
+      questionKey="starting_salaries_compared"
+    />
+
+    <QuestionCard
+      question="האם לעובדים יש גישה לטווחי שכר שקופים?"
+      options={['כן', 'בחלק מהתפקידים', 'לא']}
+      questionKey="transparent_pay_bands"
+    />
+
+    <QuestionCard
+      question="האם מנהלים מקבלים הכשרה בנושא תגמול שוויוני?"
+      options={['כן', 'חלק מהמנהלים', 'לא']}
+      questionKey="manager_training"
+    />
+
+    {!isPageComplete && (
+      <View style={styles.validationMessage}>
+        <Text style={styles.validationText}>אנא ענה/עני על כל השאלות לפני המעבר לסעיף הבא.</Text>
+      </View>
+    )}
+
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity style={styles.prevButton} onPress={goToPreviousPage}>
+        <Text style={styles.prevButtonText}>הסעיף הקודם</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+        style={[styles.nextButton, !isPageComplete && styles.nextButtonDisabled]} 
+        onPress={goToNextPage}
+        disabled={!isPageComplete}
+      >
+        <Text style={[styles.nextButtonText, !isPageComplete && styles.nextButtonTextDisabled]}>
+          הסעיף הבא
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </ScrollView>
+</View>
+
+    </View>
+  )
+}
+
+}
 
 
 export function PerformanceMetrics({ 
@@ -671,10 +1723,109 @@ export function PerformanceMetrics({
   updateGlobalResponses,
   isPageComplete,
   completedSections,
-  getCompletedSectionsCount,
-  pages
+  getCompletedSectionsCount,getCompletedSectionsCount1,getCompletedSectionsCount2,
+  pages,pages1,pages2
 }) {
   const [responses, setResponses] = useState(allResponses);
+const [showLangMenu, setShowLangMenu] = useState(false);
+  const [if2, setIf2] = useState(0);
+
+const ProgressBar1 = () => {
+    const completedCount = getCompletedSectionsCount1();
+    return (
+      <View style={styles.progressContainer}>
+        <Text style={styles.progressText}>{completedCount} of {totalPages} </Text>
+        <View style={styles.progressBar}>
+          <View style={[styles.progressFill, { width: `${(completedCount / totalPages) * 100}%` }]} />
+        </View>
+      </View>
+    );
+  };
+
+  const ProgressBar2 = () => {
+    const completedCount = getCompletedSectionsCount2();
+    return (
+      <View style={styles.progressContainer}>
+        <Text style={styles.progressText}>{completedCount} of {totalPages} sections completed</Text>
+        <View style={styles.progressBar}>
+          <View style={[styles.progressFill, { width: `${(completedCount / totalPages) * 100}%` }]} />
+        </View>
+      </View>
+    );
+  };
+
+
+  const SectionNav1 = () => (
+    <View style={styles.sectionNav}>
+      <Text style={styles.sectionTitle}>Sections</Text>
+      
+      {pages1.map((page, index) => {
+        const status = getSectionStatus(index);
+        return (
+          <TouchableOpacity 
+            key={index}
+            style={[
+              styles.sectionItem, 
+              status === 'completed' && styles.sectionCompleted,
+              status === 'active' && styles.sectionActive
+            ]}
+            
+          >
+            <Text style={[
+              styles.sectionText,
+              status === 'completed' && styles.sectionCompletedText,
+              status === 'active' && styles.sectionActiveText
+            ]}>
+              {page.name}
+            </Text>
+            <Text style={[
+              styles.sectionInactiveBadge,
+              status === 'completed' && styles.sectionCompletedBadge,
+              status === 'active' && styles.sectionBadge
+            ]}>
+              {status === 'completed' ? '✓' : index + 1}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+
+  const SectionNav2 = () => (
+    <View style={styles.sectionNav}>
+      <Text style={styles.sectionTitle}>Sections</Text>
+      
+      {pages2.map((page, index) => {
+        const status = getSectionStatus(index);
+        return (
+          <TouchableOpacity 
+            key={index}
+            style={[
+              styles.sectionItem, 
+              status === 'completed' && styles.sectionCompleted,
+              status === 'active' && styles.sectionActive
+            ]}
+            
+          >
+            <Text style={[
+              styles.sectionText,
+              status === 'completed' && styles.sectionCompletedText,
+              status === 'active' && styles.sectionActiveText
+            ]}>
+              {page.name}
+            </Text>
+            <Text style={[
+              styles.sectionInactiveBadge,
+              status === 'completed' && styles.sectionCompletedBadge,
+              status === 'active' && styles.sectionBadge
+            ]}>
+              {status === 'completed' ? '✓' : index + 1}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
 
   const updateResponse = (questionKey, value) => {
     const numericValue = value.replace(/[^0-9]/g, '');
@@ -766,9 +1917,29 @@ export function PerformanceMetrics({
       })}
     </View>
   );
-
+if(if2 === 0)
+  {
   return (
     <View style={styles.container}>
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Gender Equity Assessment</Text>
@@ -844,6 +2015,207 @@ export function PerformanceMetrics({
     </View>
   )
 }
+if(if2 === 1)
+  {
+  return (
+    <View style={styles.container}>
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+      {/* Header */}
+      <View style={styles.header}>
+  <Text style={styles.headerTitle}>تقييم المساواة بين الجنسين</Text>
+  <Text style={styles.headerSubtitle}>قيّم ممارسات مؤسستك في المجالات الرئيسية للمساواة بين الجنسين</Text>
+  <ProgressBar1/>
+</View>
+
+<View style={styles.content}>
+  {/* Sidebar Navigation */}
+  <View style={styles.sidebar}>
+    <SectionNav1/>
+  </View>
+
+  {/* Main Content */}
+  <ScrollView style={styles.mainContent}>
+    <View style={styles.contentHeader}>
+      <Text style={styles.contentTitle}>الإنصاف في الأجور</Text>
+      <Text style={styles.contentSubtitle}>راجع ممارسات التعويضات والفجوات في الأجور بين الجنسين</Text>
+    </View>
+
+    <QuestionCard
+      question="هل تم إجراء تدقيق على الأجور حسب النوع الاجتماعي خلال العامين الماضيين؟"
+      options={['نعم', 'لا']}
+      questionKey="pay_audit_conducted"
+    />
+
+    <QuestionCard
+      question="هل تقومون بتعديل الرواتب في حال وجود فجوات قائمة على النوع الاجتماعي؟"
+      options={['دائمًا', 'أحيانًا', 'أبدًا']}
+      questionKey="adjust_salaries"
+    />
+
+    <QuestionCard
+      question="هل تتم مقارنة الرواتب الابتدائية للنساء والرجال في نفس الأدوار؟"
+      options={['نعم', 'لا', 'لا أعلم']}
+      questionKey="starting_salaries_compared"
+    />
+
+    <QuestionCard
+      question="هل لدى الموظفين إمكانية الوصول إلى نطاقات الأجور الشفافة؟"
+      options={['نعم', 'لبعض الوظائف', 'لا']}
+      questionKey="transparent_pay_bands"
+    />
+
+    <QuestionCard
+      question="هل يتلقى المديرون تدريبًا على ممارسات التعويض العادل؟"
+      options={['نعم', 'بعض المديرين', 'لا']}
+      questionKey="manager_training"
+    />
+
+    {!isPageComplete && (
+      <View style={styles.validationMessage}>
+        <Text style={styles.validationText}>يرجى الإجابة على جميع الأسئلة قبل الانتقال إلى القسم التالي.</Text>
+      </View>
+    )}
+
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity style={styles.prevButton} onPress={goToPreviousPage}>
+        <Text style={styles.prevButtonText}>القسم السابق</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+        style={[styles.nextButton, !isPageComplete && styles.nextButtonDisabled]} 
+        onPress={goToNextPage}
+        disabled={!isPageComplete}
+      >
+        <Text style={[styles.nextButtonText, !isPageComplete && styles.nextButtonTextDisabled]}>
+          القسم التالي
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </ScrollView>
+</View>
+
+    </View>
+  )
+}
+if(if2 === 2)
+  {
+  return (
+    <View style={styles.container}>
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+      {/* Header */}
+<View style={styles.header}>
+  <Text style={styles.headerTitle}>הערכת שוויון מגדרי</Text>
+  <Text style={styles.headerSubtitle}>הערך את נהלי הארגון שלך בתחומים מרכזיים של שוויון מגדרי</Text>
+  <ProgressBar2 />
+</View>
+
+<View style={styles.content}>
+  {/* Sidebar Navigation */}
+  <View style={styles.sidebar}>
+    <SectionNav2 />
+  </View>
+
+  {/* Main Content */}
+  <ScrollView style={styles.mainContent}>
+    <View style={styles.contentHeader}>
+      <Text style={styles.contentTitle}>שוויון בשכר</Text>
+      <Text style={styles.contentSubtitle}>סקור נהלי תגמול ופערים מגדריים בשכר</Text>
+    </View>
+
+    <QuestionCard
+      question="האם נערך סקר שכר מגדרי במהלך השנתיים האחרונות?"
+      options={['כן', 'לא']}
+      questionKey="pay_audit_conducted"
+    />
+
+    <QuestionCard
+      question="האם מתבצע תיקון שכר כאשר מתגלים פערים מגדריים?"
+      options={['תמיד', 'לפעמים', 'לעולם לא']}
+      questionKey="adjust_salaries"
+    />
+
+    <QuestionCard
+      question="האם שכר התחלתי מושווה בין נשים לגברים בתפקידים דומים?"
+      options={['כן', 'לא', 'לא יודע/ת']}
+      questionKey="starting_salaries_compared"
+    />
+
+    <QuestionCard
+      question="האם לעובדים יש גישה לטווחי שכר שקופים?"
+      options={['כן', 'בחלק מהתפקידים', 'לא']}
+      questionKey="transparent_pay_bands"
+    />
+
+    <QuestionCard
+      question="האם מנהלים מקבלים הכשרה בנושא תגמול שוויוני?"
+      options={['כן', 'חלק מהמנהלים', 'לא']}
+      questionKey="manager_training"
+    />
+
+    {!isPageComplete && (
+      <View style={styles.validationMessage}>
+        <Text style={styles.validationText}>אנא ענה/עני על כל השאלות לפני המעבר לסעיף הבא.</Text>
+      </View>
+    )}
+
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity style={styles.prevButton} onPress={goToPreviousPage}>
+        <Text style={styles.prevButtonText}>הסעיף הקודם</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+        style={[styles.nextButton, !isPageComplete && styles.nextButtonDisabled]} 
+        onPress={goToNextPage}
+        disabled={!isPageComplete}
+      >
+        <Text style={[styles.nextButtonText, !isPageComplete && styles.nextButtonTextDisabled]}>
+          הסעיף הבא
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </ScrollView>
+</View>
+
+    </View>
+  )
+}
+
+
+}
 
 
 
@@ -858,14 +2230,110 @@ export function AdditionalConsiderations({
   updateGlobalResponses,
   isPageComplete,
   completedSections,
-  getCompletedSectionsCount,
-  pages
+  getCompletedSectionsCount,getCompletedSectionsCount1,getCompletedSectionsCount2,
+  pages,pages1,pages2
 }) {
   const [responses, setResponses] = useState(allResponses);
-
+  const [showLangMenu, setShowLangMenu] = useState(false);
+  const [if2, setIf2] = useState(0);
  
 
-  
+  const SectionNav1 = () => (
+    <View style={styles.sectionNav}>
+      <Text style={styles.sectionTitle}>Sections</Text>
+      
+      {pages1.map((page, index) => {
+        const status = getSectionStatus(index);
+        return (
+          <TouchableOpacity 
+            key={index}
+            style={[
+              styles.sectionItem, 
+              status === 'completed' && styles.sectionCompleted,
+              status === 'active' && styles.sectionActive
+            ]}
+            
+          >
+            <Text style={[
+              styles.sectionText,
+              status === 'completed' && styles.sectionCompletedText,
+              status === 'active' && styles.sectionActiveText
+            ]}>
+              {page.name}
+            </Text>
+            <Text style={[
+              styles.sectionInactiveBadge,
+              status === 'completed' && styles.sectionCompletedBadge,
+              status === 'active' && styles.sectionBadge
+            ]}>
+              {status === 'completed' ? '✓' : index + 1}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+
+
+  const ProgressBar1 = () => {
+    const completedCount = getCompletedSectionsCount1();
+    return (
+      <View style={styles.progressContainer}>
+        <Text style={styles.progressText}>{completedCount} of {totalPages} </Text>
+        <View style={styles.progressBar}>
+          <View style={[styles.progressFill, { width: `${(completedCount / totalPages) * 100}%` }]} />
+        </View>
+      </View>
+    );
+  };
+
+  const ProgressBar2 = () => {
+    const completedCount = getCompletedSectionsCount2();
+    return (
+      <View style={styles.progressContainer}>
+        <Text style={styles.progressText}>{completedCount} of {totalPages} sections completed</Text>
+        <View style={styles.progressBar}>
+          <View style={[styles.progressFill, { width: `${(completedCount / totalPages) * 100}%` }]} />
+        </View>
+      </View>
+    );
+  };
+
+  const SectionNav2 = () => (
+    <View style={styles.sectionNav}>
+      <Text style={styles.sectionTitle}>Sections</Text>
+      
+      {pages2.map((page, index) => {
+        const status = getSectionStatus(index);
+        return (
+          <TouchableOpacity 
+            key={index}
+            style={[
+              styles.sectionItem, 
+              status === 'completed' && styles.sectionCompleted,
+              status === 'active' && styles.sectionActive
+            ]}
+            
+          >
+            <Text style={[
+              styles.sectionText,
+              status === 'completed' && styles.sectionCompletedText,
+              status === 'active' && styles.sectionActiveText
+            ]}>
+              {page.name}
+            </Text>
+            <Text style={[
+              styles.sectionInactiveBadge,
+              status === 'completed' && styles.sectionCompletedBadge,
+              status === 'active' && styles.sectionBadge
+            ]}>
+              {status === 'completed' ? '✓' : index + 1}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
 
   const updateResponse = (questionKey, value) => {
     const newResponses = {
@@ -984,9 +2452,29 @@ export function AdditionalConsiderations({
     
     alert(`Assessment Complete! \n\nYour Gender Equity Score: ${percentage}%\n\nThank you for completing the Gender Equity Assessment. Consider reviewing areas where you scored lower to improve your organization's gender equity practices.`);
   };
-
+if(if2 === 0)
+  {
   return (
     <View style={styles.container}>
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Gender Equity Assessment</Text>
@@ -1062,6 +2550,205 @@ export function AdditionalConsiderations({
     </View>
   )
 }
+if(if2 === 1)
+  {
+  return (
+    <View style={styles.container}>
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+      {/* Header */}
+      <View style={styles.header}>
+  <Text style={styles.headerTitle}>تقييم المساواة بين الجنسين</Text>
+  <Text style={styles.headerSubtitle}>قيّم ممارسات مؤسستك في المجالات الرئيسية للمساواة بين الجنسين</Text>
+  <ProgressBar1 />
+</View>
+
+<View style={styles.content}>
+  {/* Sidebar Navigation */}
+  <View style={styles.sidebar}>
+    <SectionNav1 />
+  </View>
+
+  {/* Main Content */}
+  <ScrollView style={styles.mainContent}>
+    <View style={styles.contentHeader}>
+      <Text style={styles.contentTitle}>اعتبارات إضافية</Text>
+      <Text style={styles.contentSubtitle}>افحص ثقافة مكان العمل وأنظمة الدعم</Text>
+    </View>
+
+    <QuestionCard
+      question="هل سياسة إجازة الوالدين تفي بالحد الأدنى القانوني الوطني أو تتجاوزه؟"
+      options={['نعم', 'تفي', 'أقل', 'لست متأكدًا']}
+      questionKey="parental_leave_policy"
+    />
+
+    <QuestionCard
+      question="هل سياسات العمل المرنة متاحة ومشجعة بالتساوي لجميع الفئات؟"
+      options={['نعم', 'بشكل غير رسمي', 'لا']}
+      questionKey="flexible_work_policies"
+    />
+
+    <QuestionCard
+      question="هل تم إجراء استطلاع للموظفين حول تجربتهم مع المساواة بين الجنسين؟"
+      options={['نعم', 'قيد التخطيط', 'لا']}
+      questionKey="employee_survey"
+    />
+
+    <QuestionCard
+      question="هل يتم تتبع ومعالجة حوادث التحيز أو التمييز الجنسي بشكل رسمي؟"
+      options={['دائمًا', 'أحيانًا', 'نادراً', 'أبدًا']}
+      questionKey="bias_incidents_tracked"
+    />
+
+    <QuestionCard
+      question="هل هناك جهة أو فريق داخلي مسؤول عن جهود المساواة بين الجنسين؟"
+      options={['نعم', 'دور غير رسمي', 'لا']}
+      questionKey="internal_champion"
+    />
+
+    {!isPageComplete && (
+      <View style={styles.validationMessage}>
+        <Text style={styles.validationText}>يرجى الإجابة على جميع الأسئلة قبل إكمال التقييم.</Text>
+      </View>
+    )}
+
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity style={styles.prevButton} onPress={goToPreviousPage}>
+        <Text style={styles.prevButtonText}>القسم السابق</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+        style={[styles.completeButton, !isPageComplete && styles.completeButtonDisabled]} 
+        onPress={goToNextPage}
+        disabled={!isPageComplete}
+      >
+        <Text style={[styles.completeButtonText, !isPageComplete && styles.completeButtonTextDisabled]}>
+          إكمال التقييم
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </ScrollView>
+</View>
+
+    </View>
+  )
+}
+if(if2 === 2)
+  {
+  return (
+    <View style={styles.container}>
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+      {/* Header */}
+<View style={styles.header}>
+  <Text style={styles.headerTitle}>הערכת שוויון מגדרי</Text>
+  <Text style={styles.headerSubtitle}>הערך את נהלי הארגון שלך בתחומים מרכזיים של שוויון מגדרי</Text>
+  <ProgressBar2 />
+</View>
+
+<View style={styles.content}>
+  {/* Sidebar Navigation */}
+  <View style={styles.sidebar}>
+    <SectionNav2 />
+  </View>
+
+  {/* Main Content */}
+  <ScrollView style={styles.mainContent}>
+    <View style={styles.contentHeader}>
+      <Text style={styles.contentTitle}>שיקולים נוספים</Text>
+      <Text style={styles.contentSubtitle}>בדוק את תרבות מקום העבודה ומערכות התמיכה</Text>
+    </View>
+
+    <QuestionCard
+      question="האם מדיניות חופשת ההורות שלכם עומדת או עולה על הדרישות החוקיות?"
+      options={['כן', 'עומדת בדרישות', 'פחות מהנדרש', 'לא בטוח/ה']}
+      questionKey="parental_leave_policy"
+    />
+
+    <QuestionCard
+      question="האם מדיניות העבודה הגמישה נגישה ומעודדת לכל המגדרים באופן שווה?"
+      options={['כן', 'באופן לא פורמלי', 'לא']}
+      questionKey="flexible_work_policies"
+    />
+
+    <QuestionCard
+      question="האם נערך סקר לעובדים על החוויה שלהם בנוגע לשוויון מגדרי?"
+      options={['כן', 'מתוכנן', 'לא']}
+      questionKey="employee_survey"
+    />
+
+    <QuestionCard
+      question="האם מדווחים ומטופלים מקרים של אפליה או הטיה מגדרית באופן פורמלי?"
+      options={['תמיד', 'לפעמים', 'לעיתים רחוקות', 'אף פעם']}
+      questionKey="bias_incidents_tracked"
+    />
+
+    <QuestionCard
+      question="האם יש גורם או צוות פנימי שאחראי למאמצי שוויון מגדרי?"
+      options={['כן', 'תפקיד לא פורמלי', 'לא']}
+      questionKey="internal_champion"
+    />
+
+    {!isPageComplete && (
+      <View style={styles.validationMessage}>
+        <Text style={styles.validationText}>אנא ענה/עני על כל השאלות לפני סיום ההערכה.</Text>
+      </View>
+    )}
+
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity style={styles.prevButton} onPress={goToPreviousPage}>
+        <Text style={styles.prevButtonText}>הסעיף הקודם</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+        style={[styles.completeButton, !isPageComplete && styles.completeButtonDisabled]} 
+        onPress={goToNextPage}
+        disabled={!isPageComplete}
+      >
+        <Text style={[styles.completeButtonText, !isPageComplete && styles.completeButtonTextDisabled]}>
+          סיום ההערכה
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </ScrollView>
+</View>
+
+    </View>
+  )
+}
+}
 
 
 
@@ -1077,11 +2764,36 @@ export function GenderEquityAssesmentApp2({
   updateGlobalResponses,
   isPageComplete,
   completedSections,
-  getCompletedSectionsCount,
-  pages
+  getCompletedSectionsCount,getCompletedSectionsCount1,getCompletedSectionsCount2,
+  pages,pages1,pages2
 }){
+const [showLangMenu, setShowLangMenu] = useState(false);
+  const [if2, setIf2] = useState(0);
+  
 
-// 
+  const ProgressBar1 = () => {
+    const completedCount = getCompletedSectionsCount1();
+    return (
+      <View style={styles.progressContainer}>
+        <Text style={styles.progressText}>{completedCount} of {totalPages} </Text>
+        <View style={styles.progressBar}>
+          <View style={[styles.progressFill, { width: `${(completedCount / totalPages) * 100}%` }]} />
+        </View>
+      </View>
+    );
+  };
+
+  const ProgressBar2 = () => {
+    const completedCount = getCompletedSectionsCount2();
+    return (
+      <View style={styles.progressContainer}>
+        <Text style={styles.progressText}>{completedCount} of {totalPages} sections completed</Text>
+        <View style={styles.progressBar}>
+          <View style={[styles.progressFill, { width: `${(completedCount / totalPages) * 100}%` }]} />
+        </View>
+      </View>
+    );
+  };
   // Calculate score for a specific section based on responses
  const calculateSectionScore = (questionKeys) => {
     if (!questionKeys || questionKeys.length === 0) return 0;
@@ -1277,9 +2989,29 @@ export function GenderEquityAssesmentApp2({
       })}
     </View>
   );
-
+if(if2 === 0)
+  {
   return (
     <View style={styles.container}>
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Gender Equity Assessment</Text>
@@ -1397,6 +3129,228 @@ export function GenderEquityAssesmentApp2({
       </View>
     </View>
   );}
+
+  if(if2 === 1)
+  {
+  return (
+    <View style={styles.container}>
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+      {/* Header */}
+      <View style={styles.header}>
+  <Text style={styles.headerTitle}>تقييم المساواة بين الجنسين</Text>
+  <Text style={styles.headerSubtitle}>تحليل شامل لممارسات المساواة بين الجنسين في مؤسستك</Text>
+  <ProgressBar1 />
+</View>
+
+<View style={styles.content}>
+  <View style={styles.sidebar}>
+    <SectionNav />
+  </View>
+
+  <ScrollView style={styles.mainContent}>
+    <View style={styles.resultsHeader}>
+      <Text style={styles.resultsTitle}>نتائج تقييم المساواة بين الجنسين</Text>
+      <Text style={styles.resultsSubtitle}>
+        تحليل شامل لممارسات المساواة بين الجنسين في مؤسستك
+      </Text>
+    </View>
+
+    <View style={styles.overallScoreContainer}>
+      <View style={styles.overallScoreCircle}>
+        <Text style={styles.overallScoreNumber}>{overallScore}%</Text>
+      </View>
+      <Text style={styles.overallScoreLabel}>
+        النتيجة العامة: {getScoreLabel(overallScore)}
+      </Text>
+      <Text style={styles.overallScoreDescription}>
+        تُظهر مؤسستك ممارسات {overallScore >= 80 ? 'قوية' : overallScore >= 60 ? 'متوسطة' : 'محدودة'} في مجال المساواة بين الجنسين عبر جميع المجالات المُقيَّمة.
+      </Text>
+    </View>
+
+    <View style={styles.sectionResults}>
+      <SectionCard title="ممارسات التوظيف" score={sectionScores['Hiring Practices']} description="تقييم العدالة والشفافية في عمليات التوظيف" />
+      <SectionCard title="الترقيات والتقدم" score={sectionScores['Promotion & Advancement']} description="تقييم الإنصاف في فرص الترقية" />
+      <SectionCard title="العدالة في الأجور" score={sectionScores['Pay Equity']} description="مراجعة ممارسات التعويضات والفجوات بين الجنسين" />
+      <SectionCard title="مقاييس الأداء" score={sectionScores['Performance Metrics']} description="بيانات كمية عن النساء في المؤسسة" />
+      <SectionCard title="اعتبارات إضافية" score={sectionScores['Additional Considerations']} description="فحص ثقافة العمل وأنظمة الدعم" />
+    </View>
+
+    <View style={styles.recommendationsContainer}>
+      <Text style={styles.recommendationsTitle}>🔑 توصيات رئيسية</Text>
+      <View style={styles.recommendationItem}>
+        <View style={styles.recommendationNumber}>
+          <Text style={styles.recommendationNumberText}>1</Text>
+        </View>
+        <Text style={styles.recommendationText}>
+          تنفيذ تتبع منظم للتنوع وممارسات توظيف خالية من التحيز
+        </Text>
+      </View>
+      <View style={styles.recommendationItem}>
+        <View style={styles.recommendationNumber}>
+          <Text style={styles.recommendationNumberText}>2</Text>
+        </View>
+        <Text style={styles.recommendationText}>
+          وضع معايير شفافة للترقية وبرامج إرشاد
+        </Text>
+      </View>
+      <View style={styles.recommendationItem}>
+        <View style={styles.recommendationNumber}>
+          <Text style={styles.recommendationNumberText}>3</Text>
+        </View>
+        <Text style={styles.recommendationText}>
+          تعزيز السياسات الداخلية وإنشاء أنظمة دعم رسمية
+        </Text>
+      </View>
+    </View>
+
+    <View style={styles.actionButtonsContainer}>
+      <TouchableOpacity style={styles.primaryActionButton}>
+        <Text style={styles.primaryActionButtonText}>👥 التواصل مع شركات مشابهة</Text>
+      </TouchableOpacity>
+      <View style={styles.secondaryButtonsRow}>
+        <TouchableOpacity style={styles.secondaryActionButton}>
+          <Text style={styles.secondaryActionButtonText}>📄 تحميل التقرير</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.secondaryActionButton} onPress={() => navigateToPage(0)}>
+          <Text style={styles.secondaryActionButtonText}>🔄 إعادة التقييم</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  </ScrollView>
+</View>
+
+    </View>
+  );}
+
+  if(if2 === 2)
+  {
+  return (
+    <View style={styles.container}>
+       <View style={styles.topRightContainer}>
+              <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
+                <Text style={styles.menuIcon}>⋮</Text>
+              </TouchableOpacity>
+            
+              {showLangMenu && (
+                <View style={styles.languageMenu}>
+                  <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>English</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>العربية</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
+                    <Text style={styles.menuItem}>עברית</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+      {/* Header */}
+      <View style={styles.header}>
+  <Text style={styles.headerTitle}>הערכת שוויון מגדרי</Text>
+  <Text style={styles.headerSubtitle}>ניתוח מקיף של נהלי השוויון המגדרי בארגון שלך</Text>
+  <ProgressBar2 />
+</View>
+
+<View style={styles.content}>
+  <View style={styles.sidebar}>
+    <SectionNav />
+  </View>
+
+  <ScrollView style={styles.mainContent}>
+    <View style={styles.resultsHeader}>
+      <Text style={styles.resultsTitle}>תוצאות הערכת השוויון המגדרי שלך</Text>
+      <Text style={styles.resultsSubtitle}>
+        ניתוח מקיף של נהלי השוויון המגדרי בארגון שלך
+      </Text>
+    </View>
+
+    <View style={styles.overallScoreContainer}>
+      <View style={styles.overallScoreCircle}>
+        <Text style={styles.overallScoreNumber}>{overallScore}%</Text>
+      </View>
+      <Text style={styles.overallScoreLabel}>
+        ציון כולל: {getScoreLabel(overallScore)}
+      </Text>
+      <Text style={styles.overallScoreDescription}>
+        הארגון שלך מציג נהלים {overallScore >= 80 ? 'חזקים' : overallScore >= 60 ? 'בינוניים' : 'מוגבלים'} לשוויון מגדרי בכל התחומים שנבדקו.
+      </Text>
+    </View>
+
+    <View style={styles.sectionResults}>
+      <SectionCard title="נהלי גיוס" score={sectionScores['Hiring Practices']} description="הערכת הוגנות ושקיפות בתהליכי הגיוס" />
+      <SectionCard title="קידום והתפתחות" score={sectionScores['Promotion & Advancement']} description="הערכת שוויון בהזדמנויות הקידום" />
+      <SectionCard title="שוויון בשכר" score={sectionScores['Pay Equity']} description="בדיקת פערי שכר ונהלי תגמול" />
+      <SectionCard title="מדדי ביצוע" score={sectionScores['Performance Metrics']} description="נתונים כמותיים על נשים בארגון" />
+      <SectionCard title="שיקולים נוספים" score={sectionScores['Additional Considerations']} description="בדיקת תרבות ארגונית ומערכות תמיכה" />
+    </View>
+
+    <View style={styles.recommendationsContainer}>
+      <Text style={styles.recommendationsTitle}>🔑 המלצות מרכזיות</Text>
+      <View style={styles.recommendationItem}>
+        <View style={styles.recommendationNumber}>
+          <Text style={styles.recommendationNumberText}>1</Text>
+        </View>
+        <Text style={styles.recommendationText}>
+          יישום מעקב אחר גיוון וגיוס ללא הטיה
+        </Text>
+      </View>
+      <View style={styles.recommendationItem}>
+        <View style={styles.recommendationNumber}>
+          <Text style={styles.recommendationNumberText}>2</Text>
+        </View>
+        <Text style={styles.recommendationText}>
+          קביעת קריטריונים ברורים לקידום ותוכניות חונכות
+        </Text>
+      </View>
+      <View style={styles.recommendationItem}>
+        <View style={styles.recommendationNumber}>
+          <Text style={styles.recommendationNumberText}>3</Text>
+        </View>
+        <Text style={styles.recommendationText}>
+          שיפור מדיניות הארגון והקמת מערכות תמיכה רשמיות
+        </Text>
+      </View>
+    </View>
+
+    <View style={styles.actionButtonsContainer}>
+      <TouchableOpacity style={styles.primaryActionButton}>
+        <Text style={styles.primaryActionButtonText}>👥 התחברו עם חברות דומות</Text>
+      </TouchableOpacity>
+      <View style={styles.secondaryButtonsRow}>
+        <TouchableOpacity style={styles.secondaryActionButton}>
+          <Text style={styles.secondaryActionButtonText}>📄 הורדת הדו״ח</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.secondaryActionButton} onPress={() => navigateToPage(0)}>
+          <Text style={styles.secondaryActionButtonText}>🔄 בצע הערכה מחדש</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  </ScrollView>
+</View>
+
+    </View>
+  );}
+
+}
   
 
 
@@ -1861,5 +3815,34 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     textAlign: 'center',
-  },
+  },topRightContainer: {
+  position: 'absolute',
+  top: 10,
+  right: 10,
+  zIndex: 999,
+  alignItems: 'flex-end',
+},
+
+menuIcon: {
+  fontSize: 24,
+  padding: 5,
+},
+
+languageMenu: {
+  backgroundColor: '#fff',
+  borderRadius: 6,
+  padding: 8,
+  elevation: 4,
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.3,
+  shadowRadius: 4,
+},
+
+menuItem: {
+  paddingVertical: 6,
+  paddingHorizontal: 10,
+  fontSize: 16,
+},textAlign: 'right',
+writingDirection: 'rtl',
 });
