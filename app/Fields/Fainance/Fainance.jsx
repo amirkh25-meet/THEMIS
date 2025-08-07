@@ -140,6 +140,136 @@ const companies = [
 ];
 
 
+const companies1 = [
+  {
+    name: 'بنك لئومي',
+    city: 'تل أبيب',
+    bullets: [
+      'مؤسسة مصرفية رائدة ورائدة في المساواة بين الجنسين في إسرائيل.',
+      'تاريخ قوي من القيادة النسائية.',
+      'يستثمر في برامج تشجع النساء في التكنولوجيا والقيادة.',
+      'ثقافة شاملة تدعم نمو وتقدم المسار المهني.',
+    ],
+    industry: 'المصرفية',
+    founded: 1902,
+    employees: '12,000+',
+  },
+  {
+    name: 'أمريكان إكسبريس إسرائيل',
+    city: 'تل أبيب',
+    bullets: [
+      'مبني على الثقة والمرونة والعدالة.',
+      'أفضل صاحب عمل للنساء مع شبكات التوجيه.',
+      'برامج تطوير مهني وبرامج العافية.',
+      'العمل المرن يدعم توازن الحياة والعمل.',
+    ],
+    industry: 'الخدمات المالية',
+    founded: 1850,
+    employees: '2,500+',
+  },
+  {
+    name: 'فيديليتي إنفستمنتس إسرائيل',
+    city: 'القدس',
+    bullets: [
+      'شركة خدمات مالية متعددة الجنسيات.',
+      'التركيز على إدارة الاستثمار والتخطيط للتقاعد.',
+      'تقدم أدوار في بيئة عالمية ومهنية.',
+    ],
+    industry: 'إدارة الاستثمار',
+    founded: 1946,
+    employees: '1,800+',
+  },
+  {
+    name: 'جي بي مورغان تشيس إسرائيل',
+    city: 'هرتسليا',
+    bullets: [
+      'قائد مالي عالمي بحضور محلي.',
+      'التركيز على الابتكار المالي والتكنولوجيا الأمنية.',
+      'يدعم التنوع والشمول وبرامج النساء في القيادة.',
+    ],
+    industry: 'البنك والمالية',
+    founded: 1799,
+    employees: '1,000+ (إسرائيل)',
+  },
+  {
+    name: 'بوند آي تي',
+    city: 'تل أبيب',
+    bullets: [
+      'منصة استثمار ذات دخل ثابت مدعومة بالذكاء الاصطناعي.',
+      'تمثيل قوي للنساء في أدوار البحث والتطوير.',
+      'تعزيز ترقية المهارات التقنية والنمو القيادي.',
+    ],
+    industry: 'التكنولوجيا المالية',
+    founded: 2012,
+    employees: '150+',
+  },
+];
+
+
+const companies2 = [
+  {
+    name: 'OurCrowd',
+    city: 'ירושלים',
+    bullets: [
+      'פלטפורמת השקעות הון סיכון גלובלית.',
+      'תומכת בסטארטאפים בשלבי מוקדם ובטכנולוגיית השפעה.',
+      'מעודדת השתתפות נשים בהשקעות.',
+    ],
+    industry: 'הון סיכון',
+    founded: 2013,
+    employees: '300+',
+  },
+  {
+    name: 'Payoneer',
+    city: 'פתח תקווה',
+    bullets: [
+      'פלטפורמת תשלומים ומסחר גלובלית.',
+      'כוח עבודה מגוון עם הנהגה נשית חזקה.',
+      'מדגישה הכללה והזדמנויות שוות.',
+    ],
+    industry: 'תשלומים וטכנולוגיה פיננסית',
+    founded: 2005,
+    employees: '2,000+',
+  },
+  {
+    name: 'Fido Money',
+    city: 'תל אביב',
+    bullets: [
+      'שירותים פיננסיים דיגיטליים לאוכלוסיות עם גישה מוגבלת לבנקים.',
+      'נשים בתפקידי הייטק והנהגה מוצרית.',
+      'ממוקדת בשילוב פיננסי ונגישות.',
+    ],
+    industry: 'פינטק',
+    founded: 2013,
+    employees: '200+',
+  },
+  {
+    name: 'Payouts.com',
+    city: 'רמת גן',
+    bullets: [
+      'מתמחה בתשתית תשלומים גלובלית מדרגית.',
+      'גיוס כולל ותוכניות פיתוח נשים.',
+      'סביבת עבודה המעודדת חדשנות ומגוון.',
+    ],
+    industry: 'פינטק',
+    founded: 2018,
+    employees: '100+',
+  },
+  {
+    name: 'Sagent Management',
+    city: 'תל אביב',
+    bullets: [
+      'חברת ניהול עושר ונכסים.',
+      'תרבות ממוקדת לקוח עם אפשרויות צמיחה פנימיות.',
+      'תומכת ביוזמות פיננסיות בהובלת נשים.',
+    ],
+    industry: 'ניהול נכסים',
+    founded: 2000,
+    employees: '80+',
+  },
+];
+
+
 
 export default function Fainance() {
   const [expanded, setExpanded] = useState({});
@@ -178,7 +308,7 @@ const {if2,useIf2} = useLanguage();
       setExpanded((prev) => ({ ...prev, [idx]: !prev[idx] }));
     });
   };
-
+if(if2 === 0){
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
@@ -240,6 +370,130 @@ const {if2,useIf2} = useLanguage();
     </>
   );
 }
+if(if2 === 1){
+  return (
+    <>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
+        {/* Photo Header */}
+        <View style={styles.photoHeaderContainer}>
+          <Image
+            source={require('../../../assets/images/nobackgroundlogo.png')} // Adjust path & filename as needed
+            style={styles.photoHeader}
+            resizeMode="cover"
+          />
+        </View>
+
+        {/* Cards */}
+        <View style={styles.cardsContainer}>
+          {companies1.map((company, idx) => (
+            <Animated.View
+              key={company.name}
+              style={{
+                opacity: fadeAnim,
+                transform: [{ translateY: slideAnim }, { scale: animations[idx] }],
+                marginBottom: 20,
+                width: '100%',
+              }}
+            >
+              <TouchableOpacity
+                style={styles.companyCard}
+                activeOpacity={0.9}
+                onPress={() => handleCardPress(idx)}
+              >
+                <View style={styles.cardHeader}>
+                  <View style={styles.logoContainer}>
+                    <MaterialIcons name="business" size={32} color="#003366" />
+                  </View>
+                  <View style={styles.companyInfo}>
+                    <Text style={styles.companyName}>{company.name}</Text>
+                    <View style={styles.locationContainer}>
+                      <Ionicons name="location" size={14} color="#6c757d" />
+                      <Text style={styles.city}>{company.city}</Text>
+                    </View>
+                  </View>
+                </View>
+
+                {expanded[idx] && (
+                  <View style={styles.expandedContent}>
+{company.bullets.map((point, i) => (
+  <View key={i} style={styles.bulletItem}>
+    <View style={styles.bulletCircle} />
+    <Text style={styles.bulletText}>{point}</Text>
+  </View>
+))}
+                  </View>
+                )}
+              </TouchableOpacity>
+            </Animated.View>
+          ))}
+        </View>
+      </ScrollView>
+    </>
+  );
+}
+if(if2 === 2){
+  return (
+    <>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
+        {/* Photo Header */}
+        <View style={styles.photoHeaderContainer}>
+          <Image
+            source={require('../../../assets/images/nobackgroundlogo.png')} // Adjust path & filename as needed
+            style={styles.photoHeader}
+            resizeMode="cover"
+          />
+        </View>
+
+        {/* Cards */}
+        <View style={styles.cardsContainer}>
+          {companies2.map((company, idx) => (
+            <Animated.View
+              key={company.name}
+              style={{
+                opacity: fadeAnim,
+                transform: [{ translateY: slideAnim }, { scale: animations[idx] }],
+                marginBottom: 20,
+                width: '100%',
+              }}
+            >
+              <TouchableOpacity
+                style={styles.companyCard}
+                activeOpacity={0.9}
+                onPress={() => handleCardPress(idx)}
+              >
+                <View style={styles.cardHeader}>
+                  <View style={styles.logoContainer}>
+                    <MaterialIcons name="business" size={32} color="#003366" />
+                  </View>
+                  <View style={styles.companyInfo}>
+                    <Text style={styles.companyName}>{company.name}</Text>
+                    <View style={styles.locationContainer}>
+                      <Ionicons name="location" size={14} color="#6c757d" />
+                      <Text style={styles.city}>{company.city}</Text>
+                    </View>
+                  </View>
+                </View>
+
+                {expanded[idx] && (
+                  <View style={styles.expandedContent}>
+{company.bullets.map((point, i) => (
+  <View key={i} style={styles.bulletItem}>
+    <View style={styles.bulletCircle} />
+    <Text style={styles.bulletText}>{point}</Text>
+  </View>
+))}
+                  </View>
+                )}
+              </TouchableOpacity>
+            </Animated.View>
+          ))}
+        </View>
+      </ScrollView>
+    </>
+  );
+}}
 
 const styles = StyleSheet.create({
   container: {

@@ -21,6 +21,7 @@ import { useLanguage } from '../../LanguageContext';
 
 const { width } = Dimensions.get('window');
 
+// English (if2 === 0)
 const fields = [
   {
     id: 'healthcare',
@@ -30,7 +31,7 @@ const fields = [
       "Join leading healthcare institutions making a difference in people's lives through innovative medical solutions.",
     icon: <Heart color="#ffffff" size={24} />,
     gradient: ['#041E42', '#041E42'],
-    route: '/Fields/HeathCare/HealthCare',
+    route: '/Fields/HealthCare/HealthCare',
   },
   {
     id: 'tech',
@@ -50,20 +51,108 @@ const fields = [
       'Shape the financial landscape with established banks and investment firms managing global economies.',
     icon: <TrendingUp color="#ffffff" size={24} />,
     gradient: ['#041E42', '#041E42'],
-    route: '/Fields/Fainance/Fainance',
+    route: '/Fields/Finance/Finance',
   },
-{
-  id: 'Private Science',
-  title: 'Private Science',
-  subtitle: 'Innovation in Pharmaceuticals & Diagnostics',
-  description:
-    'Drive scientific breakthroughs in private-sector labs, where innovation meets cutting-edge technology to shape the future of healthcare, biotech, and life sciences.',
-  icon: <Ionicons name="flask" color="#ffffff" size={24} />,
-  gradient: ['#041E42', '#041E42'],
-  route: '/Fields/PrivateScience/Science',
-}
-
+  {
+    id: 'private_science',
+    title: 'Private Science',
+    subtitle: 'Innovation in Pharmaceuticals & Diagnostics',
+    description:
+      'Drive scientific breakthroughs in private-sector labs, where innovation meets cutting-edge technology to shape the future of healthcare, biotech, and life sciences.',
+    icon: <Ionicons name="flask" color="#ffffff" size={24} />,
+    gradient: ['#041E42', '#041E42'],
+    route: '/Fields/PrivateScience/Science',
+  },
 ];
+
+// Hebrew (fields2)
+const fields2 = [
+  {
+    id: 'healthcare',
+    title: 'בריאות',
+    subtitle: 'רפואה ורווחה',
+    description:
+      'הצטרפו למוסדות הבריאות המובילים שמשפיעים על חייהם של אנשים באמצעות פתרונות רפואיים חדשניים.',
+    icon: <Heart color="#ffffff" size={24} />,
+    gradient: ['#041E42', '#041E42'],
+    route: '/Fields/HealthCare/HealthCare',
+  },
+  {
+    id: 'tech',
+    title: 'טכנולוגיה',
+    subtitle: 'חדשנות ודיגיטל',
+    description:
+      'בנו את העתיד עם חברות טכנולוגיה מתקדמות שמובילות טרנספורמציה דיגיטלית וחדשנות.',
+    icon: <Laptop color="#ffffff" size={24} />,
+    gradient: ['#041E42', '#041E42'],
+    route: '/Fields/Tech/Tech',
+  },
+  {
+    id: 'finance',
+    title: 'פיננסים',
+    subtitle: 'בנקאות והשקעות',
+    description:
+      'עצבו את הנוף הפיננסי עם בנקים וחברות השקעה מבוססות שמנהלות את הכלכלה העולמית.',
+    icon: <TrendingUp color="#ffffff" size={24} />,
+    gradient: ['#041E42', '#041E42'],
+    route: '/Fields/Finance/Finance',
+  },
+  {
+    id: 'private_science',
+    title: 'מדע פרטי',
+    subtitle: 'חדשנות בפרמצבטיקה ואבחון',
+    description:
+      'קידמו פריצות דרך מדעיות במעבדות פרטיות, שם חדשנות פוגשת טכנולוגיה מתקדמת לעיצוב עתיד הבריאות, הביוטק ומדעי החיים.',
+    icon: <Ionicons name="flask" color="#ffffff" size={24} />,
+    gradient: ['#041E42', '#041E42'],
+    route: '/Fields/PrivateScience/Science',
+  },
+];
+
+// Arabic (fields1)
+const fields1 = [
+  {
+    id: 'healthcare',
+    title: 'الرعاية الصحية',
+    subtitle: 'الطب والرفاهية',
+    description:
+      'انضم إلى المؤسسات الصحية الرائدة التي تحدث فرقًا في حياة الناس من خلال حلول طبية مبتكرة.',
+    icon: <Heart color="#ffffff" size={24} />,
+    gradient: ['#041E42', '#041E42'],
+    route: '/Fields/HealthCare/HealthCare',
+  },
+  {
+    id: 'tech',
+    title: 'التكنولوجيا',
+    subtitle: 'الابتكار والرقمنة',
+    description:
+      'ابن المستقبل مع شركات التكنولوجيا المتطورة التي تقود التحول الرقمي والابتكار.',
+    icon: <Laptop color="#ffffff" size={24} />,
+    gradient: ['#041E42', '#041E42'],
+    route: '/Fields/Tech/Tech',
+  },
+  {
+    id: 'finance',
+    title: 'المالية',
+    subtitle: 'البنك والاستثمار',
+    description:
+      'شكل المشهد المالي مع البنوك وشركات الاستثمار الراسخة التي تدير الاقتصاديات العالمية.',
+    icon: <TrendingUp color="#ffffff" size={24} />,
+    gradient: ['#041E42', '#041E42'],
+    route: '/Fields/Finance/Finance',
+  },
+  {
+    id: 'private_science',
+    title: 'العلوم الخاصة',
+    subtitle: 'الابتكار في الأدوية والتشخيص',
+    description:
+      'قم بقيادة الاختراقات العلمية في مختبرات القطاع الخاص، حيث تلتقي الابتكارات بأحدث التقنيات لتشكيل مستقبل الرعاية الصحية والتكنولوجيا الحيوية وعلوم الحياة.',
+    icon: <Ionicons name="flask" color="#ffffff" size={24} />,
+    gradient: ['#041E42', '#041E42'],
+    route: '/Fields/PrivateScience/Science',
+  },
+];
+
 
 export default function FieldPage() {
   const [selectedField, setSelectedField] = useState(null);
@@ -226,7 +315,7 @@ menuItem: {
   fontSize: 16,
 },
   };
-
+if(if2===0){
   return (
     <ScrollView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#041E42" />
@@ -278,4 +367,113 @@ menuItem: {
       </ScrollView>
     </ScrollView>
   );
+}
+
+if(if2===1){
+  return (
+    <ScrollView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#041E42" />
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Explore Career Fields</Text>
+        <Text style={styles.headerSubtitle}>
+          Find inclusive workplaces and career opportunities
+        </Text>
+      </View>
+
+      <ScrollView contentContainerStyle={styles.cardList}>
+        {fields1.map((field) => (
+          <Animated.View
+            key={field.id}
+            style={{
+              opacity: fadeAnim,
+              transform: [{ translateY: slideAnim }],
+            }}
+          >
+            <TouchableOpacity
+              style={[
+                styles.card,
+                selectedField === field.id && styles.selectedCard,
+              ]}
+              onPress={() => handleCardPress(field)}
+              activeOpacity={0.9}
+            >
+              <View style={styles.cardContent}>
+                <View style={[styles.iconContainer, { backgroundColor: field.gradient[0] }]}>
+                  {field.icon}
+                </View>
+                <View style={styles.info}>
+                  <Text style={styles.title}>{field.title}</Text>
+                  <Text style={styles.subtitle}>{field.subtitle}</Text>
+                  <Text style={styles.description}>{field.description}</Text>
+                </View>
+                <ArrowRight color="#041E42" size={24} style={styles.arrow} />
+              </View>
+            </TouchableOpacity>
+          </Animated.View>
+        ))}
+
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>Need help picking a field?</Text>
+          <Text style={styles.footerSubtext}>
+            Tap any card to explore career paths that support you
+          </Text>
+        </View>
+      </ScrollView>
+    </ScrollView>
+  );
+}
+
+if(if2===2){
+  return (
+    <ScrollView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#041E42" />
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Explore Career Fields</Text>
+        <Text style={styles.headerSubtitle}>
+          Find inclusive workplaces and career opportunities
+        </Text>
+      </View>
+
+      <ScrollView contentContainerStyle={styles.cardList}>
+        {fields2.map((field) => (
+          <Animated.View
+            key={field.id}
+            style={{
+              opacity: fadeAnim,
+              transform: [{ translateY: slideAnim }],
+            }}
+          >
+            <TouchableOpacity
+              style={[
+                styles.card,
+                selectedField === field.id && styles.selectedCard,
+              ]}
+              onPress={() => handleCardPress(field)}
+              activeOpacity={0.9}
+            >
+              <View style={styles.cardContent}>
+                <View style={[styles.iconContainer, { backgroundColor: field.gradient[0] }]}>
+                  {field.icon}
+                </View>
+                <View style={styles.info}>
+                  <Text style={styles.title}>{field.title}</Text>
+                  <Text style={styles.subtitle}>{field.subtitle}</Text>
+                  <Text style={styles.description}>{field.description}</Text>
+                </View>
+                <ArrowRight color="#041E42" size={24} style={styles.arrow} />
+              </View>
+            </TouchableOpacity>
+          </Animated.View>
+        ))}
+
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>Need help picking a field?</Text>
+          <Text style={styles.footerSubtext}>
+            Tap any card to explore career paths that support you
+          </Text>
+        </View>
+      </ScrollView>
+    </ScrollView>
+  );
+}
 }

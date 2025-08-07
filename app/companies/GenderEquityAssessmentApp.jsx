@@ -732,7 +732,7 @@ export function PromotionAdvancement({
 }) {
   const [responses, setResponses] = useState(allResponses);
   const [showLangMenu, setShowLangMenu] = useState(false);
-  const [if2, setIf2] = useState(0);
+  
 
 const ProgressBar1 = () => {
     const completedCount = getCompletedSectionsCount1();
@@ -1228,7 +1228,7 @@ export function PayEquity({
 }) {
   const [responses, setResponses] = useState(allResponses);
   const [showLangMenu, setShowLangMenu] = useState(false);
-  const [if2, setIf2] = useState(0);
+  
 
 
   const updateResponse = (questionKey, value) => {
@@ -1731,7 +1731,7 @@ export function PerformanceMetrics({
 }) {
   const [responses, setResponses] = useState(allResponses);
 const [showLangMenu, setShowLangMenu] = useState(false);
-  const [if2, setIf2] = useState(0);
+
 
 const ProgressBar1 = () => {
     const completedCount = getCompletedSectionsCount1();
@@ -2238,7 +2238,7 @@ export function AdditionalConsiderations({
 }) {
   const [responses, setResponses] = useState(allResponses);
   const [showLangMenu, setShowLangMenu] = useState(false);
-  const [if2, setIf2] = useState(0);
+  
  
 
   const SectionNav1 = () => (
@@ -2771,7 +2771,7 @@ export function GenderEquityAssesmentApp2({
   pages,pages1,pages2,setIf2,if2
 }){
 const [showLangMenu, setShowLangMenu] = useState(false);
-  const [if2, setIf2] = useState(0);
+
   
 
   const ProgressBar1 = () => {

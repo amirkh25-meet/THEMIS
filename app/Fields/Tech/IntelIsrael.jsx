@@ -4,6 +4,7 @@ import { useLanguage } from '../../LanguageContext';
 
 export default function IsraelAerospaceIndustries() {
   const {if2,useIf2} = useLanguage(); 
+if(if2===0){  // English
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.card}>
@@ -28,6 +29,61 @@ export default function IsraelAerospaceIndustries() {
       </View>
     </ScrollView>
   );
+}
+
+if(if2===1){  // Arabic
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.card}>
+        <View style={styles.decorativeLine} />
+        <MaterialCommunityIcons name="airplane-takeoff" size={56} color="#2e7d32" style={styles.icon} />
+        <Text style={styles.header}>الصناعات الفضائية الإسرائيلية (IAI)</Text>
+        <View style={styles.decorativeLine} />
+
+        <Text style={styles.subHeader}>لود، إسرائيل</Text>
+
+        <Text style={styles.paragraph}>
+          تعمل IAI، الشركة الرائدة في مجال الفضاء والدفاع في إسرائيل، بنشاط على كسر الصور النمطية المتعلقة بالنوع الاجتماعي في واحدة من أكثر الصناعات التي يهيمن عليها الرجال. تدعم الشركة المهندسات والعالمات والمديرات من خلال الشبكات الداخلية والشراكات التعليمية وبرامج التوعية التي تهدف إلى زيادة تمثيل النساء في مجالات العلوم والتكنولوجيا والهندسة والرياضيات.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          تشجع IAI <Text style={styles.highlight}>المساواة في الأجر</Text>، والجدولة المرنة، وفرص التقدم، مما يجعلها خيارًا قويًا للنساء الباحثات عن تطوير مهني طويل الأمد في أدوار ذات تأثير كبير.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          للنساء اللاتي يطمحن إلى تشكيل مستقبل الفضاء والابتكار، تقدم IAI منصة مستقرة وديناميكية للنجاح المهني.
+        </Text>
+      </View>
+    </ScrollView>
+  );
+}
+
+if(if2===2){  // Hebrew
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.card}>
+        <View style={styles.decorativeLine} />
+        <MaterialCommunityIcons name="airplane-takeoff" size={56} color="#2e7d32" style={styles.icon} />
+        <Text style={styles.header}>תעשיות חלל ישראל (IAI)</Text>
+        <View style={styles.decorativeLine} />
+
+        <Text style={styles.subHeader}>לוד, ישראל</Text>
+
+        <Text style={styles.paragraph}>
+          IAI, החברה המובילה בישראל בתחום החלל והביטחון, פועלת להפרת סטריאוטיפים מגדריים באחת התעשיות השולטות על ידי גברים. החברה תומכת במהנדסות, מדעניות ומנהלות באמצעות רשתות פנימיות, שותפויות חינוכיות ותוכניות חוץ המיועדות להגברת ייצוג הנשים בתחומי ה-STEM.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          IAI מקדמת <Text style={styles.highlight}>שוויון שכר</Text>, תזמונים גמישים והזדמנויות קידום, המהווים אפשרות חזקה לנשים המחפשות התפתחות מקצועית לטווח ארוך בתפקידים בעלי השפעה.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          לנשים השואפות לעצב את עתיד החלל והחדשנות, IAI מציעה פלטפורמה יציבה ודינמית להצלחה מקצועית.
+        </Text>
+      </View>
+    </ScrollView>
+  );
+}
 }
 
 const styles = StyleSheet.create({

@@ -5,7 +5,7 @@ import { useLanguage } from '../../LanguageContext';
 
 export default function IntelIsrael() {
   const {if2,useIf2} = useLanguage(); 
-
+if(if2===0){  // English
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.card}>
@@ -30,6 +30,63 @@ export default function IntelIsrael() {
       </View>
     </ScrollView>
   );
+}
+
+if(if2===1){  // Arabic
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.card}>
+        <View style={styles.decorativeLine} />
+        <MaterialIcons name="memory" size={48} color="#2e7d32" style={styles.icon} />
+        <Text style={styles.header}>إنتل إسرائيل</Text>
+        <View style={styles.decorativeLine} />
+
+        <Text style={styles.subHeader}>حيفا، إسرائيل</Text>
+
+        <Text style={styles.paragraph}>
+          تُعد إنتل إسرائيل واحدة من أكبر وأبرز أصحاب العمل في مجال التكنولوجيا في البلاد، مع تركيز قوي على <Text style={styles.highlight}>التنوع والإنصاف والشمول.</Text>
+        </Text>
+
+        <Text style={styles.paragraph}>
+          تستفيد النساء في إنتل من برامج التوجيه ومسارات التطوير المهني وثقافة الشركة التي تدعم بنشاط <Text style={styles.highlight}>التوازن بين العمل والحياة الشخصية.</Text> تُدير إنتل إسرائيل مبادرات مخصصة لتوظيف النساء وترقيتهن في مجالات الهندسة والبحث والتطوير والأدوار القيادية.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          كإمرأة تعمل في إنتل حيفا، ستنضمين إلى بيئة تعاونية ومستقبلية تحترم صوتك، وتستثمر في نموك، وتشجعك على قيادة الابتكار في طليعة التكنولوجيا العالمية.
+        </Text>
+      </View>
+    </ScrollView>
+  );
+}
+
+if(if2===2){  // Hebrew
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.card}>
+        <View style={styles.decorativeLine} />
+        <MaterialIcons name="memory" size={48} color="#2e7d32" style={styles.icon} />
+        <Text style={styles.header}>אינטל ישראל</Text>
+        <View style={styles.decorativeLine} />
+
+        <Text style={styles.subHeader}>חיפה, ישראל</Text>
+
+        <Text style={styles.paragraph}>
+          אינטל ישראל היא אחת מחברות הטכנולוגיה הגדולות והמשפיעות ביותר בארץ, עם דגש חזק על <Text style={styles.highlight}>גיוון, שוויון והכלה</Text>.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          נשים באינטל נהנות מתוכניות חונכות, מסלולי פיתוח מקצועי ותרבות ארגונית התומכת באופן פעיל ב-<Text style={styles.highlight}>איזון בין עבודה לחיים פרטיים</Text>. אינטל ישראל מפעילה יוזמות ייעודיות לגיוס ולקידום נשים בהנדסה, במחקר ופיתוח ובתפקידי מנהיגות.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          כאישה העובדת באינטל חיפה, תצטרפי לסביבה שיתופית וחדשנית המכבדת את קולך, משקיעה בצמיחתך ומעודדת אותך להוביל חדשנות בחזית הטכנולוגיה העולמית.
+        </Text>
+      </View>
+    </ScrollView>
+  );
+}
+
+
 }
 
 const styles = StyleSheet.create({

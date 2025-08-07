@@ -37,7 +37,7 @@ const {if2,useIf2} = useLanguage();
   const handleUserSelection = () => {
     router.push('/user/(tabs)');
   };
-
+if(if2===0){
   return (
     <AnimatedImageBackground
       source={require('../assets/images/backpink.jpeg')}
@@ -104,6 +104,146 @@ const {if2,useIf2} = useLanguage();
       </ScrollView>
     </AnimatedImageBackground>
   );
+}
+if (if2 === 1) {
+  return (
+    <AnimatedImageBackground
+      source={require('../assets/images/backpink.jpeg')}
+      style={[styles.background, { opacity: fadeAnim }]}
+      resizeMode="cover"
+    >
+      <ScrollView contentContainerStyle={styles.container}>
+
+        <View style={styles.content}>
+          <View style={styles.header}>
+            <Image
+              source={require('../assets/images/nobackgroundlogo.png')}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+            <Text style={styles.subtitle}>
+              اختر نوع حسابك للبدء
+            </Text>
+          </View>
+          <View style={styles.selectionContainer}>
+            <TouchableOpacity
+              style={styles.selectionCard}
+              onPress={handleUserSelection}
+              activeOpacity={0.9}
+            >
+              <View style={styles.cardContent}>
+                <View style={[styles.iconContainer, styles.userIcon]}>
+                  <MaterialCommunityIcons name="account" size={32} color="#fff" />
+                </View>
+                <View style={styles.cardText}>
+                  <Text style={styles.cardTitle}>أنا مستخدم</Text>
+                  <Text style={styles.cardDescription}>
+                    استكشف الشركات، تصفح المحتوى، واكتشف الفرص
+                  </Text>
+                </View>
+                <View style={styles.arrowContainer}>
+                  <Text style={styles.arrow}>→</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.selectionCard}
+              onPress={handleCompanySelection}
+              activeOpacity={0.9}
+            >
+              <View style={styles.cardContent}>
+                <View style={[styles.iconContainer, styles.companyIcon]}>
+                  <MaterialCommunityIcons name="office-building" size={32} color="#fff" />
+                </View>
+                <View style={styles.cardText}>
+                  <Text style={styles.cardTitle}>أنا شركة</Text>
+                  <Text style={styles.cardDescription}>
+                    إدارة ملف عملك والتواصل مع المستخدمين
+                  </Text>
+                </View>
+                <View style={styles.arrowContainer}>
+                  <Text style={styles.arrow}>→</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
+    </AnimatedImageBackground>
+  );
+}
+
+if (if2 === 2) {
+  return (
+    <AnimatedImageBackground
+      source={require('../assets/images/backpink.jpeg')}
+      style={[styles.background, { opacity: fadeAnim }]}
+      resizeMode="cover"
+    >
+      <ScrollView contentContainerStyle={styles.container}>
+
+        <View style={styles.content}>
+          <View style={styles.header}>
+            <Image
+              source={require('../assets/images/nobackgroundlogo.png')}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+            <Text style={styles.subtitle}>
+              בחר את סוג החשבון שלך כדי להתחיל
+            </Text>
+          </View>
+          <View style={styles.selectionContainer}>
+            <TouchableOpacity
+              style={styles.selectionCard}
+              onPress={handleUserSelection}
+              activeOpacity={0.9}
+            >
+              <View style={styles.cardContent}>
+                <View style={[styles.iconContainer, styles.userIcon]}>
+                  <MaterialCommunityIcons name="account" size={32} color="#fff" />
+                </View>
+                <View style={styles.cardText}>
+                  <Text style={styles.cardTitle}>אני משתמש</Text>
+                  <Text style={styles.cardDescription}>
+                    גלה חברות, עיין בתוכן, וגלה הזדמנויות
+                  </Text>
+                </View>
+                <View style={styles.arrowContainer}>
+                  <Text style={styles.arrow}>→</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.selectionCard}
+              onPress={handleCompanySelection}
+              activeOpacity={0.9}
+            >
+              <View style={styles.cardContent}>
+                <View style={[styles.iconContainer, styles.companyIcon]}>
+                  <MaterialCommunityIcons name="office-building" size={32} color="#fff" />
+                </View>
+                <View style={styles.cardText}>
+                  <Text style={styles.cardTitle}>אני חברה</Text>
+                  <Text style={styles.cardDescription}>
+                    נהל את פרופיל העסק שלך והתחבר עם משתמשים
+                  </Text>
+                </View>
+                <View style={styles.arrowContainer}>
+                  <Text style={styles.arrow}>→</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
+    </AnimatedImageBackground>
+  );
+}
+
+
 }
 
 const styles = StyleSheet.create({

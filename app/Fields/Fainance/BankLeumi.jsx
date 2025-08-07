@@ -3,6 +3,7 @@ import { useLanguage } from '../../LanguageContext';
 
 export default function BankLeumi() {
   const {if2,useIf2} = useLanguage(); 
+ if(if2===0){
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.card}>
@@ -22,6 +23,41 @@ export default function BankLeumi() {
       </View>
     </ScrollView>
   );
+}if(if2 === 1){
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.card}>
+        <Text style={styles.title}>بنك لئومي</Text>
+        <Text style={styles.paragraph}>
+          بنك لئومي هو أحد المؤسسات المصرفية الرائدة في إسرائيل ورائد في تعزيز المساواة بين الجنسين في قطاع المالية.
+          يمتلك البنك تاريخًا قويًا من القيادة النسائية ويُعترف به على نطاق واسع لجهوده في تحديث ورقمنة تجربة البنوك.
+        </Text>
+        <Text style={styles.paragraph}>
+          يستثمر بنك لئومي في تطوير الموظفين من خلال برامج مبتكرة تشجع على نمو المسار المهني — خاصةً للنساء اللاتي يسعين للانتقال إلى أدوار التكنولوجيا العالية أو التقدم إلى مناصب قيادية.
+          كامرأة تعمل في لئومي، ستجدين ثقافة شاملة تقدر صوتك، وتدعم تطورك المهني، وتوفر فرصًا ذات معنى للتقدم.
+        </Text>
+      </View>
+    </ScrollView>
+  );
+}
+if(if2 === 2){
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.card}>
+        <Text style={styles.title}>בנק לאומי</Text>
+        <Text style={styles.paragraph}>
+          בנק לאומי הוא אחד המוסדות הבנקאיים המובילים בישראל וחלוץ בקידום שוויון מגדרי במגזר הפיננסים.
+          לבנק היסטוריה חזקה של הנהגה נשית ומוכר רחבה על מאמציו למודרניזציה ודיגיטציה של חוויית הבנקאות.
+        </Text>
+        <Text style={styles.paragraph}>
+          בנק לאומי משקיע בפיתוח העובדים דרך תוכניות חדשניות שמעודדות צמיחה מקצועית — במיוחד לנשים המחפשות לעבור לתפקידים בהייטק או להתקדם לתפקידי מנהיגות.
+          כאישה העובדת בליאומי, תמצאי תרבות כוללנית שמעריכה את קולך, תומכת בהתפתחותך המקצועית ומספקת הזדמנויות משמעותיות לקידום.
+        </Text>
+      </View>
+    </ScrollView>
+  );
+}
+
 }
 
 const styles = StyleSheet.create({

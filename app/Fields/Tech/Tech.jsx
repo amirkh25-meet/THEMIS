@@ -53,7 +53,7 @@ const companies = [
   },
   {
     name: 'Amdocs',
-    city: 'Ra\'anana',
+    city: "Ra'anana",
     bulletPoints: [
       'A leading global provider of telecom software and services.',
       'Headquartered in Israel with international reach.',
@@ -86,7 +86,7 @@ const companies = [
   },
   {
     name: 'NICE Ltd.',
-    city: 'Ra\'anana',
+    city: "Ra'anana",
     bulletPoints: [
       'Global leader in AI-powered customer experience and analytics.',
       'Works with Fortune 500 companies worldwide.',
@@ -130,6 +130,95 @@ const companies = [
   },
 ];
 
+// Arabic company names (companies1)
+const companies1 = [
+  {
+    name: 'إنتل إسرائيل',
+    city: 'حيفا، إسرائيل',
+  },
+  {
+    name: 'أنظمة إلبيت',
+    city: 'حيفا، إسرائيل',
+  },
+  {
+    name: 'الصناعات الجوية الفضائية الإسرائيلية (IAI)',
+    city: 'لود',
+  },
+  {
+    name: 'أمدوكس',
+    city: "رعنانا",
+  },
+  {
+    name: 'رافائيل أنظمة الدفاع المتقدمة',
+    city: 'حيفا، إسرائيل',
+  },
+  {
+    name: 'بلايتيكا',
+    city: 'هرتسليا',
+  },
+  {
+    name: 'شركة NICE المحدودة',
+    city: "رعنانا",
+  },
+  {
+    name: 'موبايلي',
+    city: 'القدس',
+  },
+  {
+    name: 'ماندي.كوم',
+    city: 'تل أبيب',
+  },
+  {
+    name: 'آيرون سورس (جزء من يونيتي)',
+    city: 'تل أبيب',
+  },
+];
+
+// Hebrew company names (companies2)
+const companies2 = [
+  {
+    name: 'אינטל ישראל',
+    city: 'חיפה, ישראל',
+  },
+  {
+    name: 'אלביט מערכות',
+    city: 'חיפה, ישראל',
+  },
+  {
+    name: 'התעשייה האווירית לישראל (IAI)',
+    city: 'לוד',
+  },
+  {
+    name: 'אמדוקס',
+    city: "רעננה",
+  },
+  {
+    name: 'רפאל מערכות הגנה מתקדמות',
+    city: 'חיפה, ישראל',
+  },
+  {
+    name: 'פלייטיקה',
+    city: 'הרצליה',
+  },
+  {
+    name: 'NICE בע"מ',
+    city: "רעננה",
+  },
+  {
+    name: 'מוביילאיי',
+    city: 'ירושלים',
+  },
+  {
+    name: 'monday.com',
+    city: 'תל אביב',
+  },
+  {
+    name: 'IronSource (חלק מ-Unity)',
+    city: 'תל אביב',
+  },
+];
+
+
 
 export default function Fainance() {
   const [expanded, setExpanded] = useState({});
@@ -169,7 +258,7 @@ export default function Fainance() {
       setExpanded((prev) => ({ ...prev, [idx]: !prev[idx] }));
     });
   };
-
+if(if2===0){
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
@@ -234,6 +323,140 @@ export default function Fainance() {
       </ScrollView>
     </>
   );
+}
+if(if2===1){
+  return (
+    <>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
+        {/* Photo Header */}
+        <View style={styles.photoHeaderContainer}>
+          <Image
+            source={require('../../../assets/images/nobackgroundlogo.png')}
+            style={styles.photoHeader}
+            resizeMode="cover"
+          />
+        </View>
+
+        {/* Cards */}
+        <View style={styles.cardsContainer}>
+          {companies1.map((company, idx) => (
+            <Animated.View
+              key={company.name}
+              style={{
+                opacity: fadeAnim,
+                transform: [{ translateY: slideAnim }, { scale: animations[idx] }],
+                marginBottom: 20,
+                width: '100%',
+              }}
+            >
+              <TouchableOpacity
+                style={styles.companyCard}
+                activeOpacity={0.9}
+                onPress={() => handleCardPress(idx)}
+              >
+                <View style={styles.cardHeader}>
+                  <View style={styles.logoContainer}>
+                    <MaterialIcons name="computer" size={32} color="#003366" />
+                  </View>
+                  <View style={styles.companyInfo}>
+                    <Text style={styles.companyName}>{company.name}</Text>
+                    <View style={styles.locationContainer}>
+                      <Ionicons name="location" size={14} color="#6c757d" />
+                      <Text style={styles.city}>{company.city}</Text>
+                    </View>
+                  </View>
+                </View>
+
+                {expanded[idx] && (
+                  <View style={styles.expandedContent}>
+                    {company.bulletPoints ? (
+                      company.bulletPoints.map((point, i) => (
+                        <View key={i} style={styles.bulletItem}>
+                          <View style={styles.bulletCircle} />
+                          <Text style={styles.bulletText}>{point}</Text>
+                        </View>
+                      ))
+                    ) : (
+                      <Text style={styles.description}>{company.description}</Text>
+                    )}
+                  </View>
+                )}
+              </TouchableOpacity>
+            </Animated.View>
+          ))}
+        </View>
+      </ScrollView>
+    </>
+  );
+}
+if(if2===2){
+  return (
+    <>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
+        {/* Photo Header */}
+        <View style={styles.photoHeaderContainer}>
+          <Image
+            source={require('../../../assets/images/nobackgroundlogo.png')}
+            style={styles.photoHeader}
+            resizeMode="cover"
+          />
+        </View>
+
+        {/* Cards */}
+        <View style={styles.cardsContainer}>
+          {companies2.map((company, idx) => (
+            <Animated.View
+              key={company.name}
+              style={{
+                opacity: fadeAnim,
+                transform: [{ translateY: slideAnim }, { scale: animations[idx] }],
+                marginBottom: 20,
+                width: '100%',
+              }}
+            >
+              <TouchableOpacity
+                style={styles.companyCard}
+                activeOpacity={0.9}
+                onPress={() => handleCardPress(idx)}
+              >
+                <View style={styles.cardHeader}>
+                  <View style={styles.logoContainer}>
+                    <MaterialIcons name="computer" size={32} color="#003366" />
+                  </View>
+                  <View style={styles.companyInfo}>
+                    <Text style={styles.companyName}>{company.name}</Text>
+                    <View style={styles.locationContainer}>
+                      <Ionicons name="location" size={14} color="#6c757d" />
+                      <Text style={styles.city}>{company.city}</Text>
+                    </View>
+                  </View>
+                </View>
+
+                {expanded[idx] && (
+                  <View style={styles.expandedContent}>
+                    {company.bulletPoints ? (
+                      company.bulletPoints.map((point, i) => (
+                        <View key={i} style={styles.bulletItem}>
+                          <View style={styles.bulletCircle} />
+                          <Text style={styles.bulletText}>{point}</Text>
+                        </View>
+                      ))
+                    ) : (
+                      <Text style={styles.description}>{company.description}</Text>
+                    )}
+                  </View>
+                )}
+              </TouchableOpacity>
+            </Animated.View>
+          ))}
+        </View>
+      </ScrollView>
+    </>
+  );
+}
+
 }
 
 const styles = StyleSheet.create({

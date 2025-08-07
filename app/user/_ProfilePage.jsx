@@ -218,7 +218,7 @@ const checkCurrentUser = async () => {
   );
 
   // Sign Up Form
-  if (if1 === 0) {
+  if (if1 === 0&&if2===0) {
     return renderForm(
       'Create Account',
       <>
@@ -240,7 +240,7 @@ const checkCurrentUser = async () => {
   }
 
   // Sign In Form
-  if (if1 === 1) {
+  if (if1 === 1&&if2===0) {
     return renderForm(
       'Sign In',
       <>
@@ -260,7 +260,7 @@ const checkCurrentUser = async () => {
     );
   }
 
-  // This should not be reached anymore since we removed the auto-redirect
+  //This should not be reached anymore since we removed the auto-redirect
   return (
     <View style={styles.container}>
       <Image
@@ -274,6 +274,121 @@ const checkCurrentUser = async () => {
       </TouchableOpacity>
     </View>
   );
+
+if (if1 === 0 && if2 === 1) {
+  return renderForm(
+    'إنشاء حساب',
+    <>
+      <TextInput style={styles.input} placeholder="البريد الإلكتروني" value={email} onChangeText={setEmail} />
+      <TextInput style={styles.input} placeholder="الاسم" value={name} onChangeText={setName} />
+      <TextInput
+        style={styles.input}
+        placeholder="كلمة المرور"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+    </>,
+    createUser,
+    'هل لديك حساب بالفعل؟ تسجيل الدخول',
+    () => setIf(1),
+    'إنشاء حساب'
+  );
+}
+
+// Arabic: تسجيل الدخول
+if (if1 === 1 && if2 === 1) {
+  return renderForm(
+    'تسجيل الدخول',
+    <>
+      <TextInput style={styles.input} placeholder="البريد الإلكتروني" value={email} onChangeText={setEmail} />
+      <TextInput
+        style={styles.input}
+        placeholder="كلمة المرور"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+    </>,
+    signIn,
+    'ليس لديك حساب؟ إنشاء حساب',
+    () => setIf(0),
+    'تسجيل الدخول'
+  );
+}
+
+// return (
+//   <View style={styles.container}>
+//     <Image
+//       source={require('../../assets/images/pinklogo.png')}
+//       style={styles.logo}
+//       resizeMode="contain"
+//     />
+//     <Text style={styles.header}>مرحباً!</Text>
+//     <TouchableOpacity style={styles.button} onPress={() => setIf(0)}>
+//       <Text style={styles.buttonText}>ابدأ الآن</Text>
+//     </TouchableOpacity>
+//   </View>
+// );
+
+
+if (if1 === 0 && if2 === 2) {
+  return renderForm(
+    'צור חשבון',
+    <>
+      <TextInput style={styles.input} placeholder="אימייל" value={email} onChangeText={setEmail} />
+      <TextInput style={styles.input} placeholder="שם" value={name} onChangeText={setName} />
+      <TextInput
+        style={styles.input}
+        placeholder="סיסמה"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+    </>,
+    createUser,
+    'כבר יש לך חשבון? התחבר',
+    () => setIf(1),
+    'הרשמה'
+  );
+}
+
+// Hebrew: התחברות
+if (if1 === 1 && if2 === 2) {
+  return renderForm(
+    'התחברות',
+    <>
+      <TextInput style={styles.input} placeholder="אימייל" value={email} onChangeText={setEmail} />
+      <TextInput
+        style={styles.input}
+        placeholder="סיסמה"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+    </>,
+    signIn,
+    'אין לך חשבון? הירשם',
+    () => setIf(0),
+    'התחברות'
+  );
+}
+
+return (
+  <View style={styles.container}>
+    <Image
+      source={require('../../assets/images/pinklogo.png')}
+      style={styles.logo}
+      resizeMode="contain"
+    />
+    <Text style={styles.header}>ברוך הבא!</Text>
+    <TouchableOpacity style={styles.button} onPress={() => setIf(0)}>
+      <Text style={styles.buttonText}>התחל</Text>
+    </TouchableOpacity>
+  </View>
+);
+
+
 }
 
 const styles = StyleSheet.create({

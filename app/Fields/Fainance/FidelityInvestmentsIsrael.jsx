@@ -20,7 +20,7 @@ const {if2,useIf2} = useLanguage();
       }),
     ]).start();
   }, []);
-
+if(if2===0){
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Animated.View style={[styles.card, { opacity: fadeAnim, transform: [{ translateY: slideAnim }] }]}> 
@@ -54,6 +54,78 @@ const {if2,useIf2} = useLanguage();
       </Animated.View>
     </ScrollView>
   );
+}
+if (if2 === 1) {
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <Animated.View style={[styles.card, { opacity: fadeAnim, transform: [{ translateY: slideAnim }] }]}>
+        <View style={styles.headerSection}>
+          <View style={styles.iconCircle}>
+            <MaterialCommunityIcons name="bank" size={40} color="#fff" />
+          </View>
+          <Text style={styles.companyName}>فيدليتي إنفستمنتس إسرائيل</Text>
+          <View style={styles.tagsRow}>
+            <View style={styles.tag}><Ionicons name="location" size={14} color="#2563eb" /><Text style={styles.tagText}>القدس</Text></View>
+            <View style={styles.tag}><MaterialCommunityIcons name="briefcase" size={14} color="#2563eb" /><Text style={styles.tagText}>إدارة الاستثمار</Text></View>
+          </View>
+        </View>
+        <View style={styles.badgesRow}>
+          <View style={styles.badge}><Text style={styles.badgeText}>النساء العائدات للعمل</Text></View>
+          <View style={styles.badge}><Text style={styles.badgeText}>التوجيه والإرشاد</Text></View>
+          <View style={styles.badge}><Text style={styles.badgeText}>توازن الحياة والعمل</Text></View>
+        </View>
+        <Text style={styles.sectionTitle}>المهمة والثقافة</Text>
+        <Text style={styles.description}>
+          تشتهر شركة فيدليتي إنفستمنتس إسرائيل بنهجها الشامل والتزامها بتمكين النساء في مكان العمل. توفر الشركة مسارات منظمة للنساء العائدات إلى العمل، بالإضافة إلى برامج القيادة، والتوجيه من قبل الأقران، وموارد التطوير الشخصي. تشجع فيدليتي على توازن الحياة والعمل وتقدم المرونة لدعم النساء في مسيرتهن المهنية والشخصية. تعزز ثقافتها التعاون والابتكار والتعلم المستمر — مما يجعلها بيئة ممتازة للنساء الباحثات عن تحقيق مهني في مكان عمل داعم ومتقدم.
+        </Text>
+        <Text style={styles.sectionTitle}>لماذا العمل هنا؟</Text>
+        <View style={styles.bulletList}>
+          <Text style={styles.bulletPoint}>• برامج منظمة للعودة إلى العمل للنساء</Text>
+          <Text style={styles.bulletPoint}>• فرص للقيادة والتوجيه من قبل الأقران</Text>
+          <Text style={styles.bulletPoint}>• ترتيبات عمل مرنة وتوازن قوي بين الحياة والعمل</Text>
+          <Text style={styles.bulletPoint}>• ثقافة الابتكار والتعلم المستمر</Text>
+          <Text style={styles.bulletPoint}>• بيئة داعمة وشاملة وتعاونية</Text>
+        </View>
+      </Animated.View>
+    </ScrollView>
+  );
+}
+if (if2 === 2) {
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <Animated.View style={[styles.card, { opacity: fadeAnim, transform: [{ translateY: slideAnim }] }]}>
+        <View style={styles.headerSection}>
+          <View style={styles.iconCircle}>
+            <MaterialCommunityIcons name="bank" size={40} color="#fff" />
+          </View>
+          <Text style={styles.companyName}>פידליטי אינבסטמנטס ישראל</Text>
+          <View style={styles.tagsRow}>
+            <View style={styles.tag}><Ionicons name="location" size={14} color="#2563eb" /><Text style={styles.tagText}>ירושלים</Text></View>
+            <View style={styles.tag}><MaterialCommunityIcons name="briefcase" size={14} color="#2563eb" /><Text style={styles.tagText}>ניהול השקעות</Text></View>
+          </View>
+        </View>
+        <View style={styles.badgesRow}>
+          <View style={styles.badge}><Text style={styles.badgeText}>נשים חוזרות לעבודה</Text></View>
+          <View style={styles.badge}><Text style={styles.badgeText}>חונכות</Text></View>
+          <View style={styles.badge}><Text style={styles.badgeText}>איזון בין עבודה לחיים</Text></View>
+        </View>
+        <Text style={styles.sectionTitle}>משימה ותרבות</Text>
+        <Text style={styles.description}>
+          פידליטי אינבסטמנטס ישראל ידועה בגישתה הכוללת ובמסירות שלה להעצמת נשים במקום העבודה. החברה מספקת מסלולים מסודרים לנשים החוזרות לעבודה, יחד עם תוכניות מנהיגות, חונכות עמיתים, ומשאבי פיתוח אישי. פידליטי מעודדת איזון בין עבודה לחיים ומציעה גמישות לתמיכה בנשים גם בקריירה וגם במסעות האישיים שלהן. התרבות שלה מקדמת שיתוף פעולה, חדשנות ולמידה מתמשכת — מה שהופך אותה לסביבה מצוינת לנשים המחפשות סיפוק מקצועי במקום עבודה תומך וחדשני.
+        </Text>
+        <Text style={styles.sectionTitle}>למה לעבוד כאן?</Text>
+        <View style={styles.bulletList}>
+          <Text style={styles.bulletPoint}>• תוכניות מסודרות לחזרה לעבודה לנשים</Text>
+          <Text style={styles.bulletPoint}>• הזדמנויות למנהיגות וחונכות עמיתים</Text>
+          <Text style={styles.bulletPoint}>• סידורי עבודה גמישים ואיזון חזק בין עבודה לחיים</Text>
+          <Text style={styles.bulletPoint}>• תרבות של חדשנות ולמידה מתמשכת</Text>
+          <Text style={styles.bulletPoint}>• סביבה תומכת, מקיפה ומשתפת פעולה</Text>
+        </View>
+      </Animated.View>
+    </ScrollView>
+  );
+}
+
 }
 
 const styles = StyleSheet.create({

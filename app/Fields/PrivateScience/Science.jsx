@@ -118,6 +118,216 @@ const companies = [
 ];
 
 
+// Hebrew - if2 === 2
+const companies2 = [
+  {
+    name: 'אורמד פרמצבטיקה',
+    city: 'ירושלים',
+    description: [
+      'מפתחת פתרונות מתן תרופות דרך הפה.',
+      'מתמקדת בטיפול בסוכרת באמצעות אינסולין פומי.',
+      'תרבות חדשנית ותפקידי מחקר ביו-טכנולוגי.',
+      'נשים מעורבות בצוותים קליניים ורגולטוריים.',
+    ],
+  },
+  {
+    name: 'מעבדות איון',
+    city: 'רחובות',
+    description: [
+      'מעבדת בינה מלאכותית וביולוגיה הנתמכת על ידי מובילי פרמצבטיקה.',
+      'משלבת ענן, ביולוגיה ולמידת מכונה.',
+      'מטפחת חדשנות בסטארטאפים עם מומחי ביוטכנולוגיה.',
+      'מעודדת מייסדות ומדעניות נשים.',
+    ],
+  },
+  {
+    name: 'ביולינאריקס',
+    city: 'מודיעין',
+    description: [
+      'חברת ביופרמצבטיקה בשלב קליני המפתחת טיפולים לסרטן.',
+      'מתמקדת באימונותרפיה ומחלות נדירות.',
+      'נשים תורמות במחקר, ניסויים ותפעול.',
+      'תרבות צוות דינמית ומונעת השפעה.',
+    ],
+  },
+  {
+    name: 'אינוקן פרמה',
+    city: 'הרצליה',
+    description: [
+      'מומחית בטיפולים מבוססי קנאבינואידים.',
+      'משלבת ננוטכנולוגיה וקנאביס רפואי.',
+      'תפקידי מחקר ופיתוח וניסוח פתוחים לנשים.',
+      'תומכת בשילוב עבודה היברידית וגמישה.',
+    ],
+  },
+  {
+    name: 'איזברה לטיפול בפצעים מתקדמים',
+    city: 'תל אביב',
+    description: [
+      'מפתחת תחבושות חזה סטריליות וחד-פעמיות.',
+      'סטארטאפ בהובלת נשים המתמקד בבריאות האישה.',
+      'עיצוב בכבוד, נוחות וחדשנות.',
+      'מקדמת נשים בתפקידי מוצר, עיצוב ומכירות.',
+    ],
+  },
+  {
+    name: 'מוביל ODT',
+    city: 'תל אביב',
+    description: [
+      'משתמשת בטלפונים סלולריים לסריקת סרטן צוואר הרחם.',
+      'קולפוסקופיה דיגיטלית מבוססת AI לאזורים עם משאבים מוגבלים.',
+      'תרבות חברה ממוקדת נשים ובהשפעה.',
+      'הזדמנויות ב-AI, חוויית משתמש ואימות קליני.',
+    ],
+  },
+  {
+    name: 'ביופ מדיקל',
+    city: 'רמת גן',
+    description: [
+      'מפתחת טכנולוגיות דימות לזיהוי מוקדם של סרטן.',
+      'נשים תורמות במחקר ופיתוח ובהגעה קלינית.',
+      'ממוקדת באבחון סרטן נשים.',
+      'צוות מונע משימה וחדשנות.',
+    ],
+  },
+  {
+    name: 'אמבי',
+    city: 'תל אביב',
+    description: [
+      'אפליקציית מעקב פוריות למטופלים ולמרפאות.',
+      'מעצימה נשים באמצעות תובנות על נתוני פוריות.',
+      'סטארטאפ בהובלת נשים המתמקד בבריאות הרבייה.',
+      'תפקידי טכנולוגיה ומוצר מתאימים לנשים בתחום הבריאות הדיגיטלית.',
+    ],
+  },
+  {
+    name: 'גאלס ביואו',
+    city: 'הרצליה',
+    description: [
+      'מפתחת טמפון חכם למעקב סמני ביולוגיים של המחזור החודשי.',
+      'מקדמת חדשנות בבריאות האישה והבנת הגוף.',
+      'סטארטאפ בהובלת נשים ולנשים.',
+      'הזדמנויות בטכנולוגיה והנדסה ביולוגית.',
+    ],
+  },
+  {
+    name: 'impact.51',
+    city: 'תל אביב',
+    description: [
+      'מאיץ השפעה בתחום הטכנולוגיה הבריאותית התומך במייסדות מגוונות.',
+      'משקיע בסטארטאפים בהובלת נשים בתחום הבריאות.',
+      'מציע חונכות, מימון וכלים טכנולוגיים.',
+      'מנהיגות נשים בתחום ההשקעות, הבריאות והאסטרטגיה.',
+    ],
+  },
+];
+
+
+// Arabic - if2 === 1
+const companies1 = [
+  {
+    name: 'أوراميد للأدوية',
+    city: 'القدس',
+    description: [
+      'تطوير حلول توصيل الأدوية عن طريق الفم.',
+      'التركيز على علاج السكري بواسطة الإنسولين الفموي.',
+      'ثقافة مبتكرة وأدوار بحثية في التكنولوجيا الحيوية.',
+      'مشاركة النساء في الفرق السريرية والتنظيمية.',
+    ],
+  },
+  {
+    name: 'مختبرات أيون',
+    city: 'رحوفوت',
+    description: [
+      'مختبر الذكاء الاصطناعي والبيولوجيا مدعوم من قادة الأدوية.',
+      'يجمع بين الحوسبة السحابية والبيولوجيا والتعلم الآلي.',
+      'يشجع الابتكار في الشركات الناشئة مع خبراء التكنولوجيا الحيوية.',
+      'يدعم تأسيس النساء والعالمات.',
+    ],
+  },
+  {
+    name: 'بايو لاين آر إكس',
+    city: 'موديعين',
+    description: [
+      'شركة أدوية حيوية في المرحلة السريرية تطور علاجات للسرطان.',
+      'تركز على العلاج المناعي والأمراض النادرة.',
+      'تشارك النساء في البحث والتجارب والعمليات.',
+      'ثقافة فريق ديناميكية وموجهة نحو التأثير.',
+    ],
+  },
+  {
+    name: 'إنوكان فارما',
+    city: 'هرتسليا',
+    description: [
+      'متخصصة في العلاجات القائمة على الكانابينويد.',
+      'تدمج تقنيات النانو والقنب الطبي.',
+      'أدوار البحث والتطوير والتكوين متاحة للنساء.',
+      'تدعم جداول البحث الهجينة والمرنة.',
+    ],
+  },
+  {
+    name: 'إيزبرا للعناية بالجروح المتقدمة',
+    city: 'تل أبيب',
+    description: [
+      'تطوير ضمادات صدر معقمة وقابلة للتخلص منها.',
+      'شركة ناشئة تقودها نساء تعنى بصحة النساء.',
+      'تصاميم تجمع بين الكرامة والراحة والابتكار.',
+      'تعزز النساء في مجالات المنتج والتصميم والمبيعات.',
+    ],
+  },
+  {
+    name: 'موبايل أود تي',
+    city: 'تل أبيب',
+    description: [
+      'يستخدم الهواتف المحمولة لفحص سرطان عنق الرحم.',
+      'تنظير رقمي معزز بالذكاء الاصطناعي للمناطق ذات الموارد المحدودة.',
+      'ثقافة شركة تركز على النساء والتأثير.',
+      'فرص في الذكاء الاصطناعي وتجربة المستخدم والتحقق السريري.',
+    ],
+  },
+  {
+    name: 'بيوب ميديكال',
+    city: 'رامات جان',
+    description: [
+      'تطوير تكنولوجيا تصوير للكشف المبكر عن السرطان.',
+      'مشاركة النساء في البحث والتطوير والوصول السريري.',
+      'تركيز على تشخيص سرطانات النساء.',
+      'فريق موجه نحو المهمة والابتكار.',
+    ],
+  },
+  {
+    name: 'إمبي',
+    city: 'تل أبيب',
+    description: [
+      'تطبيق تتبع الخصوبة للمرضى والعيادات.',
+      'تمكين النساء من خلال بيانات الخصوبة.',
+      'شركة ناشئة بقيادة نسائية تركز على الصحة الإنجابية.',
+      'أدوار تقنية ومنتج مناسبة للنساء في الصحة الرقمية.',
+    ],
+  },
+  {
+    name: 'غالز بايو',
+    city: 'هرتسليا',
+    description: [
+      'تطوير سدادة ذكية لتتبع مؤشرات الحيض.',
+      'تعزيز ابتكار صحة النساء وفهم الجسم.',
+      'شركة ناشئة تديرها نساء وللنساء.',
+      'فرص في التكنولوجيا والهندسة الحيوية.',
+    ],
+  },
+  {
+    name: 'إمباكت.51',
+    city: 'تل أبيب',
+    description: [
+      'مسرّع تأثير في التكنولوجيا الصحية يدعم مؤسسات متنوعة.',
+      'يستثمر في شركات ناشئة تقودها نساء في مجال الرعاية الصحية.',
+      'يوفر الإرشاد والتمويل والأدوات التقنية.',
+      'قائدات نساء في الاستثمار والصحة والاستراتيجية.',
+    ],
+  },
+];
+
+
 export default function HealthCare() {
   const [expanded, setExpanded] = useState({});
   const [animations] = useState(companies.map(() => new Animated.Value(1)));
@@ -216,7 +426,130 @@ if(if2===0){
       </ScrollView>
     </>
   );
-}}
+}
+
+if(if2===1){
+  return (
+    <>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
+        <View style={styles.photoHeaderContainer}>
+          <Image
+            source={require('../../../assets/images/nobackgroundlogo.png')}
+            style={styles.photoHeader}
+            resizeMode="cover"
+          />
+        </View>
+
+        <View style={styles.cardsContainer}>
+          {companies1.map((company, idx) => (
+            <Animated.View
+              key={company.name}
+              style={{
+                opacity: fadeAnim,
+                transform: [{ translateY: slideAnim }, { scale: animations[idx] }],
+                marginBottom: 20,
+                width: '100%',
+              }}
+            >
+              <TouchableOpacity
+                style={styles.companyCard}
+                activeOpacity={0.9}
+                onPress={() => handleCardPress(idx, company.route)}
+              >
+                <View style={styles.cardHeader}>
+                  <View style={styles.logoContainer}>
+                    <Ionicons name="flask-outline" size={24} color="#003366" />
+                  </View>
+                  <View style={styles.companyInfo}>
+                    <Text style={styles.companyName}>{company.name}</Text>
+                    <View style={styles.locationContainer}>
+                      <Ionicons name="location" size={14} color="#6c757d" />
+                      <Text style={styles.city}>{company.city}</Text>
+                    </View>
+                  </View>
+                </View>
+
+                {expanded[idx] && (
+                  <View style={styles.expandedContent}>
+                    {company.description.map((point, i) => (
+                      <View key={i} style={styles.bulletItem}>
+                        <View style={styles.bulletCircle} />
+                        <Text style={styles.bulletText}>{point}</Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
+              </TouchableOpacity>
+            </Animated.View>
+          ))}
+        </View>
+      </ScrollView>
+    </>
+  );
+}
+
+if(if2===2){
+  return (
+    <>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
+        <View style={styles.photoHeaderContainer}>
+          <Image
+            source={require('../../../assets/images/nobackgroundlogo.png')}
+            style={styles.photoHeader}
+            resizeMode="cover"
+          />
+        </View>
+
+        <View style={styles.cardsContainer}>
+          {companies2.map((company, idx) => (
+            <Animated.View
+              key={company.name}
+              style={{
+                opacity: fadeAnim,
+                transform: [{ translateY: slideAnim }, { scale: animations[idx] }],
+                marginBottom: 20,
+                width: '100%',
+              }}
+            >
+              <TouchableOpacity
+                style={styles.companyCard}
+                activeOpacity={0.9}
+                onPress={() => handleCardPress(idx, company.route)}
+              >
+                <View style={styles.cardHeader}>
+                  <View style={styles.logoContainer}>
+                    <Ionicons name="flask-outline" size={24} color="#003366" />
+                  </View>
+                  <View style={styles.companyInfo}>
+                    <Text style={styles.companyName}>{company.name}</Text>
+                    <View style={styles.locationContainer}>
+                      <Ionicons name="location" size={14} color="#6c757d" />
+                      <Text style={styles.city}>{company.city}</Text>
+                    </View>
+                  </View>
+                </View>
+
+                {expanded[idx] && (
+                  <View style={styles.expandedContent}>
+                    {company.description.map((point, i) => (
+                      <View key={i} style={styles.bulletItem}>
+                        <View style={styles.bulletCircle} />
+                        <Text style={styles.bulletText}>{point}</Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
+              </TouchableOpacity>
+            </Animated.View>
+          ))}
+        </View>
+      </ScrollView>
+    </>
+  );
+}
+}
 
 const styles = StyleSheet.create({
   container: {

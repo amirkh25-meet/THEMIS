@@ -5,6 +5,8 @@ import { useLanguage } from '../../LanguageContext';
 
 export default function ReuthRehabilitationHospital() {
   const {if2,useIf2} = useLanguage(); 
+  
+  if(if2===0){
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.card}>
@@ -34,6 +36,70 @@ export default function ReuthRehabilitationHospital() {
       </View>
     </ScrollView>
   );
+}
+if(if2 === 1){
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.card}>
+        <MaterialCommunityIcons name="hospital-building" size={48} color="#2a5298" style={styles.icon} />
+        <Text style={styles.header}>مستشفى روث لإعادة التأهيل</Text>
+        <Text style={styles.subHeader}>تل أبيب، إسرائيل</Text>
+
+        <Text style={styles.paragraph}>
+          يقدم مستشفى روث لإعادة التأهيل في تل أبيب بيئة عمل جذابة بشكل خاص للنساء في مجال الرعاية الصحية، حيث يجمع بين <Text style={styles.highlight}>بيئة مدفوعة بالمهمة</Text> ودعم مهني قوي. باعتباره أكبر مركز إعادة تأهيل في إسرائيل، يكرس روث جهوده لمساعدة المرضى على استعادة الاستقلالية والكرامة — مما يجعله <Text style={styles.highlight}>مكانًا ذا معنى عميق للعمل.</Text>
+        </Text>
+
+        <Text style={styles.paragraph}>
+          العديد من الأدوار الأساسية في روث، بما في ذلك التمريض والعلاج الطبيعي والعلاج الوظيفي، هي <Text style={styles.highlight}>مهن يهيمن عليها النساء</Text>، ويضمن نموذج الرعاية التعاونية والمتعدد التخصصات أن تكون أصوات النساء جزءًا لا يتجزأ من نتائج المرضى.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          مع وجود حرم جامعي جديد قيد التطوير، ستتوسع فرص <Text style={styles.highlight}>التقدم والقيادة والتطوير المهني.</Text> يشتهر روث بثقافته الدافئة والشاملة، وغالبًا ما يوصف بأنها تشبه العائلة، حيث يُقدر التعاون والاحترام بشكل كبير.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          بالنسبة للنساء الباحثات عن توازن بين الحياة والعمل، تقدم العديد من الأدوار السريرية <Text style={styles.highlight}>خيارات دوام جزئي أو جداول زمنية مرنة.</Text> كمؤسسة غير ربحية، يولي روث الأولوية للممارسات الأخلاقية والشمولية بين الجنسين بشكل أكثر فعالية من الأنظمة البيروقراطية الكبيرة.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          برؤيتها المتوسعة وبيئتها الداعمة والتزامها بالرعاية المرتكزة على الإنسان، يقدم روث <Text style={styles.highlight}>فرصة جذابة للنساء</Text> اللواتي يرغبن في إحداث فرق حقيقي في مجال الرعاية الصحية مع تطوير مساراتهن المهنية.
+        </Text>
+      </View>
+    </ScrollView>
+  );
+}
+if(if2 === 2){
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.card}>
+        <MaterialCommunityIcons name="hospital-building" size={48} color="#2a5298" style={styles.icon} />
+        <Text style={styles.header}>מרכז רפואה שיקומית רות</Text>
+        <Text style={styles.subHeader}>תל אביב, ישראל</Text>
+
+        <Text style={styles.paragraph}>
+          מרכז רפואה שיקומית רות בתל אביב מציע סביבת עבודה אטרקטיבית במיוחד לנשים בתחום הבריאות, המשלבת <Text style={styles.highlight}>סביבה ממוקדת מטרה</Text> עם תמיכה מקצועית חזקה. כרשת השיקום הגדולה בישראל, רות מחויב לעזור למטופלים להשיב לעצמאות ולכבוד – מה שהופך אותו ל-<Text style={styles.highlight}>מקום עבודה בעל משמעות עמוקה.</Text>
+        </Text>
+
+        <Text style={styles.paragraph}>
+          תפקידים מרכזיים רבים ברות, כולל אחיות, פיזיותרפיה וטרפיה תעסוקתית, הם <Text style={styles.highlight}>מקצועות בהם נשים הן הרוב</Text>, ומודל הטיפול השיתופי והבין-תחומי של בית החולים מבטיח שקולם של הנשים הוא חלק בלתי נפרד מתוצאות הטיפול.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          עם קמפוס חדש משמעותי בפיתוח, צפויות הזדמנויות גוברת ל-<Text style={styles.highlight}>קידום, מנהיגות ופיתוח מקצועי.</Text> רות ידועה בתרבות החמה והכוללת שלה, המתוארת לעיתים קרובות כמשפחתית, שבה שיתופי פעולה וכבוד מוערכים מאוד.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          לנשים המחפשות איזון בין עבודה לחיים, תפקידים רבים בתחום הקליני מציעים <Text style={styles.highlight}>אפשרויות משרה חלקית או גמישות בשעות.</Text> בתור מוסד ללא מטרות רווח, רות מדגישה עקרונות אתיים ושוויון מגדרי בצורה יעילה יותר מאשר מערכות בירוקרטיות גדולות.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          עם חזון מתרחב, סביבה תומכת ומחויבות לטיפול ממוקד אדם, רות מציע <Text style={styles.highlight}>הזדמנות משמעותית לנשים</Text> המעוניינות לעשות שינוי אמיתי בתחום הבריאות תוך כדי התפתחות מקצועית.
+        </Text>
+      </View>
+    </ScrollView>
+  );
+}
+
 }
 
 const styles = StyleSheet.create({

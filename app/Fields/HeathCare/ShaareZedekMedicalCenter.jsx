@@ -5,6 +5,7 @@ import { useLanguage } from '../../LanguageContext';
 
 export default function ShaareZedekMedicalCenter() {
   const {if2,useIf2} = useLanguage(); 
+ if(if2===0){ 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.card}>
@@ -34,6 +35,72 @@ export default function ShaareZedekMedicalCenter() {
       </View>
     </ScrollView>
   );
+}
+
+if(if2 === 1){ 
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.card}>
+        <MaterialCommunityIcons name="hospital-building" size={48} color="#2a5298" style={styles.icon} />
+        <Text style={styles.header}>مركز شعاري تسيديك الطبي</Text>
+        <Text style={styles.subHeader}>القدس، إسرائيل</Text>
+
+        <Text style={styles.paragraph}>
+          يعد مركز شعاري تسيديك الطبي في القدس مكان عمل جذابًا للغاية للنساء في مجال الرعاية الصحية، حيث يقدم مزيجًا من <Text style={styles.highlight}>التفوق السريري، الفرص الأكاديمية، وثقافة شاملة وعميقة.</Text> باعتباره أحد المستشفيات التعليمية الرائدة غير الربحية في إسرائيل، يخدم المركز أكثر من نصف مليون مريض سنويًا ويشتهر بنهجه الرحيم والمركز حول المريض.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          تمثل النساء المهنيات بشكل جيد ويحصلن على دعم نشط في الأدوار القيادية والسريرية. مثال بارز هو الدكتورة شاني بالوش-شيمون، أصغر مديرة لقسم الأورام وهي تربي ثلاثة أطفال — مما يعكس التزام المستشفى بـ <Text style={styles.highlight}>تمكين النساء في الطب.</Text>
+        </Text>
+
+        <Text style={styles.paragraph}>
+          تؤكد ثقافة مكان العمل على التنوع والتعايش، حيث يعمل الموظفون اليهود والعرب جنبًا إلى جنب في جو من الاحترام المتبادل. يشمل التوسع الكبير الجاري وحدات جديدة للطوارئ، حديثي الولادة، الأطفال، وصحة المرأة، مما يوفر فرصًا متزايدة في المسارات السريرية والبحثية.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          تدعم العديد من الأدوار <Text style={styles.highlight}>ساعات عمل مرنة وتوازن بين العمل والحياة</Text>، مما يفيد النساء اللواتي يوازن بين المسؤوليات المهنية والشخصية. يصف الموظفون المستشفى بأنه تعاوني وموجه بالمهمة، حيث العمل ذو معنى والبيئة داعمة.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          بشكل عام، يوفر شعاري تسيديك منصة قوية للنساء الباحثات عن <Text style={styles.highlight}>مسارات مهنية ذات هدف</Text> في مؤسسة طبية محترمة، ديناميكية ومتطورة.
+        </Text>
+      </View>
+    </ScrollView>
+  );
+}
+
+if(if2 === 2){ 
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.card}>
+        <MaterialCommunityIcons name="hospital-building" size={48} color="#2a5298" style={styles.icon} />
+        <Text style={styles.header}>מרכז רפואי שערי צדק</Text>
+        <Text style={styles.subHeader}>ירושלים, ישראל</Text>
+
+        <Text style={styles.paragraph}>
+          מרכז רפואי שערי צדק בירושלים הוא מקום עבודה אטרקטיבי במיוחד לנשים בתחום הבריאות, המציע שילוב של <Text style={styles.highlight}>מצוינות קלינית, הזדמנויות אקדמיות ותרבות עמוקה של הכללה.</Text> כאחד מבתי החולים הלא-רווחיים המובילים בישראל, הוא מטפל בלמעלה מחצי מיליון מטופלים בשנה ומוכר בגישתו החומלת וממוקדת המטופל.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          נשים מקצועיות מיוצגות היטב ומקבלות תמיכה פעילה בתפקידים ניהוליים וקליניים. דוגמה בולטת היא ד"ר שני פלוץ-שימון, המנהלת הצעירה ביותר של מחלקת האונקולוגיה תוך כדי גידול שלושה ילדים — המשקפת את מחויבות בית החולים ל-<Text style={styles.highlight}>העצמת נשים ברפואה.</Text>
+        </Text>
+
+        <Text style={styles.paragraph}>
+          תרבות מקום העבודה מדגישה גיוון וקיום משותף, כאשר צוות יהודי וערבי עובדים יחד באווירה של כבוד הדדי. התרחבות משמעותית מתבצעת עם יחידות חדשות לטראומה, יילודים, ילדים ובריאות נשים, ומציעה הזדמנויות גדלות גם במסלולים קליניים וגם במחקר.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          תפקידים רבים תומכים ב-<Text style={styles.highlight}>שעות עבודה גמישות ואיזון בין עבודה לחיים</Text>, דבר המועיל לנשים המאזנות בין אחריות מקצועית ואישית. הצוות מתאר את בית החולים כמשתף פעולה ומונחה מטרה, שבו העבודה משמעותית והסביבה תומכת.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          בסך הכל, שערי צדק מספקת פלטפורמה חזקה לנשים המחפשות <Text style={styles.highlight}>קריירות מוכוונות מטרה</Text> במוסד רפואי מכבד, דינמי ומתפתח.
+        </Text>
+      </View>
+    </ScrollView>
+  );
+}
+
 }
 
 const styles = StyleSheet.create({

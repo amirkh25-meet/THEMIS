@@ -58,7 +58,7 @@ export default function CompanyLogin() {
       setLoading(false);
     }
   };
-
+if(if2===0){
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Company Login</Text>
@@ -88,6 +88,73 @@ export default function CompanyLogin() {
       </TouchableOpacity>
     </View>
   );
+}
+
+if (if2 === 0) {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>تسجيل دخول الشركة</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="البريد الإلكتروني"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="كلمة المرور"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+      <TouchableOpacity 
+        style={[styles.button, loading && styles.buttonDisabled]} 
+        onPress={handleLogin}
+        disabled={loading}
+      >
+        <Text style={styles.buttonText}>
+          {loading ? 'جارٍ تسجيل الدخول...' : 'تسجيل الدخول'}
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+if (if2 === 0) {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>כניסת חברה</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="אימייל"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="סיסמה"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+      <TouchableOpacity 
+        style={[styles.button, loading && styles.buttonDisabled]} 
+        onPress={handleLogin}
+        disabled={loading}
+      >
+        <Text style={styles.buttonText}>
+          {loading ? 'מתחבר...' : 'התחברות'}
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+
 }
 
 const styles = StyleSheet.create({

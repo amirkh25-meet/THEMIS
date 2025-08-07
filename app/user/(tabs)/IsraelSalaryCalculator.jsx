@@ -114,7 +114,8 @@ const IsraelSalaryCalculator = () => {
       maximumFractionDigits: 0
     }).format(amount);
   };
-
+if (if2 === 0) {
+  // English
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -122,14 +123,12 @@ const IsraelSalaryCalculator = () => {
           <Text style={styles.headerTitle}>Salary Calculator</Text>
         </View>
         <View style={styles.headerSubRow}>
-                <Text style={styles.intro}>
-        Know your worth. Enter your info to see what <Text style={styles.highlight}>salary</Text> you should aim for – and walk in with confidence.
-      </Text>
-      <Text style={styles.headerSubtitle}>* Including Israeli Tax Calculations</Text>
+          <Text style={styles.intro}>
+            Know your worth. Enter your info to see what <Text style={styles.highlight}>salary</Text> you should aim for – and walk in with confidence.
+          </Text>
+          <Text style={styles.headerSubtitle}>* Including Israeli Tax Calculations</Text>
         </View>
       </View>
-
-
 
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>Your Details</Text>
@@ -164,24 +163,21 @@ const IsraelSalaryCalculator = () => {
         />
       </View>
 
-
       <Text style={styles.label}>Job Load: {jobPercentage}%</Text>
-<Slider
-  minimumValue={10}
-  maximumValue={100}
-  step={10}
-  value={jobPercentage}
-  onValueChange={setJobPercentage}
-  minimumTrackTintColor="#ff7c8a"
-  maximumTrackTintColor="#adb5bd"
-  thumbTintColor="#ff7c8a"
-/>
+      <Slider
+        minimumValue={10}
+        maximumValue={100}
+        step={10}
+        value={jobPercentage}
+        onValueChange={setJobPercentage}
+        minimumTrackTintColor="#ff7c8a"
+        maximumTrackTintColor="#adb5bd"
+        thumbTintColor="#ff7c8a"
+      />
 
-<Text style={{ fontSize: 12, color: '#666', marginBottom: 8 }}>
-  Adjust to calculate part-time salaries based on job load.
-</Text>
-
-
+      <Text style={{ fontSize: 12, color: '#666', marginBottom: 8 }}>
+        Adjust to calculate part-time salaries based on job load.
+      </Text>
 
       <View style={styles.tableContainer}>
         <Text style={styles.tableTitle}>Salary Breakdown</Text>
@@ -206,7 +202,184 @@ const IsraelSalaryCalculator = () => {
       </View>
     </ScrollView>
   );
-};
+} else if (if2 === 1) {
+  // Arabic
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.header}>
+        <View>
+          <Text style={styles.headerTitle}>حاسبة الرواتب</Text>
+        </View>
+        <View style={styles.headerSubRow}>
+          <Text style={styles.intro}>
+            اعرف قيمتك. أدخل معلوماتك لمعرفة الراتب الذي يجب أن تستهدفه – وادخل بثقة.
+          </Text>
+          <Text style={styles.headerSubtitle}>* يشمل حسابات الضرائب الإسرائيلية</Text>
+        </View>
+      </View>
+
+      <View style={styles.card}>
+        <Text style={styles.sectionTitle}>تفاصيلك</Text>
+
+        <Text style={styles.label}>المجال المهني</Text>
+        <Picker selectedValue={field} onValueChange={setField} style={styles.picker}>
+          <Picker.Item label="تطوير البرمجيات" value="software" />
+          <Picker.Item label="الهندسة" value="engineering" />
+          <Picker.Item label="التسويق" value="marketing" />
+          <Picker.Item label="المالية" value="finance" />
+          <Picker.Item label="الرعاية الصحية" value="healthcare" />
+        </Picker>
+
+        <Text style={styles.label}>المستوى التعليمي</Text>
+        <Picker selectedValue={education} onValueChange={setEducation} style={styles.picker}>
+          <Picker.Item label="الثانوية العامة" value="highschool" />
+          <Picker.Item label="بكالوريوس" value="bachelor" />
+          <Picker.Item label="ماجستير" value="master" />
+          <Picker.Item label="دكتوراه" value="phd" />
+        </Picker>
+
+        <Text style={styles.label}>سنوات الخبرة: {experience}</Text>
+        <Slider
+          minimumValue={0}
+          maximumValue={20}
+          step={1}
+          value={experience}
+          onValueChange={setExperience}
+          minimumTrackTintColor="#ff7c8a"
+          maximumTrackTintColor="#adb5bd"
+          thumbTintColor="#ff7c8a"
+        />
+      </View>
+
+      <Text style={styles.label}>نسبة عبء العمل: {jobPercentage}%</Text>
+      <Slider
+        minimumValue={10}
+        maximumValue={100}
+        step={10}
+        value={jobPercentage}
+        onValueChange={setJobPercentage}
+        minimumTrackTintColor="#ff7c8a"
+        maximumTrackTintColor="#adb5bd"
+        thumbTintColor="#ff7c8a"
+      />
+
+      <Text style={{ fontSize: 12, color: '#666', marginBottom: 8 }}>
+        اضبط لحساب الرواتب الجزئية بناءً على عبء العمل.
+      </Text>
+
+      <View style={styles.tableContainer}>
+        <Text style={styles.tableTitle}>تفصيل الراتب</Text>
+
+        {[
+          ['الراتب الشهري الإجمالي', baseSalary],
+          ['ضريبة الدخل', taxes.incomeTax],
+          ['التأمين الوطني', taxes.nationalInsurance],
+          ['ضريبة الصحة', taxes.healthTax],
+          ['إجمالي الخصومات', taxes.total],
+          ['صافي الراتب الشهري', netSalary],
+          ['صافي الراتب السنوي', netSalary * 12],
+          ['نسبة الضريبة الفعالة', `${((taxes.total / baseSalary) * 100).toFixed(1)}%`],
+        ].map(([label, value], index) => (
+          <View key={index} style={styles.tableRow}>
+            <Text style={styles.tableCell}>{label}</Text>
+            <Text style={styles.tableCell}>
+              {typeof value === 'number' ? formatCurrency(value) : value}
+            </Text>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
+  );
+} else if (if2 === 2) {
+  // Hebrew
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.header}>
+        <View>
+          <Text style={styles.headerTitle}>מחשבון שכר</Text>
+        </View>
+        <View style={styles.headerSubRow}>
+          <Text style={styles.intro}>
+            דע את הערך שלך. הזן את הפרטים שלך כדי לראות איזה <Text style={styles.highlight}>שכר</Text> כדאי לשאוף אליו – ולצאת עם ביטחון.
+          </Text>
+          <Text style={styles.headerSubtitle}>* כולל חישובי מס ישראליים</Text>
+        </View>
+      </View>
+
+      <View style={styles.card}>
+        <Text style={styles.sectionTitle}>הפרטים שלך</Text>
+
+        <Text style={styles.label}>תחום מקצועי</Text>
+        <Picker selectedValue={field} onValueChange={setField} style={styles.picker}>
+          <Picker.Item label="פיתוח תוכנה" value="software" />
+          <Picker.Item label="הנדסה" value="engineering" />
+          <Picker.Item label="שיווק" value="marketing" />
+          <Picker.Item label="פיננסים" value="finance" />
+          <Picker.Item label="בריאות" value="healthcare" />
+        </Picker>
+
+        <Text style={styles.label}>רמת השכלה</Text>
+        <Picker selectedValue={education} onValueChange={setEducation} style={styles.picker}>
+          <Picker.Item label="תיכון" value="highschool" />
+          <Picker.Item label="תואר ראשון" value="bachelor" />
+          <Picker.Item label="תואר שני" value="master" />
+          <Picker.Item label="דוקטורט" value="phd" />
+        </Picker>
+
+        <Text style={styles.label}>שנות ניסיון: {experience}</Text>
+        <Slider
+          minimumValue={0}
+          maximumValue={20}
+          step={1}
+          value={experience}
+          onValueChange={setExperience}
+          minimumTrackTintColor="#ff7c8a"
+          maximumTrackTintColor="#adb5bd"
+          thumbTintColor="#ff7c8a"
+        />
+      </View>
+
+      <Text style={styles.label}>עומס עבודה: {jobPercentage}%</Text>
+      <Slider
+        minimumValue={10}
+        maximumValue={100}
+        step={10}
+        value={jobPercentage}
+        onValueChange={setJobPercentage}
+        minimumTrackTintColor="#ff7c8a"
+        maximumTrackTintColor="#adb5bd"
+        thumbTintColor="#ff7c8a"
+      />
+
+      <Text style={{ fontSize: 12, color: '#666', marginBottom: 8 }}>
+        כוונן לחישוב שכר חלקי בהתבסס על עומס העבודה.
+      </Text>
+
+      <View style={styles.tableContainer}>
+        <Text style={styles.tableTitle}>פירוט שכר</Text>
+
+        {[
+          ['שכר חודשי ברוטו', baseSalary],
+          ['מס הכנסה', taxes.incomeTax],
+          ['ביטוח לאומי', taxes.nationalInsurance],
+          ['מס בריאות', taxes.healthTax],
+          ['סך הניכויים', taxes.total],
+          ['שכר חודשי נטו', netSalary],
+          ['שכר שנתי נטו', netSalary * 12],
+          ['אחוז מס אפקטיבי', `${((taxes.total / baseSalary) * 100).toFixed(1)}%`],
+        ].map(([label, value], index) => (
+          <View key={index} style={styles.tableRow}>
+            <Text style={styles.tableCell}>{label}</Text>
+            <Text style={styles.tableCell}>
+              {typeof value === 'number' ? formatCurrency(value) : value}
+            </Text>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
+  );
+}
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,

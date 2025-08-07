@@ -424,6 +424,226 @@ menuItem: {
     }
   ];
 
+  
+
+  
+  const steps1 = [
+  {
+    id: 1,
+    title: "اختر صيغة السيرة الذاتية",
+    icon: <FileText color="#ffffff" size={24} />,
+    preview: "اختر بين الصيغة العكسية الزمنية أو الوظيفية",
+    tips: "• الصيغة العكسية الزمنية هي الأكثر شيوعًا والمفضلة لدى أصحاب العمل\n• الصيغة الوظيفية مناسبة لمن يغيرون مجال العمل أو لديهم فجوات\n• الصيغة المختلطة تجمع بين الطريقتين",
+    example: "الصيغة العكسية الزمنية: تسرد الخبرات من الأحدث للأقدم\nالصيغة الوظيفية: تصنف المهارات والإنجازات حسب الفئات",
+    content: {
+      title: "اختر صيغة السيرة الذاتية",
+      description:
+        "صيغة سيرتك الذاتية تحدد طريقة عرض خبراتك. اخترها بحكمة بناءً على مرحلة حياتك المهنية وأهدافك.\n\nالصيغة العكسية الزمنية هي الأكثر قبولًا وتفضيلاً من أصحاب العمل. تسرد خبراتك التعليمية والعملية من الأحدث إلى الأقدم، لتسهل على مسؤولي التوظيف متابعة تقدمك المهني.\n\nالصيغة الوظيفية تركز على المهارات والإنجازات بدلاً من التسلسل الزمني للتوظيف. مفيدة لمن لديهم فجوات وظيفية أو يغيرون مجال العمل أو يريدون التركيز على مهارات معينة."
+    }
+  },
+  {
+    id: 2,
+    title: "أضف معلومات الاتصال",
+    icon: <User color="#ffffff" size={24} />,
+    preview: "تفاصيل الاتصال الأساسية والروابط المهنية",
+    tips: "• استخدم بريد إلكتروني احترافي\n• أضف ملف لينكدإن إن وجد\n• لا تذكر العنوان الكامل - فقط المدينة والدولة\n• تأكد من تحديث رقم الهاتف",
+    example: "سارة جونسون\nsarah.johnson@email.com\n+972-50-123-4567\nتل أبيب، إسرائيل\nlinkedin.com/in/sarahjohnson",
+    content: {
+      title: "أضف معلومات الاتصال",
+      description:
+        "معلومات الاتصال هي أول ما يراه أصحاب العمل. اجعلها احترافية ومحدثة.\n\nأدرج في أعلى السيرة الذاتية:\n• الاسم الكامل كما في الوثائق الرسمية\n• بريد إلكتروني احترافي (تجنب الأسماء الغير جدية)\n• رقم هاتف (يفضل الجوال)\n• ملف لينكدإن (اختياري لكن موصى به)\n• الموقع (المدينة والدولة فقط)\n\nنصائح لعرض احترافي:\n• استخدم خط وتنسيق موحد\n• تحقق من صحة ودقة المعلومات\n• قد تضيف صورة شخصية احترافية (شائعة في بعض الدول)"
+    }
+  },
+  {
+    id: 3,
+    title: "اكتب ملخصًا شخصيًا",
+    icon: <BookOpen color="#ffffff" size={24} />,
+    preview: "صغ ملخصًا جذابًا في 2-3 جمل",
+    tips: "• اجعله موجزًا - 2-3 جمل فقط\n• ركز على ما يمكنك تقديمه، لا ما تريده\n• استخدم أفعال قوية وإنجازات محددة\n• خصصه للدور أو المجال المطلوب",
+    example: "طالبة متحمسة شغوفة بالتكنولوجيا والمساواة بين الجنسين، مع خبرة في تطوير تطبيقات الهواتف المحمولة وقيادة مشاريع ذات تأثير اجتماعي. أبحث عن فرص لتطبيق مهارات البحث وحل المشكلات في حلول تكنولوجية مبتكرة.",
+    content: {
+      title: "اكتب ملخصًا شخصيًا",
+      description:
+        "ملخصك الشخصي هو بمثابة عرض تقديمي موجز وجذاب يعرف من أنت وماذا تقدم.\n\nينبغي أن يكون الملخص:\n• من 2 إلى 3 جمل\n• مخصصًا لأهدافك وخبراتك\n• يركز على ما يمكنك تقديمه\n• مكتوبًا بصيغة نشطة\n\nقم بتضمين:\n• من أنت (دورك أو وضعك الحالي)\n• ما الذي تشعر بالشغف تجاهه\n• مهاراتك أو إنجازاتك الرئيسية\n• ما تبحث عنه\n\nتذكر: هذا غالبًا أول ما يقرأه المسؤولون عن التوظيف، فاجعله مؤثرًا!"
+    }
+  },
+  {
+    id: 4,
+    title: "أدرج تعليمك",
+    icon: <GraduationCap color="#ffffff" size={24} />,
+    preview: "الخلفية الأكاديمية والدورات ذات الصلة",
+    tips: "• أدرج الدورات ذات الصلة بالوظيفة\n• أضف الجوائز والتكريمات\n• أدرج المعدل التراكمي فقط إذا كان 3.5 أو أعلى\n• أضف تاريخ التخرج المتوقع إذا كنت لا تزال تدرس",
+    example: "برنامج MEET – علوم الحاسوب وريادة الأعمال\n2022–2025\n• دورات ذات صلة: البرمجة، تطوير الأعمال، تصميم تجربة المستخدم\n• المعدل التراكمي: 3.8/4.0\n• قائمة العميد: 2023، 2024",
+    content: {
+      title: "أدرج تعليمك",
+      description:
+        "قسم التعليم يعكس أساسك الأكاديمي والمعرفة ذات الصلة. حتى لو كنت طالبًا، هذا القسم مهم.\n\nأدرج:\n• اسم المدرسة أو البرنامج\n• سنوات الدراسة أو تاريخ التخرج المتوقع\n• الدورات ذات الصلة بالوظيفة\n• الجوائز أو التكريمات\n• المعدل التراكمي (إذا كان 3.5 أو أكثر)\n• الأنشطة اللاصفية ذات الصلة\n\nللطلبة، ركز على:\n• الدورات والمشاريع ذات الصلة\n• الإنجازات الأكاديمية\n• الأدوار القيادية في المنظمات الطلابية\n• الأبحاث أو الخبرة المخبرية\n• التدريبات أو العمل الجزئي المرتبط بالدراسة"
+    }
+  },
+  {
+    id: 5,
+    title: "سلط الضوء على الخبرات العملية أو المشاريع",
+    icon: <Briefcase color="#ffffff" size={28} />,
+    preview: "عرض المشاريع، التدريبات، والإنجازات",
+    tips: "• استخدم أفعال حركة في بداية كل نقطة\n• كَوِّن الإنجازات بأرقام إن أمكن\n• ركز على النتائج والتأثير وليس فقط المهام\n• أدرج العمل التطوعي والمشاريع ذات الصلة",
+    example: "المؤسس المشارك، Themis – شركة ذات تأثير اجتماعي\nصيف 2024\n• طورت تطبيقًا للهواتف يعالج فجوة الأجور بين الجنسين، ووصل لـ 500+ مستخدم\n• قادت مقابلات المستخدمين وحسنت تصميم تجربة المستخدم بناءً على الملاحظات\n• أدرت فريقًا من 3 مطورين ومصممين",
+    content: {
+      title: "سلط الضوء على الخبرات العملية أو المشاريع",
+      description:
+        "في هذا القسم تظهر مهاراتك العملية وإنجازاتك. حتى إذا لم يكن لديك خبرة عمل تقليدية، فالمشاريع والتدريبات تُحتسب!\n\nأدرج:\n• المسمى الوظيفي أو الدور في المشروع\n• اسم المنظمة أو المشروع\n• التواريخ (شهر/سنة)\n• 2-4 نقاط تصف الإنجازات\n\nأنواع الخبرات:\n• العمل بدوام كامل أو جزئي\n• التدريبات والتمرينات\n• الأبحاث والمشاريع المختبرية\n• العمل التطوعي\n• مشاريع دراسية ذات تأثير حقيقي\n• العمل الحر أو الاستشارات\n\nكتابة نقاط فعالة:\n• ابدأ بأفعال قوية\n• ركز على النتائج والتأثير\n• استخدم أرقامًا محددة إن أمكن\n• أبرز المهارات ذات الصلة"
+    }
+  },
+  {
+    id: 6,
+    title: "أضف المهارات",
+    icon: <Award color="#ffffff" size={28} />,
+    preview: "تصنيف المهارات التقنية والناعمة",
+    tips: "• صنف المهارات حسب الفئة (تقنية، مهارات ناعمة، لغات)\n• أدرج المهارات الصلبة والناعمة\n• كن محددًا بمستوى المهارة\n• حدّث المهارات وفقًا لمتطلبات الوظيفة",
+    example: "المهارات التقنية: Python، JavaScript، Figma، Google Analytics\nالمهارات الناعمة: القيادة، حل المشكلات، التواصل بين الثقافات\nاللغات: العبرية (اللغة الأم)، الإنجليزية (بطلاقة)، العربية (متوسط)",
+    content: {
+      title: "أضف المهارات",
+      description:
+        "قسم المهارات يعرض قدراتك ويساعدك على اجتياز أنظمة تتبع المتقدمين. نظمها بوضوح.\n\nفئات المهارات:\n• المهارات التقنية: لغات البرمجة، البرمجيات، الأدوات\n• المهارات الناعمة: التواصل، القيادة، حل المشكلات\n• اللغات: أدرج مستويات الإتقان\n• مهارات متخصصة: شهادات، منهجيات\n\nنصائح:\n• استخدم نقاط أو قائمة نظيفة\n• صنف المهارات المرتبطة معًا\n• كن صادقًا بمستوى مهارتك\n• أدرج المهارات التقنية والقابلة للنقل\n• خصص المهارات للوظيفة المطلوبة\n\nتذكر: المهارات تدعم خبرتك وتعليمك، لا تستبدلها."
+    }
+  },
+  {
+    id: 7,
+    title: "أضف أقسامًا إضافية",
+    icon: <CheckCircle color="#ffffff" size={28} />,
+    preview: "اللغات، الجوائز، التطوع، والمزيد",
+    tips: "• أدرج فقط الأقسام التي تضيف قيمة\n• اجعل الأقسام الإضافية موجزة وذات صلة\n• استخدم تنسيقًا موحدًا\n• راعِ ثقافة الشركة عند الاختيار",
+    example: "اللغات: العبرية (الأم)، الإنجليزية (بطلاقة)، العربية (متوسط)\nالجوائز: جائزة الطالب المتفوق 2024، الفائز في الهاكاثون 2023\nالتطوع: مرشد تقني في Girls Who Code، 2023-حتى الآن",
+    content: {
+      title: "أضف أقسامًا إضافية",
+      description:
+        "الأقسام الإضافية تميزك عن غيرك وتُظهر خلفيتك المتنوعة. اختر الأقسام ذات الصلة بالوظيفة والشركة.\n\nالأقسام الاختيارية:\n• اللغات مع مستويات الإتقان\n• الجوائز والتكريمات\n• الشهادات والتدريب\n• المنشورات والعروض\n• العمل التطوعي\n• العضويات المهنية\n• الهوايات والاهتمامات (إذا كانت ذات صلة)\n• المشاريع والمحفظة\n\nإرشادات:\n• أدرج فقط ما يضيف قيمة\n• اجعلها منظمة وموجزة\n• استخدم تنسيقًا موحدًا\n• ضع في الاعتبار ثقافة وقيم الشركة\n• حدّثها حسب الدور المتقدم إليه"
+    }
+  },
+  {
+    id: 8,
+    title: "نسّق سيرتك الذاتية باحترافية",
+    icon: <Settings color="#ffffff" size={28} />,
+    preview: "نصائح للعرض النهائي والتنسيق",
+    tips: "• اجعلها من صفحة إلى صفحتين كحد أقصى\n• استخدم خطوطًا احترافية (Arial، Calibri، Times New Roman)\n• حافظ على تباعد واتساق التنسيق\n• احفظها بصيغة PDF للحفاظ على التنسيق\n• راجعها جيدًا عدة مرات",
+    example: "التنسيق: تصميم نظيف واحترافي مع تباعد منتظم\nالخط: Arial بحجم 11 للنص، 14 للعناوين\nالطول: صفحة واحدة\nصيغة الملف: PDF",
+    content: {
+      title: "نسّق سيرتك الذاتية باحترافية",
+      description:
+        "التنسيق الاحترافي يجعل سيرتك الذاتية سهلة القراءة ويترك انطباعًا إيجابيًا. التنسيق السيء قد يطغى على محتوى جيد.\n\nإرشادات التنسيق:\n• اجعلها صفحة واحدة (خاصة للطلاب والمبتدئين)\n• استخدم خطوطًا احترافية: Arial، Calibri، Times New Roman\n• حافظ على تباعد وتنظيم متسق\n• استخدم عناوين واضحة\n• وفر مساحات بيضاء مناسبة\n• احفظ بصيغة PDF للحفاظ على التنسيق\n\nالقائمة النهائية:\n• راجع الأخطاء الإملائية والنحوية\n• تأكد من صحة معلومات الاتصال\n• تحقق من الاتساق في التنسيق\n• تحقق من فتح الملف بشكل صحيح\n• اختبر مظهرها عند الطباعة\n\nتذكر: سيرتك الذاتية هي الانطباع الأول، والتنسيق الاحترافي يظهر اهتمامك ودقتك."
+    }
+  }
+];
+
+
+
+const steps2 = [
+  {
+    id: 1,
+    title: "בחר פורמט קורות חיים",
+    icon: <FileText color="#ffffff" size={24} />,
+    preview: "בחר בין פורמט כרונולוגי הפוך או פונקציונלי",
+    tips: "• הפורמט הכרונולוגי ההפוך הוא הנפוץ ביותר והמועדף על מעסיקים\n• הפורמט הפונקציונלי מתאים למי שמחליפים תחום עבודה או שיש להם פערים\n• הפורמט המעורב משלב בין שתי השיטות",
+    example: "פורמט כרונולוגי הפוך: מציג ניסיון מהחדש ביותר לישן ביותר\nפורמט פונקציונלי: מסווג מهארות והישגים לפי קטגוריות",
+    content: {
+      title: "בחר פורמט קורות חיים",
+      description:
+        "פורמט קורות החיים שלך קובע את הדרך בה מוצג הניסיון שלך. בחר בחכמה בהתבסס על שלב הקריירה שלך ויעדיך.\n\nהפורמט הכרונולוגי ההפוך הוא המקובל ביותר והמועדף על מעסיקים. הוא מציג את הניסיון החינוכי והמקצועי שלך מהחדש ביותר לישן ביותר, כדי להקל על גורמי הגיוס לעקוב אחר התקדמותך המקצועית.\n\nהפורמט הפונקציונלי מתמקד במהארות והישגים במקום בסדר הכרונולוגי של העבודות. שימושי למי שיש להם פערים תעסוקתיים או מחליפים תחום עבודה או רוצים להתמקד במהארות מסוימות."
+    }
+  },
+  {
+    id: 2,
+    title: "הוסף פרטי התקשרות",
+    icon: <User color="#ffffff" size={24} />,
+    preview: "פרטי התקשרות בסיסיים וקישורים מקצועיים",
+    tips: "• השתמש בדואר אלקטרוני מקצועי\n• הוסף פרופיל לינקדאין אם קיים\n• אל תציין את הכתובת המלאה - רק עיר ומדינה\n• ודא שמספר הטלפון מעודכן",
+    example: "שרה ג'ונסון\nsarah.johnson@email.com\n+972-50-123-4567\nתל אביב, ישראל\nlinkedin.com/in/sarahjohnson",
+    content: {
+      title: "הוסף פרטי התקשרות",
+      description:
+        "פרטי ההתקשרות הם הדבר הראשון שמעסיקים רואים. הפוך אותם למקצועיים ומעודכנים.\n\nכלול בחלק העליון של קורות החיים:\n• שם מלא כמו במסמכים רשמיים\n• דואר אלקטרוני מקצועי (הימנע משמות לא רציניים)\n• מספר טלפון (רצוי נייד)\n• פרופיל לינקדאין (אופציונלי אך מומלץ)\n• מיקום (עיר ומדינה בלבד)\n\nטיפים לתצוגה מקצועית:\n• השתמש בגופן ועיצוב אחיד\n• בדוק שהמידע נכון ומדויק\n• ניתן להוסיף תמונה אישית מקצועית (נהוג במדינות מסוימות)"
+    }
+  },
+  {
+    id: 3,
+    title: "כתוב תקציר אישי",
+    icon: <BookOpen color="#ffffff" size={24} />,
+    preview: "נסח תקציר מושך ב-2-3 משפטים",
+    tips: "• שמור על קיצור - 2-3 משפטים בלבד\n• התמקד במה שאתה יכול לתרום, לא במה שאתה רוצה\n• השתמש בפעלים חזקים והישגים ספציפיים\n• התאם אותו לתפקיד או התחום הרצוי",
+    example: "סטודנטית נלהבת עם תשוקה לטכנולוגיה ושוויון מגדרי, עם ניסיון בפיתוח אפליקציות נייד והובלת פרויקטים עם השפעה חברתית. מחפשת הזדמנויות ליישם כישורי מחקר ופתרון בעיות בפתרונות טכנולוגיים חדשניים.",
+    content: {
+      title: "כתוב תקציר אישי",
+      description:
+        "התקציר האישי שלך הוא כמו מצגת קצרה ומושכת שמציגה מי אתה ומה אתה מביא.\n\nהתקציר צריך להיות:\n• בן 2 עד 3 משפטים\n• מותאם ליעדים ולניסיון שלך\n• מתמקד במה שאתה יכול לתרום\n• כתוב בצורה פעילה\n\nכלול:\n• מי אתה (התפקיד או המצב הנוכחי שלך)\n• מה מלהיב אותך\n• המהארות או ההישגים המרכזיים שלך\n• מה אתה מחפש\n\nזכור: זה לעתים קרובות הדבר הראשון שאחראי גיוס קורא, אז הפוך אותו למשפיע!"
+    }
+  },
+  {
+    id: 4,
+    title: "פרט את ההשכלה שלך",
+    icon: <GraduationCap color="#ffffff" size={24} />,
+    preview: "רקע אקדמי וקורסים רלוונטיים",
+    tips: "• פרט קורסים הרלוונטיים לתפקיד\n• הוסף פרסים והכרות\n• פרט ממוצע ציונים רק אם הוא 3.5 או גבוה יותר\n• הוסף תאריך סיום צפוי אם עדיין לומד",
+    example: "תוכנית MEET – מדעי המחשב ויזמות\n2022–2025\n• קורסים רלוונטיים: תכנות, פיתוח עסקי, עיצוב חוויית משתמש\n• ממוצע ציונים: 3.8/4.0\n• רשימת דיקן: 2023, 2024",
+    content: {
+      title: "פרט את ההשכלה שלך",
+      description:
+        "קטע ההשכלה משקף את הבסיס האקדמי והידע הרלוונטי שלך. גם אם אתה סטודנט, הקטע הזה חשוב.\n\nפרט:\n• שם בית הספר או התוכנית\n• שנות לימוד או תאריך סיום צפוי\n• קורסים רלוונטיים לעבודה\n• פרסים או הכרות\n• ממוצע ציונים (אם 3.5 או יותר)\n• פעילויות חוץ-לימודיות רלוונטיות\n\nלסטודנטים, התמקד ב:\n• קורסים ופרויקטים רלוונטיים\n• הישגים אקדמיים\n• תפקידי מנהיגות בארגוני סטודנטים\n• מחקר או ניסיון במעבדה\n• סטז'ים או עבודה חלקית הקשורה ללימודים"
+    }
+  },
+  {
+    id: 5,
+    title: "הדגש ניסיון מעשי או פרויקטים",
+    icon: <Briefcase color="#ffffff" size={28} />,
+    preview: "הצגת פרויקטים, סטז'ים והישגים",
+    tips: "• השתמש בפעלי פעולה בתחילת כל נקודה\n• כמת הישגים במספרים כשניתן\n• התמקד בתוצאות והשפעה ולא רק במשימות\n• כלול עבודה התנדבותית ופרויקטים רלוונטיים",
+    example: "מייסד שותף, Themis – חברה עם השפעה חברתית\nקיץ 2024\n• פיתחתי אפליקציה לנייד שמטפלת בפער השכר בין המינים, הגיעה ל-500+ משתמשים\n• הובלתי ראיונות משתמשים ושיפרתי עיצוב חוויית משתמש על בסיס משוב\n• ניהלתי צוות של 3 מפתחים ומעצבים",
+    content: {
+      title: "הדגש ניסיון מעשי או פרויקטים",
+      description:
+        "בקטע הזה אתה מציג את הכישורים המעשיים וההישגים שלך. גם אם אין לך ניסיון עבודה מסורתי, פרויקטים וסטז'ים נחשבים!\n\nפרט:\n• כותרת המשרה או התפקיד בפרויקט\n• שם הארגון או הפרויקט\n• תאריכים (חודש/שנה)\n• 2-4 נקודות שמתארות הישגים\n\nסוגי ניסיון:\n• עבודה במשרה מלאה או חלקית\n• סטז'ים והתמחויות\n• מחקר ופרויקטי מעבדה\n• עבודה התנדבותית\n• פרויקטים לימודיים עם השפעה אמיתית\n• עבודה עצמאית או ייעוץ\n\nכתיבת נקודות יעילה:\n• התחל בפעלים חזקים\n• התמקד בתוצאות והשפעה\n• השתמש במספרים ספציפיים כשניתן\n• הדגש כישורים רלוונטיים"
+    }
+  },
+  {
+    id: 6,
+    title: "הוסף מהארות",
+    icon: <Award color="#ffffff" size={28} />,
+    preview: "סיווג מהארות טכניות ורכות",
+    tips: "• סווג מהארות לפי קטגוריה (טכניות, מהארות רכות, שפות)\n• פרט מהארות קשות ורכות\n• היה ספציפי לגבי רמת המיומנות\n• עדכן מהארות לפי דרישות התפקיד",
+    example: "מהארות טכניות: Python, JavaScript, Figma, Google Analytics\nמהארות רכות: מנהיגות, פתרון בעיות, תקשורת בין-תרבותית\nשפות: עברית (שפת אם), אנגלית (רהוטה), ערבית (בינונית)",
+    content: {
+      title: "הוסף מהארות",
+      description:
+        "קטע המהארות מציג את היכולות שלך ועוזר לך לעבור מערכות מעקב מועמדים. ארגן אותן בבירור.\n\nקטגוריות מהארות:\n• מהארות טכניות: שפות תכנות, תוכנות, כלים\n• מהארות רכות: תקשורת, מנהיגות, פתרון בעיות\n• שפות: פרט רמות בקיאות\n• מהארות מתמחות: הסמכות, מתודולוגיות\n\nטיפים:\n• השתמש בנקודות או רשימה נקייה\n• סווג מהארות קשורות יחדיו\n• היה כנה לגבי רמת המיומנות שלך\n• כלול מהארות טכניות וניידות\n• התאם מהארות לתפקיד הרצוי\n\nזכור: מהארות תומכות בניסיון ובחינוך שלך, לא מחליפות אותם."
+    }
+  },
+  {
+    id: 7,
+    title: "הוסף קטעים נוספים",
+    icon: <CheckCircle color="#ffffff" size={28} />,
+    preview: "שפות, פרסים, התנדבות ועוד",
+    tips: "• כלול רק קטעים שמוסיפים ערך\n• שמור על קטעים נוספים קצרים ורלוונטיים\n• השתמש בעיצוב אחיד\n• שקול את תרבות החברה בעת הבחירה",
+    example: "שפות: עברית (שפת אם), אנגלית (רהוטה), ערבית (בינונית)\nפרסים: פרס הסטודנט המצטיין 2024, זוכה בהקאתון 2023\nהתנדבות: מדריכה טכנית ב-Girls Who Code, 2023-עד היום",
+    content: {
+      title: "הוסף קטעים נוספים",
+      description:
+        "קטעים נוספים מייחדים אותך מאחרים ומציגים את הרקע המגוון שלך. בחר קטעים רלוונטיים לתפקיד ולחברה.\n\nקטעים אופציונליים:\n• שפות עם רמות בקיאות\n• פרסים והכרות\n• הסמכות והכשרה\n• פרסומים ומצגות\n• עבודה התנדבותית\n• חברות מקצועיות\n• תחביבים ועניינים (אם רלוונטיים)\n• פרויקטים ותיק עבודות\n\nהנחיות:\n• כלול רק מה שמוסיף ערך\n• שמור על ארגון וקיצור\n• השתמש בעיצוב אחיד\n• שקול את תרבות וערכי החברה\n• עדכן לפי התפקיד אליו מתמודד"
+    }
+  },
+  {
+    id: 8,
+    title: "עצב את קורות החיים שלך במקצועיות",
+    icon: <Settings color="#ffffff" size={28} />,
+    preview: "טיפים לתצוגה סופית ועיצוב",
+    tips: "• שמור על עמוד אחד עד שני עמודים לכל היותר\n• השתמש בגופנים מקצועיים (Arial, Calibri, Times New Roman)\n• שמור על ריווח ועקביות בעיצוב\n• שמור בפורמט PDF לשמירה על העיצוב\n• בדוק היטב מספר פעמים",
+    example: "עיצוב: עיצוב נקי ומקצועי עם ריווח סדיר\nגופן: Arial בגודל 11 לטקסט, 14 לכותרות\nאורך: עמוד אחד\nפורמט קובץ: PDF",
+    content: {
+      title: "עצב את קורות החיים שלך במקצועיות",
+      description:
+        "עיצוב מקצועי הופך את קורות החיים שלך לקלים לקריאה ומשאיר רושם חיובי. עיצוב גרוע עלול להעליב תוכן טוב.\n\nהנחיות עיצוב:\n• שמור על עמוד אחד (במיוחד לסטודנטים ומתחילים)\n• השתמש בגופנים מקצועיים: Arial, Calibri, Times New Roman\n• שמור על ריווח וארגון עקבי\n• השתמש בכותרות ברורות\n• ספק רווחים לבנים מתאימים\n• שמור בפורמט PDF לשמירה על העיצוב\n\nרשימת בדיקה סופית:\n• בדוק שגיאות כתיב ודקדוק\n• ודא שפרטי ההתקשרות נכונים\n• וודא עקביות בעיצוב\n• בדוק שהקובץ נפתח כראוי\n• בחן את המראה בעת הדפסה\n\nזכור: קורות החיים שלך הם הרושם הראשון, ועיצוב מקצועי מראה על תשומת הלב והדיוק שלך."
+    }
+  }
+];
+
+
   const progressPercentage = (completedSteps.size / steps.length) * 100;
 
   const StepsList = () => (
@@ -532,11 +752,240 @@ menuItem: {
     </ScrollView>
   );
 
+
+
+  const StepsList1 = () => (
+    <ScrollView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Resume Guide</Text>
+        <Text style={styles.headerSubtitle}>Master resume writing in 8 comprehensive steps</Text>
+        
+        <View style={styles.progressContainer}>
+          <Text style={styles.progressText}>
+            {completedSteps.size} / {steps1.length} 
+          </Text>
+          <View style={styles.progressBar}>
+            <View style={[styles.progressFill, { width: `${progressPercentage}%` }]} />
+          </View>
+        </View>
+      </View>
+
+      <ScrollView contentContainerStyle={styles.stepsList}>
+        {steps1.map((step, index) => (
+          <Animated.View
+            key={step.id}
+            style={{
+              opacity: fadeAnim,
+              transform: [{ translateY: slideAnim }],
+            }}
+          >
+            <TouchableOpacity
+              style={[
+                styles.stepCard,
+                completedSteps.has(step.id) && styles.stepCardCompleted
+              ]}
+              onPress={() => setCurrentStep(step)}
+              activeOpacity={0.9}
+            >
+              <View style={styles.stepCardContent}>
+                <View style={[
+                  styles.stepIcon,
+                  completedSteps.has(step.id) && styles.stepIconCompleted
+                ]}>
+                  {completedSteps.has(step.id) ? (
+                    <CheckCircle color="#ffffff" size={28} />
+                  ) : (
+                    step.icon
+                  )}
+                </View>
+                <View style={styles.stepInfo}>
+                  <Text style={styles.stepNumber}>Step {step.id}</Text>
+                  <Text style={styles.stepTitle}>{step.title}</Text>
+                  <Text style={styles.stepPreview}>{step.preview}</Text>
+                  {completedSteps.has(step.id) && (
+                    <View style={styles. stepStatus}>
+                      <CheckCircle color="#ff7c8a" size={18} />
+                      <Text style={styles.stepStatusText}>Completed</Text>
+                    </View>
+                  )}
+                </View>
+                <ArrowRight color="#041E42FF" size={24} />
+              </View>
+            </TouchableOpacity>
+          </Animated.View>
+        ))}
+      </ScrollView>
+    </ScrollView>
+  );
+
+  const StepDetail1 = ({ step }) => (
+    <ScrollView style={styles.detailContainer}>
+      <StatusBar barStyle="dark-content" backgroundColor="#fdf2f8" />
+      <View style={styles.detailHeader}>
+        <TouchableOpacity 
+          style={styles.backButton}
+          onPress={() => setCurrentStep(null)}
+        >
+          <ChevronLeft color="#041E42FF" size={24} />
+          <Text style={styles.backButtonText}>Back to Steps</Text>
+        </TouchableOpacity>
+        <Text style={styles.detailTitle}>{step.content.title}</Text>
+      </View>
+      
+      <ScrollView contentContainerStyle={styles.detailContent}>
+        <Text style={styles.detailDescription}>{step.content.description}</Text>
+        
+        <View style={styles.tipsContainer}>
+          <Text style={styles.tipsTitle}>💡 Pro Tips</Text>
+          <Text style={styles.tipsText}>{step.tips}</Text>
+        </View>
+        
+        <View style={styles.exampleContainer}>
+          <Text style={styles.exampleTitle}>📝 Example</Text>
+          <Text style={styles.exampleText}>{step.example}</Text>
+        </View>
+        
+        {!completedSteps.has(step.id) && (
+          <TouchableOpacity
+            style={styles.completeButton}
+            onPress={() => {
+              markStepComplete(step.id);
+              setCurrentStep(null);
+            }}
+          >
+            <Text style={styles.completeButtonText}>Mark as Complete</Text>
+          </TouchableOpacity>
+        )}
+      </ScrollView>
+    </ScrollView>
+  );
+
+  const StepsList2 = () => (
+    <ScrollView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Resume Guide</Text>
+        <Text style={styles.headerSubtitle}>Master resume writing in 8 comprehensive steps</Text>
+        
+        <View style={styles.progressContainer}>
+          <Text style={styles.progressText}>
+            {completedSteps.size} / {steps2.length} 
+          </Text>
+          <View style={styles.progressBar}>
+            <View style={[styles.progressFill, { width: `${progressPercentage}%` }]} />
+          </View>
+        </View>
+      </View>
+
+      <ScrollView contentContainerStyle={styles.stepsList}>
+        {steps.map((step, index) => (
+          <Animated.View
+            key={step.id}
+            style={{
+              opacity: fadeAnim,
+              transform: [{ translateY: slideAnim }],
+            }}
+          >
+            <TouchableOpacity
+              style={[
+                styles.stepCard,
+                completedSteps.has(step.id) && styles.stepCardCompleted
+              ]}
+              onPress={() => setCurrentStep(step)}
+              activeOpacity={0.9}
+            >
+              <View style={styles.stepCardContent}>
+                <View style={[
+                  styles.stepIcon,
+                  completedSteps.has(step.id) && styles.stepIconCompleted
+                ]}>
+                  {completedSteps.has(step.id) ? (
+                    <CheckCircle color="#ffffff" size={28} />
+                  ) : (
+                    step.icon
+                  )}
+                </View>
+                <View style={styles.stepInfo}>
+                  <Text style={styles.stepNumber}>Step {step.id}</Text>
+                  <Text style={styles.stepTitle}>{step.title}</Text>
+                  <Text style={styles.stepPreview}>{step.preview}</Text>
+                  {completedSteps.has(step.id) && (
+                    <View style={styles. stepStatus}>
+                      <CheckCircle color="#ff7c8a" size={18} />
+                      <Text style={styles.stepStatusText}>Completed</Text>
+                    </View>
+                  )}
+                </View>
+                <ArrowRight color="#041E42FF" size={24} />
+              </View>
+            </TouchableOpacity>
+          </Animated.View>
+        ))}
+      </ScrollView>
+    </ScrollView>
+  );
+
+  const StepDetai2 = ({ step }) => (
+    <ScrollView style={styles.detailContainer}>
+      <StatusBar barStyle="dark-content" backgroundColor="#fdf2f8" />
+      <View style={styles.detailHeader}>
+        <TouchableOpacity 
+          style={styles.backButton}
+          onPress={() => setCurrentStep(null)}
+        >
+          <ChevronLeft color="#041E42FF" size={24} />
+          <Text style={styles.backButtonText}>Back to Steps</Text>
+        </TouchableOpacity>
+        <Text style={styles.detailTitle}>{step.content.title}</Text>
+      </View>
+      
+      <ScrollView contentContainerStyle={styles.detailContent}>
+        <Text style={styles.detailDescription}>{step.content.description}</Text>
+        
+        <View style={styles.tipsContainer}>
+          <Text style={styles.tipsTitle}>💡 Pro Tips</Text>
+          <Text style={styles.tipsText}>{step.tips}</Text>
+        </View>
+        
+        <View style={styles.exampleContainer}>
+          <Text style={styles.exampleTitle}>📝 Example</Text>
+          <Text style={styles.exampleText}>{step.example}</Text>
+        </View>
+        
+        {!completedSteps.has(step.id) && (
+          <TouchableOpacity
+            style={styles.completeButton}
+            onPress={() => {
+              markStepComplete(step.id);
+              setCurrentStep(null);
+            }}
+          >
+            <Text style={styles.completeButtonText}>Mark as Complete</Text>
+          </TouchableOpacity>
+        )}
+      </ScrollView>
+    </ScrollView>
+  );
+if(if2===0){
   return (
     <View style={{ flex: 1 }}>
       {currentStep ? <StepDetail step={currentStep} /> : <StepsList />}
     </View>
   );
 };
+  if(if2===1){
+  return (
+    <View style={{ flex: 1 }}>
+      {currentStep ? <StepDetail1 step={currentStep} /> : <StepsList1 />}
+    </View>
+  );
+};
+
+if(if2===2){
+  return (
+    <View style={{ flex: 1 }}>
+      {currentStep ? <StepDetail2 step={currentStep} /> : <StepsList2 />}
+    </View>
+  );
+};}
 
 export default ResumeGuideApp;

@@ -5,6 +5,8 @@ import { useLanguage } from '../../LanguageContext';
 
 export default function RaphaelHospitals() {
   const {if2,useIf2} = useLanguage(); 
+ 
+ if(if2===0){
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.card}>
@@ -38,6 +40,83 @@ export default function RaphaelHospitals() {
       </View>
     </ScrollView>
   );
+}
+
+if(if2 === 1){
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.card}>
+        <MaterialCommunityIcons name="hospital-building" size={48} color="#2a5298" style={styles.icon} />
+        <Text style={styles.header}>مستشفيات رافائيل</Text>
+        <Text style={styles.subHeader}>تل أبيب، إسرائيل</Text>
+
+        <Text style={styles.paragraph}>
+          مستشفيات رافائيل في تل أبيب هي <Text style={styles.highlight}>مركز طبي خاص حديث</Text> معروف بـ <Text style={styles.highlight}>التقنيات المتقدمة</Text> والرعاية الشخصية والتركيز على الابتكار. يقدم أدوات جراحية متطورة مثل <Text style={styles.highlight}>الأنظمة الروبوتية</Text> لإجراءات العظام والتنظير البطني، مما يخلق بيئة متقدمة للغاية.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          على الرغم من صغر حجمه مقارنة بالمستشفيات العامة الكبرى، تعزز رافائيل <Text style={styles.highlight}>ثقافة فريق متعدد التخصصات مترابطة</Text> تجمع بين الدقة السريرية والاهتمام العميق برفاهية المرضى.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          بالنسبة للنساء في مجال الرعاية الصحية، تقدم رافائيل بيئة تقدر <Text style={styles.highlight}>التعاطف، التعاون، والتفوق السريري</Text>، مع فرص للنمو في المجالات التقنية والمتخصصة.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          حجمها البوتيكي وإعدادها الخاص يسمحان بـ <Text style={styles.highlight}>المرونة، التقدير الشخصي،</Text> وتوازن أفضل بين الحياة والعمل. تزدهر النساء في التمريض والتخدير والتشخيص والمساعدة الجراحية في ثقافة تؤكد على <Text style={styles.highlight}>العمل الجماعي والذكاء العاطفي.</Text>
+        </Text>
+
+        <Text style={styles.paragraph}>
+          رغم أن سياسات المساواة بين الجنسين غير معلنة علنًا، فإن النهج الشامل والمحترم لرافائيل يشير إلى ثقافة حيث <Text style={styles.highlight}>مساهمات النساء ضرورية وتحظى بالاحترام.</Text>
+        </Text>
+
+        <Text style={styles.paragraph}>
+          للنساء الباحثات عن <Text style={styles.highlight}>مكان عمل مرضٍ، تقدمي، وداعم</Text> في مؤسسة طبية متطلعة للمستقبل، تقدم مستشفيات رافائيل فرصة جذابة.
+        </Text>
+      </View>
+    </ScrollView>
+  );
+}
+
+
+if(if2 === 2){
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.card}>
+        <MaterialCommunityIcons name="hospital-building" size={48} color="#2a5298" style={styles.icon} />
+        <Text style={styles.header}>בתי החולים רפאל</Text>
+        <Text style={styles.subHeader}>תל אביב, ישראל</Text>
+
+        <Text style={styles.paragraph}>
+          בתי החולים רפאל בתל אביב הם <Text style={styles.highlight}>מרכז רפואי פרטי מודרני</Text> הידוע ב-<Text style={styles.highlight}>טכנולוגיות מתקדמות</Text>, טיפול מותאם אישית ודגש על חדשנות. הוא מציע כלים כירורגיים מתקדמים כגון <Text style={styles.highlight}>מערכות רובוטיות</Text> לניתוחים אורטופדיים ולפרוסקופיים, היוצרים סביבה חדשנית.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          למרות היותו קטן יותר בהיקפו מבתי חולים ציבוריים גדולים, רפאל מקדם <Text style={styles.highlight}>תרבות צוות רב-תחומית מלוכדת</Text> שמשלבת דיוק קליני עם תשומת לב עמוקה לרווחת המטופלים.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          לנשים בתחום הבריאות, רפאל מציע סביבה המעריכה <Text style={styles.highlight}>חמלה, שיתוף פעולה ומצוינות קלינית</Text>, עם הזדמנויות לצמיחה בתחומים טכנולוגיים ומיוחדים.
+        </Text>
+
+        <Text style={styles.paragraph}>
+          גודלו הבוטיקי וההקשר הפרטי מאפשרים <Text style={styles.highlight}>גמישות, הכרה אישית</Text> ואיזון טוב יותר בין עבודה לחיים. נשים בתפקידים כמו סיעוד, הרדמה, אבחון וסיוע כירורגי פורחות בתרבות המדגישה <Text style={styles.highlight}>עבודת צוות ואינטליגנציה רגשית.</Text>
+        </Text>
+
+        <Text style={styles.paragraph}>
+          למרות שעדיין לא פורסמו מדיניות שוויון מגדרי, הגישה הכוללת והמורכבת של רפאל מציעה תרבות שבה <Text style={styles.highlight}>התרומות של נשים הן חיוניות ומכובדות.</Text>
+        </Text>
+
+        <Text style={styles.paragraph}>
+          לנשים המחפשות <Text style={styles.highlight}>מקום עבודה מספק, מתקדם ותומך</Text> במוסד רפואי מבטיח, בתי החולים רפאל מציעים הזדמנות משמעותית.
+        </Text>
+      </View>
+    </ScrollView>
+  );
+}
+
+
+
 }
 
 const styles = StyleSheet.create({

@@ -8,13 +8,15 @@ export default function NegotiationSimulatorPage() {
     Linking.openURL('https://app.cesura.ai/sim/4d091003-9abc-4700-8686-cb29c97fb88e');
   };
 const {if2,useIf2} = useLanguage(); 
+if (if2 === 0) {
+  // English
   return (
     <ScrollView contentContainerStyle={styles.container}>
-        <Image
-          source={require('../../../assets/images/pinklogo.png')}
-          style={styles.logo}
-          resizeMode="contain"
-        />
+      <Image
+        source={require('../../../assets/images/pinklogo.png')}
+        style={styles.logo}
+        resizeMode="contain"
+      />
 
       <Text style={styles.heading}>Ready to Get What You Deserve?</Text>
       <Text style={styles.subheading}>
@@ -31,6 +33,57 @@ const {if2,useIf2} = useLanguage();
       </TouchableOpacity>
     </ScrollView>
   );
+} else if (if2 === 1) {
+  // Arabic
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <Image
+        source={require('../../../assets/images/pinklogo.png')}
+        style={styles.logo}
+        resizeMode="contain"
+      />
+
+      <Text style={styles.heading}>هل أنت مستعدة للحصول على ما تستحقينه؟</Text>
+      <Text style={styles.subheading}>
+        الآن بعد أن تعرفت على راتبك المستهدف وشروطه، حان الوقت لممارسة كيفية طلبها.
+      </Text>
+
+      <Text style={styles.description}>
+        تساعدك محاكاة التفاوض المدعومة بالذكاء الاصطناعي على ممارسة المحادثات مع صاحب عمل افتراضي، تحسين استراتيجيتك، وبناء الثقة — حتى تكوني جاهزة عند التفاوض الحقيقي.
+      </Text>
+
+      <TouchableOpacity style={styles.button} onPress={openSimulator}>
+        <Ionicons name="rocket-outline" size={20} color="#ff7c8a" />
+        <Text style={styles.buttonText}>ابدأي المحاكاة</Text>
+      </TouchableOpacity>
+    </ScrollView>
+  );
+} else if (if2 === 2) {
+  // Hebrew
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <Image
+        source={require('../../../assets/images/pinklogo.png')}
+        style={styles.logo}
+        resizeMode="contain"
+      />
+
+      <Text style={styles.heading}>מוכנה לקבל את מה שאת ראויה לו?</Text>
+      <Text style={styles.subheading}>
+        עכשיו כשאת יודעת מה שכר היעד והתנאים שלך, הגיע הזמן לתרגל איך לבקש אותם.
+      </Text>
+
+      <Text style={styles.description}>
+        סימולטור המשא ומתן המופעל על ידי AI שלנו עוזר לך לתרגל שיחות עם מעסיק וירטואלי, לשפר את האסטרטגיה ולבנות ביטחון — כך שכשתגיעי למשא ומתן אמיתי, תהיי מוכנה.
+      </Text>
+
+      <TouchableOpacity style={styles.button} onPress={openSimulator}>
+        <Ionicons name="rocket-outline" size={20} color="#ff7c8a" />
+        <Text style={styles.buttonText}>התחילי סימולציה</Text>
+      </TouchableOpacity>
+    </ScrollView>
+  );
+}
 }
 
 const styles = StyleSheet.create({
