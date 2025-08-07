@@ -1,7 +1,7 @@
 import { Entypo, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import {
   Animated,
   Dimensions,
@@ -11,13 +11,16 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  ImageBackground,
 } from 'react-native';
 import { databases, account } from '../../../assets/appwrite1';
 
-const { width, height } = Dimensions.get('window');
 
-// Define sections data inside the component file
+const { width, height } = Dimensions.get('window');
+const AnimatedImageBackground = Animated.createAnimatedComponent(ImageBackground);
+
+
 const sections = [
   {
     key: 'intro',
@@ -129,6 +132,15 @@ export default function HomeScreen() {
   const [pulseAnimation] = useState(new Animated.Value(1));
   const router = useRouter();
 
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1500,
+      useNativeDriver: true,
+    }).start();
+  }, []);
   const toggleSection = (section) => {
     setExpanded(expanded === section ? null : section);
   };
@@ -299,7 +311,14 @@ const handleCardPress = async (step) => {
 
 
   return (
+                    <AnimatedImageBackground
+      source={require('../../../assets/images/backpink.jpeg')}
+      style={[styles.background, { opacity: fadeAnim }]}
+      resizeMode="cover">
+
+    
     <View style={styles.mainContainer}>
+
       <View style={styles.backgroundGradient} />
       
       <ScrollView 
@@ -315,7 +334,7 @@ const handleCardPress = async (step) => {
         <Animated.View style={[styles.logoContainer, logoTransform]}>
           <Image
             
-            source={require('../../../assets/images/logo.jpeg')}
+            source={require('../../../assets/images/reallogo.png')}
             style={styles.logo}
             resizeMode="contain"
           />
@@ -349,7 +368,7 @@ const handleCardPress = async (step) => {
             >
               <TouchableOpacity 
                 onPress={() => toggleSection(section.key)} 
-                style={[styles.modernCard, { borderLeftColor: section.color }]}
+                style={[styles.modernCard]}
                 activeOpacity={0.8}
               >
                 <View style={styles.cardGradient}>
@@ -550,13 +569,14 @@ const handleCardPress = async (step) => {
               </View>
               <Text style={styles.factText}>{randomFact}</Text>
               <TouchableOpacity onPress={closeFactPopup} style={styles.factCloseButton}>
-                <Text style={styles.factCloseText}>Amazing!</Text>
+                <Text style={styles.factCloseText}>Got It.</Text>
               </TouchableOpacity>
             </View>
           </Animated.View>
         </View>
       </Modal>
     </View>
+    </AnimatedImageBackground>
   );
 }
 
@@ -565,29 +585,28 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
-  backgroundGradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundColor: '#EAEBFF', 
-    backgroundColor: '#EAEBFF',
+    background: {
+    width: '100%',
+    height: '100%',
   },
   container: {
     paddingVertical: 60,
     paddingHorizontal: 20,
     alignItems: 'center',
   },
+    background: {
+    width: '100%',
+    height: '100%',
+  },
   logoContainer: {
-    marginBottom: 5,
+    marginBottom: -35,
   },
   logo: {
     width: 450,
     height: 200,
   },
   subheadingContainer: {
-    marginBottom: 40,
+    marginBottom: 30,
   },
   subheading: {
     fontSize: 24,
@@ -607,13 +626,15 @@ const styles = StyleSheet.create({
   },
   modernCard: {
     borderRadius: 20,
-    overflow: 'hidden',
     elevation: 8,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
-    borderLeftWidth: 5,
+    borderLeftWidth: 7,
+    borderRightWidth: 7,
+    borderLeftColor: '#ff7c8a',
+    borderRightColor: '#ff7c8a',
   },
   cardGradient: {
     backgroundColor: '#ffffff', 
@@ -745,7 +766,7 @@ const styles = StyleSheet.create({
     elevation: 20,
   },
   modalGradient: {
-    backgroundColor: '#667eea',
+    backgroundColor: '#041E42FF',
     padding: 25,
   },
   modalHeader: {
@@ -773,7 +794,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   closeButtonGradient: {
-    backgroundColor: '#667eea',
+    backgroundColor: '#041E42FF',
     paddingVertical: 15,
     paddingHorizontal: 30,
     alignItems: 'center',
