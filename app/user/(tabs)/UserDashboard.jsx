@@ -325,6 +325,8 @@ export default function HomeScreen() {
   const [visibleStepId, setVisibleStepId] = useState(null);
   const [showFactPopup, setShowFactPopup] = useState(false);
   const [randomFact, setRandomFact] = useState('');
+  const [randomFact1, setRandomFact1] = useState('');
+  const [randomFact2, setRandomFact2] = useState('');
   const [logoAnimation] = useState(new Animated.Value(0));
   const [cardAnimations] = useState(sections.map(() => new Animated.Value(0)));
   const [cardAnimations1] = useState(sections1.map(() => new Animated.Value(0)));
@@ -405,9 +407,28 @@ const [stepAnimations2] = useState(steps2.map(() => new Animated.Value(0)));
   }, []);
 
   // Auto-popup with random fact every 5 minutes
+  if(if2===0){
   useEffect(() => {
     const interval = setInterval(() => {
       setRandomFact(getRandomFact());
+      setShowFactPopup(true);
+      setTimeout(() => setShowFactPopup(false), 300000);
+    }, 300000);
+
+    return () => clearInterval(interval);
+  }, []);}
+  if(if2===1){useEffect(() => {
+    const interval = setInterval(() => {
+      setRandomFact1(getRandomFact1());
+      setShowFactPopup(true);
+      setTimeout(() => setShowFactPopup(false), 300000);
+    }, 300000);
+
+    return () => clearInterval(interval);
+  }, []);}
+  if(if2===2){useEffect(() => {
+    const interval = setInterval(() => {
+      setRandomFact2(getRandomFact2());
       setShowFactPopup(true);
       setTimeout(() => setShowFactPopup(false), 300000);
     }, 300000);
@@ -1326,7 +1347,7 @@ if(if2===2){
     </AnimatedImageBackground>
   );
 }
-}
+}}
 
 // Define styles inside the component file - no props needed
 const styles = StyleSheet.create({
