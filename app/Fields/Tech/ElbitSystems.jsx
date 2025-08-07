@@ -1,8 +1,11 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useLanguage } from '../../LanguageContext';
 
 export default function IntelIsrael() {
+  const {if2,useIf2} = useLanguage(); 
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.card}>

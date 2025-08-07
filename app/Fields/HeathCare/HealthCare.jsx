@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
+import { useLanguage } from '../../LanguageContext';
 const companies = [
   {
     name: 'Raphael Hospitals',
@@ -189,6 +189,7 @@ export default function HealthCare() {
   const [animations] = useState(companies.map(() => new Animated.Value(1)));
   const [fadeAnim] = useState(new Animated.Value(0));
   const [slideAnim] = useState(new Animated.Value(50));
+  const {if2,useIf2} = useLanguage(); 
 
   useEffect(() => {
     Animated.parallel([

@@ -18,25 +18,7 @@ export default function Strategy() {
     {
 return (
     <View style={styles.container}>
-      <View style={styles.topRightContainer}>
-  <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
-    <Text style={styles.menuIcon}>⋮</Text>
-  </TouchableOpacity>
 
-  {showLangMenu && (
-    <View style={styles.languageMenu}>
-      <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>English</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>العربية</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>עברית</Text>
-      </TouchableOpacity>
-    </View>
-  )}
-</View>
 
 
       <TextInput
@@ -81,25 +63,7 @@ return (
     <ScrollView style={styles.container}>
 
       
-      <View style={styles.topRightContainer}>
-  <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
-    <Text style={styles.menuIcon}>⋮</Text>
-  </TouchableOpacity>
-
-  {showLangMenu && (
-    <View style={styles.languageMenu}>
-      <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>English</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>العربية</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>עברית</Text>
-      </TouchableOpacity>
-    </View>
-  )}
-</View>
+    
 
 
 
@@ -180,25 +144,7 @@ if(if1===0&&if2===1)
     {
 return (
     <View style={styles.container}>
-      <View style={styles.topRightContainer}>
-  <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
-    <Text style={styles.menuIcon}>⋮</Text>
-  </TouchableOpacity>
-
-  {showLangMenu && (
-    <View style={styles.languageMenu}>
-      <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>English</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>العربية</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>עברית</Text>
-      </TouchableOpacity>
-    </View>
-  )}
-</View>
+      
 
      <TextInput
   value={a}
@@ -247,25 +193,6 @@ return (
   {return (
     <ScrollView style={styles.container}>
 
-      <View style={styles.topRightContainer}>
-  <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
-    <Text style={styles.menuIcon}>⋮</Text>
-  </TouchableOpacity>
-
-  {showLangMenu && (
-    <View style={styles.languageMenu}>
-      <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>English</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>العربية</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>עברית</Text>
-      </TouchableOpacity>
-    </View>
-  )}
-</View>
 
 
       <Text style={styles.title}>استراتيجية المساواة بين الجنسين</Text>
@@ -352,25 +279,7 @@ return (
     <View style={styles.container}>
       
       
-      <View style={styles.topRightContainer}>
-  <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
-    <Text style={styles.menuIcon}>⋮</Text>
-  </TouchableOpacity>
-
-  {showLangMenu && (
-    <View style={styles.languageMenu}>
-      <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>English</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>العربية</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>עברית</Text>
-      </TouchableOpacity>
-    </View>
-  )}
-</View>
+     
 
 <TextInput
   value={a}
@@ -417,25 +326,8 @@ return (
   {return (
     <ScrollView style={styles.container}>
 
-  <View style={styles.topRightContainer}>
-  <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
-    <Text style={styles.menuIcon}>⋮</Text>
-  </TouchableOpacity>
 
-  {showLangMenu && (
-    <View style={styles.languageMenu}>
-      <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>English</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>العربية</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
-        <Text style={styles.menuItem}>עברית</Text>
-      </TouchableOpacity>
-    </View>
-  )}
-</View>
+
 
 
 

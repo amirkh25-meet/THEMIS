@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 import { databases, account } from '../../../assets/appwrite1';
 
+import { useLanguage } from '../../LanguageContext';
 
 const { width, height } = Dimensions.get('window');
 const AnimatedImageBackground = Animated.createAnimatedComponent(ImageBackground);
@@ -131,6 +132,7 @@ export default function HomeScreen() {
   const [stepAnimations] = useState(steps.map(() => new Animated.Value(0)));
   const [pulseAnimation] = useState(new Animated.Value(1));
   const router = useRouter();
+  const {if2,useIf2} = useLanguage(); 
 
   const fadeAnim = useRef(new Animated.Value(0)).current;
 

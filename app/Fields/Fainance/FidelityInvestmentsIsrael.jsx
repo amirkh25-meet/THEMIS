@@ -1,11 +1,11 @@
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import React, { useEffect, useRef } from 'react';
 import { Animated, ScrollView, StyleSheet, Text, View } from 'react-native';
-
+import { useLanguage } from '../../LanguageContext';
 export default function FidelityInvestmentsIsrael() {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(40)).current;
-
+const {if2,useIf2} = useLanguage(); 
   useEffect(() => {
     Animated.parallel([
       Animated.timing(fadeAnim, {

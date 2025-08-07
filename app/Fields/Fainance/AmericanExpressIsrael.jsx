@@ -1,8 +1,11 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React from 'react';
+import { useLanguage } from '../../LanguageContext';
 
 export default function AmericanExpressIsrael() {
-  return (
+ const {if2, setIf2}= useLanguage()
+ if(if2===0){ 
+ return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.card}>
         <Text style={styles.title}>American Express Israel</Text>
@@ -20,7 +23,7 @@ export default function AmericanExpressIsrael() {
       </View>
     </ScrollView>
   );
-}
+}}
 
 const styles = StyleSheet.create({
   container: {

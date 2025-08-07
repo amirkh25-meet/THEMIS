@@ -2,11 +2,11 @@ import React, { use,useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-
+import { useLanguage } from '../LanguageContext';
 
 export default function CompaniesIndex() {
   const router = useRouter();
-  const [if2, setIf2] = useState(0);
+  const {if2, setIf2}= useLanguage()
   const [showLangMenu, setShowLangMenu] = useState(false);
 
 
@@ -14,25 +14,6 @@ export default function CompaniesIndex() {
 if (if2 === 0) {
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.topRightContainer}>
-        <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
-          <Text style={styles.menuIcon}>⋮</Text>
-        </TouchableOpacity>
-      
-        {showLangMenu && (
-          <View style={styles.languageMenu}>
-            <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
-              <Text style={styles.menuItem}>English</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
-              <Text style={styles.menuItem}>العربية</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
-              <Text style={styles.menuItem}>עברית</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      </View>
       {/* Badge */}
       <View style={styles.badge}>
         <Text style={styles.badgeText}>Professional Gender Equity Assessment</Text>
@@ -68,25 +49,7 @@ if (if2 === 0) {
 if (if2 === 1) {
   return (
     <ScrollView contentContainerStyle={styles.container}>
-  <View style={styles.topRightContainer}>
-    <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
-      <Text style={styles.menuIcon}>⋮</Text>
-    </TouchableOpacity>
-
-    {showLangMenu && (
-      <View style={styles.languageMenu}>
-        <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
-          <Text style={styles.menuItem}>English</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
-          <Text style={styles.menuItem}>العربية</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
-          <Text style={styles.menuItem}>עברית</Text>
-        </TouchableOpacity>
-      </View>
-    )}
-  </View>
+  
 
   {/* Badge */}
   <View style={styles.badge}>
@@ -124,25 +87,6 @@ if (if2 === 1) {
 if (if2 === 2) {
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.topRightContainer}>
-        <TouchableOpacity onPress={() => setShowLangMenu(!showLangMenu)}>
-          <Text style={styles.menuIcon}>⋮</Text>
-        </TouchableOpacity>
-      
-        {showLangMenu && (
-          <View style={styles.languageMenu}>
-            <TouchableOpacity onPress={() => { setIf2(0); setShowLangMenu(false); }}>
-              <Text style={styles.menuItem}>English</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setIf2(1); setShowLangMenu(false); }}>
-              <Text style={styles.menuItem}>العربية</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setIf2(2); setShowLangMenu(false); }}>
-              <Text style={styles.menuItem}>עברית</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      </View>
       {/* Badge */}
       <View style={styles.badge}>
   <Text style={styles.badgeText}>הערכת שוויון מגדרי מקצועית</Text>

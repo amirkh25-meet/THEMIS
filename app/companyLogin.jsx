@@ -2,12 +2,14 @@ import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { databases, Query } from '../assets/appwrite1'; // Adjust path as needed
+import { useLanguage } from './LanguageContext';
 
 export default function CompanyLogin() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const {if2,useIf2} = useLanguage(); 
 
   const handleLogin = async () => {
     if (!email || !password) {

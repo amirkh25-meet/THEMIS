@@ -1,13 +1,14 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { router } from 'expo-router';
+import { useLanguage } from '../LanguageContext';
 
 
 export default function GenderEquityAssessmentApp() {
   const [currentPage, setCurrentPage] = useState(0);
   const [allResponses, setAllResponses] = useState({});
   const [completedSections, setCompletedSections] = useState([]);
-  
+  const {if2, setIf2}= useLanguage()
 
   const pages = [
     { 
@@ -192,6 +193,8 @@ const pages2 = [
         pages={pages}
         pages1={pages1}
         pages2={pages2}
+        if2 ={if2}
+        setIf2={setIf2}
       />
     );
   };
@@ -213,11 +216,11 @@ export function HiringPractices({
   isPageComplete,
   completedSections,
   getCompletedSectionsCount,getCompletedSectionsCount1,getCompletedSectionsCount2,
-  pages,pages1,pages2
+  pages,pages1,pages2,if2,setIf2
 }) {
   const [responses, setResponses] = useState(allResponses);
   const [showLangMenu, setShowLangMenu] = useState(false);
-  const [if2, setIf2] = useState(0);
+  
 
 
   const updateResponse = (questionKey, value) => {
@@ -725,7 +728,7 @@ export function PromotionAdvancement({
   isPageComplete,
   completedSections,
   getCompletedSectionsCount,getCompletedSectionsCount1,getCompletedSectionsCount2,
-  pages,pages1,pages2
+  pages,pages1,pages2,setIf2,if2
 }) {
   const [responses, setResponses] = useState(allResponses);
   const [showLangMenu, setShowLangMenu] = useState(false);
@@ -1221,7 +1224,7 @@ export function PayEquity({
   isPageComplete,
   completedSections,
   getCompletedSectionsCount,getCompletedSectionsCount1,getCompletedSectionsCount2,
-  pages,pages1,pages2
+  pages,pages1,pages2,setIf2,if2
 }) {
   const [responses, setResponses] = useState(allResponses);
   const [showLangMenu, setShowLangMenu] = useState(false);
@@ -1724,7 +1727,7 @@ export function PerformanceMetrics({
   isPageComplete,
   completedSections,
   getCompletedSectionsCount,getCompletedSectionsCount1,getCompletedSectionsCount2,
-  pages,pages1,pages2
+  pages,pages1,pages2,setIf2,if2
 }) {
   const [responses, setResponses] = useState(allResponses);
 const [showLangMenu, setShowLangMenu] = useState(false);
@@ -2231,7 +2234,7 @@ export function AdditionalConsiderations({
   isPageComplete,
   completedSections,
   getCompletedSectionsCount,getCompletedSectionsCount1,getCompletedSectionsCount2,
-  pages,pages1,pages2
+  pages,pages1,pages2,setIf2,if2
 }) {
   const [responses, setResponses] = useState(allResponses);
   const [showLangMenu, setShowLangMenu] = useState(false);
@@ -2765,7 +2768,7 @@ export function GenderEquityAssesmentApp2({
   isPageComplete,
   completedSections,
   getCompletedSectionsCount,getCompletedSectionsCount1,getCompletedSectionsCount2,
-  pages,pages1,pages2
+  pages,pages1,pages2,setIf2,if2
 }){
 const [showLangMenu, setShowLangMenu] = useState(false);
   const [if2, setIf2] = useState(0);

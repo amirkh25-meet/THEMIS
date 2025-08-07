@@ -1,8 +1,10 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useLanguage } from '../../LanguageContext';
 
 export default function ReuthRehabilitationHospital() {
+  const {if2,useIf2} = useLanguage(); 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.card}>

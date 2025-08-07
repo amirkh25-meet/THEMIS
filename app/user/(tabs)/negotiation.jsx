@@ -1,11 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Image, Linking, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { useLanguage } from '../../LanguageContext';
+
 
 export default function NegotiationSimulatorPage() {
   const openSimulator = () => {
     Linking.openURL('https://app.cesura.ai/sim/4d091003-9abc-4700-8686-cb29c97fb88e');
   };
-
+const {if2,useIf2} = useLanguage(); 
   return (
     <ScrollView contentContainerStyle={styles.container}>
         <Image

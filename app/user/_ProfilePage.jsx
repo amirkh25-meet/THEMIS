@@ -15,6 +15,8 @@ import {
 import UUID from 'react-native-uuid';
 import { ActivityIndicator } from 'react-native';
 import { databases, account, avatars } from '../../assets/appwrite1';
+import { useLanguage } from '../LanguageContext';
+
 
 export default function _ProfilePage() {
   const [password, setPassword] = useState('');
@@ -23,6 +25,7 @@ export default function _ProfilePage() {
   const [currentUser, setCurrentUser] = useState(null);
   const [time, setTime] = useState('');
   const [if1, setIf] = useState(0);
+  const {if2,useIf2} = useLanguage(); 
 
   // Simple time updater - no auth checking
   useEffect(() => {

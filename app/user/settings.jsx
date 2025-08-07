@@ -12,6 +12,8 @@ import {
   View
 } from 'react-native';
 import { account, avatars } from '../../assets/appwrite1';
+import { useLanguage } from '../LanguageContext';
+
 
 const SettingsPage = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('en');
@@ -19,6 +21,7 @@ const SettingsPage = () => {
   const [isSigningOut, setIsSigningOut] = useState(false);
   const [user, setUser] = useState(null);
   const [isLoadingUser, setIsLoadingUser] = useState(true);
+  const {if2, setIf2}= useLanguage()
 
   // Available languages - En, Ar, He only
   const languages = [
@@ -86,9 +89,14 @@ try {
     
 
   const handleLanguageChange = (languageCode) => {
+    if(languageCode ==='en')
+    {setIf2(0)}
+    else if (languageCode === 'ar')
+    {setIf2(1)}
+      else if (languageCode === 'he')
+      {setIf2(2)}
     setSelectedLanguage(languageCode);
     setIsLanguageDropdownOpen(false);
-    console.log(`Language changed to: ${languageCode}`);
   };
 
   const handleSignOut = async () => {
@@ -129,7 +137,7 @@ try {
       </View>
     );
   }
-
+if(if2===0){
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
@@ -275,6 +283,299 @@ try {
     </View>
   );
 };
+
+if(if2 === 1){
+  return (
+    <View style={styles.container}>
+      <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+        {/* Header */}
+        <View style={styles.header}>
+          <View style={styles.headerRow}>
+            <View style={styles.headerIcon}>
+              <Ionicons name="settings-outline" size={24} color="#2563eb" />
+            </View>
+            <Text style={styles.headerTitle}>الإعدادات</Text>
+          </View>
+          <Text style={styles.headerSubtitle}>قم بإدارة تفضيلات وإعدادات حسابك</Text>
+        </View>
+
+        {/* User Profile Card */}
+        {user && (
+          <View style={styles.userCard}>
+            <View style={styles.userRow}>
+              <Image 
+                source={{ uri: user.avatar }}
+                style={styles.userAvatar}
+                onError={() => {
+                  console.log('فشل تحميل الصورة الرمزية، يتم استخدام الصورة الافتراضية');
+                }}
+              />
+              <View style={styles.userInfo}>
+                <Text style={styles.userName}>{user.name}</Text>
+                <Text style={styles.userEmail}>{user.email}</Text>
+              </View>
+            </View>
+            
+            {/* Refresh button */}
+            <TouchableOpacity 
+              onPress={handleRefreshUserData}
+              style={styles.refreshButton}
+            >
+              <Ionicons name="refresh-outline" size={20} color="#2563eb" />
+              <Text style={styles.refreshButtonText}>تحديث</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
+        {/* Language Settings */}
+        <View style={styles.settingCard}>
+          <View style={styles.settingHeader}>
+            <View style={[styles.settingIconContainer, styles.languageIconContainer]}>
+              <Ionicons name="globe-outline" size={20} color="#16a34a" />
+            </View>
+            <View>
+              <Text style={styles.settingTitle}>اللغة</Text>
+              <Text style={styles.settingSubtitle}>اختر لغتك المفضلة</Text>
+            </View>
+          </View>
+
+          {/* Language Dropdown */}
+          <View style={styles.dropdown}>
+            <TouchableOpacity
+              onPress={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+              style={[
+                styles.dropdownButton,
+                isLanguageDropdownOpen && styles.dropdownButtonPressed
+              ]}
+            >
+              <View style={styles.dropdownContent}>
+                <Text style={styles.dropdownText}>{selectedLang?.name}</Text>
+              </View>
+              <Ionicons 
+                name="chevron-down" 
+                size={20} 
+                color="#6b7280"
+                style={[
+                  styles.chevronIcon,
+                  isLanguageDropdownOpen && styles.chevronRotated
+                ]}
+              />
+            </TouchableOpacity>
+
+            {isLanguageDropdownOpen && (
+              <View style={styles.dropdownMenu}>
+                {languages.map((language) => (
+                  <TouchableOpacity
+                    key={language.code}
+                    onPress={() => handleLanguageChange(language.code)}
+                    style={[
+                      styles.dropdownMenuItem,
+                      selectedLanguage === language.code && styles.dropdownMenuItemPressed
+                    ]}
+                  >
+                    <View style={styles.dropdownContent}>
+                      <Text style={styles.dropdownText}>{language.name}</Text>
+                    </View>
+                    {selectedLanguage === language.code && (
+                      <Ionicons name="checkmark" size={20} color="#16a34a" />
+                    )}
+                  </TouchableOpacity>
+                ))}
+              </View>
+            )}
+          </View>
+        </View>
+
+        {/* Account Actions */}
+        <View style={styles.settingCard}>
+          <View style={styles.settingHeader}>
+            <View style={[styles.settingIconContainer, styles.accountIconContainer]}>
+              <Ionicons name="log-out-outline" size={20} color="#dc2626" />
+            </View>
+            <View>
+              <Text style={styles.settingTitle}>الحساب</Text>
+              <Text style={styles.settingSubtitle}>إدارة حسابك وجلساتك</Text>
+            </View>
+          </View>
+
+          {/* Sign Out Button */}
+          <TouchableOpacity
+            onPress={handleSignOut}
+            disabled={isSigningOut}
+            style={[
+              styles.signOutButton,
+              isSigningOut && styles.signOutButtonDisabled
+            ]}
+          >
+            {isSigningOut ? (
+              <>
+                <ActivityIndicator size="small" color="white" />
+                <Text style={styles.signOutButtonText}>تسجيل الخروج...</Text>
+              </>
+            ) : (
+              <>
+                <Ionicons name="log-out-outline" size={20} color="white" />
+                <Text style={styles.signOutButtonText}>تسجيل الخروج</Text>
+              </>
+            )}
+          </TouchableOpacity>
+          
+          <Text style={styles.signOutDescription}>
+            سيؤدي هذا إلى إنهاء جلستك الحالية وتحويلك إلى صفحة تسجيل الدخول.
+          </Text>
+        </View>
+      </ScrollView>
+    </View>
+  );
+};
+
+if(if2 === 2){
+  return (
+    <View style={styles.container}>
+      <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+        {/* Header */}
+        <View style={styles.header}>
+          <View style={styles.headerRow}>
+            <View style={styles.headerIcon}>
+              <Ionicons name="settings-outline" size={24} color="#2563eb" />
+            </View>
+            <Text style={styles.headerTitle}>הגדרות</Text>
+          </View>
+          <Text style={styles.headerSubtitle}>נהל את העדפות והגדרות החשבון שלך</Text>
+        </View>
+
+        {/* User Profile Card */}
+        {user && (
+          <View style={styles.userCard}>
+            <View style={styles.userRow}>
+              <Image 
+                source={{ uri: user.avatar }}
+                style={styles.userAvatar}
+                onError={() => {
+                  console.log('טעינת התמונה נכשלה, משתמשים בתמונה ברירת מחדל');
+                }}
+              />
+              <View style={styles.userInfo}>
+                <Text style={styles.userName}>{user.name}</Text>
+                <Text style={styles.userEmail}>{user.email}</Text>
+              </View>
+            </View>
+            
+            {/* Refresh button */}
+            <TouchableOpacity 
+              onPress={handleRefreshUserData}
+              style={styles.refreshButton}
+            >
+              <Ionicons name="refresh-outline" size={20} color="#2563eb" />
+              <Text style={styles.refreshButtonText}>רענן</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
+        {/* Language Settings */}
+        <View style={styles.settingCard}>
+          <View style={styles.settingHeader}>
+            <View style={[styles.settingIconContainer, styles.languageIconContainer]}>
+              <Ionicons name="globe-outline" size={20} color="#16a34a" />
+            </View>
+            <View>
+              <Text style={styles.settingTitle}>שפה</Text>
+              <Text style={styles.settingSubtitle}>בחר את השפה המועדפת עליך</Text>
+            </View>
+          </View>
+
+          {/* Language Dropdown */}
+          <View style={styles.dropdown}>
+            <TouchableOpacity
+              onPress={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+              style={[
+                styles.dropdownButton,
+                isLanguageDropdownOpen && styles.dropdownButtonPressed
+              ]}
+            >
+              <View style={styles.dropdownContent}>
+                <Text style={styles.dropdownText}>{selectedLang?.name}</Text>
+              </View>
+              <Ionicons 
+                name="chevron-down" 
+                size={20} 
+                color="#6b7280"
+                style={[
+                  styles.chevronIcon,
+                  isLanguageDropdownOpen && styles.chevronRotated
+                ]}
+              />
+            </TouchableOpacity>
+
+            {isLanguageDropdownOpen && (
+              <View style={styles.dropdownMenu}>
+                {languages.map((language) => (
+                  <TouchableOpacity
+                    key={language.code}
+                    onPress={() => handleLanguageChange(language.code)}
+                    style={[
+                      styles.dropdownMenuItem,
+                      selectedLanguage === language.code && styles.dropdownMenuItemPressed
+                    ]}
+                  >
+                    <View style={styles.dropdownContent}>
+                      <Text style={styles.dropdownText}>{language.name}</Text>
+                    </View>
+                    {selectedLanguage === language.code && (
+                      <Ionicons name="checkmark" size={20} color="#16a34a" />
+                    )}
+                  </TouchableOpacity>
+                ))}
+              </View>
+            )}
+          </View>
+        </View>
+
+        {/* Account Actions */}
+        <View style={styles.settingCard}>
+          <View style={styles.settingHeader}>
+            <View style={[styles.settingIconContainer, styles.accountIconContainer]}>
+              <Ionicons name="log-out-outline" size={20} color="#dc2626" />
+            </View>
+            <View>
+              <Text style={styles.settingTitle}>חשבון</Text>
+              <Text style={styles.settingSubtitle}>נהל את החשבון והפגישות שלך</Text>
+            </View>
+          </View>
+
+          {/* Sign Out Button */}
+          <TouchableOpacity
+            onPress={handleSignOut}
+            disabled={isSigningOut}
+            style={[
+              styles.signOutButton,
+              isSigningOut && styles.signOutButtonDisabled
+            ]}
+          >
+            {isSigningOut ? (
+              <>
+                <ActivityIndicator size="small" color="white" />
+                <Text style={styles.signOutButtonText}>מתנתק...</Text>
+              </>
+            ) : (
+              <>
+                <Ionicons name="log-out-outline" size={20} color="white" />
+                <Text style={styles.signOutButtonText}>התנתק</Text>
+              </>
+            )}
+          </TouchableOpacity>
+          
+          <Text style={styles.signOutDescription}>
+            פעולה זו תסיים את הסשן הנוכחי ותפנה אותך לדף ההתחברות.
+          </Text>
+        </View>
+      </ScrollView>
+    </View>
+  );
+};
+
+
+}
 
 const styles = StyleSheet.create({
   container: {

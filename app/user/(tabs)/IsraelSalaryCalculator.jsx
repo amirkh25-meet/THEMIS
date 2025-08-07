@@ -8,6 +8,7 @@ import {
   Text,
   View
 } from 'react-native';
+import { useLanguage } from '../../LanguageContext';
 
 const IsraelSalaryCalculator = () => {
   const [experience, setExperience] = useState(0);
@@ -15,6 +16,7 @@ const IsraelSalaryCalculator = () => {
   const [field, setField] = useState('software');
   const [baseSalary, setBaseSalary] = useState(0);
   const [netSalary, setNetSalary] = useState(0);
+  const {if2,useIf2} = useLanguage(); 
   const [taxes, setTaxes] = useState({
     incomeTax: 0,
     nationalInsurance: 0,

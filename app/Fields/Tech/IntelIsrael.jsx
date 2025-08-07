@@ -1,7 +1,9 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useLanguage } from '../../LanguageContext';
 
 export default function IsraelAerospaceIndustries() {
+  const {if2,useIf2} = useLanguage(); 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.card}>

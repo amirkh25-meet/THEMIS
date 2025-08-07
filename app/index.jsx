@@ -12,13 +12,14 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import { useLanguage } from './LanguageContext';
 
 const { width, height } = Dimensions.get('window');
 const AnimatedImageBackground = Animated.createAnimatedComponent(ImageBackground);
 
 export default function LandingPage() {
   const router = useRouter();
-
+const {if2,useIf2} = useLanguage(); 
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {

@@ -22,6 +22,7 @@ import {
   View
 } from 'react-native';
 
+import { useLanguage } from '../../LanguageContext';
 const { width } = Dimensions.get('window');
 
 const ResumeGuideApp = () => {
@@ -29,6 +30,7 @@ const ResumeGuideApp = () => {
   const [completedSteps, setCompletedSteps] = useState(new Set());
   const [fadeAnim] = useState(new Animated.Value(0));
   const [slideAnim] = useState(new Animated.Value(50));
+  const {if2,useIf2} = useLanguage(); 
 
   useEffect(() => {
     Animated.parallel([
