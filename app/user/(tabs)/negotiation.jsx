@@ -7,7 +7,7 @@ export default function NegotiationSimulatorPage() {
   const openSimulator = () => {
     Linking.openURL('https://app.cesura.ai/sim/4d091003-9abc-4700-8686-cb29c97fb88e');
   };
-const {if2,useIf2} = useLanguage(); 
+const {if2,setIf2} = useLanguage(); 
 if (if2 === 0) {
   // English
   return (

@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useLanguage } from '../../LanguageContext';
 
 export default function IsraelAerospaceIndustries() {
-  const {if2,useIf2} = useLanguage(); 
+  const {if2,setIf2} = useLanguage(); 
 if(if2===0){  // English
   return (
     <ScrollView contentContainerStyle={styles.container}>

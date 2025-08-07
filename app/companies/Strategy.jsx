@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, ScrollView,TextInput, Button ,TouchableOpacity} from 'react-native'
 import React, { use } from 'react'
 import { useState } from 'react' 
+import { useLanguage } from '../LanguageContext';
 
 
 export default function Strategy() {
@@ -10,7 +11,7 @@ export default function Strategy() {
   const [d,setD] = useState(0)
   const [e,setE] = useState(0)
   const [if1,setIf1] = useState(0)
-  const [if2,setIf2] = useState(0)
+  const {if2,setIf2} = useLanguage();
   const [showLangMenu, setShowLangMenu] = useState(false);
 
 

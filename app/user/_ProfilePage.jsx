@@ -25,7 +25,7 @@ export default function _ProfilePage() {
   const [currentUser, setCurrentUser] = useState(null);
   const [time, setTime] = useState('');
   const [if1, setIf] = useState(0);
-  const {if2,useIf2} = useLanguage(); 
+  const {if2,setIf2} = useLanguage(); 
 
   // Simple time updater - no auth checking
   useEffect(() => {

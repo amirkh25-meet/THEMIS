@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../../LanguageContext';
 
 export default function ShaareZedekMedicalCenter() {
-  const {if2,useIf2} = useLanguage(); 
+  const {if2,setIf2} = useLanguage(); 
  if(if2===0){ 
   return (
     <ScrollView contentContainerStyle={styles.container}>

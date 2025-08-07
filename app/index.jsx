@@ -19,7 +19,7 @@ const AnimatedImageBackground = Animated.createAnimatedComponent(ImageBackground
 
 export default function LandingPage() {
   const router = useRouter();
-const {if2,useIf2} = useLanguage(); 
+  const {if2,setIf2} = useLanguage(); 
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -35,9 +35,10 @@ const {if2,useIf2} = useLanguage();
   };
 
   const handleUserSelection = () => {
-    router.push('/user/(tabs)');
+    router.push('/user/(tabs)/ ');
   };
-if(if2===0){
+
+if(if2 ===0 || if2 === 1 || if2 === 2) {
   return (
     <AnimatedImageBackground
       source={require('../assets/images/backpink.jpeg')}
@@ -242,9 +243,9 @@ if (if2 === 2) {
     </AnimatedImageBackground>
   );
 }
-
-
 }
+
+
 
 const styles = StyleSheet.create({
   background: {

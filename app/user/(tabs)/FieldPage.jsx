@@ -158,7 +158,7 @@ export default function FieldPage() {
   const [selectedField, setSelectedField] = useState(null);
   const [fadeAnim] = useState(new Animated.Value(0));
   const [slideAnim] = useState(new Animated.Value(50));
-  const {if2,useIf2} = useLanguage(); 
+  const {if2,setIf2} = useLanguage(); 
 
   useEffect(() => {
     Animated.parallel([

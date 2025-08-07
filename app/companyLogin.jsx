@@ -9,7 +9,7 @@ export default function CompanyLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const {if2,useIf2} = useLanguage(); 
+  const {if2,setIf2} = useLanguage(); 
 
   const handleLogin = async () => {
     if (!email || !password) {

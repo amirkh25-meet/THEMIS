@@ -276,7 +276,7 @@ export default function Fainance() {
   const [animations] = useState(companies.map(() => new Animated.Value(1)));
   const [fadeAnim] = useState(new Animated.Value(0));
   const [slideAnim] = useState(new Animated.Value(50));
-const {if2,useIf2} = useLanguage(); 
+const {if2,setIf2} = useLanguage(); 
   useEffect(() => {
     Animated.parallel([
       Animated.timing(fadeAnim, {

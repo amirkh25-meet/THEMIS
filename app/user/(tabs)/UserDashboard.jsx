@@ -14,9 +14,9 @@ import {
   View,
   ImageBackground,
 } from 'react-native';
-import { databases, account } from '../../../assets/appwrite1';
+import { databases, account } from '../../../assets/appwrite1'; // Adjust path as needed
 
-import { useLanguage } from '../../LanguageContext';
+import { useLanguage } from '../../LanguageContext'; // Adjust path as needed
 
 const { width, height } = Dimensions.get('window');
 const AnimatedImageBackground = Animated.createAnimatedComponent(ImageBackground);
@@ -332,7 +332,7 @@ export default function HomeScreen() {
   const [cardAnimations1] = useState(sections1.map(() => new Animated.Value(0)));
   const [cardAnimations2] = useState(sections2.map(() => new Animated.Value(0)));
   const [stepAnimations] = useState(steps.map(() => new Animated.Value(0)));
-const [stepAnimations1] = useState(steps1.map(() => new Animated.Value(0)));
+ const [stepAnimations1] = useState(steps1.map(() => new Animated.Value(0)));
 const [stepAnimations2] = useState(steps2.map(() => new Animated.Value(0)));
   const [pulseAnimation] = useState(new Animated.Value(1));
   const router = useRouter();
@@ -417,6 +417,9 @@ const [stepAnimations2] = useState(steps2.map(() => new Animated.Value(0)));
 
     return () => clearInterval(interval);
   }, []);}
+
+
+
   if(if2===1){useEffect(() => {
     const interval = setInterval(() => {
       setRandomFact1(getRandomFact1());
@@ -426,6 +429,9 @@ const [stepAnimations2] = useState(steps2.map(() => new Animated.Value(0)));
 
     return () => clearInterval(interval);
   }, []);}
+
+
+
   if(if2===2){useEffect(() => {
     const interval = setInterval(() => {
       setRandomFact2(getRandomFact2());
@@ -434,7 +440,7 @@ const [stepAnimations2] = useState(steps2.map(() => new Animated.Value(0)));
     }, 300000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, []);}
 
   const logoTransform = {
     transform: [
@@ -850,10 +856,10 @@ if(if2===1){
               style={[
                 styles.cardWrapper,
                 {
-                  opacity: cardAnimations[index],
+                  opacity: cardAnimations1[index],
                   transform: [
                     {
-                      translateY: cardAnimations[index].interpolate({
+                      translateY: cardAnimations1[index].interpolate({
                         inputRange: [0, 1],
                         outputRange: [50, 0],
                       })
@@ -908,16 +914,16 @@ if(if2===1){
                 style={[
                   styles.stepWrapper,
                   {
-                    opacity: stepAnimations[index],
+                    opacity: stepAnimations1[index],
                     transform: [
                       {
-                        translateY: stepAnimations[index].interpolate({
+                        translateY: stepAnimations1[index].interpolate({
                           inputRange: [0, 1],
                           outputRange: [30, 0],
                         })
                       },
                       {
-                        scale: stepAnimations[index].interpolate({
+                        scale: stepAnimations1[index].interpolate({
                           inputRange: [0, 1],
                           outputRange: [0.8, 1],
                         })
@@ -963,16 +969,16 @@ if(if2===1){
                 style={[
                   styles.stepWrapper,
                   {
-                    opacity: stepAnimations[index + 3],
+                    opacity: stepAnimations1[index + 3],
                     transform: [
                       {
-                        translateY: stepAnimations[index + 3].interpolate({
+                        translateY: stepAnimations1[index + 3].interpolate({
                           inputRange: [0, 1],
                           outputRange: [30, 0],
                         })
                       },
                       {
-                        scale: stepAnimations[index + 3].interpolate({
+                        scale: stepAnimations1[index + 3].interpolate({
                           inputRange: [0, 1],
                           outputRange: [0.8, 1],
                         })
@@ -1063,7 +1069,7 @@ if(if2===1){
                 <Text style={styles.factEmoji}>💡</Text>
                 <Text style={styles.factTitle}>Did You Know?</Text>
               </View>
-              <Text style={styles.factText}>{randomFact}</Text>
+              <Text style={styles.factText}>{randomFact1}</Text>
               <TouchableOpacity onPress={closeFactPopup} style={styles.factCloseButton}>
                 <Text style={styles.factCloseText}>Got It.</Text>
               </TouchableOpacity>
@@ -1122,10 +1128,10 @@ if(if2===2){
               style={[
                 styles.cardWrapper,
                 {
-                  opacity: cardAnimations[index],
+                  opacity: cardAnimations2[index],
                   transform: [
                     {
-                      translateY: cardAnimations[index].interpolate({
+                      translateY: cardAnimations2[index].interpolate({
                         inputRange: [0, 1],
                         outputRange: [50, 0],
                       })
@@ -1180,16 +1186,16 @@ if(if2===2){
                 style={[
                   styles.stepWrapper,
                   {
-                    opacity: stepAnimations[index],
+                    opacity: stepAnimations2[index],
                     transform: [
                       {
-                        translateY: stepAnimations[index].interpolate({
+                        translateY: stepAnimations2[index].interpolate({
                           inputRange: [0, 1],
                           outputRange: [30, 0],
                         })
                       },
                       {
-                        scale: stepAnimations[index].interpolate({
+                        scale: stepAnimations2[index].interpolate({
                           inputRange: [0, 1],
                           outputRange: [0.8, 1],
                         })
@@ -1235,16 +1241,16 @@ if(if2===2){
                 style={[
                   styles.stepWrapper,
                   {
-                    opacity: stepAnimations[index + 3],
+                    opacity: stepAnimations2[index + 3],
                     transform: [
                       {
-                        translateY: stepAnimations[index + 3].interpolate({
+                        translateY: stepAnimations2[index + 3].interpolate({
                           inputRange: [0, 1],
                           outputRange: [30, 0],
                         })
                       },
                       {
-                        scale: stepAnimations[index + 3].interpolate({
+                        scale: stepAnimations2[index + 3].interpolate({
                           inputRange: [0, 1],
                           outputRange: [0.8, 1],
                         })
@@ -1335,7 +1341,7 @@ if(if2===2){
                 <Text style={styles.factEmoji}>💡</Text>
                 <Text style={styles.factTitle}>Did You Know?</Text>
               </View>
-              <Text style={styles.factText}>{randomFact}</Text>
+              <Text style={styles.factText}>{randomFact2}</Text>
               <TouchableOpacity onPress={closeFactPopup} style={styles.factCloseButton}>
                 <Text style={styles.factCloseText}>Got It.</Text>
               </TouchableOpacity>
@@ -1347,7 +1353,7 @@ if(if2===2){
     </AnimatedImageBackground>
   );
 }
-}}
+} 
 
 // Define styles inside the component file - no props needed
 const styles = StyleSheet.create({
